@@ -1,9 +1,10 @@
 function loadDoc() {
-  const xhttp = new XMLHttpRequest();
+  /*const xhttp = new XMLHttpRequest();
   console.log("called");
   xhttp.onload = function () {
     document.getElementById("demo").innerHTML = this.responseText;
   };
-  xhttp.open("GET", "allHostels", true);
-  xhttp.send();
+  xhttp.open("GET", "hostelInfo.jsp?h=VFS-M-101", true);
+  xhttp.send();*/
+	window.location.href="hostelInfo.jsp?h=VFS-M-101";
 }

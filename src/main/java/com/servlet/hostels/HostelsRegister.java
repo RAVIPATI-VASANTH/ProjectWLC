@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/hostelRegister")
 public class HostelsRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+ 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("servlet Called");
-		response.sendRedirect("hostelWorkspace.jsp");
+		System.out.println(request.getParameter("name"));
+//		response.sendRedirect("hostelWorkspace.jsp");
 	}
 }
