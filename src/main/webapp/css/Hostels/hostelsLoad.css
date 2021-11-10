@@ -1,0 +1,108 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0%;
+  padding: 0%;
+  line-height: 1s;
+  font-family: "Inter", sans-serif;
+}
+
+.head-section {
+  background-color: #fdf2e9;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  height: 8rem;
+}
+
+.website-name {
+  font-size: 3.6rem !important;
+  margin: 0rem 1rem 0rem 2rem !important;
+  text-decoration: none;
+  color: black;
+}
+
+.count-info {
+  font-size: 2.4rem !important;
+  margin: 0rem 1rem 0rem 2rem !important;
+}
+
+.count {
+  font-size: 3.6rem !important;
+}
+
+.about-section {
+  max-width: 130rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0rem 15rem 0rem 15rem;
+}
+
+.illustration-img {
+  width: 100%;
+  height: 50rem;
+}
+
+.color {
+  background-color: #fdf2e9;
+}
+
+.landmarks-section {
+  max-width: 130rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0rem 15rem 0rem 15rem;
+}
+
+.landmarks-bar {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.phrase {
+  padding: 0rem;
+  margin: 0rem;
+  font-size: 6.4rem;
+  font-weight: bolder;
+  margin: 1rem;
+}
+
+.phrase1 {
+  padding: 0rem;
+  margin: 0rem;
+  font-size: 3.6rem;
+  color: #e67e22;
+  font-weight: bolder;
+  /* margin: 1rem; */
+}
+
+.phrase2 {
+  padding: 0rem;
+  margin: 0rem;
+  font-size: 2.4rem;
+  font-weight: 550;
+  /* line-height: 1.15;
+  letter-spacing: 0.02rem;
+  word-spacing: 0.05rem; */
+}
+
+.notes {
+  word-break: break-word;
+}
+
+.word-color {
+  color: #e67e22;
+}

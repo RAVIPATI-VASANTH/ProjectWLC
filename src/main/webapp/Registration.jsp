@@ -12,17 +12,17 @@ pageEncoding="ISO-8859-1"%>
       href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/hostelRegistration.css" />
-    <title>Registration-Hostel</title>
+    <link rel="stylesheet" href="css/Registration.css" />
+    <title>WebsiteLoChudu-Registration</title>
   </head>
 
   <body>
     <section class="head-section">
-      <div class="website-name"><strong>WebsiteLoChudu</strong></div>
+      <a class="website-name" href="index.html"
+        ><strong>WebsiteLoChudu</strong></a
+      >
       <nav class="nav">
-        <a href="Hostels/Workspace/Hostel-WorkSpace.html" class="Workspace"
-          ><strong>Workspace</strong></a
-        >
+        <a href="Login.jsp" class="Workspace"><strong>Workspace</strong></a>
       </nav>
     </section>
 
@@ -49,6 +49,12 @@ pageEncoding="ISO-8859-1"%>
     </section>
 
     <div class="color">
+      <nav class="modules-nav">
+        <a class="module">Hostels</a>
+      </nav>
+    </div>
+
+    <div class="">
       <section class="hostel-registration">
         <div class="phrase2"><strong>Hostel-Registration</strong></div>
       </section>
@@ -213,7 +219,7 @@ pageEncoding="ISO-8859-1"%>
       </div>
     </div>
 
-    <div>
+    <div class="color">
       <section class="credential-setup">
         <div class="phrase2"><strong>Credential-Setup</strong></div>
       </section>
@@ -260,89 +266,86 @@ pageEncoding="ISO-8859-1"%>
           </div>
         </div>
       </section>
+    </div>
 
-      <section class="landmark-setup color">
+    <div>
+      <section class="landmark-setup">
         <div class="phrase2"><strong>Create Landmark</strong></div>
       </section>
 
-      <div class="color">
-        <section class="landmark-section color">
-          <div class="landmark-credentials color">
-            <div class="form-element pad">
-              <label for="landmark-full-name" class="label"
-                >Landmark Full Name</label
-              >
-              <input
-                type="text"
-                id="landmark-full-name"
-                class="text-input"
-                oninput="checkChange(6)"
-              />
-              <p id="landmark-full-name-message" class="notes message">
-                30 charecters remaining
-              </p>
-            </div>
-            <div class="form-element pad">
-              <label for="landmark-description" class="label"
-                >Description</label
-              >
-              <input
-                type="text"
-                id="landmark-description"
-                class="text-input"
-                oninput="checkChange(7)"
-              />
-              <p id="landmark-description-message" class="notes message">
-                50 charecters remaining
-              </p>
-            </div>
-            <div
-              style="display: flex; justify-content: end; align-items: center"
+      <section class="landmark-section">
+        <div class="landmark-credentials">
+          <div class="form-element pad">
+            <label for="landmark-full-name" class="label"
+              >Landmark Full Name</label
             >
-              <button
-                id="ajaxcall"
-                class="submit-button pad"
-                onclick="createLandmark()"
-              >
-                Create
-              </button>
-            </div>
+            <input
+              type="text"
+              id="landmark-full-name"
+              class="text-input"
+              oninput="checkChange(6)"
+            />
+            <p id="landmark-full-name-message" class="notes message">
+              30 charecters remaining
+            </p>
           </div>
+          <div class="form-element pad">
+            <label for="landmark-description" class="label">Description</label>
+            <input
+              type="text"
+              id="landmark-description"
+              class="text-input"
+              oninput="checkChange(7)"
+            />
+            <p id="landmark-description-message" class="notes message">
+              50 charecters remaining
+            </p>
+          </div>
+          <div style="display: flex; justify-content: end; align-items: center">
+            <button
+              id="ajaxcall"
+              class="submit-button pad"
+              onclick="createLandmark()"
+            >
+              Create
+            </button>
+          </div>
+        </div>
 
-          <div class="description">
-            <li class="phrase1 notes">
-              Create the landmark which is recognized by more people. Example
-              like Collage, IT Hub, Traning Centers etc.,
-            </li>
-            <br />
-            <li class="phrase1 notes">
-              Give details about landmark in 'Description' field like it's
-              city-name, area or any other information about it.
-            </li>
-            <br />
-            <li class="phrase1 notes">
-              This help our Team get Identified it as Landmark faster.
-            </li>
-            <br />
-            <li class="phrase1 notes">
-              The Landmarks Create by you are noted and inspected by our team
-              later.
-            </li>
-            <br />
-            <li class="phrase1 notes">
-              If the landmark doesn't reach our requirements, Don't worry, We
-              will contact you and clear the issue.
-            </li>
-            <br />
-            <li class="phrase1 notes">
-              Make Sure you must need to register the hostel, with the new
-              landmark created
-            </li>
-          </div>
-        </section>
-      </div>
+        <div class="description">
+          <li class="phrase1 notes">
+            Create the landmark which is recognized by more people. Example like
+            Collage, IT Hub, Traning Centers etc.,
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            Give details about landmark in 'Description' field like it's
+            city-name, area or any other information about it.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            This help our Team get Identified it as Landmark faster.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            The Landmarks Create by you are noted and inspected by our team
+            later.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            If the landmark doesn't reach our requirements, Don't worry, We will
+            contact you and clear the issue.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            Make Sure you must need to register the hostel, with the new
+            landmark created
+          </li>
+        </div>
+      </section>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/Hostels/hostelRegister.js"></script>
+    <script src="js/Registration.js"></script>
   </body>
 </html>
