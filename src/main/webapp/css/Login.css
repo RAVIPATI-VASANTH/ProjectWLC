@@ -1,0 +1,150 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0%;
+  padding: 0%;
+  line-height: 1s;
+  font-family: "Inter", sans-serif;
+}
+
+.head-section {
+  background-color: #fdf2e9;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  height: 8rem;
+}
+
+.head-section a {
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.website-name {
+  font-size: 3.6rem !important;
+  margin: 0rem 1rem 0rem 2rem !important;
+  text-decoration: none;
+  color: black;
+}
+
+.Register {
+  height: 2rem;
+  background-color: #e67e22;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  border: solid #e67e22;
+  border-width: 0.1rem;
+  padding: 0.5rem 1rem;
+}
+
+.Workspace:hover {
+  border-width: 0.15rem;
+}
+
+.color {
+  background-color: #fdf2e9;
+}
+
+.modules-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: initial;
+  margin: 1rem;
+  max-width: 130rem;
+  margin: 0rem 15rem 0rem 15rem;
+}
+
+.module {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-size: 2.4rem;
+  font-weight: bolder;
+  background-color: #e67e22;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+.illustration-img {
+  width: 100%;
+  height: 50rem;
+}
+.credentials-section {
+  max-width: 130rem;
+  margin: 0rem 15rem 0rem 15rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.credentials {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.pad {
+  margin: 1rem;
+}
+
+.form-element {
+  padding: 1rem;
+  /* height: 6rem; */
+  background-color: #eb984e;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: initial;
+}
+
+.login-button {
+  background-color: #eb984e;
+  color: black;
+  text-decoration: none;
+  font-size: 2.4rem;
+  font-weight: 550;
+  border: 0rem;
+  border-radius: 1rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  border-width: 0.15rem;
+  /* box-shadow:inset 0rem 0rem 0rem 10rem #f00; */
+}
+
+.label {
+  font-size: 3.2rem;
+  font-weight: 600;
+  padding: 0rem 0rem 0.5rem 0rem;
+}
+
+.label1 {
+  font-size: 1.8rem;
+  font-weight: 550;
+  cursor: pointer;
+  /* padding: 0rem 0rem 1rem 0rem; */
+}
+
+.text-input {
+  font-size: 1.8rem;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  border: 0rem;
+  height: 2.5rem;
+}
+
+.notes {
+  word-break: break-all;
+}
