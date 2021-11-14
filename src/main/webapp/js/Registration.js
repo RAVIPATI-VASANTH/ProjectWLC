@@ -1,44 +1,4 @@
-$("#ajaxcall").click(function () {
-  $.post(
-    "hostelRegister",
-    {
-      name: "Donald Duck",
-      city: "Duckburg",
-    },
-    function (data, status) {
-      if (status == "success") {
-        window.location.assign("hostelWorkspace.jsp");
-      }
-    }
-  );
-});
-
-// let obj={
-//   hname="",
-//   oname="",
-//   ocontact="",
-//   hgender="",
-//   htype="",
-//   hcommunityname="",
-//   hlandmark="",
-//   hlocation="",
-//   hid="",
-//   hpassword=""
-// }
-
-// let objsignal={
-//   hname=false,
-//   oname=false,
-//   ocontact=false,
-//   hgender=false,
-//   htype=false,
-//   hcommunityname=false,
-//   hlandmark=false,
-//   hlocation=false,
-//   hid=false,
-//   hpassword=false
-// }
-
+"use strict";
 function checkChange(value) {
   switch (value) {
     case 0:
@@ -190,7 +150,27 @@ function checkPassword() {
 function checkDataValidation() {}
 
 //LandMark Creation
-function createLandmark() {}
+function createLandmark() {
+  var fname = String(document.getElementById("landmark-full-name").value);
+  var text = String(document.getElementById("landmark-description").value);
+  var signal = false;
+  if (
+    fname.length === "" ||
+    fname.length > 30 ||
+    fname.trim() === "" ||
+    text.length === "" ||
+    text.length > 30 ||
+    text.trim() === ""
+  ) {
+    signal = true;
+    alert("Please enter valid Data to create Landmark");
+  }
+  if (signal) {
+    return false;
+  } else {
+    return { name: fname, des: text };
+  }
+}
 
 // Location related
 function addLocation() {

@@ -193,11 +193,7 @@ pageEncoding="ISO-8859-1"%>
             placeholder="Select from Below Only"
             oninput="checkChange(5)"
           />
-          <datalist name="landmark" id="landmarks">
-            <option value="VFSTR">
-              Vignan Foundation of Sciences of Technology and Research
-            </option>
-          </datalist>
+          <datalist name="landmark" id="landmarks"> </datalist>
           <p id="landmark-message" class="notes message hide">
             Not Found landmark.<br />
             Scroll Down to create a New One
@@ -256,11 +252,7 @@ pageEncoding="ISO-8859-1"%>
             <p id="password-message" class="notes message hide">Not Macthed</p>
           </div>
           <div style="display: flex; justify-content: end; align-items: center">
-            <button
-              id="ajaxcall"
-              class="submit-button pad"
-              onclick="checkDataValidation()"
-            >
+            <button class="submit-button pad" onclick="checkDataValidation()">
               Submit
             </button>
           </div>
@@ -302,13 +294,7 @@ pageEncoding="ISO-8859-1"%>
             </p>
           </div>
           <div style="display: flex; justify-content: end; align-items: center">
-            <button
-              id="ajaxcall"
-              class="submit-button pad"
-              onclick="createLandmark()"
-            >
-              Create
-            </button>
+            <button id="ajaxcall" class="submit-button pad">Create</button>
           </div>
         </div>
 
@@ -346,6 +332,7 @@ pageEncoding="ISO-8859-1"%>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/RegistrationAjaxCalls.js"></script>
     <script src="js/Registration.js"></script>
   </body>
 </html>
