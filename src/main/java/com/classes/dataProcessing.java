@@ -6,4 +6,6 @@ public class dataProcessing {
 		
 		return minicode;
 	}
+	
+//	public static String ge
 }
