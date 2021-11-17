@@ -190,17 +190,15 @@ pageEncoding="ISO-8859-1"%>
             list="landmarks"
             id="landmark"
             class="text-input"
-            placeholder="Select from Below Only"
             oninput="checkChange(5)"
           />
-          <datalist name="landmark" id="landmarks">
-            <option value="VFSTR">
-              Vignan Foundation of Sciences of Technology and Research
-            </option>
-          </datalist>
+          <datalist name="landmark" id="landmarks"> </datalist>
           <p id="landmark-message" class="notes message hide">
-            Not Found landmark.<br />
-            Scroll Down to create a New One
+            The Landmark you entered is not recognized by us. Continue the
+            Registration process with this Landmark. Later we consult you for
+            recognization.
+            <!-- Not Found landmark.<br />
+            Scroll Down to create a New One -->
           </p>
         </div>
 
@@ -256,11 +254,7 @@ pageEncoding="ISO-8859-1"%>
             <p id="password-message" class="notes message hide">Not Macthed</p>
           </div>
           <div style="display: flex; justify-content: end; align-items: center">
-            <button
-              id="ajaxcall"
-              class="submit-button pad"
-              onclick="checkDataValidation()"
-            >
+            <button class="submit-button pad" onclick="checkDataValidation()">
               Submit
             </button>
           </div>
@@ -268,7 +262,7 @@ pageEncoding="ISO-8859-1"%>
       </section>
     </div>
 
-    <div>
+    <div class="hide">
       <section class="landmark-setup">
         <div class="phrase2"><strong>Create Landmark</strong></div>
       </section>
@@ -286,7 +280,7 @@ pageEncoding="ISO-8859-1"%>
               oninput="checkChange(6)"
             />
             <p id="landmark-full-name-message" class="notes message">
-              30 charecters remaining
+              60 charecters remaining
             </p>
           </div>
           <div class="form-element pad">
@@ -298,17 +292,11 @@ pageEncoding="ISO-8859-1"%>
               oninput="checkChange(7)"
             />
             <p id="landmark-description-message" class="notes message">
-              50 charecters remaining
+              150 charecters remaining
             </p>
           </div>
           <div style="display: flex; justify-content: end; align-items: center">
-            <button
-              id="ajaxcall"
-              class="submit-button pad"
-              onclick="createLandmark()"
-            >
-              Create
-            </button>
+            <button id="ajaxcall" class="submit-button pad">Create</button>
           </div>
         </div>
 
@@ -346,6 +334,7 @@ pageEncoding="ISO-8859-1"%>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/RegistrationAjaxCalls.js"></script>
     <script src="js/Registration.js"></script>
   </body>
 </html>
