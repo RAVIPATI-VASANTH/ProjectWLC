@@ -1,25 +1,28 @@
-/*$("#ajaxcall").click(function () {
-  var obj = createLandmark();
-  if (obj !== false) {
-    $.post(
-      "hostelRegister",
-      {
-        signal: 1,
-		id:obj.id,
-        name: obj.name,
-        des: obj.des,
-        mcode: obj.minicode,
-      },
-      function (data, status) {
-        if (status === "success") {
-            //window.location.assign("Registration.jsp");
-			consol.log(data);
-        }
+function sendNewHostelData() {
+  console.log(obj.oname);
+  $.post(
+    "hostelRegister",
+    {
+      signal: 1,
+      hname: obj.hname,
+      oname: obj.oname,
+      ocontact: obj.ocontact,
+      hgender: obj.hgender,
+      htype: obj.htype,
+      hcommunityname: obj.hcommunityname,
+      hlandmark: obj.hlandmark,
+      hlocation: obj.hlocation,
+      hid: obj.hid,
+      hpassword: obj.hpassword,
+    },
+    function (data, status) {
+      if (status === "success") {
+          //window.location.assign("Registration.jsp");
+    // console.log(data);
       }
-    );
-  }
-});
-*/
+    }
+  );
+}
 // VFSTR
 // Vignan Foundation of Sciences of Technology and Research
 

@@ -1,0 +1,151 @@
+*********************************************************************************************
+## Registration.js
+ 
+//LandMark Creation
+// class StringProcessVar {
+//   constructor(word) {
+//     this.value = word;
+//     this.cur = -1;
+//   }
+// }
+
+// function createLandmark() {
+//   var fname = String(document.getElementById("landmark-full-name").value);
+//   var text = String(document.getElementById("landmark-description").value);
+//   var signal = false;
+//   if (
+//     fname.length === "" ||
+//     fname.length > 60 ||
+//     fname.trim() === "" ||
+//     text.length === "" ||
+//     text.length > 150 ||
+//     text.trim() === ""
+//   ) {
+//     signal = true;
+//     alert("Please enter valid Data to create Landmark");
+//   }
+//   if (signal) {
+//     return false;
+//   } else {
+//     var code = minicodeGenerator(fname);
+//     var id1 = createLandmarkCode();
+//     console.log({ id: id1, name: fname, minicode: code, des: text });
+//     return { id: id1, name: fname, minicode: code, des: text };
+//   }
+// }
+
+// function generateMinicode(objsList) {
+//   var str = "";
+//   objsList.forEach((element) => {
+//     str += element[0].value.toUpperCase();
+//   });
+//   if (str.length < 7) {
+//     var diff = 7 - str.length;
+//   }
+//   return str;
+// }
+=============================================================================================
+function minicodeGenerator(fname) {
+  var str = fname;
+  if (str.length > 7) {
+    str = str.slice(0, 8);
+  } else if (str.length < 7) {
+    var diff = 7 - str.length;
+    for (var i = 0; i < diff; i++) {
+      str += "A";
+    }
+  }
+  return str;
+  /*
+  //Splitting full name to Words
+  var words = fname.split(" ");
+  words.forEach((element, index) => {
+    if (element === "") {
+      words.splice(index, 1);
+    }
+  });
+  //Creating a  processing variables
+  var objsList = [];
+  words.forEach((elements) => {
+    objsList.push(new StringProcessVar(element));
+  });
+
+  //genrating actual code
+  var minicode = generateMinicode(objsList);*/
+}
+
+
+*********************************************************************************************
+## Registration.jsp
+    <div class="hide">
+      <section class="landmark-setup">
+        <div class="phrase2"><strong>Create Landmark</strong></div>
+      </section>
+
+      <section class="landmark-section">
+        <div class="landmark-credentials">
+          <div class="form-element pad">
+            <label for="landmark-full-name" class="label"
+              >Landmark Full Name</label
+            >
+            <input
+              type="text"
+              id="landmark-full-name"
+              class="text-input"
+              oninput="checkChange(6)"
+            />
+            <p id="landmark-full-name-message" class="notes message">
+              60 charecters remaining
+            </p>
+          </div>
+          <div class="form-element pad">
+            <label for="landmark-description" class="label">Description</label>
+            <input
+              type="text"
+              id="landmark-description"
+              class="text-input"
+              oninput="checkChange(7)"
+            />
+            <p id="landmark-description-message" class="notes message">
+              150 charecters remaining
+            </p>
+          </div>
+          <div style="display: flex; justify-content: end; align-items: center">
+            <button id="ajaxcall" class="submit-button pad">Create</button>
+          </div>
+        </div>
+
+        <div class="description">
+          <li class="phrase1 notes">
+            Create the landmark which is recognized by more people. Example like
+            Collage, IT Hub, Traning Centers etc.,
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            Give details about landmark in 'Description' field like it's
+            city-name, area or any other information about it.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            This help our Team get Identified it as Landmark faster.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            The Landmarks Create by you are noted and inspected by our team
+            later.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            If the landmark doesn't reach our requirements, Don't worry, We will
+            contact you and clear the issue.
+          </li>
+          <br />
+          <li class="phrase1 notes">
+            Make Sure you must need to register the hostel, with the new
+            landmark created
+          </li>
+        </div>
+      </section>
+    </div>
+*********************************************************************************************
+
