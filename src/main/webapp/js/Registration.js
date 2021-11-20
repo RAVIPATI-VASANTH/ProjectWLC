@@ -97,16 +97,7 @@ function checkChange(value) {
       }
       break;
     case 5:
-      // console.log("called");
-      if (!isAvailable(document.getElementById("landmark").value)) {
-        document
-          .getElementById("landmark-message")
-          .setAttribute("class", "notes message");
-      } else {
-        document
-          .getElementById("landmark-message")
-          .setAttribute("class", "notes message hide");
-      }
+      var signal1=false;
       if (document.getElementById("landmark").value === "") {
         obj.hlandmark = "";
         objsignal.hlandmark = false;
@@ -114,8 +105,17 @@ function checkChange(value) {
       } else {
         obj.hlandmark = document.getElementById("landmark").value;
         objsignal.hlandmark = true;
-        document.getElementById("landmark-message").innerHTML =
-          "The Landmark you entered is not recognized by us. Continue the Registration process with this Landmark. Later we consult you for recognization.";
+        var signal=isAvailable(document.getElementById("landmark").value);
+        if (signal) {
+          document
+            .getElementById("landmark-message")
+            .setAttribute("class", "notes message");
+          document.getElementById("landmark-message").innerHTML = "The Landmark you entered is not recognized by us. Continue the Registration process with this Landmark. Later we consult you forrecognization.";
+        } else {
+          document
+            .getElementById("landmark-message")
+            .setAttribute("class", "notes message hide");
+        }
       }
       break;
     case 6:
@@ -168,60 +168,53 @@ function createLandmarkCode() {
 }
 
 function isAvailable(value) {
+  var signal=true;
   currentLandmarks.forEach((element) => {
-    console.log(element.minicode + " " + value);
     if (element.minicode === value) {
-      return false;
+      signal=false;
     }
-    return true;
   });
+  return signal;
 }
+
 //Credential Set-Up
-function getRandNumber() {
-  var s = "";
-  if (currentLandmarks.hostel_ids.length === 0) {
-    s = "1";
-  } else {
-    var list = [];
-    var g = "";
-    if (document.getElementById("hostel-gender-male").checked) {
-      g = "M";
-    } else {
-      g = "F";
-    }
-    currentLandmarks.forEach((element) => {
-      var k = element.split("-");
-      if (k[1] === g) {
-        list.push(element);
-      }
-    });
-    list.sort();
-    var e = list[list.length - 1].split("-");
-    s = String(Number(e[2]) + 1);
-  }
-  return s;
-}
-
-function getLandmarkSub() {
-  var s = document.getElementById("landmark").value;
-  return s.substring(0, 3);
-}
-
 function generateHostelId() {
-  // console.log(obj);
-  // console.log(objsignal);
-
   if (document.getElementById("landmark").value === "") {
     document
       .getElementById("generate-id-message")
       .setAttribute("class", "notes message");
     document.getElementById("hostel-id").value = "";
+    obj.hid="";
+    objsignal.hid=false;
   } else {
     document
       .getElementById("generate-id-message")
       .setAttribute("class", "notes message hide");
-    var num = getRandNumber();
-    var lan = minicodeGenerator(obj.hlandmark); //getLandmarkSub();
+      
+    var lan="";
+    currentLandmarks.forEach((element)=>{
+      if(element.minicode===obj.hlandmark){
+        lan=element.minicode;
+        }
+      else{
+          lan=obj.hlandmark;
+          if(lan.length>7){
+            lan=lan.slice(0,8);
+          }
+        }
+    });
+
+    var num=1;
+    currentLandmarks.forEach((element)=>{
+      if(element.minicode===lan){
+        if(element.hostel_ids.length!==0){
+          var l=element.hostel_ids.sort();
+          l=l[l.length-1].split("-")
+          var num=Number(l[l.length-1])+1;
+        }
+      }
+    })
+
     if (document.getElementById("hostel-gender-male").checked) {
       var g = "M";
     } else {
@@ -230,6 +223,8 @@ function generateHostelId() {
 
     document.getElementById("hostel-id").value =
       "#" + lan + "-" + g + "-" + num;
+    obj.hid=document.getElementById("hostel-id").value;
+    objsignal.hid=true
   }
 }
 
@@ -240,88 +235,61 @@ function checkPassword() {
     document
       .getElementById("password-message")
       .setAttribute("class", "notes message hide");
+      obj.hpassword=j;
+      objsignal.hpassword=true;
   } else {
     document
       .getElementById("password-message")
       .setAttribute("class", "notes message");
-  }
+      obj.hpassword="";
+      objsignal.hpassword=true;
+    }
 }
 
 //Hostel  registration
-function checkDataValidation() {}
-
-//LandMark Creation
-class StringProcessVar {
-  constructor(word) {
-    this.value = word;
-    this.cur = -1;
+function checkDataValidation() {
+  console.log(obj);
+  console.log(objsignal);
+  var signal=true;
+  if(!objsignal.hname){
+    alert("Enter a valid Hostel Name");
+    signal=false;
   }
-}
-
-function createLandmark() {
-  var fname = String(document.getElementById("landmark-full-name").value);
-  var text = String(document.getElementById("landmark-description").value);
-  var signal = false;
-  if (
-    fname.length === "" ||
-    fname.length > 60 ||
-    fname.trim() === "" ||
-    text.length === "" ||
-    text.length > 150 ||
-    text.trim() === ""
-  ) {
-    signal = true;
-    alert("Please enter valid Data to create Landmark");
+  else if(!objsignal.oname){
+    alert("Enter a valid Owner Name");
+    signal=false;
   }
-  if (signal) {
-    return false;
-  } else {
-    var code = minicodeGenerator(fname);
-    var id1 = createLandmarkCode();
-    console.log({ id: id1, name: fname, minicode: code, des: text });
-    return { id: id1, name: fname, minicode: code, des: text };
+  else if(!objsignal.ocontact){
+    alert("Enter a valid Contact");
+    signal=false;
   }
-}
-
-// function generateMinicode(objsList) {
-//   var str = "";
-//   objsList.forEach((element) => {
-//     str += element[0].value.toUpperCase();
-//   });
-//   if (str.length < 7) {
-//     var diff = 7 - str.length;
-//   }
-//   return str;
-// }
-
-function minicodeGenerator(fname) {
-  var str = fname;
-  if (str.length > 7) {
-    str = str.slice(0, 8);
-  } else if (str.length < 7) {
-    var diff = 7 - str.length;
-    for (var i = 0; i < diff; i++) {
-      str += "A";
+  else if(obj.htype==="community"){
+    if(!objsignal.hcommunityname){
+      alert("Enter Community Name");
+      signal=false;
     }
   }
-  return str;
-  /*
-  //Splitting full name to Words
-  var words = fname.split(" ");
-  words.forEach((element, index) => {
-    if (element === "") {
-      words.splice(index, 1);
-    }
-  });
-  //Creating a  processing variables
-  var objsList = [];
-  words.forEach((elements) => {
-    objsList.push(new StringProcessVar(element));
-  });
-
-  //genrating actual code
-  var minicode = generateMinicode(objsList);*/
+  else if(!objsignal.hlocation){
+    alert("Add Loaction");
+    signal=false;
+  }
+  else if(!objsignal.hlandmark){
+    alert("Enetr a valid Landmark");
+    signal=false;
+  }
+  else if(!objsignal.hid){
+    alert("Generate Hostel Id");
+    signal=false;
+  }
+  else if(!objsignal.hpassword){
+    alert("Check the Password");
+    signal=false;
+  }
+  if(signal){
+    sendNewHostelData()
+  }
 }
+
 
 // Location related
 function addLocation() {
