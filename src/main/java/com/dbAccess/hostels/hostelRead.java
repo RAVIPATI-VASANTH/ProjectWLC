@@ -40,4 +40,25 @@ public class hostelRead {
 		}
 		return list;
 	}
+
+	public static String getHostelTableNameFromLandmarkMinicode(String minicode) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		String hostelsTable="";
+		try {
+			//getting landmark's hostels table name
+			String sql="SELECT hostels_table from landmarks where mini_code=?";
+			PreparedStatement st1= con.prepareStatement(sql);
+			st1.setString(1,minicode);
+			ResultSet rs=st1.executeQuery();
+			while(rs.next()) {
+				hostelsTable=(String)rs.getString(1);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return hostelsTable;
+	}
+
 }
