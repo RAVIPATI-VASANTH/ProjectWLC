@@ -1,5 +1,4 @@
 function sendNewHostelData() {
-  console.log(obj.oname);
   $.post(
     "hostelRegister",
     {
@@ -18,7 +17,10 @@ function sendNewHostelData() {
     function (data, status) {
       if (status === "success") {
           //window.location.assign("Registration.jsp");
-    // console.log(data);
+      // console.log(data);
+      }
+      else{
+        alert("Something Went Wrong..!!");
       }
     }
   );

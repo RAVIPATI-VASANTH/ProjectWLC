@@ -142,10 +142,10 @@ function checkChange(value) {
 }
 
 function updateLandmarksDatalist(data) {
-  console.log(data);
+  // console.log(data);
   var list = JSON.parse(data);
   currentLandmarks = list;
-  console.log(currentLandmarks);
+  // console.log(currentLandmarks);
   var element = document.getElementById("landmarks");
   list.forEach((item, index) => {
     var tag = document.createElement("option");
@@ -210,7 +210,7 @@ function generateHostelId() {
         if(element.hostel_ids.length!==0){
           var l=element.hostel_ids.sort();
           l=l[l.length-1].split("-")
-          var num=Number(l[l.length-1])+1;
+          num=Number(l[l.length-1])+1;
         }
       }
     })
@@ -248,8 +248,8 @@ function checkPassword() {
 
 //Hostel  registration
 function checkDataValidation() {
-  console.log(obj);
-  console.log(objsignal);
+  // console.log(obj);
+  // console.log(objsignal);
   var signal=true;
   if(!objsignal.hname){
     alert("Enter a valid Hostel Name");
@@ -289,7 +289,6 @@ function checkDataValidation() {
     sendNewHostelData()
   }
 }
-
 
 // Location related
 function addLocation() {
