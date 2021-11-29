@@ -44,6 +44,9 @@ public class HostelsRegister extends HttpServlet {
 				}
 				else {
 					out.println("success");
+					//Create here a Session Object
+					
+					response.sendRedirect("hostelWorkSpace.jsp");
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
