@@ -1,4 +1,29 @@
 *********************************************************************************************
+## hostelRead.java
+
+public static String getHostelTableNameFromLandmarkMinicode(String minicode) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		String hostelsTable="";
+		try {
+			//getting landmark's hostels table name
+			String sql="SELECT hostels_table from landmarks where mini_code=?";
+			PreparedStatement st1= con.prepareStatement(sql);
+			st1.setString(1,minicode);
+			ResultSet rs=st1.executeQuery();
+			while(rs.next()) {
+				hostelsTable=rs.getString(1).toString();
+				break;
+			}
+			System.out.println("hello mowa"+hostelsTable);
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		con.close();
+		return hostelsTable;
+	}
+*********************************************************************************************
 ## Registration.js
  
 //LandMark Creation
@@ -73,7 +98,54 @@ function minicodeGenerator(fname) {
   //genrating actual code
   var minicode = generateMinicode(objsList);*/
 }
+=============================================================================================
+this used when there is no delay in table creation
+function verifyLandmark() {
+  var l = [];
+  var obj = window.obj;
+  currentLandmarks.forEach((element) => {
+    l.push(element.minicode);
+  });
+  // console.log(obj);
+  for (var i = 0; i < l.length; i++) {
+    var element = l[i];
+    // console.log(element, obj.hlandmark);
+    if (obj.hlandmark === element) {
+      console.log("landmark creation skipped");
+      return false;
+    }
+  }
+  // console.log("called below");
+  var mini = obj.hlandmark;
+  var lanid = createLandmarkCode();
+  var fname = obj.hlfname;
+  var htablename = "other_lan";
+  window.obj.htablesname = htablename;
+  obj = {
+    signal: 0,
+    id: lanid,
+    minicode: mini,
+    fullname: fname,
+    tablename: htablename,
+  };
+  return obj;
+}
 
+function checkLandmark() {
+  var v = verifyLandmark();
+  if (v) {
+    console.log("printing in check landmark", v);
+    $.post("hostelRegister", v, function (data, status) {
+      if (status === "success") {
+        console.log("created new landmark");
+      } else {
+        alert("Something Went Wrong..!!");
+      }
+    });
+    return true;
+  }
+  return false;
+}
 
 *********************************************************************************************
 ## Registration.jsp

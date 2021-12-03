@@ -22,6 +22,29 @@ public class HostelsRegister extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int i= Integer.parseInt(request.getParameter("signal"));
+		if(i==0) {
+			String lanid=(String)request.getParameter("id");
+			String mcode=(String)request.getParameter("minicode");
+			String fname=(String)request.getParameter("fullname");
+			String tabname=(String)request.getParameter("tablename");
+//			System.out.println(lanid+" "+mcode+" "+fname+" "+tabname);
+			PrintWriter out=response.getWriter();
+			try {
+				int resultSignal=hostelWrite.createNewLandmark(lanid,mcode,fname,tabname);
+				if (resultSignal==0) {
+					out.println("error");
+				}
+				else {
+					out.println("success");
+					//Create here a Session Object
+//					response.sendRedirect("hostelWorkSpace.jsp");
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				out.println("error");
+			}
+		}
 		if(i==1) {
 			HostelRegisterContainer h=new HostelRegisterContainer();
 
@@ -35,6 +58,8 @@ public class HostelsRegister extends HttpServlet {
 			h.hcommunityname=(String)request.getParameter("hcommunityname");
 			h.hlandmark=(String)request.getParameter("hlandmark");
 			h.hpassword=(String)request.getParameter("hpassword");
+			h.htablename=(String)request.getParameter("htablename");
+			h.hlfname=(String)request.getParameter("hlfname");
 
 			PrintWriter out=response.getWriter();
 			try {
@@ -44,6 +69,9 @@ public class HostelsRegister extends HttpServlet {
 				}
 				else {
 					out.println("success");
+					//Create here a Session Object
+					
+					response.sendRedirect("hostelWorkSpace.jsp");
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -59,7 +87,7 @@ public class HostelsRegister extends HttpServlet {
 			try {
 				ArrayList<JSONObject> list= hostelRead.getLandmarksBasicInfo();
 				PrintWriter out = response.getWriter();
-				System.out.println(list);
+//				System.out.println(list);
 				out.println(list.toString());
 //				System.out.println(list.toString());
 			} catch (Exception e) {

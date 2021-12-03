@@ -201,19 +201,6 @@ pageEncoding="ISO-8859-1"%>
             Scroll Down to create a New One -->
           </p>
         </div>
-
-        <div class="form-element">
-          <button
-            id="location-button"
-            class="label1"
-            onclick="generateHostelId()"
-          >
-            Generate Hostel ID
-          </button>
-          <p id="generate-id-message" class="notes message hide">
-            LandMark Required
-          </p>
-        </div>
       </div>
     </div>
 
