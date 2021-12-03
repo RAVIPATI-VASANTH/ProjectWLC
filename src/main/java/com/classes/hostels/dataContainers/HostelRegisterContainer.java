@@ -12,4 +12,6 @@ public class HostelRegisterContainer {
 	public String hid;
 	public String hpassword;
 	public String minicode;
+	public String htablename;
+	public String hlfname;
 }

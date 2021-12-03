@@ -16,13 +16,14 @@ public class hostelRead {
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
 		ArrayList<JSONObject> list = new ArrayList<JSONObject>();
-		try {
+//		try {
 		ResultSet rs=stmt.executeQuery("select id,mini_code,full_name,hostels_table from landmarks");
 		while(rs.next()) {
 			JSONObject ob = new JSONObject();
 			ob.put("id", rs.getString(1));
 			ob.put("minicode", rs.getString(2));
 			ob.put("fullname", rs.getString(3));
+			ob.put("htablesname", rs.getString(4));
 			Statement st=con.createStatement();
 			String s="select hostel_id from "+rs.getString(4)+"";
 			ResultSet r=st.executeQuery(s);
@@ -34,31 +35,11 @@ public class hostelRead {
 			list.add(ob);
 		}
 		con.close();
-		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
+//		}
+//		catch(Exception e) {
+//			System.out.println("here man "+e.getMessage());
+//		}
 		return list;
-	}
-
-	public static String getHostelTableNameFromLandmarkMinicode(String minicode) throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con=DriverManager.getConnection(url,user,pass);
-		String hostelsTable="";
-		try {
-			//getting landmark's hostels table name
-			String sql="SELECT hostels_table from landmarks where mini_code=?";
-			PreparedStatement st1= con.prepareStatement(sql);
-			st1.setString(1,minicode);
-			ResultSet rs=st1.executeQuery();
-			while(rs.next()) {
-				hostelsTable=(String)rs.getString(1);
-			}
-		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return hostelsTable;
 	}
 
 }

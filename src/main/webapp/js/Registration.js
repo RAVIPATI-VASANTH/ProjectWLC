@@ -1,7 +1,6 @@
 "use strict";
 var currentLandmarks = [];
-
-let obj = {
+var obj = {
   hname: "",
   oname: "",
   ocontact: "",
@@ -9,12 +8,14 @@ let obj = {
   htype: "public",
   hcommunityname: "",
   hlandmark: "",
+  hlfname: "",
   hlocation: "",
+  htablesname: "",
   hid: "",
   hpassword: "",
 };
 
-let objsignal = {
+var objsignal = {
   hname: false,
   oname: false,
   ocontact: false,
@@ -22,12 +23,16 @@ let objsignal = {
   htype: true,
   hcommunityname: false,
   hlandmark: false,
+  hlfname: false,
   hlocation: false,
+  htablesname: true,
   hid: false,
   hpassword: false,
 };
 
 function checkChange(value) {
+  var obj = window.obj;
+  var objsignal = window.objsignal;
   switch (value) {
     case 0:
       var s = document.getElementById("hostel-name").value;
@@ -97,26 +102,33 @@ function checkChange(value) {
       }
       break;
     case 5:
-      var signal1=false;
       if (document.getElementById("landmark").value === "") {
         obj.hlandmark = "";
-        objsignal.hlandmark = false;
+        obj.hlfname = "";
+        objsignal.hlfname = false;
+        obj.htablesname = "";
         document.getElementById("landmark-message").innerHTML = "Invalid";
       } else {
-        obj.hlandmark = document.getElementById("landmark").value;
+        obj.hlandmark = generateMinicode(
+          document.getElementById("landmark").value
+        );
+        obj.hlfname = document.getElementById("landmark").value;
+        objsignal.hlfname = true;
         objsignal.hlandmark = true;
-        var signal=isAvailable(document.getElementById("landmark").value);
+        var signal = isAvailable(document.getElementById("landmark").value);
         if (signal) {
           document
             .getElementById("landmark-message")
             .setAttribute("class", "notes message");
-          document.getElementById("landmark-message").innerHTML = "The Landmark you entered is not recognized by us. Continue the Registration process with this Landmark. Later we consult you forrecognization.";
+          document.getElementById("landmark-message").innerHTML =
+            "The Landmark you entered is not recognized by us. Continue the Registration process with this Landmark. Later we consult you forrecognization.";
         } else {
           document
             .getElementById("landmark-message")
             .setAttribute("class", "notes message hide");
         }
       }
+      generateHostelId();
       break;
     case 6:
       var n = 60;
@@ -139,13 +151,16 @@ function checkChange(value) {
       }
       break;
   }
+  window.obj = obj;
+  window.objsignal = objsignal;
+  // console.log(obj);
 }
 
 function updateLandmarksDatalist(data) {
   // console.log(data);
   var list = JSON.parse(data);
   currentLandmarks = list;
-  // console.log(currentLandmarks);
+  console.log(currentLandmarks);
   var element = document.getElementById("landmarks");
   list.forEach((item, index) => {
     var tag = document.createElement("option");
@@ -155,23 +170,32 @@ function updateLandmarksDatalist(data) {
   });
 }
 
+function generateMinicode(hstr) {
+  var str = hstr.toUpperCase();
+  if (str.length > 7) {
+    str = str.slice(0, 7);
+  }
+  return str;
+}
+
 function createLandmarkCode() {
   var list = [];
   currentLandmarks.forEach((element) => {
     list.push(element.id);
   });
   list.sort();
-  var num = Number(list[list.length - 1].split("-")[1]);
+  var num = Number(list[list.length - 1].split("_")[1]);
   num += 1;
-  var str = "#lan-" + String(num);
+  var str = "lan_" + String(num);
   return str;
 }
 
 function isAvailable(value) {
-  var signal=true;
+  var signal = true;
   currentLandmarks.forEach((element) => {
     if (element.minicode === value) {
-      signal=false;
+      window.obj.htablesname = element.htablesname;
+      signal = false;
     }
   });
   return signal;
@@ -180,40 +204,32 @@ function isAvailable(value) {
 //Credential Set-Up
 function generateHostelId() {
   if (document.getElementById("landmark").value === "") {
-    document
-      .getElementById("generate-id-message")
-      .setAttribute("class", "notes message");
     document.getElementById("hostel-id").value = "";
-    obj.hid="";
-    objsignal.hid=false;
+    obj.hid = "";
+    objsignal.hid = false;
   } else {
-    document
-      .getElementById("generate-id-message")
-      .setAttribute("class", "notes message hide");
-      
-    var lan="";
-    currentLandmarks.forEach((element)=>{
-      if(element.minicode===obj.hlandmark){
-        lan=element.minicode;
-        }
-      else{
-          lan=obj.hlandmark;
-          if(lan.length>7){
-            lan=lan.slice(0,8);
-          }
-        }
-    });
-
-    var num=1;
-    currentLandmarks.forEach((element)=>{
-      if(element.minicode===lan){
-        if(element.hostel_ids.length!==0){
-          var l=element.hostel_ids.sort();
-          l=l[l.length-1].split("-")
-          num=Number(l[l.length-1])+1;
+    var lan = "";
+    currentLandmarks.forEach((element) => {
+      if (element.minicode === obj.hlandmark) {
+        lan = element.minicode;
+      } else {
+        lan = obj.hlandmark;
+        if (lan.length > 7) {
+          lan = lan.slice(0, 7);
         }
       }
-    })
+    });
+
+    var num = 1;
+    currentLandmarks.forEach((element) => {
+      if (element.minicode === lan) {
+        if (element.hostel_ids.length !== 0) {
+          var l = element.hostel_ids.sort();
+          l = l[l.length - 1].split("_");
+          num = Number(l[l.length - 1]) + 1;
+        }
+      }
+    });
 
     if (document.getElementById("hostel-gender-male").checked) {
       var g = "M";
@@ -221,10 +237,9 @@ function generateHostelId() {
       var g = "F";
     }
 
-    document.getElementById("hostel-id").value =
-      "#" + lan + "-" + g + "-" + num;
-    obj.hid=document.getElementById("hostel-id").value;
-    objsignal.hid=true
+    document.getElementById("hostel-id").value = lan + "_" + g + "_" + num;
+    obj.hid = document.getElementById("hostel-id").value;
+    objsignal.hid = true;
   }
 }
 
@@ -235,58 +250,51 @@ function checkPassword() {
     document
       .getElementById("password-message")
       .setAttribute("class", "notes message hide");
-      obj.hpassword=j;
-      objsignal.hpassword=true;
+    obj.hpassword = j;
+    objsignal.hpassword = true;
   } else {
     document
       .getElementById("password-message")
       .setAttribute("class", "notes message");
-      obj.hpassword="";
-      objsignal.hpassword=true;
-    }
+    obj.hpassword = "";
+    objsignal.hpassword = true;
+  }
 }
 
 //Hostel  registration
 function checkDataValidation() {
   // console.log(obj);
   // console.log(objsignal);
-  var signal=true;
-  if(!objsignal.hname){
+  var signal = true;
+  if (!objsignal.hname) {
     alert("Enter a valid Hostel Name");
-    signal=false;
-  }
-  else if(!objsignal.oname){
+    signal = false;
+  } else if (!objsignal.oname) {
     alert("Enter a valid Owner Name");
-    signal=false;
-  }
-  else if(!objsignal.ocontact){
+    signal = false;
+  } else if (!objsignal.ocontact) {
     alert("Enter a valid Contact");
-    signal=false;
-  }
-  else if(obj.htype==="community"){
-    if(!objsignal.hcommunityname){
+    signal = false;
+  } else if (obj.htype === "community") {
+    if (!objsignal.hcommunityname) {
       alert("Enter Community Name");
-      signal=false;
+      signal = false;
     }
-  }
-  else if(!objsignal.hlocation){
+  } else if (!objsignal.hlocation) {
     alert("Add Loaction");
-    signal=false;
-  }
-  else if(!objsignal.hlandmark){
+    signal = false;
+  } else if (!objsignal.hlandmark) {
     alert("Enetr a valid Landmark");
-    signal=false;
-  }
-  else if(!objsignal.hid){
+    signal = false;
+  } else if (!objsignal.hid) {
     alert("Generate Hostel Id");
-    signal=false;
-  }
-  else if(!objsignal.hpassword){
+    signal = false;
+  } else if (!objsignal.hpassword) {
     alert("Check the Password");
-    signal=false;
+    signal = false;
   }
-  if(signal){
-    sendNewHostelData()
+  if (signal) {
+    sendNewHostelData();
   }
 }
 
