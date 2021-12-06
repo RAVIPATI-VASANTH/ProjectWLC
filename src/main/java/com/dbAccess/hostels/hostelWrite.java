@@ -18,7 +18,7 @@ public class hostelWrite {
 //		System.out.println("Called");
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
-		
+
 		String sql="insert into landmarks values(?,?,?,?,?,?,?)";
 		PreparedStatement st= con.prepareStatement(sql);
 		st.setString(1,id);
@@ -35,8 +35,8 @@ public class hostelWrite {
 		status=smt.executeUpdate();
 //		con.commit();
 		con.close();
-		Connection con1=DriverManager.getConnection(url,user,pass);
-		con1.close();
+//		Connection con1=DriverManager.getConnection(url,user,pass);
+//		con1.close();
 //		return 1;
 		return status;
 	}
@@ -46,38 +46,20 @@ public class hostelWrite {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
-			if(h.htablename=="other_lan") {
-				String sql="insert into other_lan values(?,?,?,?,?,?,?,?,?,?,?)";
-				PreparedStatement smt=con.prepareStatement(sql);				
-				smt.setString(1,h.hid);
-				smt.setString(2,h.hname);
-				smt.setString(3,h.oname);
-				smt.setString(4,h.ocontact);
-				smt.setString(5,h.htype);
-				smt.setString(6,h.hgender);
-				smt.setString(7,h.hlocation);
-				smt.setString(8,h.hlandmark);
-				smt.setString(9,h.hpassword);
-				smt.setString(10,h.hcommunityname);
-				smt.setString(11, h.hlfname);
-				status=smt.executeUpdate();
-			}
-			else {
-				System.out.println("called");
-				String sql="insert into "+h.htablename+" values(?,?,?,?,?,?,?,?,?,?)";
-				PreparedStatement smt=con.prepareStatement(sql);
-				smt.setString(1,h.hid);
-				smt.setString(2,h.hname);
-				smt.setString(3,h.oname);
-				smt.setString(4,h.ocontact);
-				smt.setString(5,h.htype);
-				smt.setString(6,h.hgender);
-				smt.setString(7,h.hlocation);
-				smt.setString(8,h.hlandmark);
-				smt.setString(9,h.hpassword);
-				smt.setString(10,h.hcommunityname);
-				status=smt.executeUpdate();	
-			}
+//			System.out.println("called");
+			String sql="insert into "+h.htablename+" values(?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,h.hid);
+			smt.setString(2,h.hname);
+			smt.setString(3,h.oname);
+			smt.setString(4,h.ocontact);
+			smt.setString(5,h.htype);
+			smt.setString(6,h.hgender);
+			smt.setString(7,h.hlocation);
+			smt.setString(8,h.hlandmark);
+			smt.setString(9,h.hpassword);
+			smt.setString(10,h.hcommunityname);
+			status=smt.executeUpdate();	
 			con.close();
 		}
 		catch(Exception e) {

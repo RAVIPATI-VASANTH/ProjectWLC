@@ -59,7 +59,7 @@ public class HostelsRegister extends HttpServlet {
 			h.hlandmark=(String)request.getParameter("hlandmark");
 			h.hpassword=(String)request.getParameter("hpassword");
 			h.htablename=(String)request.getParameter("htablename");
-			h.hlfname=(String)request.getParameter("hlfname");
+//			h.hlfname=(String)request.getParameter("hlfname");
 
 			PrintWriter out=response.getWriter();
 			try {
@@ -71,7 +71,7 @@ public class HostelsRegister extends HttpServlet {
 					out.println("success");
 					//Create here a Session Object
 					
-					response.sendRedirect("hostelWorkSpace.jsp");
+//					response.sendRedirect("hostelWorkSpace.jsp");
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
