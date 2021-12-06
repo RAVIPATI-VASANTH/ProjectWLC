@@ -12,10 +12,9 @@ pageEncoding="ISO-8859-1"%>
       href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/Registration.css" />
-    <title>WebsiteLoChudu-Registration</title>
+    <link rel="stylesheet" href="css/Hostels/hostelRegistrationS2.css" />
+    <title>Hostel Registration-Step 2</title>
   </head>
-
   <body>
     <section class="head-section">
       <a class="website-name" href="index.html"
@@ -33,6 +32,7 @@ pageEncoding="ISO-8859-1"%>
         <p class="phrase1 notes">
           Register your Thing and move it on to the Internet.
         </p>
+        <p class="phrase"><strong>Step 2</strong></p>
       </div>
       <div class="illustration">
         <img
@@ -40,19 +40,27 @@ pageEncoding="ISO-8859-1"%>
           src="images\Secure login-bro.svg"
           alt="illustrating how the WebsiteLoChudu work"
         />
-        <!-- <img
-          class="illustration1-img"
-          src="images\workspace.jpeg"
-          alt="working"
-          /> -->
       </div>
     </section>
 
-    <div class="color">
-      <nav class="modules-nav">
-        <a class="module">Hostels</a>
-      </nav>
-    </div>
+    <section class="color">
+      <div class="info-section">
+        <ul>
+          <li class="phrase1">Enter the Required details.</li>
+          <li class="phrase1">
+            Watch out for your <span class="phrase-color">Hostel Id</span> and
+            Set a
+            <span class="phrase-color">Password</span>
+            below.
+          </li>
+          <li class="phrase1">
+            Those Credentials helps you to log-in to your Hostel and allows you
+            to make changes.
+          </li>
+        </ul>
+        <!-- <li></li> -->
+      </div>
+    </section>
 
     <div class="">
       <section class="hostel-registration">
@@ -159,9 +167,15 @@ pageEncoding="ISO-8859-1"%>
               value="male"
               name="gender"
               class="radio-button"
+              onclick="checkChange(5)"
               checked
             />
-            <label for="hostel-gender-male" class="label1">Male</label>
+            <label
+              for="hostel-gender-male"
+              class="label1"
+              onclick="checkChange(5)"
+              >Male</label
+            >
           </div>
           <div>
             <input
@@ -170,8 +184,14 @@ pageEncoding="ISO-8859-1"%>
               value="female"
               name="gender"
               class="radio-button"
+              onclick="checkChange(5)"
             />
-            <label for="hostel-gender-female" class="label1">Female</label>
+            <label
+              for="hostel-gender-female"
+              class="label1"
+              onclick="checkChange(5)"
+              >Female</label
+            >
           </div>
         </div>
 
@@ -185,21 +205,11 @@ pageEncoding="ISO-8859-1"%>
 
         <div class="form-element">
           <label for="" class="label">Landmark</label>
-          <input
-            type="text"
-            list="landmarks"
-            id="landmark"
-            class="text-input"
-            oninput="checkChange(5)"
-          />
-          <datalist name="landmark" id="landmarks"> </datalist>
-          <p id="landmark-message" class="notes message hide">
-            The Landmark you entered is not recognized by us. Continue the
-            Registration process with this Landmark. Later we consult you for
-            recognization.
-            <!-- Not Found landmark.<br />
-            Scroll Down to create a New One -->
-          </p>
+          <input type="text" id="landmark" class="text-input" readonly value="<%
+          String s=request.getParameter("l"); out.println(s); %>"/>
+          <!-- <dump id="dump"
+            ><% out.println(request.getParameter("l").toString()); %></dump
+          > -->
         </div>
       </div>
     </div>
@@ -238,7 +248,7 @@ pageEncoding="ISO-8859-1"%>
               oninput="checkPassword()"
               placeholder="re-enter password"
             />
-            <p id="password-message" class="notes message hide">Not Macthed</p>
+            <p id="password-message" class="notes message hide">Not Matched</p>
           </div>
           <div style="display: flex; justify-content: end; align-items: center">
             <button class="submit-button pad" onclick="checkDataValidation()">
@@ -250,7 +260,6 @@ pageEncoding="ISO-8859-1"%>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/Registration.js"></script>
-    <script src="js/RegistrationAjaxCalls.js"></script>
+    <script src="js/Hostels/hostelRegistrationS2.js"></script>
   </body>
 </html>
