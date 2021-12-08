@@ -1,0 +1,6 @@
+phone no : call 
+hostel type : home 
+gender gender : male,female
+strength : group
+landmark flaticon : flag
+location : map 

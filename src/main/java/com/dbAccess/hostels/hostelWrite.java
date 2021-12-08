@@ -15,7 +15,6 @@ public class hostelWrite {
 	
 	public static int createNewLandmark(String id,String minicode,String fullname,String tabname) throws ClassNotFoundException, SQLException {
 		int status=0;
-//		System.out.println("Called");
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 
@@ -30,24 +29,20 @@ public class hostelWrite {
 		st.setString(7,"");
 		status=st.executeUpdate();
 
-		String sql2="create table "+tabname+" (hostel_id VARCHAR(15) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(20),owner_contact VARCHAR(15),hostel_type VARCHAR(10),hostel_gender VARCHAR(10),hostel_location VARCHAR(30),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15) ,PRIMARY KEY(hostel_id))";
+		String sql2="create table "+tabname+" (hostel_id VARCHAR(15) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(20),owner_contact VARCHAR(15),hostel_type VARCHAR(10),hostel_gender VARCHAR(10),hostel_location VARCHAR(30),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(5),hostel_headline VARCHAR(45),hostel_roomtable VARCHAR(45),hostel_hotspottable VARCHAR(45),hostel_speacializationtable VARCHAR(45),hostel_policytable VARCHAR(45),hostel_requirementtable VARCHAR(45) ,PRIMARY KEY(hostel_id))";
 		PreparedStatement smt= con.prepareStatement(sql2);
 		status=smt.executeUpdate();
-//		con.commit();
 		con.close();
-//		Connection con1=DriverManager.getConnection(url,user,pass);
-//		con1.close();
-//		return 1;
 		return status;
 	}
-	
+
 	public static int createNewHostel(HostelRegisterContainer h) throws ClassNotFoundException, SQLException {
 		int status=0;
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 //			System.out.println("called");
-			String sql="insert into "+h.htablename+" values(?,?,?,?,?,?,?,?,?,?)";
+			String sql="insert into "+h.htablename+" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,h.hid);
 			smt.setString(2,h.hname);
@@ -59,11 +54,57 @@ public class hostelWrite {
 			smt.setString(8,h.hlandmark);
 			smt.setString(9,h.hpassword);
 			smt.setString(10,h.hcommunityname);
-			status=smt.executeUpdate();	
+			smt.setString(11,"0");
+			smt.setString(12,"");
+			h.hid=h.hid.toLowerCase();
+			smt.setString(13,h.hid+"_roomtable");
+			smt.setString(14,h.hid+"_hotspottable");
+			smt.setString(15,h.hid+"_speacializationtable");
+			smt.setString(16,h.hid+"_policytable");
+			smt.setString(17,h.hid+"_requirementtable");
+			status=smt.executeUpdate();
+			
+			String rt=h.hid+"_roomtable";
+			String ht=h.hid+"_hotspottable";
+			String st=h.hid+"_speacializationtable";
+			String pt=h.hid+"_policytable";
+			String reqt=h.hid+"_requirementtable";
+			
+			sql="create table "+rt+" (roomcard VARCHAR(300));";
+			smt=con.prepareStatement(sql);
+			smt.executeUpdate();
+			
+			sql="create table "+ht+" (hotspot VARCHAR(50));";
+			smt=con.prepareStatement(sql);
+			smt.executeUpdate();
+			
+			sql="create table "+st+" (speacialization VARCHAR(100));";
+			smt=con.prepareStatement(sql);
+			smt.executeUpdate();
+			
+			sql="create table "+pt+" (policy VARCHAR(150));";
+			smt=con.prepareStatement(sql);
+			smt.executeUpdate();
+			
+			sql="create table "+reqt+" (requirement VARCHAR(100));";
+			smt=con.prepareStatement(sql);
+			smt.executeUpdate();
+			
+			h.hid=h.hid.toUpperCase();
+			sql="insert into food_table values(?,?,?,?,?,?)";
+			smt=con.prepareStatement(sql);
+			smt.setString(1,h.hid);
+			smt.setString(2,"");
+			smt.setString(3,"");
+			smt.setString(4,"");
+			smt.setString(5,"");
+			smt.setString(6,"");
+			status=smt.executeUpdate();
+
 			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("here 2"+e.getMessage());
 		}
 		return status;
 	}

@@ -69,4 +69,47 @@ public class hostelRead {
 		return list;
 		
 	}
+
+	public static JSONObject getHostelBasicInfo(String id,String lanmincode) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		JSONObject ob = new JSONObject();
+		try {
+			String sql="select hostels_table,full_name from landmarks where mini_code ='"+lanmincode+"';";
+			ResultSet rs=stmt.executeQuery(sql);
+			String tname="";
+			String lfname="";
+			while(rs.next()) {
+				tname=rs.getString(1);
+				lfname=rs.getString(2);
+			}
+			sql="select hostel_id,hostel_name,owner_name,owner_contact,hostel_type,hostel_gender,hostel_location,hostel_landmark,hostel_community,hostel_strength,hostel_headline,hostel_roomtable,hostel_hotspottable,hostel_speacializationtable,hostel_policytable,hostel_requirementtable from "+tname+" where hostel_id='"+id+"';";
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				ob.put("hid",rs.getString(1));
+				ob.put("hname",rs.getString(2));
+				ob.put("honame",rs.getString(3));
+				ob.put("hocontact",rs.getString(4));
+				ob.put("htype",rs.getString(5));
+				ob.put("hgender",rs.getString(6));
+				ob.put("hlocation",rs.getString(7));
+				ob.put("hlandmark",rs.getString(8));
+				ob.put("hcommunity",rs.getString(9));
+				ob.put("hstrength",rs.getString(10));
+				ob.put("hheadline",rs.getString(11));
+				ob.put("hrtable",rs.getString(12));
+				ob.put("hhtable",rs.getString(13));
+				ob.put("hstable",rs.getString(14));
+				ob.put("hptable",rs.getString(15));
+				ob.put("hreqtable",rs.getString(16));
+				ob.put("hlfname",lfname);
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return ob;
+	}
 }
