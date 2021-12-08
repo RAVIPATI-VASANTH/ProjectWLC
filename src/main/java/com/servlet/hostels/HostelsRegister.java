@@ -27,7 +27,6 @@ public class HostelsRegister extends HttpServlet {
 			String mcode=(String)request.getParameter("minicode");
 			String fname=(String)request.getParameter("fullname");
 			String tabname=(String)request.getParameter("tablename");
-//			System.out.println(lanid+" "+mcode+" "+fname+" "+tabname);
 			PrintWriter out=response.getWriter();
 			try {
 				int resultSignal=hostelWrite.createNewLandmark(lanid,mcode,fname,tabname);
@@ -37,10 +36,9 @@ public class HostelsRegister extends HttpServlet {
 				else {
 					out.println("success");
 					//Create here a Session Object
-//					response.sendRedirect("hostelWorkSpace.jsp");
+
 				}
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				out.println("error");
 			}
@@ -59,7 +57,6 @@ public class HostelsRegister extends HttpServlet {
 			h.hlandmark=(String)request.getParameter("hlandmark");
 			h.hpassword=(String)request.getParameter("hpassword");
 			h.htablename=(String)request.getParameter("htablename");
-//			h.hlfname=(String)request.getParameter("hlfname");
 
 			PrintWriter out=response.getWriter();
 			try {
@@ -70,12 +67,9 @@ public class HostelsRegister extends HttpServlet {
 				else {
 					out.println("success");
 					//Create here a Session Object
-					
-//					response.sendRedirect("hostelWorkSpace.jsp");
 				}
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("here 1"+e.getMessage());
 				out.println("error");
 			}
 		}
@@ -87,11 +81,8 @@ public class HostelsRegister extends HttpServlet {
 			try {
 				ArrayList<JSONObject> list= hostelRead.getLandmarksBasicInfo();
 				PrintWriter out = response.getWriter();
-//				System.out.println(list);
 				out.println(list.toString());
-//				System.out.println(list.toString());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				System.out.println("hello"+e.getMessage());
 			}
 		}
