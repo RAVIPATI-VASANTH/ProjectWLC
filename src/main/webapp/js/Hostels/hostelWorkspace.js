@@ -37,10 +37,11 @@ function showError(error) {
       break;
   }
 }
-
+//Classes
 class Hostel {
   constructor() {
     this.basicInfo;
+    this.foodInfo;
   }
 }
 
@@ -140,6 +141,273 @@ class BasicInfo {
       hostel.basicInfo.hgender = "female";
     }
     BasicInfo.updateBasicInfoUi();
+  }
+}
+
+class FoodInfo {
+  static processFoodInfoData() {
+    var obj = {
+      breakfast: {
+        time: "",
+        items: "",
+        type: "",
+        notes: "",
+      },
+      lunch: {
+        time: "",
+        items: "",
+        type: "",
+        notes: "",
+      },
+      snacks: {
+        time: "",
+        items: "",
+        type: "",
+        notes: "",
+      },
+      dinner: {
+        time: "",
+        items: "",
+        type: "",
+        notes: "",
+      },
+      nonveg: {
+        count: "",
+        type: "",
+        notes: "",
+      },
+    };
+
+    var rawobj = window.modifiedData.foodInfo;
+    var words = rawobj.breakfast.split("|");
+    obj.breakfast.time = words[0].replace(/[\r\n]+/gm, "");
+    obj.breakfast.type = words[1].replace(/[\r\n]+/gm, "");
+    obj.breakfast.items = words[2].replace(/[\r\n]+/gm, "");
+    obj.breakfast.notes = words[3].replace(/[\r\n]+/gm, "");
+
+    words = rawobj.lunch.split("|");
+    obj.lunch.time = words[0].replace(/[\r\n]+/gm, "");
+    obj.lunch.type = words[1].replace(/[\r\n]+/gm, "");
+    obj.lunch.items = words[2].replace(/[\r\n]+/gm, "");
+    obj.lunch.notes = words[3].replace(/[\r\n]+/gm, "");
+
+    words = rawobj.snacks.split("|");
+    obj.snacks.time = words[0].replace(/[\r\n]+/gm, "");
+    obj.snacks.type = words[1].replace(/[\r\n]+/gm, "");
+    obj.snacks.items = words[2].replace(/[\r\n]+/gm, "");
+    obj.snacks.notes = words[3].replace(/[\r\n]+/gm, "");
+
+    words = rawobj.dinner.split("|");
+    obj.dinner.time = words[0].replace(/[\r\n]+/gm, "");
+    obj.dinner.type = words[1].replace(/[\r\n]+/gm, "");
+    obj.dinner.items = words[2].replace(/[\r\n]+/gm, "");
+    obj.dinner.notes = words[3].replace(/[\r\n]+/gm, "");
+
+    words = rawobj.nonveg.split("|");
+    obj.nonveg.count = words[0].replace(/[\r\n]+/gm, "");
+    obj.nonveg.type = words[1].replace(/[\r\n]+/gm, "");
+    obj.nonveg.notes = words[2].replace(/[\r\n]+/gm, "");
+
+    window.modifiedData.foodInfo = obj;
+    window.originalData.foodInfo = obj;
+
+    FoodInfo.updateFoodEditInfo();
+  }
+
+  static updateFoodEditInfo() {
+    var obj = window.modifiedData.foodInfo;
+    //Breakfast
+    document.getElementById("breakfast-time").value = obj.breakfast.time;
+    document.getElementById("breakfast-period").value = obj.breakfast.type;
+    document.getElementById("breakfast-items").value = obj.breakfast.items;
+    document.getElementById("breakfast-notes").value = obj.breakfast.notes;
+
+    //Lunch
+    document.getElementById("lunch-time").value = obj.lunch.time;
+    document.getElementById("lunch-period").value = obj.lunch.type;
+    document.getElementById("lunch-items").value = obj.lunch.items;
+    document.getElementById("lunch-notes").value = obj.lunch.notes;
+
+    //Snacks
+    document.getElementById("snacks-time").value = obj.snacks.time;
+    document.getElementById("snacks-period").value = obj.snacks.type;
+    document.getElementById("snacks-items").value = obj.snacks.items;
+    document.getElementById("snacks-notes").value = obj.snacks.notes;
+
+    //Dinner
+    document.getElementById("dinner-time").value = obj.dinner.time;
+    document.getElementById("dinner-period").value = obj.dinner.type;
+    document.getElementById("dinner-items").value = obj.dinner.items;
+    document.getElementById("dinner-notes").value = obj.dinner.notes;
+
+    //Non-Veg
+    document.getElementById("noof-times").value = obj.nonveg.count;
+    document.getElementById("limit").value = obj.nonveg.type;
+    document.getElementById("nonveg-notes").value = obj.nonveg.notes;
+
+    FoodInfo.updateFoodViewInfo();
+  }
+
+  static createCard1(obj, title) {
+    if (obj.time !== "") {
+      //creating food card
+      var carddiv = document.createElement("div");
+      carddiv.setAttribute("class", "food-card");
+      //creating Title
+      var tit = document.createElement("P");
+      tit.setAttribute("class", "label");
+      tit.innerText = title + "(" + obj.type + ")";
+      carddiv.appendChild(tit);
+      //creating ul1 for ordering
+      var ul1 = document.createElement("ul");
+      //creating time div
+      var tdiv = document.createElement("div");
+      tdiv.setAttribute("class", "field-box");
+
+      var arrow = document.createElement("IMG");
+      arrow.setAttribute("src", "images/arrow-right.svg");
+      arrow.setAttribute("class", "mini-icon");
+      tdiv.appendChild(arrow);
+
+      var tp = document.createElement("P");
+      tp.setAttribute("class", "label2");
+      tp.innerText = "Starts at " + obj.time;
+      tdiv.appendChild(tp);
+      ul1.appendChild(tdiv);
+      //creating item div
+      var itemdiv = document.createElement("div");
+      itemdiv.setAttribute("class", "field-box");
+
+      var arrow1 = document.createElement("IMG");
+      arrow1.setAttribute("src", "images/arrow-right.svg");
+      arrow1.setAttribute("class", "mini-icon");
+      itemdiv.appendChild(arrow1);
+
+      var tp1 = document.createElement("P");
+      tp1.setAttribute("class", "label2 notes");
+      tp1.innerText = "Items : ";
+      var words = obj.items.split("-");
+      for (var i = 0; i < words.length; i++) {
+        if (i !== words.length - 1) {
+          tp1.innerText += words[i] + ", ";
+        } else {
+          tp1.innerText += words[i];
+        }
+      }
+      itemdiv.appendChild(tp1);
+      ul1.appendChild(itemdiv);
+      //creating notes div
+      var ndiv = document.createElement("div");
+      ndiv.setAttribute("class", "field-box");
+
+      var arrow2 = document.createElement("IMG");
+      arrow2.setAttribute("src", "images/arrow-right.svg");
+      arrow2.setAttribute("class", "mini-icon");
+      ndiv.appendChild(arrow2);
+
+      var np = document.createElement("P");
+      np.setAttribute("class", "label2 notes");
+      np.innerText = obj.notes;
+      ndiv.appendChild(np);
+
+      ul1.appendChild(ndiv);
+      carddiv.appendChild(ul1);
+      document.getElementById("food-cards-section").appendChild(carddiv);
+    }
+  }
+
+  static createCard2(obj, title) {
+    if (obj.time !== "") {
+      //creating food card
+      var carddiv = document.createElement("div");
+      carddiv.setAttribute("class", "food-card");
+      //creating Title
+      var tit = document.createElement("P");
+      tit.setAttribute("class", "label");
+      tit.innerText = title;
+      carddiv.appendChild(tit);
+      //creating ul1 for ordering
+      var ul1 = document.createElement("ul");
+      //creating count div
+      var cdiv = document.createElement("div");
+      cdiv.setAttribute("class", "field-box");
+      var arrow = document.createElement("IMG");
+      arrow.setAttribute("src", "images/arrow-right.svg");
+      arrow.setAttribute("class", "mini-icon");
+      cdiv.appendChild(arrow);
+
+      var cp = document.createElement("P");
+      cp.setAttribute("class", "label2");
+      cp.innerText = obj.count + " times per week - " + obj.type;
+      cdiv.appendChild(cp);
+      ul1.appendChild(cdiv);
+
+      //creating notes div
+      var ndiv = document.createElement("div");
+      ndiv.setAttribute("class", "field-box");
+
+      var arrow2 = document.createElement("IMG");
+      arrow2.setAttribute("src", "images/arrow-right.svg");
+      arrow2.setAttribute("class", "mini-icon");
+      ndiv.appendChild(arrow2);
+
+      var np = document.createElement("P");
+      np.setAttribute("class", "label2 notes");
+      np.innerText = obj.notes;
+      ndiv.appendChild(np);
+
+      ul1.appendChild(ndiv);
+
+      carddiv.appendChild(ul1);
+      document.getElementById("food-cards-section").appendChild(carddiv);
+    }
+  }
+
+  static updateFoodViewInfo() {
+    //Removing previous cards
+    var maindiv = document.getElementById("food-cards-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+    FoodInfo.createCard1(window.modifiedData.foodInfo.breakfast, "Breakfast");
+    FoodInfo.createCard1(window.modifiedData.foodInfo.lunch, "Lunch");
+    FoodInfo.createCard1(window.modifiedData.foodInfo.snacks, "Snacks");
+    FoodInfo.createCard1(window.modifiedData.foodInfo.dinner, "Dinner");
+    FoodInfo.createCard2(window.modifiedData.foodInfo.nonveg, "Non-Veg");
+  }
+
+  static updateFoodInfo() {
+    var obj = window.modifiedData.foodInfo;
+    //Breakfast
+    obj.breakfast.time = document.getElementById("breakfast-time").value;
+    obj.breakfast.type = document.getElementById("breakfast-period").value;
+    obj.breakfast.items = document.getElementById("breakfast-items").value;
+    obj.breakfast.notes = document.getElementById("breakfast-notes").value;
+
+    //Lunch
+    obj.lunch.time = document.getElementById("lunch-time").value;
+    obj.lunch.type = document.getElementById("lunch-period").value;
+    obj.lunch.items = document.getElementById("lunch-items").value;
+    obj.lunch.notes = document.getElementById("lunch-notes").value;
+
+    //Snacks
+    obj.snacks.time = document.getElementById("snacks-time").value;
+    obj.snacks.type = document.getElementById("snacks-period").value;
+    obj.snacks.items = document.getElementById("snacks-items").value;
+    obj.snacks.notes = document.getElementById("snacks-notes").value;
+
+    //Dinner
+    obj.dinner.time = document.getElementById("dinner-time").value;
+    obj.dinner.type = document.getElementById("dinner-period").value;
+    obj.dinner.items = document.getElementById("dinner-items").value;
+    obj.dinner.notes = document.getElementById("dinner-notes").value;
+
+    //Non-Veg
+    obj.nonveg.count = document.getElementById("noof-times").value;
+    obj.nonveg.type = document.getElementById("limit").value;
+    obj.nonveg.notes = document.getElementById("nonveg-notes").value;
+    window.modifiedData.foodInfo = obj;
+    FoodInfo.updateFoodViewInfo;
   }
 }
 
@@ -2169,10 +2437,18 @@ editHostel.createHotspotsDetails();
 // }
 
 function dataConversion(obj, value) {
-  if (value == 0) {
-    obj = JSON.parse(obj);
-    window.originalData.basicInfo = obj;
-    window.modifiedData.basicInfo = obj;
-    BasicInfo.updateBasicInfoUi();
+  switch (value) {
+    case 0:
+      obj = JSON.parse(obj);
+      window.originalData.basicInfo = obj;
+      window.modifiedData.basicInfo = obj;
+      BasicInfo.updateBasicInfoUi();
+      break;
+    case 1:
+      obj = JSON.parse(obj);
+      window.originalData.foodInfo = obj;
+      window.modifiedData.foodInfo = obj;
+      FoodInfo.processFoodInfoData();
+      break;
   }
 }

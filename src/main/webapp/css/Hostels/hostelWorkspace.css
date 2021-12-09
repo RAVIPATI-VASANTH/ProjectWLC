@@ -145,11 +145,6 @@ body {
   margin: 1rem 1rem 1rem 1rem;
 }
 
-.mini-icon {
-  width: 3.2rem;
-  height: 3.2rem;
-}
-
 .info {
   font-size: 1.8rem;
   font-weight: bold;
@@ -184,6 +179,8 @@ body {
 .view-tag {
   font-size: 3.2rem;
   font-weight: bold;
+  padding: 0rem;
+  margin: 0rem;
 }
 
 .room-cards {
@@ -270,26 +267,11 @@ body {
   align-items: initial;
 }
 
-.label {
-  font-size: 1.8rem;
-  font-weight: bold;
-  padding: 0rem 0rem 0.5rem 0rem;
-  color: #e67e22;
-}
-
 .label1 {
   font-size: 1.4rem;
   font-weight: bold;
   cursor: pointer;
   padding: 1rem;
-}
-
-.label2 {
-  font-size: 1.4rem;
-  font-weight: bold;
-  /* padding: ; */
-  /* padding: 0rem; */
-  /* pad: ; */
 }
 
 .text-input {
@@ -348,11 +330,10 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1.5rem;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.room-card,
-.food-card {
+.room-card {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -366,9 +347,6 @@ body {
   padding: 1.5rem;
 }
 
-.food-card {
-  background-color: #fdf2e9;
-}
 .card-element {
   /* padding: 1rem; */
   border-radius: 1rem;
@@ -392,10 +370,6 @@ body {
 .food-card-div p {
   margin: 0rem;
   padding: 0rem;
-}
-
-.notes {
-  word-break: break-all;
 }
 
 .specializations-tags-section,

@@ -1,0 +1,43 @@
+.food-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 26rem;
+}
+
+.label {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  color: #e67e22;
+  margin: 0rem;
+}
+
+.label2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0.5rem 0rem 0rem 0rem;
+  margin: 0rem;
+}
+
+.field-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.mini-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.notes {
+  overflow-wrap: break-word;
+}
+
+ul {
+  padding: 0rem;
+  margin: 0rem;
+}
