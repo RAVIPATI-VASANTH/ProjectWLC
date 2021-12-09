@@ -13,6 +13,7 @@ pageEncoding="ISO-8859-1"%>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/Hostels/hostelWorkspace.css" />
+    <link rel="stylesheet" href="css/Hostels/hostelWorkspace2.css" />
     <title>Workspace-Hostel</title>
   </head>
   <body>
@@ -359,7 +360,7 @@ pageEncoding="ISO-8859-1"%>
           </div>
         </div>
       </div>
-
+      <!-- Food  -->
       <div class="color">
         <p class="edit-tag edit-section">Food Details</p>
         <div class="food-info edit-section">
@@ -455,8 +456,8 @@ pageEncoding="ISO-8859-1"%>
 
             <label for="limit" class="label1">Select Type</label>
             <select name="" id="limit" class="text-input">
-              <option value="true" class="text-input">Un-Limited</option>
-              <option value="false" class="text-input">Limited</option>
+              <option value="Un-Limited" class="text-input">Un-Limited</option>
+              <option value="Limited" class="text-input">Limited</option>
             </select>
             <label for="nonveg-notes" class="label1">Notes</label>
             <input id="nonveg-notes" type="text" class="text-input" />
@@ -465,9 +466,9 @@ pageEncoding="ISO-8859-1"%>
             <button
               id="update-food-cards"
               class="label1"
-              onclick="checkChange(2,0)"
+              onclick="FoodInfo.updateFoodInfo()"
             >
-              Update
+              Update Changes to View
             </button>
           </div>
         </div>

@@ -32,7 +32,17 @@ public class HostelWorkspace extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println(obj.toString());
 			} catch (Exception e) {
-				System.out.println("hello"+e.getMessage());
+				System.out.println("hello1"+e.getMessage());
+			}
+		}
+		else if(signal==1) {
+			try {
+				String id=request.getParameter("id").toString();
+				JSONObject obj= hostelRead.getHostelFoodInfo(id);
+				PrintWriter out = response.getWriter();
+				out.println(obj.toString());
+			} catch (Exception e) {
+				System.out.println("hello2"+e.getMessage());
 			}
 		}
 	}

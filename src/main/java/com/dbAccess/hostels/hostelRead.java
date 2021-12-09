@@ -112,4 +112,30 @@ public class hostelRead {
 		}
 		return ob;
 	}
+	
+	public static JSONObject getHostelFoodInfo(String id) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		JSONObject ob = new JSONObject();
+		try {
+			String sql="select breakfast,lunch,snacks,dinner,nonveg from food_table where hostel_id='"+id+"';";
+			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				ob.put("breakfast",rs.getString(1));
+				ob.put("lunch",rs.getString(2));
+				ob.put("snacks",rs.getString(3));
+				ob.put("dinner",rs.getString(4));
+				ob.put("nonveg",rs.getString(5));
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return ob;
+	}
+	
 }
+

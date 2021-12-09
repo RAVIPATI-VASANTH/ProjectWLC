@@ -94,11 +94,11 @@ public class hostelWrite {
 			sql="insert into food_table values(?,?,?,?,?,?)";
 			smt=con.prepareStatement(sql);
 			smt.setString(1,h.hid);
-			smt.setString(2,"");
-			smt.setString(3,"");
-			smt.setString(4,"");
-			smt.setString(5,"");
-			smt.setString(6,"");
+			smt.setString(2,"|||");
+			smt.setString(3,"|||");
+			smt.setString(4,"|||");
+			smt.setString(5,"|||");
+			smt.setString(6,"||");
 			status=smt.executeUpdate();
 
 			con.close();
