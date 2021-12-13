@@ -24,25 +24,35 @@ public class HostelWorkspace extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int signal=Integer.parseInt(request.getParameter("signal"));
+		JSONObject finalobj= new JSONObject();
 		if(signal==0) {
 			try {
 				String id=request.getParameter("id").toString();
 				String minicode=request.getParameter("lanmincode").toString();
-				JSONObject obj= hostelRead.getHostelBasicInfo(id,minicode);
+				JSONObject basicInfoObj= hostelRead.getHostelBasicInfo(id,minicode);
+				finalobj.put("basicInfo", basicInfoObj);
+				JSONObject foodObj= hostelRead.getHostelFoodInfo(id);
+				finalobj.put("foodInfo", foodObj);
+				String rtable=(String) basicInfoObj.get("hrtable");
+				ArrayList<String> roomlist= hostelRead.getHostelRoomInfo(rtable);
+				finalobj.put("roomInfo", roomlist);
+				String ptable=(String) basicInfoObj.get("hptable");
+				ArrayList<String> policylist= hostelRead.getHostelPolicyInfo(ptable);
+				finalobj.put("policyInfo", policylist);
+				String hstable=(String) basicInfoObj.get("hhtable");
+				ArrayList<String> hotspotslist= hostelRead.getHostelHotspotsInfo(hstable);
+				finalobj.put("hotspotInfo", hotspotslist);
+				String reqtable=(String) basicInfoObj.get("hreqtable");
+				ArrayList<String> reqlist= hostelRead.getHostelRequirementsInfo(reqtable);
+				finalobj.put("requirementInfo", reqlist);
+				String spectable=(String) basicInfoObj.get("hstable");
+				ArrayList<String> speclist= hostelRead.getHostelRequirementsInfo(spectable);
+				finalobj.put("specializationInfo", speclist);
+				System.out.println(finalobj);
 				PrintWriter out = response.getWriter();
-				out.println(obj.toString());
+				out.println(finalobj.toString());
 			} catch (Exception e) {
 				System.out.println("hello1"+e.getMessage());
-			}
-		}
-		else if(signal==1) {
-			try {
-				String id=request.getParameter("id").toString();
-				JSONObject obj= hostelRead.getHostelFoodInfo(id);
-				PrintWriter out = response.getWriter();
-				out.println(obj.toString());
-			} catch (Exception e) {
-				System.out.println("hello2"+e.getMessage());
 			}
 		}
 	}

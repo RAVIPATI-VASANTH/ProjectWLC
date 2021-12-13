@@ -89,21 +89,21 @@ pageEncoding="ISO-8859-1"%>
       </div>
 
       <div class="color">
-        <div class="view-section">
+        <div class="view-section" style="padding: 2rem 0rem">
           <p class="view-tag">Room Details</p>
           <div class="room-cards-section" id="room-cards-section"></div>
         </div>
       </div>
 
       <div class="">
-        <div class="view-section">
+        <div class="view-section" style="padding: 2rem 0rem">
           <p class="view-tag">Food Details</p>
           <div class="food-cards-section" id="food-cards-section"></div>
         </div>
       </div>
 
       <div class="color">
-        <div class="view-section grid-for-2">
+        <div class="view-section grid-for-2" style="padding: 2rem 0rem">
           <div>
             <p class="view-tag">Specializations</p>
             <div
@@ -119,7 +119,7 @@ pageEncoding="ISO-8859-1"%>
       </div>
 
       <div>
-        <div class="view-section grid-for-2">
+        <div class="view-section grid-for-2" style="padding: 2rem 0rem">
           <div>
             <p class="view-tag">Requirements Around</p>
             <div class="req-view-tags-section" id="req-view-tags-section"></div>
@@ -260,7 +260,7 @@ pageEncoding="ISO-8859-1"%>
           </div>
         </div>
       </div>
-
+      <!-- Rooms -->
       <div class="color">
         <p class="edit-tag edit-section">Room Details</p>
         <div class="room-tags-section edit-section color" id="room-tags"></div>
@@ -275,7 +275,7 @@ pageEncoding="ISO-8859-1"%>
               <input
                 type="radio"
                 id="ac"
-                value="male"
+                value="AC"
                 name="gender"
                 class="radio-button"
               />
@@ -285,7 +285,7 @@ pageEncoding="ISO-8859-1"%>
               <input
                 type="radio"
                 id="nac"
-                value="female"
+                value="N-AC"
                 name="gender"
                 class="radio-button"
                 checked
@@ -299,7 +299,7 @@ pageEncoding="ISO-8859-1"%>
               <input
                 type="checkbox"
                 id="common"
-                value="male"
+                value="Common"
                 name="gender"
                 class="radio-button"
               />
@@ -309,7 +309,7 @@ pageEncoding="ISO-8859-1"%>
               <input
                 type="checkbox"
                 id="attached"
-                value="female"
+                value="Attached"
                 name="gender"
                 class="radio-button"
                 checked
@@ -323,7 +323,6 @@ pageEncoding="ISO-8859-1"%>
               type="text"
               id="bed-count"
               class="text-input"
-              value="4-5"
               placeholder="Eg.. 2-3-4"
             />
           </div>
@@ -353,9 +352,16 @@ pageEncoding="ISO-8859-1"%>
             <button
               id="add-room-card"
               class="label1"
-              onclick="checkChange(1,0)"
+              onclick="RoomInfo.addRoomCard()"
             >
               ADD
+            </button>
+            <button
+              id="update-room-card"
+              class="label1 hide"
+              onclick="RoomInfo.updateRoomCard()"
+            >
+              Update Card
             </button>
           </div>
         </div>
@@ -481,7 +487,7 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">WIFI</label>
             <label for="wifi-method" class="label1">Select Type</label>
             <select name="" id="wifi-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -502,7 +508,7 @@ pageEncoding="ISO-8859-1"%>
               >Select Type</label
             >
             <select name="" id="washing-machine-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -521,7 +527,7 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Lockers</label>
             <label for="lockers-method" class="label1">Select Type</label>
             <select name="" id="lockers-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -540,7 +546,7 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Hot Water</label>
             <label for="hot-water-method" class="label1">Select Type</label>
             <select name="" id="hot-water-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -559,7 +565,7 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Gym</label>
             <label for="gym-method" class="label1">Select Type</label>
             <select name="" id="gym-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -578,7 +584,7 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Generator</label>
             <label for="generator-method" class="label1">Select Type</label>
             <select name="" id="generator-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -599,7 +605,7 @@ pageEncoding="ISO-8859-1"%>
               >Select Type</label
             >
             <select name="" id="vehicle-parking-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -618,7 +624,7 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Transport</label>
             <label for="transport-method" class="label1">Select Type</label>
             <select name="" id="transport-method" class="text-input">
-              <option value="Paid">Pay-and-Use</option>
+              <option value="Paid">Pay and Use</option>
               <option value="Free">Free</option>
               <option value="un-available">Un Available</option>
             </select>
@@ -720,21 +726,21 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Enter Policy</label>
             <div class="policies-tags-section" id="hp-edit-tags-section"></div>
             <input type="text" class="text-input" id="new-policy" />
-            <button
-              id="location"
-              class="label1"
-              style="margin: 1rem"
-              onclick="HostelPolicies.addPolicy()"
-            >
-              ADD
-            </button>
           </div>
           <div class="form-element">
             <button
-              class="label1"
-              onclick="HostelPolicies.createPolicyViewTags()"
+              class="label1 hide"
+              id="update-policy"
+              onclick="PolicyInfo.updatePolicy()"
             >
               Update
+            </button>
+            <button
+              id="add-policy"
+              class="label1"
+              onclick="PolicyInfo.addPolicy()"
+            >
+              ADD Policy
             </button>
           </div>
         </div>
@@ -742,10 +748,13 @@ pageEncoding="ISO-8859-1"%>
 
       <div class="color">
         <p class="edit-tag edit-section">Requirements Around</p>
-        <div class="policy-tags edit-section" id="req-edit-tags-section"></div>
         <div class="policy-info edit-section">
           <div class="form-element">
             <label for="" class="label">Requirement</label>
+            <div
+              class="requirements-tags-section"
+              id="req-edit-tags-section"
+            ></div>
             <label for="" class="label1">Select Type</label>
             <select name="" id="req-category" class="text-input">
               <option value="Atm">ATM</option>
@@ -758,19 +767,23 @@ pageEncoding="ISO-8859-1"%>
               <option value="Others">Others</option>
             </select>
             <label for="add-requirement" class="label1">Enter Name</label>
-            <input id="add-requirement" type="text" class="text-input" />
-            <button
-              class="label1"
-              style="margin: 1rem"
-              onclick="Requirements.addRequirement()"
-            >
-              ADD
-            </button>
+            <input id="new-requirement" type="text" class="text-input" />
           </div>
 
           <div class="form-element">
-            <button class="label1" onclick="Requirements.createReqViewTags()">
+            <button
+              class="label1 hide"
+              id="update-requirement"
+              onclick="RequirementInfo.updateRequirement()"
+            >
               Update
+            </button>
+            <button
+              id="add-requirement"
+              class="label1"
+              onclick="RequirementInfo.addRequirement()"
+            >
+              ADD Hotspot
             </button>
           </div>
         </div>
@@ -778,10 +791,10 @@ pageEncoding="ISO-8859-1"%>
 
       <div class="color">
         <p class="edit-tag edit-section">Hotspots</p>
-        <div class="policy-tags edit-section" id="hs-edit-tags-section"></div>
         <div class="policy-info edit-section">
           <div class="form-element">
             <label for="" class="label">Hotspot</label>
+            <div class="hotspots-tags-section" id="hs-edit-tags-section"></div>
             <label for="" class="label1">Select Type</label>
             <select name="" id="hs-category" class="text-input">
               <option value="Restaurent">Restaurent</option>
@@ -791,19 +804,22 @@ pageEncoding="ISO-8859-1"%>
               <option value="Others">Others</option>
             </select>
             <label for="add-hotspot" class="label1">Enter Name</label>
-            <input id="add-hotspot" type="text" class="text-input" />
-            <button
-              id="location"
-              class="label1"
-              style="margin: 1rem"
-              onclick="Hotspots.addHotspot()"
-            >
-              ADD
-            </button>
+            <input id="new-hotspot" type="text" class="text-input" />
           </div>
           <div class="form-element">
-            <button class="label1" onclick="Hotspots.createHsViewTags()">
+            <button
+              class="label1 hide"
+              id="update-hotspot"
+              onclick="HotspotInfo.updateHotspot()"
+            >
               Update
+            </button>
+            <button
+              id="add-hotspot"
+              class="label1"
+              onclick="HotspotInfo.addHotspot()"
+            >
+              ADD Hotspot
             </button>
           </div>
         </div>
@@ -811,7 +827,7 @@ pageEncoding="ISO-8859-1"%>
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/Hostels/hostelWorkspaceAjaxCalls.js"></script>
     <script src="js/Hostels/hostelWorkspace.js"></script>
+    <!-- <script src="js/Hostels/hostelWorkspaceAjaxCalls.js"></script> -->
   </body>
 </html>

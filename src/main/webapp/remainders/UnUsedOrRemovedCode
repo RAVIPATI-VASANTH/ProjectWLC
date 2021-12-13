@@ -1,3 +1,136 @@
+
+  static createRequirementTags(obj) {
+    let division = document.getElementById("req-edit-tags-section");
+
+    let div = document.createElement("DIV");
+    div.setAttribute("class", "room-tags ");
+    let p = document.createElement("P");
+    p.setAttribute("class", "label1 ");
+    p.setAttribute("onclick", "RequirementInfo.editCard(" + obj.index + ")");
+    p.innerText = obj.tagname;
+    let button = document.createElement("BUTTON");
+    button.setAttribute("class", "cross-button");
+    button.setAttribute(
+      "onclick",
+      "RequirementInfo.removeCard(" + obj.index + ")"
+    );
+    button.innerHTML = "<strong>x</strong>";
+    div.appendChild(p);
+    div.appendChild(button);
+    obj.tag = div;
+    division.appendChild(div);
+  }
+
+  static createRequirementCards(obj) {
+    var maindiv = document.getElementById("req-view-tags-section");
+    var pdiv = document.createElement("div");
+    pdiv.setAttribute("class", "field-box");
+
+    var minicon = document.createElement("IMG");
+    switch (obj.type) {
+      case "ATM":
+        minicon.setAttribute("src", "images/atm.svg");
+        break;
+      case "Medical Emergency":
+        minicon.setAttribute("src", "images/medkit.svg");
+        break;
+      case "Bus Stop":
+        minicon.setAttribute("src", "images/transport.svg");
+        break;
+      case "Theatre":
+        minicon.setAttribute("src", "images/theatre.svg");
+        break;
+      case "Stationery":
+        minicon.setAttribute("src", "images/stationery.svg");
+        break;
+      case "Saloon/Spa":
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+      case "Xerox":
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+      default:
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+    }
+    minicon.setAttribute("class", "mini-icon");
+    pdiv.appendChild(minicon);
+
+    var hp = document.createElement("P");
+    hp.setAttribute("class", "label2");
+    hp.innerText = obj.requirement;
+    pdiv.appendChild(hp);
+    maindiv.appendChild(pdiv);
+  }
+
+  static editCard(index) {
+    var obj;
+    for (var i = 0; i < window.modifiedData.requirementInfo.length; i++) {
+      if (window.modifiedData.requirementInfo[i].index === index) {
+        window.modifiedData.requirementInfo[i].signal = true;
+        obj = window.modifiedData.requirementInfo[i];
+        break;
+      }
+    }
+    document.getElementById("req-category").value = obj.type;
+    document.getElementById("add-requirement").value = obj.requirement;
+
+    document
+      .getElementById("add-requirement")
+      .setAttribute("class", "label1 hide");
+    document
+      .getElementById("update-requirement")
+      .setAttribute("class", "label1");
+  }
+
+  static updateHotspot() {
+    var obj;
+    var index = 0;
+    for (var i = 0; i < window.modifiedData.requirementInfo.length; i++) {
+      if (window.modifiedData.requirementInfo[i].signal) {
+        obj = window.modifiedData.requirementInfo[i];
+        index = i;
+        break;
+      }
+    }
+    window.modifiedData.requirementInfo[index] = obj;
+    obj.type = document.getElementById("req-category").value;
+    obj.requirement = document.getElementById("new-requirement").value;
+    if (obj.requirement.length > 10) obj.tagname = obj.requirement.slice(0, 10);
+    else obj.tagname = obj.requirement;
+    obj.signal = false;
+    this.makeDefault();
+  }
+
+  static makeDefault() {
+    document.getElementById("req-category").value = "ATM";
+    document.getElementById("new-requirement").value = "";
+    document.getElementById("add-requirement").setAttribute("class", "label1");
+    document
+      .getElementById("update-requirement")
+      .setAttribute("class", "label1 hide");
+    this.updateUi();
+  }
+
+  static addHotspot() {
+    var obj = {
+      signal: false,
+      index: 0,
+      requirement: "",
+      type: "",
+      tagname: "",
+      tag: "",
+      card: "",
+    };
+    obj.type = document.getElementById("req-category").value;
+    obj.requirement = document.getElementById("new-requirement").value;
+    if (obj.requirement.length > 10) obj.tagname = obj.requirement.slice(0, 10);
+    else obj.tagname = obj.requirement;
+    console.log(obj.tagname);
+    obj.index = window.modifiedData.requirementInfo.length;
+    window.modifiedData.requirementInfo.push(obj);
+    this.makeDefault();
+  }
 *********************************************************************************************
 ## hostelRead.java
 
