@@ -137,5 +137,83 @@ public class hostelRead {
 		return ob;
 	}
 	
+	public static ArrayList<String> getHostelRoomInfo(String tname) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String sql="select roomcard from "+tname;
+			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+	
+	public static ArrayList<String> getHostelPolicyInfo(String tname) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String sql="select policy from "+tname;
+			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+	
+	public static ArrayList<String> getHostelHotspotsInfo(String tname) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String sql="select hotspot from "+tname;
+			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+	
+	public static ArrayList<String> getHostelRequirementsInfo(String tname) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String sql="select requirement from "+tname;
+			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
 }
-

@@ -1,4 +1,5 @@
-.food-card {
+.food-card,
+.room-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,8 +23,15 @@
 }
 
 .field-box {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+.filed-box-column {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
@@ -40,4 +48,44 @@
 ul {
   padding: 0rem;
   margin: 0rem;
+}
+
+.room-tags-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: initial;
+  align-items: center;
+}
+
+.room-tags {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 1rem;
+  cursor: pointer;
+  height: 3rem;
+  margin: 1rem;
+}
+
+.label1 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.cross-button {
+  font-size: 1.4rem;
+  border: 1rem;
+  background-color: #e67e22;
+  color: black;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+.word-color {
+  color: #e67e22;
 }

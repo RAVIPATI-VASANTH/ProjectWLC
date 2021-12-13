@@ -1,4 +1,21 @@
 "use strict";
+class Hostel {
+  constructor() {
+    this.basicInfo;
+    this.foodInfo;
+    this.roomInfo;
+  }
+}
+
+var originalData = new Hostel();
+var modifiedData = new Hostel();
+
+//String Processing
+function processString(s) {
+  s = s.replaceAll("\r", "");
+  s = s.replaceAll("\n", "");
+  return s;
+}
 
 //Location Related functions
 function addLocation() {
@@ -35,13 +52,6 @@ function showError(error) {
       document.getElementById("location-status").innerText =
         "An unknown error occurred.";
       break;
-  }
-}
-//Classes
-class Hostel {
-  constructor() {
-    this.basicInfo;
-    this.foodInfo;
   }
 }
 
@@ -104,12 +114,7 @@ class BasicInfo {
     document.getElementById("view-landmark").innerHTML =
       hostel.basicInfo.hlfname;
     //location
-    var words = hostel.basicInfo.hlocation.split("&");
-    var loc = words[0] + "," + words[1];
-    document.getElementById("location").href =
-      "https://maps.googleapis.com/maps/api/staticmap?center=" +
-      loc +
-      "&zoom=14&size=400x300&sensor=false&key=AIzaSyAlkEMZd1nxIILagBicKu_w1i5n0Xix_2s";
+    document.getElementById("location").href = hostel.basicInfo.hlocation;
   }
 
   static updateChanges() {
@@ -141,6 +146,7 @@ class BasicInfo {
       hostel.basicInfo.hgender = "female";
     }
     BasicInfo.updateBasicInfoUi();
+    window.modifiedData = hostel;
   }
 }
 
@@ -369,6 +375,7 @@ class FoodInfo {
     while (maindiv.hasChildNodes()) {
       maindiv.removeChild(maindiv.firstChild);
     }
+    //Creating Food Cards
     FoodInfo.createCard1(window.modifiedData.foodInfo.breakfast, "Breakfast");
     FoodInfo.createCard1(window.modifiedData.foodInfo.lunch, "Lunch");
     FoodInfo.createCard1(window.modifiedData.foodInfo.snacks, "Snacks");
@@ -411,948 +418,1057 @@ class FoodInfo {
   }
 }
 
-var originalData = new Hostel();
-var modifiedData = new Hostel();
+class RoomInfo {
+  static processRoomInfoData() {
+    var list = [];
+    var rawlist = window.modifiedData.roomInfo;
+    var index = 0;
+    rawlist.forEach((element) => {
+      element = element.replace(/[\r\n]+/gm, "");
+      var obj = {
+        signal: false,
+        index: 0,
+        tag: "",
+        card: "",
+        planname: "",
+        type: "",
+        bathroom: "",
+        beds: "",
+        stayandfood: {
+          monthly: "",
+          semester: "",
+          annum: "",
+        },
+        stayonly: {
+          monthly: "",
+          semester: "",
+          annum: "",
+        },
+      };
 
-// Data Holding classes
-class BasicInfo1 {
-  constructor(obj) {
-    // this.
+      var words = element.split("|");
+      obj.planname = words[0];
+      obj.type = words[1];
+      obj.bathroom = words[2];
+      obj.beds = words[3];
+      var prices = words[4].split("-");
+      obj.stayandfood.monthly = prices[0];
+      obj.stayandfood.semester = prices[1];
+      obj.stayandfood.annum = prices[2];
+      prices = words[4].split("-");
+      obj.stayonly.monthly = prices[0];
+      obj.stayonly.semester = prices[1];
+      obj.stayonly.annum = prices[2];
+      obj.index = index;
+
+      index++;
+
+      list.push(obj);
+    });
+    window.modifiedData.roomInfo = list;
+    this.updateUi();
   }
 
-  static basicInfoChange(value) {
-    switch (value) {
-      case 0:
-        document.getElementById("view-hostel-name").innerText =
-          document.getElementById("edit-hostel-name").value;
-        editHostel.basicInfo.hostelName =
-          document.getElementById("edit-hostel-name").value;
-        break;
-      case 1:
-        document.getElementById("view-head-line").innerText =
-          document.getElementById("edit-head-line").value;
-        editHostel.basicInfo.headLine =
-          document.getElementById("edit-head-line").value;
-        break;
-      case 2:
-        document.getElementById("view-owner-name").innerText =
-          document.getElementById("edit-owner-name").value;
-        editHostel.basicInfo.ownerName =
-          document.getElementById("edit-owner-name").value;
-        break;
-      case 3:
-        document.getElementById("view-owner-contact").innerText =
-          document.getElementById("edit-owner-contact").value;
-        editHostel.basicInfo.contactNumber =
-          document.getElementById("edit-owner-contact").value;
-        break;
-      case 4:
-        document.getElementById("view-strength").innerText =
-          document.getElementById("edit-strength").value;
-        editHostel.basicInfo.strength =
-          document.getElementById("edit-strength").value;
-        break;
-      case 5:
-        let typeString = new String();
-        if (document.getElementById("edit-type-public").checked) {
-          typeString = "Public - Any one can join.";
-        }
-        if (document.getElementById("edit-type-community").checked) {
-          typeString = "Community - ";
-          typeString += document.getElementById("community-name").value;
-        }
-        document.getElementById("view-type").innerText = typeString;
-        editHostel.basicInfo.type = typeString;
-        break;
-      case 6:
-        if (document.getElementById("hostel-gender-male").checked) {
-          document.getElementById("view-gender").innerText = "Gents";
-          document.getElementById("gender").src = "images/male.svg";
-          editHostel.basicInfo.gender = "Gents";
-        }
-        if (document.getElementById("hostel-gender-female").checked) {
-          document.getElementById("view-gender").innerText = "Ladies";
-          document.getElementById("gender").src = "images/female.svg";
-          editHostel.basicInfo.gender = "Ladies";
-        }
-        break;
-      case 7:
-        break;
-      case 8:
-        document.getElementById("view-landmark").innerText =
-          document.getElementById("landmark").value;
-        // LANDMARK here we need ajax call to get all LANDMARKS.
-        break;
+  static updateUi() {
+    var maindiv = document.getElementById("room-tags");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
     }
-  }
-}
 
-class hostelPlans {
-  constructor(name) {
-    this.planName = name;
-    this.isActive = true;
-    this.monthly = "";
-    this.semester = "";
-    this.annum = "";
-  }
-}
-
-class RoomCard {
-  constructor(cname) {
-    this.cardName = cname;
-    this.stayOnly = new hostelPlans("Stay Only");
-    this.stayAndFood = new hostelPlans("Stay and Food");
-    this.isAcActive = false;
-    this.bathroomtype = 0;
-    this.bedsperRoom = "";
-  }
-}
-
-class RoomDetails {
-  constructor() {
-    this.roomCards = new Array();
-  }
-
-  createRoomObject() {
-    if (document.getElementById("plan-name").value === "") {
-      alert("Plan not to be empty!!");
-    } else {
-      //Room card Object creation
-      let currentRoomCard = new RoomCard(
-        document.getElementById("plan-name").value
-      );
-
-      //Checking and adding Stay + Food
-      let sFMonthly = document.getElementById("sf-monthly");
-      let sFSemester = document.getElementById("sf-semester");
-      let sFAnnum = document.getElementById("sf-annum");
-      currentRoomCard.stayAndFood.planName = "Stay + Food";
-      if (
-        sFAnnum.value === "" &&
-        sFMonthly.value === "" &&
-        sFSemester.value === ""
-      ) {
-        currentRoomCard.stayAndFood.isActive = false;
-      } else {
-        currentRoomCard.stayAndFood.isActive = true;
-        currentRoomCard.stayAndFood.monthly = sFMonthly.value;
-        currentRoomCard.stayAndFood.semester = sFSemester.value;
-        currentRoomCard.stayAndFood.annum = sFAnnum.value;
-      }
-
-      //Checking and Add Stay Only
-      let sMonthly = document.getElementById("s-monthly");
-      let sSemester = document.getElementById("s-semester");
-      let sAnnum = document.getElementById("s-annum");
-      currentRoomCard.stayOnly.planName = "Stay Only";
-      if (
-        sAnnum.value === "" &&
-        sMonthly.value === "" &&
-        sSemester.value === ""
-      ) {
-        currentRoomCard.stayOnly.isActive = false;
-      } else {
-        currentRoomCard.stayOnly.isActive = true;
-        currentRoomCard.stayOnly.monthly = sMonthly.value;
-        currentRoomCard.stayOnly.semester = sSemester.value;
-        currentRoomCard.stayOnly.annum = sAnnum.value;
-      }
-      // AC/NAC
-      if (document.getElementById("ac").checked) {
-        currentRoomCard.isAcActive = true;
-      }
-      if (document.getElementById("nac").checked) {
-        currentRoomCard.isAcActive = false;
-      }
-
-      // Beds Per Room
-      currentRoomCard.bedsperRoom = document.getElementById("bed-count").value;
-
-      // Bathrooms
-      if (document.getElementById("common").checked) {
-        currentRoomCard.bathroomtype = 0;
-      }
-      if (document.getElementById("attached").checked) {
-        currentRoomCard.bathroomtype = 1;
-      }
-      if (
-        document.getElementById("common").checked &&
-        document.getElementById("attached").checked
-      ) {
-        currentRoomCard.bathroomtype = 2;
-      }
-
-      this.roomCards.push(currentRoomCard);
-      console.log(currentRoomCard);
-      // console.log(this.roomCards);
-      this.createRoomTags(this.roomCards.length - 1);
-      this.createRoomCards(this.roomCards.length - 1);
+    maindiv = document.getElementById("room-cards-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
     }
+
+    window.modifiedData.roomInfo.forEach((element) => {
+      this.createRoomTags(element);
+      this.createRoomCards(element);
+    });
   }
 
-  createRoomTags(index) {
+  static createRoomTags(obj) {
     let division = document.getElementById("room-tags");
+
     let div = document.createElement("DIV");
     div.setAttribute("class", "room-tags");
-    div.setAttribute("id", "room-tag-" + index);
     let p = document.createElement("P");
     p.setAttribute("class", "label1");
-    p.setAttribute("id", "room-tag-" + index + "-p");
-    p.setAttribute("onclick", "RoomDetails.editCard(" + index + ")");
-    p.innerHTML = this.roomCards[index].cardName;
+    p.setAttribute("onclick", "RoomInfo.editCard(" + obj.index + ")");
+    p.innerHTML = obj.planname;
     let button = document.createElement("BUTTON");
     button.setAttribute("class", "cross-button");
-    button.setAttribute("id", "cross-button-" + index);
-    button.setAttribute("onclick", "FoodDetails.removeCard(" + index + ")");
+    button.setAttribute("onclick", "RoomInfo.removeCard(" + obj.index + ")");
     button.innerHTML = "<strong>x</strong>";
     div.appendChild(p);
     div.appendChild(button);
+    obj.tag = div;
     division.appendChild(div);
   }
 
-  createRoomCards(index) {
-    let division = document.getElementById("room-cards-section");
-    let roomCard = document.createElement("DIV");
-    roomCard.setAttribute("class", "room-card");
-    roomCard.setAttribute("id", "room-card-" + index);
-    let currentRoomCard = editHostel.roomDetails.roomCards[index];
-    var rtn = document.createElement("P");
-    rtn.setAttribute("class", "label notes");
-    rtn.innerHTML = currentRoomCard.cardName;
-    rtn.style.padding = "0rem";
-    rtn.style.margin = "0rem";
-    roomCard.appendChild(rtn);
-    //STAY AND FOOD
-    if (currentRoomCard.stayAndFood.isActive) {
-      var saf = document.createElement("DIV");
-      saf.setAttribute("class", "card-element");
-      roomCard.appendChild(saf);
-      var safDiv = document.createElement("DIV");
-      safDiv.setAttribute("class", "room-card-div");
-      var safimgarrow = document.createElement("IMG");
-      safimgarrow.setAttribute("src", "images/arrow-right.svg");
-      safimgarrow.setAttribute("class", "mini-icon");
-      safDiv.appendChild(safimgarrow);
-      var safinfoP = document.createElement("P");
-      safinfoP.setAttribute("class", "label2 notes");
-      safinfoP.innerHTML = currentRoomCard.stayAndFood.planName;
-      safDiv.appendChild(safinfoP);
-      saf.appendChild(safDiv);
-      if (!(currentRoomCard.stayAndFood.monthly === "")) {
-        var safLi1 = document.createElement("LI");
-        safLi1.setAttribute("class", "label2 notes");
-        safLi1.innerHTML =
-          "Monthly Rs" + currentRoomCard.stayAndFood.monthly + "/-";
-        saf.appendChild(safLi1);
+  static createRoomCards(obj) {
+    var maindiv = document.getElementById("room-cards-section");
+
+    //creating room card
+    var card = document.createElement("div");
+    card.setAttribute("class", "room-card");
+    //creating Plan name
+    var planname = document.createElement("p");
+    planname.setAttribute("class", "label");
+    planname.innerText = obj.planname;
+    card.appendChild(planname);
+    //creating ul1 for ordering
+    var ul1 = document.createElement("ul");
+    //Room Type
+    var tdiv = document.createElement("div");
+    tdiv.setAttribute("class", "field-box");
+
+    var arrow = document.createElement("IMG");
+    arrow.setAttribute("src", "images/arrow-right.svg");
+    arrow.setAttribute("class", "mini-icon");
+    tdiv.appendChild(arrow);
+
+    var tp = document.createElement("P");
+    tp.setAttribute("class", "label2");
+    tp.innerText = obj.type;
+    tdiv.appendChild(tp);
+    ul1.appendChild(tdiv);
+    //beds per room
+    var bdiv = document.createElement("div");
+    bdiv.setAttribute("class", "field-box");
+
+    var arrow1 = document.createElement("IMG");
+    arrow1.setAttribute("src", "images/arrow-right.svg");
+    arrow1.setAttribute("class", "mini-icon");
+    bdiv.appendChild(arrow1);
+
+    var ulb = document.createElement("ul");
+    ulb.setAttribute("class", "filed-box-column");
+
+    var bp = document.createElement("P");
+    bp.setAttribute("class", "label2 word-color");
+    bp.innerText = "Beds per Room ";
+    ulb.appendChild(bp);
+    var bv = document.createElement("p");
+    bv.setAttribute("class", "label2");
+    bv.innerText = obj.beds;
+    ulb.appendChild(bv);
+    bdiv.appendChild(ulb);
+    ul1.appendChild(bdiv);
+    //bathrooms
+    var btdiv = document.createElement("div");
+    btdiv.setAttribute("class", "field-box");
+
+    var barrow = document.createElement("IMG");
+    barrow.setAttribute("src", "images/arrow-right.svg");
+    barrow.setAttribute("class", "mini-icon");
+    btdiv.appendChild(barrow);
+    var bul = document.createElement("ul");
+    bul.setAttribute("class", "filed-box-column");
+    var brh = document.createElement("P");
+    brh.setAttribute("class", "label2 word-color");
+    brh.innerText = "Bathrooms";
+    bul.appendChild(brh);
+    var brp = document.createElement("p");
+    brp.setAttribute("class", "label2");
+    brp.innerText = obj.bathroom;
+    brp.setAttribute("class", "label2");
+    bul.appendChild(brp);
+    btdiv.appendChild(bul);
+    ul1.appendChild(btdiv);
+    //Stay and Food
+    if (
+      !(
+        obj.stayandfood.monthly === "" &&
+        obj.stayandfood.semester === "" &&
+        obj.stayandfood.annum === ""
+      )
+    ) {
+      //headinf stay and food
+      var safdiv = document.createElement("div");
+      safdiv.setAttribute("class", "field-box");
+      var safarrow = document.createElement("IMG");
+      safarrow.setAttribute("src", "images/arrow-right.svg");
+      safarrow.setAttribute("class", "mini-icon");
+      safdiv.appendChild(safarrow);
+
+      var ul2 = document.createElement("ul");
+      var safp = document.createElement("P");
+      safp.setAttribute("class", "label2 word-color");
+      safp.innerText = "Stay and Food";
+      ul2.appendChild(safp);
+      //actual list
+      ul2.setAttribute("class", "filed-box-column");
+      if (obj.stayandfood.monthly !== "") {
+        var safmon = document.createElement("p");
+        safmon.setAttribute("class", "label2");
+        safmon.innerText = "Monthly : Rs." + obj.stayandfood.monthly;
+        ul2.appendChild(safmon);
       }
-      if (!(currentRoomCard.stayAndFood.semester === "")) {
-        var safLi2 = document.createElement("LI");
-        safLi2.setAttribute("class", "label2 notes");
-        safLi2.innerHTML =
-          "Semester Rs" + currentRoomCard.stayAndFood.semester + "/-";
-        saf.appendChild(safLi2);
+      if (obj.stayandfood.semester !== "") {
+        var safsem = document.createElement("p");
+        safsem.setAttribute("class", "label2");
+        safsem.innerText = "Semester : Rs." + obj.stayandfood.semester;
+        ul2.appendChild(safsem);
       }
-      if (!(currentRoomCard.stayAndFood.annum === "")) {
-        var safLi3 = document.createElement("LI");
-        safLi3.setAttribute("class", "label2 notes");
-        safLi3.innerHTML =
-          "Annum Rs" + currentRoomCard.stayAndFood.annum + "/-";
-        saf.appendChild(safLi3);
+      if (obj.stayandfood.annum !== "") {
+        var safann = document.createElement("p");
+        safann.setAttribute("class", "label2");
+        safann.innerText = "Annum : Rs." + obj.stayandfood.annum;
+        ul2.appendChild(safann);
       }
+      safdiv.append(ul2);
+      ul1.appendChild(safdiv);
     }
+    //Stay only
+    if (
+      !(
+        obj.stayonly.monthly === "" &&
+        obj.stayonly.semester === "" &&
+        obj.stayonly.annum === ""
+      )
+    ) {
+      //headinf stay only
+      var sodiv = document.createElement("div");
+      sodiv.setAttribute("class", "field-box");
+      var soarrow = document.createElement("IMG");
+      soarrow.setAttribute("src", "images/arrow-right.svg");
+      soarrow.setAttribute("class", "mini-icon");
+      sodiv.appendChild(soarrow);
 
-    //STAY ONLY
-    if (currentRoomCard.stayOnly.isActive) {
-      var so = document.createElement("DIV");
-      so.setAttribute("class", "card-element");
-      var soDiv = document.createElement("DIV");
-      soDiv.setAttribute("class", "room-card-div");
-      var soimgarrow = document.createElement("IMG");
-      soimgarrow.setAttribute("src", "images/arrow-right.svg");
-      soimgarrow.setAttribute("class", "mini-icon");
-      soDiv.appendChild(soimgarrow);
-      var soinfoP = document.createElement("P");
-      soinfoP.setAttribute("class", "label2 notes");
-      soinfoP.innerHTML = currentRoomCard.stayOnly.planName;
-      soDiv.appendChild(soinfoP);
-      so.appendChild(soDiv);
-      if (!(currentRoomCard.stayOnly.monthly === "")) {
-        var safLi1 = document.createElement("LI");
-        safLi1.setAttribute("class", "label2 notes");
-        safLi1.innerHTML =
-          "Monthly Rs" + currentRoomCard.stayOnly.monthly + "/-";
-        so.appendChild(safLi1);
+      var ul3 = document.createElement("ul");
+      var sop = document.createElement("P");
+      sop.setAttribute("class", "label2 word-color");
+      sop.innerText = "Stay Only";
+      ul3.appendChild(sop);
+      //actual list
+      ul3.setAttribute("class", "filed-box-column");
+      if (obj.stayonly.monthly !== "") {
+        var somon = document.createElement("p");
+        somon.setAttribute("class", "label2");
+        somon.innerText = "Monthly : Rs." + obj.stayonly.monthly;
+        ul3.appendChild(somon);
       }
-      if (!(currentRoomCard.stayOnly.semester === "")) {
-        var safLi2 = document.createElement("LI");
-        safLi2.setAttribute("class", "label2 notes");
-        safLi2.innerHTML =
-          "Semester Rs" + currentRoomCard.stayOnly.semester + "/-";
-        so.appendChild(safLi2);
+      if (obj.stayonly.semester !== "") {
+        var sosem = document.createElement("p");
+        sosem.setAttribute("class", "label2");
+        sosem.innerText = "Semester : Rs." + obj.stayonly.semester;
+        ul3.appendChild(sosem);
       }
-      if (!(currentRoomCard.stayOnly.annum === "")) {
-        var soLi3 = document.createElement("LI");
-        soLi3.setAttribute("class", "label2 notes");
-        soLi3.innerHTML = "Annum Rs" + currentRoomCard.stayOnly.annum + "/-";
-        so.appendChild(soLi3);
+      if (obj.stayonly.annum !== "") {
+        var soann = document.createElement("p");
+        soann.setAttribute("class", "label2");
+        soann.innerText = "Annum : Rs." + obj.stayonly.annum;
+        ul3.appendChild(soann);
       }
-      roomCard.appendChild(so);
+      sodiv.appendChild(ul3);
+      ul1.appendChild(sodiv);
     }
-
-    //AC/N-AC
-    var ac = document.createElement("DIV");
-    ac.setAttribute("class", "card-element");
-    var acDiv = document.createElement("DIV");
-    acDiv.setAttribute("class", "room-card-div");
-    var acimgarrow = document.createElement("IMG");
-    acimgarrow.setAttribute("src", "images/arrow-right.svg");
-    acimgarrow.setAttribute("class", "mini-icon");
-    acDiv.appendChild(acimgarrow);
-    var acinfoP = document.createElement("P");
-    acinfoP.setAttribute("class", "label2 notes");
-    if (currentRoomCard.isAcActive) {
-      acinfoP.innerHTML = "AC";
-    } else {
-      acinfoP.innerHTML = "N-AC";
-    }
-    acDiv.appendChild(acinfoP);
-    ac.appendChild(acDiv);
-    roomCard.appendChild(ac);
-
-    //Beds per Room
-    var bpr = document.createElement("DIV");
-    bpr.setAttribute("class", "card-element");
-    var bprDiv = document.createElement("DIV");
-    bprDiv.setAttribute("class", "room-card-div");
-    var bprimgarrow = document.createElement("IMG");
-    bprimgarrow.setAttribute("src", "images/arrow-right.svg");
-    bprimgarrow.setAttribute("class", "mini-icon");
-    bprDiv.appendChild(bprimgarrow);
-    var bprinfoP = document.createElement("P");
-    bprinfoP.setAttribute("class", "label2");
-    bprinfoP.innerHTML = "Beds per Room";
-    bprDiv.appendChild(bprinfoP);
-    bpr.appendChild(bprDiv);
-    var bprLi = document.createElement("LI");
-    bprLi.setAttribute("class", "label2 notes");
-    bprLi.innerHTML = currentRoomCard.bedsperRoom;
-    bpr.appendChild(bprLi);
-    roomCard.appendChild(bpr);
-
-    //BathRooms
-    var br = document.createElement("DIV");
-    br.setAttribute("class", "card-element");
-    var brDiv = document.createElement("DIV");
-    brDiv.setAttribute("class", "room-card-div");
-    var brimgarrow = document.createElement("IMG");
-    brimgarrow.setAttribute("src", "images/arrow-right.svg");
-    brimgarrow.setAttribute("class", "mini-icon");
-    brDiv.appendChild(brimgarrow);
-    var brinfoP = document.createElement("P");
-    brinfoP.setAttribute("class", "label2");
-    brinfoP.innerHTML = "Bath Rooms";
-    brDiv.appendChild(brinfoP);
-    br.appendChild(brDiv);
-    if (currentRoomCard.bathroomtype === 0) {
-      var brLi1 = document.createElement("LI");
-      brLi1.setAttribute("class", "label2");
-      brLi1.innerHTML = "Common";
-      br.appendChild(brLi1);
-    }
-    if (currentRoomCard.bathroomtype === 1) {
-      var brLi2 = document.createElement("LI");
-      brLi2.setAttribute("class", "label2");
-      brLi2.innerHTML = "Attached";
-      br.appendChild(brLi2);
-    }
-    if (currentRoomCard.bathroomtype === 2) {
-      var brLi3 = document.createElement("LI");
-      brLi3.setAttribute("class", "label2");
-      brLi3.innerHTML = "Common";
-      br.appendChild(brLi3);
-      var brLi4 = document.createElement("LI");
-      brLi4.setAttribute("class", "label2");
-      brLi4.innerHTML = "Attached";
-      br.appendChild(brLi4);
-    }
-    roomCard.appendChild(br);
-    division.appendChild(roomCard);
-  }
-
-  static updateIdsOfElements(index) {
-    for (var i = index; i < editHostel.roomDetails.roomCards.length; i++) {
-      var element = document.getElementById("room-tag-" + (index + 1));
-      element.setAttribute("id", "room-tag-" + index);
-      var element1 = document.getElementById("room-card-" + (index + 1));
-      element1.setAttribute("id", "room-card-" + index);
-      var element2 = document.getElementById("room-tag-" + (index + 1) + "-p");
-      element2.setAttribute("id", "room-tag-" + index + "-p");
-      element2.setAttribute("onclick", "RoomDetails.editCard(" + index + ")");
-      var button = document.getElementById("cross-button-" + (i + 1));
-      button.setAttribute("id", "cross-button-" + i);
-      button.setAttribute("onclick", "FoodDetails.removeCard(" + i + ")");
-    }
-  }
-
-  static removeCard(index) {
-    document.getElementById("room-tag-" + index).remove();
-    editHostel.roomDetails.roomCards.splice(index, 1);
-
-    document.getElementById("plan-name").value = "";
-    document.getElementById("bed-count").value = "";
-
-    document.getElementById("sf-monthly").value = "";
-    document.getElementById("sf-semester").value = "";
-    document.getElementById("sf-annum").value = "";
-
-    document.getElementById("s-monthly").value = "";
-    document.getElementById("s-semester").value = "";
-    document.getElementById("s-annum").value = "";
-
-    document.getElementById("room-card-" + index).remove();
-    RoomDetails.updateIdsOfElements(index);
+    card.appendChild(ul1);
+    obj.card = card;
+    maindiv.appendChild(card);
   }
 
   static editCard(index) {
-    let currentRoomCard = editHostel.roomDetails.roomCards[index];
-    console.log(index);
-    console.log(editHostel.roomDetails.roomCards);
-
-    let button = document.getElementById("add-room-card");
-    button.innerHTML = "Update Card";
-    button.setAttribute("onclick", "RoomDetails.updateCard(" + index + ")");
-
-    document.getElementById("plan-name").value = currentRoomCard.cardName;
-    document.getElementById("bed-count").value = currentRoomCard.bedsperRoom;
-
-    document.getElementById("sf-monthly").value =
-      currentRoomCard.stayAndFood.monthly;
-    document.getElementById("sf-semester").value =
-      currentRoomCard.stayAndFood.semester;
-    document.getElementById("sf-annum").value =
-      currentRoomCard.stayAndFood.annum;
-
-    document.getElementById("s-monthly").value =
-      currentRoomCard.stayOnly.monthly;
-    document.getElementById("s-semester").value =
-      currentRoomCard.stayOnly.semester;
-    document.getElementById("s-annum").value = currentRoomCard.stayOnly.annum;
-
-    if (currentRoomCard.isAcActive) {
+    var obj;
+    for (var i = 0; i < window.modifiedData.roomInfo.length; i++) {
+      if (window.modifiedData.roomInfo[i].index === index) {
+        window.modifiedData.roomInfo[i].signal = true;
+        obj = window.modifiedData.roomInfo[i];
+        break;
+      }
+    }
+    //plan name
+    document.getElementById("plan-name").value = obj.planname;
+    //room type
+    if (obj.type === "AC") {
       document.getElementById("ac").checked = true;
-    }
-    if (!currentRoomCard.isAcActive) {
+      document.getElementById("nac").checked = false;
+    } else {
       document.getElementById("nac").checked = true;
+      document.getElementById("ac").checked = false;
     }
-
-    if (currentRoomCard.bathroomtype === 0) {
-      document.getElementById("common").checked = true;
-      document.getElementById("attached").checked = false;
-    }
-    if (currentRoomCard.bathroomtype === 1) {
-      document.getElementById("common").checked = false;
-      document.getElementById("attached").checked = true;
-    }
-    if (currentRoomCard.bathroomtype === 2) {
+    //Bathrooms
+    var words = obj.bathroom.split("-");
+    if (words.length === 2) {
       document.getElementById("common").checked = true;
       document.getElementById("attached").checked = true;
-    }
-  }
-
-  static updateCard(index) {
-    if (document.getElementById("plan-name").value === "") {
-      alert("Plan not to be empty!!");
     } else {
-      //Room card Object creation
-      let currentRoomCard = editHostel.roomDetails.roomCards[index];
-      currentRoomCard.cardName = document.getElementById("plan-name").value;
-      document.getElementById("room-tag-" + index + "-p").innerHTML =
-        document.getElementById("plan-name").value;
-      //Checking and adding Stay + Food
-      let sFMonthly = document.getElementById("sf-monthly");
-      let sFSemester = document.getElementById("sf-semester");
-      let sFAnnum = document.getElementById("sf-annum");
-      currentRoomCard.stayAndFood.planName = "Stay + Food";
-      if (
-        sFAnnum.value === "" &&
-        sFMonthly.value === "" &&
-        sFSemester.value === ""
-      ) {
-        currentRoomCard.stayAndFood.isActive = false;
+      if (words[0] == "Common") {
+        document.getElementById("common").checked = true;
+        document.getElementById("attached").checked = false;
       } else {
-        currentRoomCard.stayAndFood.isActive = true;
-        currentRoomCard.stayAndFood.monthly = sFMonthly.value;
-        currentRoomCard.stayAndFood.semester = sFSemester.value;
-        currentRoomCard.stayAndFood.annum = sFAnnum.value;
+        document.getElementById("common").checked = false;
+        document.getElementById("attached").checked = true;
       }
-
-      //Checking and Add Stay Only
-      let sMonthly = document.getElementById("s-monthly");
-      let sSemester = document.getElementById("s-semester");
-      let sAnnum = document.getElementById("s-annum");
-      currentRoomCard.stayOnly.planName = "Stay Only";
-      if (
-        sAnnum.value === "" &&
-        sMonthly.value === "" &&
-        sSemester.value === ""
-      ) {
-        currentRoomCard.stayAndFood.isActive = false;
-      } else {
-        currentRoomCard.stayOnly.isActive = true;
-        currentRoomCard.stayOnly.monthly = sMonthly.value;
-        currentRoomCard.stayOnly.semester = sSemester.value;
-        currentRoomCard.stayOnly.annum = sAnnum.value;
-      }
-
-      // AC/NAC
-      if (document.getElementById("ac").checked) {
-        currentRoomCard.isAcActive = true;
-      }
-      if (document.getElementById("nac").checked) {
-        currentRoomCard.isAcActive = false;
-      }
-
-      // Beds Per Room
-      currentRoomCard.bedsperRoom = document.getElementById("bed-count").value;
-
-      // Bathrooms
-      if (document.getElementById("common").checked) {
-        currentRoomCard.bathroomtype = 0;
-      }
-      if (document.getElementById("attached").checked) {
-        currentRoomCard.bathroomtype = 1;
-      }
-      if (
-        document.getElementById("common").checked &&
-        document.getElementById("attached").checked
-      ) {
-        currentRoomCard.bathroomtype = 2;
-      }
-      let button = document.getElementById("add-room-card");
-      button.innerHTML = "ADD";
-      button.setAttribute("onclick", "checkChange(1,0)");
     }
-    document.getElementById("room-card-" + index).remove();
-    editHostel.roomDetails.createRoomCards(index);
-  }
-}
+    //beds per room
+    document.getElementById("bed-count").value = obj.beds;
+    //Stay and Food
+    document.getElementById("sf-monthly").value = obj.stayandfood.monthly;
+    document.getElementById("sf-semester").value = obj.stayandfood.semester;
+    document.getElementById("sf-annum").value = obj.stayandfood.annum;
+    //Stay Only
+    document.getElementById("s-monthly").value = obj.stayonly.monthly;
+    document.getElementById("s-semester").value = obj.stayonly.semester;
+    document.getElementById("s-annum").value = obj.stayonly.annum;
 
-class FoodPack {
-  constructor() {
-    this.time = "";
-    this.period = "";
-    this.itemList = [];
-    this.notes = "";
-  }
-}
-
-class NonVeg {
-  constructor() {
-    this.noofTimes;
-    this.isUnLimited = false;
-    this.notes = "";
-  }
-}
-
-class FoodDetails {
-  constructor() {
-    this.breakFast = new FoodPack();
-    this.lunch = new FoodPack();
-    this.snacks = new FoodPack();
-    this.dinner = new FoodPack();
-    this.nonVeg = new NonVeg();
+    //updating buttons
+    document
+      .getElementById("add-room-card")
+      .setAttribute("class", "label1 hide");
+    document.getElementById("update-room-card").setAttribute("class", "label1");
   }
 
-  updateFoodDetails() {
-    //BreakFast
-    this.breakFast.time = document.getElementById("breakfast-time").value;
-    this.breakFast.period = document.getElementById("breakfast-period").value;
-    this.breakFast.itemList = String(
-      document.getElementById("breakfast-items").value
-    ).split("-");
-    this.breakFast.notes = document.getElementById("breakfast-notes").value;
-    // console.log(this.breakFast);
-    //Lunch
-    this.lunch.time = document.getElementById("lunch-time").value;
-    this.lunch.period = document.getElementById("lunch-period").value;
-    this.lunch.itemList = String(
-      document.getElementById("lunch-items").value
-    ).split("-");
-    this.lunch.notes = document.getElementById("lunch-notes").value;
-    // console.log(this.lunch);
-    //Snacks
-    this.snacks.time = document.getElementById("snacks-time").value;
-    this.snacks.period = document.getElementById("snacks-period").value;
-    this.snacks.itemList = String(
-      document.getElementById("snacks-items").value
-    ).split("-");
-    this.snacks.notes = document.getElementById("snacks-notes").value;
-    // console.log(this.snacks);
-    //Dinner
-    this.dinner.time = document.getElementById("dinner-time").value;
-    this.dinner.period = document.getElementById("dinner-period").value;
-    this.dinner.itemList = String(
-      document.getElementById("dinner-items").value
-    ).split("-");
-    this.dinner.notes = document.getElementById("dinner-notes").value;
-    // console.log(this.dinner);
-    //Non-Veg
-    this.nonVeg.noofTimes = document.getElementById("noof-times").value;
-    this.nonVeg.isUnLimited = Boolean(document.getElementById("limit").value);
-    this.nonVeg.notes = document.getElementById("nonveg-notes").value;
-    // console.log(this.nonVeg);
-
-    this.createFoodCards();
-  }
-
-  createFoodCards() {
-    try {
-      document.getElementById("breakfast-card").remove();
-      document.getElementById("lunch-card").remove();
-      document.getElementById("snacks-card").remove();
-      document.getElementById("dinner-card").remove();
-      document.getElementById("nonveg-card").remove();
-    } catch (err) {}
-    let division = document.getElementById("food-cards-section");
-
-    //BreakFast
-    var bf = document.createElement("DIV");
-    bf.setAttribute("class", "food-card");
-    bf.setAttribute("id", "breakfast-card");
-
-    var bfn = document.createElement("P");
-    bfn.setAttribute("class", "label");
-    bfn.innerHTML = "Breakfast(" + this.breakFast.period + ")";
-    bf.appendChild(bfn);
-
-    var bftimediv = document.createElement("DIV");
-    bftimediv.setAttribute("class", "food-card-div");
-
-    var bftimeimgarrow = document.createElement("IMG");
-    bftimeimgarrow.setAttribute("src", "images/arrow-right.svg");
-    bftimeimgarrow.setAttribute("class", "mini-icon");
-    bftimediv.appendChild(bftimeimgarrow);
-
-    var bftimeP = document.createElement("P");
-    bftimeP.setAttribute("class", "label2");
-    bftimeP.innerHTML = "Time : " + this.breakFast.time;
-    bftimediv.appendChild(bftimeP);
-    bf.appendChild(bftimediv);
-
-    var bfitemdiv = document.createElement("DIV");
-    bfitemdiv.setAttribute("class", "food-card-div");
-
-    var bfitemimgarrow = document.createElement("IMG");
-    bfitemimgarrow.setAttribute("src", "images/arrow-right.svg");
-    bfitemimgarrow.setAttribute("class", "mini-icon");
-    bfitemdiv.appendChild(bfitemimgarrow);
-
-    var bfitemP = document.createElement("P");
-    bfitemP.setAttribute("class", "label2");
-    bfitemP.innerHTML = "Items";
-    bfitemdiv.appendChild(bfitemP);
-
-    bf.appendChild(bfitemdiv);
-    var bfitemlidiv = document.createElement("DIV");
-    bfitemlidiv.setAttribute("class", "food-card-div");
-    for (var i = 0; i < this.breakFast.itemList.length; i++) {
-      var bfitemli = document.createElement("LI");
-      bfitemli.setAttribute("class", "label2 notes");
-      bfitemli.innerHTML = this.breakFast.itemList[i];
-      bfitemlidiv.appendChild(bfitemli);
+  static updateRoomCard() {
+    var obj;
+    var index = 0;
+    for (var i = 0; i < window.modifiedData.roomInfo.length; i++) {
+      if (window.modifiedData.roomInfo[i].signal) {
+        obj = window.modifiedData.roomInfo[i];
+        index = i;
+        break;
+      }
     }
-    bf.appendChild(bfitemlidiv);
-
-    var bfnotediv = document.createElement("DIV");
-    bfnotediv.setAttribute("class", "food-card-div");
-
-    var bfnoteimgarrow = document.createElement("IMG");
-    bfnoteimgarrow.setAttribute("src", "images/arrow-right.svg");
-    bfnoteimgarrow.setAttribute("class", "mini-icon");
-    bfnotediv.appendChild(bfnoteimgarrow);
-
-    var bfnoteP = document.createElement("P");
-    bfnoteP.setAttribute("class", "label2");
-    bfnoteP.innerHTML = "Notes";
-    bfnotediv.appendChild(bfnoteP);
-    bf.appendChild(bfnotediv);
-
-    var bfnote = document.createElement("P");
-    bfnote.setAttribute("class", "label2 notes");
-    bfnote.innerHTML = this.breakFast.notes;
-    bf.appendChild(bfnote);
-
-    division.appendChild(bf);
-
-    //LUNCH
-    var lun = document.createElement("DIV");
-    lun.setAttribute("class", "food-card");
-    lun.setAttribute("id", "lunch-card");
-
-    var lunn = document.createElement("P");
-    lunn.setAttribute("class", "label");
-    lunn.innerHTML = "Lunch(" + this.lunch.period + ")";
-    lun.appendChild(lunn);
-
-    var luntimediv = document.createElement("DIV");
-    luntimediv.setAttribute("class", "food-card-div");
-
-    var luntimeimgarrow = document.createElement("IMG");
-    luntimeimgarrow.setAttribute("src", "images/arrow-right.svg");
-    luntimeimgarrow.setAttribute("class", "mini-icon");
-    luntimediv.appendChild(luntimeimgarrow);
-
-    var luntimeP = document.createElement("P");
-    luntimeP.setAttribute("class", "label2");
-    luntimeP.innerHTML = "Time : " + this.lunch.time;
-    luntimediv.appendChild(luntimeP);
-    lun.appendChild(luntimediv);
-
-    var lunitemdiv = document.createElement("DIV");
-    lunitemdiv.setAttribute("class", "food-card-div");
-
-    var lunitemimgarrow = document.createElement("IMG");
-    lunitemimgarrow.setAttribute("src", "images/arrow-right.svg");
-    lunitemimgarrow.setAttribute("class", "mini-icon");
-    lunitemdiv.appendChild(lunitemimgarrow);
-
-    var lunitemP = document.createElement("P");
-    lunitemP.setAttribute("class", "label2");
-    lunitemP.innerHTML = "Items";
-    lunitemdiv.appendChild(lunitemP);
-
-    lun.appendChild(lunitemdiv);
-    var lunitemlidiv = document.createElement("DIV");
-    lunitemlidiv.setAttribute("class", "food-card-div");
-    for (var i = 0; i < this.lunch.itemList.length; i++) {
-      var lunitemli = document.createElement("LI");
-      lunitemli.setAttribute("class", "label2 notes");
-      lunitemli.innerHTML = this.lunch.itemList[i];
-      lunitemlidiv.appendChild(lunitemli);
-    }
-    lun.appendChild(lunitemlidiv);
-
-    var lunnotediv = document.createElement("DIV");
-    lunnotediv.setAttribute("class", "food-card-div");
-
-    var lunnoteimgarrow = document.createElement("IMG");
-    lunnoteimgarrow.setAttribute("src", "images/arrow-right.svg");
-    lunnoteimgarrow.setAttribute("class", "mini-icon");
-    lunnotediv.appendChild(lunnoteimgarrow);
-
-    var lunnoteP = document.createElement("P");
-    lunnoteP.setAttribute("class", "label2");
-    lunnoteP.innerHTML = "Notes";
-    lunnotediv.appendChild(lunnoteP);
-    lun.appendChild(lunnotediv);
-
-    var lunnote = document.createElement("P");
-    lunnote.setAttribute("class", "label2 notes");
-    lunnote.innerHTML = this.lunch.notes;
-    lun.appendChild(lunnote);
-
-    division.appendChild(lun);
-
-    //Snacks
-    var sn = document.createElement("DIV");
-    sn.setAttribute("class", "food-card");
-    sn.setAttribute("id", "snacks-card");
-
-    var snn = document.createElement("P");
-    snn.setAttribute("class", "label");
-    snn.innerHTML = "Snacks(" + this.snacks.period + ")";
-    sn.appendChild(snn);
-
-    var sntimediv = document.createElement("DIV");
-    sntimediv.setAttribute("class", "food-card-div");
-
-    var sntimeimgarrow = document.createElement("IMG");
-    sntimeimgarrow.setAttribute("src", "images/arrow-right.svg");
-    sntimeimgarrow.setAttribute("class", "mini-icon");
-    sntimediv.appendChild(sntimeimgarrow);
-
-    var sntimeP = document.createElement("P");
-    sntimeP.setAttribute("class", "label2");
-    sntimeP.innerHTML = "Time : " + this.snacks.time;
-    sntimediv.appendChild(sntimeP);
-    sn.appendChild(sntimediv);
-
-    var snitemdiv = document.createElement("DIV");
-    snitemdiv.setAttribute("class", "food-card-div");
-
-    var snitemimgarrow = document.createElement("IMG");
-    snitemimgarrow.setAttribute("src", "images/arrow-right.svg");
-    snitemimgarrow.setAttribute("class", "mini-icon");
-    snitemdiv.appendChild(snitemimgarrow);
-
-    var snitemP = document.createElement("P");
-    snitemP.setAttribute("class", "label2");
-    snitemP.innerHTML = "Items";
-    snitemdiv.appendChild(snitemP);
-
-    sn.appendChild(snitemdiv);
-    var snitemlidiv = document.createElement("DIV");
-    snitemlidiv.setAttribute("class", "food-card-div");
-    for (var i = 0; i < this.snacks.itemList.length; i++) {
-      var snitemli = document.createElement("LI");
-      snitemli.setAttribute("class", "label2 notes");
-      snitemli.innerHTML = this.snacks.itemList[i];
-      snitemlidiv.appendChild(snitemli);
-    }
-    sn.appendChild(snitemlidiv);
-
-    var snnnotediv = document.createElement("DIV");
-    snnnotediv.setAttribute("class", "food-card-div");
-
-    var snnoteimgarrow = document.createElement("IMG");
-    snnoteimgarrow.setAttribute("src", "images/arrow-right.svg");
-    snnoteimgarrow.setAttribute("class", "mini-icon");
-    snnnotediv.appendChild(snnoteimgarrow);
-
-    var snnoteP = document.createElement("P");
-    snnoteP.setAttribute("class", "label2");
-    snnoteP.innerHTML = "Notes";
-    snnnotediv.appendChild(snnoteP);
-    sn.appendChild(snnnotediv);
-
-    var snnote = document.createElement("P");
-    snnote.setAttribute("class", "label2 notes");
-    snnote.innerHTML = this.snacks.notes;
-    sn.appendChild(snnote);
-
-    division.appendChild(sn);
-
-    //Dinner
-    var din = document.createElement("DIV");
-    din.setAttribute("class", "food-card");
-    din.setAttribute("id", "dinner-card");
-
-    var dinn = document.createElement("P");
-    dinn.setAttribute("class", "label");
-    dinn.innerHTML = "Dinner(" + this.dinner.period + ")";
-    din.appendChild(dinn);
-
-    var dintimediv = document.createElement("DIV");
-    dintimediv.setAttribute("class", "food-card-div");
-
-    var dintimeimgarrow = document.createElement("IMG");
-    dintimeimgarrow.setAttribute("src", "images/arrow-right.svg");
-    dintimeimgarrow.setAttribute("class", "mini-icon");
-    dintimediv.appendChild(dintimeimgarrow);
-
-    var dintimeP = document.createElement("P");
-    dintimeP.setAttribute("class", "label2");
-    dintimeP.innerHTML = "Time : " + this.dinner.time;
-    dintimediv.appendChild(dintimeP);
-    din.appendChild(dintimediv);
-
-    var dinitemdiv = document.createElement("DIV");
-    dinitemdiv.setAttribute("class", "food-card-div");
-
-    var dinitemimgarrow = document.createElement("IMG");
-    dinitemimgarrow.setAttribute("src", "images/arrow-right.svg");
-    dinitemimgarrow.setAttribute("class", "mini-icon");
-    dinitemdiv.appendChild(dinitemimgarrow);
-
-    var dinitemP = document.createElement("P");
-    dinitemP.setAttribute("class", "label2");
-    dinitemP.innerHTML = "Items";
-    dinitemdiv.appendChild(dinitemP);
-
-    din.appendChild(dinitemdiv);
-    var dinitemlidiv = document.createElement("DIV");
-    dinitemlidiv.setAttribute("class", "food-card-div");
-    for (var i = 0; i < this.dinner.itemList.length; i++) {
-      var dinitemli = document.createElement("LI");
-      dinitemli.setAttribute("class", "label2 notes");
-      dinitemli.innerHTML = this.dinner.itemList[i];
-      dinitemlidiv.appendChild(dinitemli);
-    }
-    din.appendChild(dinitemlidiv);
-
-    var dinnotediv = document.createElement("DIV");
-    dinnotediv.setAttribute("class", "food-card-div");
-
-    var dinnoteimgarrow = document.createElement("IMG");
-    dinnoteimgarrow.setAttribute("src", "images/arrow-right.svg");
-    dinnoteimgarrow.setAttribute("class", "mini-icon");
-    dinnotediv.appendChild(dinnoteimgarrow);
-
-    var dinnoteP = document.createElement("P");
-    dinnoteP.setAttribute("class", "label2");
-    dinnoteP.innerHTML = "Notes";
-    dinnotediv.appendChild(dinnoteP);
-    din.appendChild(dinnotediv);
-
-    var dinnote = document.createElement("P");
-    dinnote.setAttribute("class", "label2 notes");
-    dinnote.innerHTML = this.dinner.notes;
-    din.appendChild(dinnote);
-
-    division.appendChild(din);
-
-    //Non-Veg
-    var nonv = document.createElement("DIV");
-    nonv.setAttribute("class", "food-card");
-    nonv.setAttribute("id", "nonveg-card");
-
-    var nonvn = document.createElement("P");
-    nonvn.setAttribute("class", "label");
-    nonvn.innerHTML = "Non-Veg";
-    nonv.appendChild(nonvn);
-
-    var nonvtimesdiv = document.createElement("DIV");
-    nonvtimesdiv.setAttribute("class", "food-card-div");
-
-    var nonvtimesimgarrow = document.createElement("IMG");
-    nonvtimesimgarrow.setAttribute("src", "images/arrow-right.svg");
-    nonvtimesimgarrow.setAttribute("class", "mini-icon");
-    nonvtimesdiv.appendChild(nonvtimesimgarrow);
-
-    var nonvtimesP = document.createElement("P");
-    nonvtimesP.setAttribute("class", "label2");
-    nonvtimesP.innerHTML = this.nonVeg.noofTimes + "times per week.";
-    nonvtimesdiv.appendChild(nonvtimesP);
-    nonv.appendChild(nonvtimesdiv);
-
-    var nonvlimiteddiv = document.createElement("DIV");
-    nonvlimiteddiv.setAttribute("class", "food-card-div");
-
-    var nonvlimitedimgarrow = document.createElement("IMG");
-    nonvlimitedimgarrow.setAttribute("src", "images/arrow-right.svg");
-    nonvlimitedimgarrow.setAttribute("class", "mini-icon");
-    nonvlimiteddiv.appendChild(nonvlimitedimgarrow);
-
-    var nonvlimitedP = document.createElement("P");
-    nonvlimitedP.setAttribute("class", "label2");
-    if (this.nonVeg.isUnLimited) {
-      nonvlimitedP.innerHTML = "Unlimited";
+    //plan name
+    obj.planname = document.getElementById("plan-name").value;
+    //type
+    if (document.getElementById("ac").checked) {
+      obj.type = "AC";
     } else {
-      nonvlimitedP.innerHTML = "Limited";
+      obj.type = "N-AC";
     }
-    nonvlimiteddiv.appendChild(nonvlimitedP);
-    nonv.appendChild(nonvlimiteddiv);
+    //bathroom
+    if (
+      document.getElementById("common").checked &&
+      document.getElementById("attached").checked
+    ) {
+      obj.bathroom = "Common-Attached";
+    } else if (document.getElementById("common").checked) {
+      obj.bathroom = "Common";
+    } else if (document.getElementById("attached").checked) {
+      obj.bathroom = "Attached";
+    }
+    //beds per room
+    obj.beds = document.getElementById("bed-count").value;
+    //Stay and Food
+    obj.stayandfood.monthly = document.getElementById("sf-monthly").value;
+    obj.stayandfood.semester = document.getElementById("sf-semester").value;
+    obj.stayandfood.annum = document.getElementById("sf-annum").value;
+    //Stay Only
+    obj.stayonly.monthly = document.getElementById("s-monthly").value;
+    obj.stayonly.semester = document.getElementById("s-semester").value;
+    obj.stayonly.annum = document.getElementById("s-annum").value;
 
-    var nonvnotediv = document.createElement("DIV");
-    nonvnotediv.setAttribute("class", "food-card-div");
+    window.modifiedData.roomInfo[index] = obj;
+    window.modifiedData.roomInfo[index].signal = false;
+    RoomInfo.makeDefault();
+  }
 
-    var nonvnoteimgarrow = document.createElement("IMG");
-    nonvnoteimgarrow.setAttribute("src", "images/arrow-right.svg");
-    nonvnoteimgarrow.setAttribute("class", "mini-icon");
-    nonvnotediv.appendChild(nonvnoteimgarrow);
+  static makeDefault() {
+    //plan name
+    document.getElementById("plan-name").value = "";
+    //room type
+    document.getElementById("nac").checked = true;
+    //Bathrooms
+    document.getElementById("attached").checked = true;
+    document.getElementById("common").checked = false;
+    //beds per room
+    document.getElementById("bed-count").value = "";
+    //Stay and Food
+    document.getElementById("sf-monthly").value = "";
+    document.getElementById("sf-semester").value = "";
+    document.getElementById("sf-annum").value = "";
+    //Stay Only
+    document.getElementById("s-monthly").value = "";
+    document.getElementById("s-semester").value = "";
+    document.getElementById("s-annum").value = "";
+    //updating buttons
+    document.getElementById("add-room-card").setAttribute("class", "label1");
+    document
+      .getElementById("update-room-card")
+      .setAttribute("class", "label1 hide");
+    this.updateUi();
+  }
 
-    var nonvnoteP = document.createElement("P");
-    nonvnoteP.setAttribute("class", "label2");
-    nonvnoteP.innerHTML = "Notes";
-    nonvnotediv.appendChild(nonvnoteP);
-    nonv.appendChild(nonvnotediv);
+  static removeCard(index) {
+    if (!window.modifiedData.roomInfo[index].signal) {
+      if (window.modifiedData.roomInfo.length === 1) {
+        window.modifiedData.roomInfo = [];
+      } else {
+        window.modifiedData.roomInfo.splice(index, 1);
+        for (var i = index; i < window.modifiedData.roomInfo.length; i++) {
+          window.modifiedData.roomInfo[i].index = i;
+        }
+      }
+      this.updateUi();
+    } else {
+      alert("Can't remove the Card while Editing It.");
+    }
+  }
 
-    var nonvnote = document.createElement("P");
-    nonvnote.setAttribute("class", "label2 notes");
-    nonvnote.innerHTML = this.dinner.notes;
-    nonv.appendChild(nonvnote);
+  static addRoomCard() {
+    var obj = {
+      signal: false,
+      index: 0,
+      tag: "",
+      card: "",
+      planname: "",
+      type: "",
+      bathroom: "",
+      beds: "",
+      stayandfood: {
+        monthly: "",
+        semester: "",
+        annum: "",
+      },
+      stayonly: {
+        monthly: "",
+        semester: "",
+        annum: "",
+      },
+    };
+    //plan name
+    obj.planname = document.getElementById("plan-name").value;
+    //type
+    if (document.getElementById("ac").checked) {
+      obj.type = "AC";
+    } else {
+      obj.type = "N-AC";
+    }
+    //bathroom
+    if (
+      document.getElementById("common").checked &&
+      document.getElementById("attached").checked
+    ) {
+      obj.bathroom = "Common-Attached";
+    } else if (document.getElementById("common").checked) {
+      obj.bathroom = "Common";
+    } else if (document.getElementById("attached").checked) {
+      obj.bathroom = "Attached";
+    }
+    //beds per room
+    obj.beds = document.getElementById("bed-count").value;
+    //Stay and Food
+    obj.stayandfood.monthly = document.getElementById("sf-monthly").value;
+    obj.stayandfood.semester = document.getElementById("sf-semester").value;
+    obj.stayandfood.annum = document.getElementById("sf-annum").value;
+    //Stay Only
+    obj.stayonly.monthly = document.getElementById("s-monthly").value;
+    obj.stayonly.semester = document.getElementById("s-semester").value;
+    obj.stayonly.annum = document.getElementById("s-annum").value;
 
-    division.appendChild(nonv);
+    obj.index = window.modifiedData.roomInfo.length;
+    window.modifiedData.roomInfo.push(obj);
+    // console.log(window.modifiedData.roomInfo);
+    this.makeDefault();
+  }
+}
+
+class SpecializationInfo {
+  static processSpecializationInfoData() {
+    var obj = {
+      preList: [],
+      postList: [],
+    };
+    var rawlist = window.modifiedData.specializationInfo;
+    rawlist.forEach((element) => {
+      var index = obj.postList.length;
+      var result = this.classifyData(element, index);
+      if (result.signal === 0) {
+        obj.preList.push(result.obj);
+      } else {
+        obj.postList.push(result.obj);
+      }
+    });
+    window.modifiedData.specializationInfo = obj;
+    this.updateUi();
+  }
+
+  static classifyData(element, index) {
+    var result = {
+      signal: 0,
+      obj: "",
+    };
+    var words = element.split("|");
+    var specsList = [
+      "WIFI",
+      "Washing Machine",
+      "Lockers",
+      "Hot Water",
+      "Gym",
+      "Generator",
+      "Vehicle Parking",
+      "Transport",
+      "Room Service",
+      "Sports Environment",
+      "CC-TV Survilance",
+      "Security",
+    ];
+    if (specsList.includes(words[0])) {
+      var specdata = {
+        specname: words[0],
+        type: words[1],
+        plan: words[2],
+        amount: words[3],
+        notes: words[4],
+      };
+      result.signal = 0;
+      result.obj = specdata;
+    } else {
+      var spec = words[0];
+      var specdata = {
+        signal: false,
+        index: 0,
+        tagname: "",
+        specname: "",
+        tag: "",
+        card: "",
+      };
+      if (spec.length > 10) specdata.tagname = spec.slice(0, 10);
+      else specdata.tagname = spec;
+      specdata.specname = spec;
+      specdata.index = index;
+      result.signal = 1;
+      result.obj = specdata;
+    }
+    return result;
+  }
+}
+
+class PolicyInfo {
+  static processPolicyInfoData() {
+    var list = [];
+    var rawlist = window.modifiedData.policyInfo;
+    var index = 0;
+    rawlist.forEach((element) => {
+      var obj = {
+        signal: false,
+        index: 0,
+        tagname: "",
+        policy: "",
+        tag: "",
+        card: "",
+      };
+      if (element.length > 10) obj.tagname = element.slice(0, 10);
+      else obj.tagname = element;
+      obj.policy = element;
+      obj.index = index;
+
+      index++;
+
+      list.push(obj);
+    });
+    window.modifiedData.policyInfo = list;
+    this.updateUi();
+  }
+
+  static updateUi() {
+    var maindiv = document.getElementById("hp-edit-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    maindiv = document.getElementById("hp-view-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    window.modifiedData.policyInfo.forEach((element) => {
+      this.createPolicyTags(element);
+      this.createPolicyCards(element);
+    });
+  }
+
+  static createPolicyTags(obj) {
+    let division = document.getElementById("hp-edit-tags-section");
+
+    let div = document.createElement("DIV");
+    div.setAttribute("class", "room-tags ");
+    let p = document.createElement("P");
+    p.setAttribute("class", "label1 ");
+    p.setAttribute("onclick", "PolicyInfo.editCard(" + obj.index + ")");
+    p.innerText = obj.tagname;
+    let button = document.createElement("BUTTON");
+    button.setAttribute("class", "cross-button");
+    button.setAttribute("onclick", "PolicyInfo.removeCard(" + obj.index + ")");
+    button.innerHTML = "<strong>x</strong>";
+    div.appendChild(p);
+    div.appendChild(button);
+    obj.tag = div;
+    division.appendChild(div);
+  }
+
+  static createPolicyCards(obj) {
+    var maindiv = document.getElementById("hp-view-tags-section");
+    var pdiv = document.createElement("div");
+    pdiv.setAttribute("class", "field-box");
+
+    var arrow = document.createElement("IMG");
+    arrow.setAttribute("src", "images/arrow-right.svg");
+    arrow.setAttribute("class", "mini-icon");
+    pdiv.appendChild(arrow);
+
+    var pp = document.createElement("P");
+    pp.setAttribute("class", "label2");
+    pp.innerText = obj.policy;
+    pdiv.appendChild(pp);
+    maindiv.appendChild(pdiv);
+  }
+
+  static editCard(index) {
+    var obj;
+    for (var i = 0; i < window.modifiedData.policyInfo.length; i++) {
+      if (window.modifiedData.policyInfo[i].index === index) {
+        window.modifiedData.policyInfo[i].signal = true;
+        obj = window.modifiedData.policyInfo[i];
+        break;
+      }
+    }
+    document.getElementById("new-policy").value = obj.policy;
+
+    document.getElementById("add-policy").setAttribute("class", "label1 hide");
+    document.getElementById("update-policy").setAttribute("class", "label1");
+  }
+
+  static updatePolicy() {
+    var obj;
+    var index = 0;
+    for (var i = 0; i < window.modifiedData.policyInfo.length; i++) {
+      if (window.modifiedData.policyInfo[i].signal) {
+        obj = window.modifiedData.policyInfo[i];
+        index = i;
+        break;
+      }
+    }
+    window.modifiedData.policyInfo[index] = obj;
+    obj.policy = document.getElementById("new-policy").value;
+    if (obj.policy.length > 10) obj.tagname = obj.policy.slice(0, 10);
+    else obj.tagname = obj.policy;
+    obj.signal = false;
+    this.makeDefault();
+  }
+
+  static makeDefault() {
+    document.getElementById("new-policy").value = "";
+    document.getElementById("add-policy").setAttribute("class", "label1");
+    document
+      .getElementById("update-policy")
+      .setAttribute("class", "label1 hide");
+    this.updateUi();
+  }
+
+  static removeCard(index) {
+    if (!window.modifiedData.policyInfo[index].signal) {
+      if (window.modifiedData.policyInfo.length === 1) {
+        window.modifiedData.policyInfo = [];
+      } else {
+        window.modifiedData.policyInfo.splice(index, 1);
+        for (var i = index; i < window.modifiedData.policyInfo.length; i++) {
+          window.modifiedData.policyInfo[i].index = i;
+        }
+      }
+      this.updateUi();
+    } else {
+      alert("Can't remove the Card while Editing It.");
+    }
+  }
+
+  static addPolicy() {
+    var obj = {
+      signal: false,
+      index: 0,
+      tagname: "",
+      policy: "",
+      tag: "",
+      card: "",
+    };
+    obj.policy = document.getElementById("new-policy").value;
+    if (obj.policy.length > 10) obj.tagname = obj.policy.slice(0, 10);
+    else obj.tagname = obj.policy;
+    obj.index = window.modifiedData.policyInfo.length;
+    window.modifiedData.policyInfo.push(obj);
+    this.makeDefault();
+  }
+}
+
+class RequirementInfo {
+  static processRequirementInfoData() {
+    var list = [];
+    var rawlist = window.modifiedData.requirementInfo;
+    var index = 0;
+    rawlist.forEach((element) => {
+      var obj = {
+        signal: false,
+        index: 0,
+        requirement: "",
+        type: "",
+        tagname: "",
+        tag: "",
+        card: "",
+      };
+      var words = element.split("|");
+      obj.type = words[0];
+      obj.requirement = words[1];
+      if (obj.requirement.length > 10)
+        obj.requirement = obj.requirement.slice(0, 10);
+      else obj.tagname = obj.requirement;
+      obj.index = index;
+
+      index++;
+
+      list.push(obj);
+    });
+    window.modifiedData.requirementInfo = list;
+    this.updateUi();
+  }
+
+  static updateUi() {
+    var maindiv = document.getElementById("req-edit-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    maindiv = document.getElementById("req-view-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    window.modifiedData.requirementInfo.forEach((element) => {
+      this.createRequirementTags(element);
+      this.createRequirementCards(element);
+    });
+  }
+
+  static createRequirementTags(obj) {
+    let division = document.getElementById("req-edit-tags-section");
+
+    let div = document.createElement("DIV");
+    div.setAttribute("class", "room-tags ");
+    let p = document.createElement("P");
+    p.setAttribute("class", "label1 ");
+    p.setAttribute("onclick", "RequirementInfo.editCard(" + obj.index + ")");
+    p.innerText = obj.tagname;
+    let button = document.createElement("BUTTON");
+    button.setAttribute("class", "cross-button");
+    button.setAttribute(
+      "onclick",
+      "RequirementInfo.removeCard(" + obj.index + ")"
+    );
+    button.innerHTML = "<strong>x</strong>";
+    div.appendChild(p);
+    div.appendChild(button);
+    obj.tag = div;
+    division.appendChild(div);
+  }
+
+  static createRequirementCards(obj) {
+    var maindiv = document.getElementById("req-view-tags-section");
+    var pdiv = document.createElement("div");
+    pdiv.setAttribute("class", "field-box");
+
+    var minicon = document.createElement("IMG");
+    switch (obj.type) {
+      case "ATM":
+        minicon.setAttribute("src", "images/atm.svg");
+        break;
+      case "Medical Emergency":
+        minicon.setAttribute("src", "images/medkit.svg");
+        break;
+      case "Bus Stop":
+        minicon.setAttribute("src", "images/transport.svg");
+        break;
+      case "Theatre":
+        minicon.setAttribute("src", "images/theatre.svg");
+        break;
+      case "Stationery":
+        minicon.setAttribute("src", "images/stationery.svg");
+        break;
+      case "Saloon/Spa":
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+      case "Xerox":
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+      default:
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+    }
+    minicon.setAttribute("class", "mini-icon");
+    pdiv.appendChild(minicon);
+
+    var hp = document.createElement("P");
+    hp.setAttribute("class", "label2");
+    hp.innerText = obj.requirement;
+    pdiv.appendChild(hp);
+    maindiv.appendChild(pdiv);
+  }
+
+  static editCard(index) {
+    var obj;
+    for (var i = 0; i < window.modifiedData.requirementInfo.length; i++) {
+      if (window.modifiedData.requirementInfo[i].index === index) {
+        window.modifiedData.requirementInfo[i].signal = true;
+        obj = window.modifiedData.requirementInfo[i];
+        break;
+      }
+    }
+    document.getElementById("req-category").value = obj.type;
+    document.getElementById("new-requirement").value = obj.requirement;
+
+    document
+      .getElementById("add-requirement")
+      .setAttribute("class", "label1 hide");
+    document
+      .getElementById("update-requirement")
+      .setAttribute("class", "label1");
+  }
+
+  static updateHotspot() {
+    var obj;
+    var index = 0;
+    for (var i = 0; i < window.modifiedData.requirementInfo.length; i++) {
+      if (window.modifiedData.requirementInfo[i].signal) {
+        obj = window.modifiedData.requirementInfo[i];
+        index = i;
+        break;
+      }
+    }
+    window.modifiedData.requirementInfo[index] = obj;
+    obj.type = document.getElementById("req-category").value;
+    obj.requirement = document.getElementById("new-requirement").value;
+    if (obj.requirement.length > 10) obj.tagname = obj.requirement.slice(0, 10);
+    else obj.tagname = obj.requirement;
+    obj.signal = false;
+    this.makeDefault();
+  }
+
+  static makeDefault() {
+    document.getElementById("req-category").value = "ATM";
+    document.getElementById("new-requirement").value = "";
+    document.getElementById("add-requirement").setAttribute("class", "label1");
+    document
+      .getElementById("update-requirement")
+      .setAttribute("class", "label1 hide");
+    this.updateUi();
+  }
+
+  static removeCard(index) {
+    if (!window.modifiedData.requirementInfo[index].signal) {
+      if (window.modifiedData.requirementInfo.length === 1) {
+        window.modifiedData.requirementInfo = [];
+      } else {
+        window.modifiedData.requirementInfo.splice(index, 1);
+        for (
+          var i = index;
+          i < window.modifiedData.requirementInfo.length;
+          i++
+        ) {
+          window.modifiedData.requirementInfo[i].index = i;
+        }
+      }
+      this.updateUi();
+    } else {
+      alert("Can't remove the Card while Editing It.");
+    }
+  }
+
+  static addRequirement() {
+    var obj = {
+      signal: false,
+      index: 0,
+      requirement: "",
+      type: "",
+      tagname: "",
+      tag: "",
+      card: "",
+    };
+    obj.type = document.getElementById("req-category").value;
+    obj.requirement = document.getElementById("new-requirement").value;
+    if (obj.requirement.length > 10) obj.tagname = obj.requirement.slice(0, 10);
+    else obj.tagname = obj.requirement;
+    obj.index = window.modifiedData.requirementInfo.length;
+    window.modifiedData.requirementInfo.push(obj);
+    this.makeDefault();
+  }
+}
+
+class HotspotInfo {
+  static processHotspotInfoData() {
+    var list = [];
+    var rawlist = window.modifiedData.hotspotInfo;
+    var index = 0;
+    rawlist.forEach((element) => {
+      var obj = {
+        signal: false,
+        index: 0,
+        hotspot: "",
+        type: "",
+        tagname: "",
+        tag: "",
+        card: "",
+      };
+      var words = element.split("|");
+      obj.type = words[0];
+      obj.hotspot = words[1];
+      if (obj.hotspot.length > 10) obj.tagname = obj.hotspot.slice(0, 10);
+      else obj.tagname = obj.hotspot;
+      obj.index = index;
+
+      index++;
+
+      list.push(obj);
+    });
+    window.modifiedData.hotspotInfo = list;
+    this.updateUi();
+  }
+
+  static updateUi() {
+    var maindiv = document.getElementById("hs-edit-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    maindiv = document.getElementById("hs-view-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    window.modifiedData.hotspotInfo.forEach((element) => {
+      this.createHotspotTags(element);
+      this.createHotspotCards(element);
+    });
+  }
+
+  static createHotspotTags(obj) {
+    let division = document.getElementById("hs-edit-tags-section");
+
+    let div = document.createElement("DIV");
+    div.setAttribute("class", "room-tags ");
+    let p = document.createElement("P");
+    p.setAttribute("class", "label1 ");
+    p.setAttribute("onclick", "HotspotInfo.editCard(" + obj.index + ")");
+    p.innerText = obj.tagname;
+    let button = document.createElement("BUTTON");
+    button.setAttribute("class", "cross-button");
+    button.setAttribute("onclick", "HotspotInfo.removeCard(" + obj.index + ")");
+    button.innerHTML = "<strong>x</strong>";
+    div.appendChild(p);
+    div.appendChild(button);
+    obj.tag = div;
+    division.appendChild(div);
+  }
+
+  static createHotspotCards(obj) {
+    var maindiv = document.getElementById("hs-view-tags-section");
+    var pdiv = document.createElement("div");
+    pdiv.setAttribute("class", "field-box");
+
+    var minicon = document.createElement("IMG");
+    switch (obj.type) {
+      case "Restaurent":
+        minicon.setAttribute("src", "images/restaurents.svg");
+        break;
+      case "Drinks/Ice-creams":
+        minicon.setAttribute("src", "images/drinks.svg");
+        break;
+      case "Holy Places":
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+      case "Parks":
+        minicon.setAttribute("src", "images/park.svg");
+        break;
+      default:
+        minicon.setAttribute("src", "images/location-point.svg");
+        break;
+    }
+    minicon.setAttribute("class", "mini-icon");
+    pdiv.appendChild(minicon);
+
+    var hp = document.createElement("P");
+    hp.setAttribute("class", "label2");
+    hp.innerText = obj.hotspot;
+    pdiv.appendChild(hp);
+    maindiv.appendChild(pdiv);
+  }
+
+  static editCard(index) {
+    var obj;
+    for (var i = 0; i < window.modifiedData.hotspotInfo.length; i++) {
+      if (window.modifiedData.hotspotInfo[i].index === index) {
+        window.modifiedData.hotspotInfo[i].signal = true;
+        obj = window.modifiedData.hotspotInfo[i];
+        break;
+      }
+    }
+    document.getElementById("hs-category").value = obj.type;
+    document.getElementById("new-hotspot").value = obj.hotspot;
+
+    document.getElementById("add-hotspot").setAttribute("class", "label1 hide");
+    document.getElementById("update-hotspot").setAttribute("class", "label1");
+  }
+
+  static updateHotspot() {
+    var obj;
+    var index = 0;
+    for (var i = 0; i < window.modifiedData.hotspotInfo.length; i++) {
+      if (window.modifiedData.hotspotInfo[i].signal) {
+        obj = window.modifiedData.hotspotInfo[i];
+        index = i;
+        break;
+      }
+    }
+    window.modifiedData.hotspotInfo[index] = obj;
+    obj.type = document.getElementById("hs-category").value;
+    obj.hotspot = document.getElementById("new-hotspot").value;
+    if (obj.hotspot.length > 10) obj.tagname = obj.hotspot.slice(0, 10);
+    else obj.tagname = obj.hotspot;
+    obj.signal = false;
+    this.makeDefault();
+  }
+
+  static makeDefault() {
+    document.getElementById("hs-category").value = "Restaurent";
+    document.getElementById("new-hotspot").value = "";
+    document.getElementById("add-hotspot").setAttribute("class", "label1");
+    document
+      .getElementById("update-hotspot")
+      .setAttribute("class", "label1 hide");
+    this.updateUi();
+  }
+
+  static removeCard(index) {
+    if (!window.modifiedData.hotspotInfo[index].signal) {
+      if (window.modifiedData.hotspotInfo.length === 1) {
+        window.modifiedData.hotspotInfo = [];
+      } else {
+        window.modifiedData.hotspotInfo.splice(index, 1);
+        for (var i = index; i < window.modifiedData.hotspotInfo.length; i++) {
+          window.modifiedData.hotspotInfo[i].index = i;
+        }
+      }
+      this.updateUi();
+    } else {
+      alert("Can't remove the Card while Editing It.");
+    }
+  }
+
+  static addHotspot() {
+    var obj = {
+      signal: false,
+      index: 0,
+      hotspot: "",
+      type: "",
+      tagname: "",
+      tag: "",
+      card: "",
+    };
+    obj.type = document.getElementById("hs-category").value;
+    obj.hotspot = document.getElementById("new-hotspot").value;
+    if (obj.hotspot.length > 10) obj.tagname = obj.hotspot.slice(0, 10);
+    else obj.tagname = obj.hotspot;
+    obj.index = window.modifiedData.hotspotInfo.length;
+    window.modifiedData.hotspotInfo.push(obj);
+    this.makeDefault();
   }
 }
 
@@ -1398,7 +1514,6 @@ class SpecializationsType4 {
     this.iconsAddress;
   }
 }
-
 class Specializations {
   constructor() {
     this.wifi = new SpecializationsType1();
@@ -2062,393 +2177,55 @@ class HostelPolicies {
   }
 }
 
-class RequirementType1 {
-  constructor() {
-    this.type = 0;
-    this.category = "";
-    this.name = "";
-    this.iconsAddress = "";
-  }
-}
-
-class Requirements {
-  constructor() {
-    this.requirementsList = [];
-  }
-
-  static addRequirement() {
-    if (document.getElementById("add-requirement").value !== "") {
-      var req = new RequirementType1();
-      var category = document.getElementById("req-category").value;
-      switch (category) {
-        case "Atm":
-          req.type = 0;
-          req.category = category;
-          req.iconsAddress = "images/atm.svg";
-          req.name = document.getElementById("add-requirement").value;
-          break;
-        case "Medical Emergency":
-          req.type = 1;
-          req.category = category;
-          req.iconsAddress = "images/medkit.svg";
-          req.name = document.getElementById("add-requirement").value;
-          break;
-        case "Bus Stop":
-          req.type = 2;
-          req.category = category;
-          req.iconsAddress = "images/transport.svg";
-          req.name = document.getElementById("add-requirement").value;
-          break;
-        case "Theatre":
-          req.type = 3;
-          req.category = category;
-          req.iconsAddress = "images/theatre.svg";
-          req.name = document.getElementById("add-requirement").value;
-          break;
-        case "Stationery":
-          req.type = 4;
-          req.category = category;
-          req.iconsAddress = "images/stationery.svg";
-          req.name = document.getElementById("add-requirement").value;
-          break;
-        default:
-          req.type = 5;
-          req.category = category;
-          req.iconsAddress = "images/location-point.svg";
-          req.name = document.getElementById("add-requirement").value;
-          break;
-      }
-      editHostel.requirements.requirementsList.push(req);
-      Requirements.createReqEditTags(
-        editHostel.requirements.requirementsList.length - 1
-      );
-      document.getElementById("add-requirement").value = "";
-    }
-  }
-
-  static createReqEditTags(index) {
-    var curReq = editHostel.requirements.requirementsList[index];
-    var division = document.getElementById("req-edit-tags-section");
-    var reqDiv = document.createElement("DIV");
-    reqDiv.setAttribute("class", "requirementDivCard");
-    reqDiv.setAttribute("id", "requirementDivCard-" + index);
-    var reqP = document.createElement("P");
-    reqP.setAttribute("class", "notes label2");
-    if (curReq.category !== "Others")
-      reqP.innerHTML = curReq.category + "-" + curReq.name;
-    else reqP.innerHTML = curReq.name;
-    reqDiv.appendChild(reqP);
-
-    var hPCross = document.createElement("BUTTON");
-    hPCross.setAttribute("class", "cross-button");
-    hPCross.setAttribute("id", "req-cross-button-" + index);
-    hPCross.setAttribute(
-      "onclick",
-      "Requirements.removeReqCard(" + index + ")"
-    );
-    hPCross.innerHTML = "<strong>X</strong>";
-    reqDiv.appendChild(hPCross);
-
-    division.appendChild(reqDiv);
-  }
-
-  static removeReqCard(index) {
-    document.getElementById("requirementDivCard-" + index).remove();
-    editHostel.requirements.requirementsList.splice(index, 1);
-    Requirements.updateReqCardsIds(index);
-  }
-
-  static updateReqCardsIds(index) {
-    for (
-      var i = index;
-      i < editHostel.requirements.requirementsList.length;
-      i++
-    ) {
-      var element = document.getElementById("requirementDivCard-" + (i + 1));
-      element.setAttribute("id", "requirementDivCard-" + i);
-
-      var button = document.getElementById("req-cross-button-" + (i + 1));
-      button.setAttribute("id", "req-cross-button-" + i);
-      button.setAttribute("onclick", "Requirements.removeReqCard(" + i + ")");
-    }
-  }
-
-  static createReqViewTags() {
-    var division = document.getElementById("req-view-tags-section");
-    try {
-      // removing previous HP cards
-      while (division.hasChildNodes()) {
-        division.removeChild(division.firstChild);
-      }
-    } catch (err) {}
-    for (var i = 0; i < editHostel.requirements.requirementsList.length; i++) {
-      var curReq = editHostel.requirements.requirementsList[i];
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "req-view-tags");
-
-      var reqImg = document.createElement("IMG");
-      reqImg.setAttribute("src", curReq.iconsAddress);
-      reqImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(reqImg);
-
-      var reqP = document.createElement("P");
-      reqP.setAttribute("class", "label2 notes");
-      reqP.setAttribute("style", "margin:1rem");
-      if (curReq.category !== "Others")
-        reqP.innerHTML = curReq.category + "-" + curReq.name;
-      else reqP.innerHTML = curReq.name;
-      subdiv.appendChild(reqP);
-      division.appendChild(subdiv);
-    }
-  }
-}
-
-class HotspotType1 {
-  constructor() {
-    this.type = 0;
-    this.category = "";
-    this.name = "";
-    this.iconsAddress = "";
-  }
-}
-
-class Hotspots {
-  constructor() {
-    this.hotspotsList = [];
-  }
-
-  static addHotspot() {
-    var hs = new HotspotType1();
-    var category = document.getElementById("hs-category").value;
-    switch (category) {
-      case "Restaurent":
-        hs.type = 0;
-        hs.category = category;
-        hs.iconsAddress = "images/restaurents.svg";
-        hs.name = document.getElementById("add-hotspot").value;
-        break;
-      case "Drinks/Ice-creams":
-        hs.type = 1;
-        hs.category = category;
-        hs.iconsAddress = "images/drinks.svg";
-        hs.name = document.getElementById("add-hotspot").value;
-        break;
-      case "Parks":
-        hs.type = 2;
-        hs.category = category;
-        hs.iconsAddress = "images/park.svg";
-        hs.name = document.getElementById("add-hotspot").value;
-        break;
-      default:
-        hs.type = 3;
-        hs.category = category;
-        hs.iconsAddress = "images/location-point.svg";
-        hs.name = document.getElementById("add-hotspot").value;
-        break;
-    }
-    editHostel.hotspots.hotspotsList.push(hs);
-    Hotspots.createHsEditTags(editHostel.hotspots.hotspotsList.length - 1);
-    document.getElementById("add-hotspot").value = "";
-  }
-
-  static createHsEditTags(index) {
-    var curHs = editHostel.hotspots.hotspotsList[index];
-    var division = document.getElementById("hs-edit-tags-section");
-    var hsDiv = document.createElement("DIV");
-    hsDiv.setAttribute("class", "hotspotDivCard");
-    hsDiv.setAttribute("id", "hotspotDivCard-" + index);
-    var hsP = document.createElement("P");
-    hsP.setAttribute("class", "notes label2");
-    hsP.innerHTML = curHs.name;
-    hsDiv.appendChild(hsP);
-
-    var hPCross = document.createElement("BUTTON");
-    hPCross.setAttribute("class", "cross-button");
-    hPCross.setAttribute("id", "hs-cross-button-" + index);
-    hPCross.setAttribute("onclick", "Hotspots.removeHsCard(" + index + ")");
-    hPCross.innerHTML = "<strong>X</strong>";
-    hsDiv.appendChild(hPCross);
-
-    division.appendChild(hsDiv);
-  }
-
-  static removeHsCard(index) {
-    document.getElementById("hotspotDivCard-" + index).remove();
-    editHostel.hotspots.hotspotsList.splice(index, 1);
-    Hotspots.updateHsCardsIds(index);
-  }
-
-  static updateHsCardsIds(index) {
-    for (var i = index; i < editHostel.hotspots.hotspotsList.length; i++) {
-      var element = document.getElementById("hotspotDivCard-" + (i + 1));
-      element.setAttribute("id", "hotspotDivCard-" + i);
-
-      var button = document.getElementById("hs-cross-button-" + (i + 1));
-      button.setAttribute("id", "hs-cross-button-" + i);
-      button.setAttribute("onclick", "Hotspots.removeHsCard(" + i + ")");
-    }
-  }
-
-  static createHsViewTags() {
-    var division = document.getElementById("hs-view-tags-section");
-    try {
-      // removing previous HP cards
-      while (division.hasChildNodes()) {
-        division.removeChild(division.firstChild);
-      }
-    } catch (err) {}
-    for (var i = 0; i < editHostel.hotspots.hotspotsList.length; i++) {
-      var curHs = editHostel.hotspots.hotspotsList[i];
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "hs-view-tags");
-
-      var hsImg = document.createElement("IMG");
-      hsImg.setAttribute("src", curHs.iconsAddress);
-      hsImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(hsImg);
-
-      var hsP = document.createElement("P");
-      hsP.setAttribute("class", "label2 notes");
-      hsP.setAttribute("style", "margin:1rem");
-      hsP.innerHTML = curHs.name;
-
-      subdiv.appendChild(hsP);
-      division.appendChild(subdiv);
-    }
-  }
-}
-
-class Hostel1 {
-  constructor() {
-    this.basicInfo;
-  }
-
-  createBasicInfo(
-    hname,
-    hline,
-    cnum,
-    oname,
-    gender,
-    type,
-    strength,
-    landmark,
-    location
-  ) {
-    this.basicInfo = new BasicInfo1(
-      hname,
-      hline,
-      cnum,
-      oname,
-      gender,
-      type,
-      strength,
-      landmark,
-      location
-    );
-  }
-
-  createRoomDetails() {
-    this.roomDetails = new RoomDetails();
-  }
-
-  createFoodDetails() {
-    this.foodDetails = new FoodDetails();
-  }
-
-  createSpecializationsDetails() {
-    this.specializations = new Specializations();
-  }
-
-  createHostelPoliciesDetails() {
-    this.hostelPolicies = new HostelPolicies();
-  }
-
-  createRequirementsDetails() {
-    this.requirements = new Requirements();
-  }
-
-  createHotspotsDetails() {
-    this.hotspots = new Hotspots();
-  }
-}
-
-// Data Modification Functions
-
-function checkChange(direction, value) {
-  switch (direction) {
-    case 0:
-      basicInfoChange(value);
-      break;
-    case 1:
-      editHostel.roomDetails.createRoomObject();
-      break;
-    case 2:
-      editHostel.foodDetails.updateFoodDetails();
-      break;
-    case 3:
-      editHostel.specializations.updateSpecializationsDetails();
-      break;
-  }
-}
-
-function resetData() {}
-
-function switchMode(mode) {
-  var button = document.getElementById("switch-button");
-  if (mode === 0) {
-    button.setAttribute("onclick", "switchMode(" + 1 + ")");
-    button.innerHTML = "Edit Mode";
-    document.getElementById("view").setAttribute("class", "");
-    document.getElementById("edit").setAttribute("class", "hide");
-  } else {
-    button.setAttribute("onclick", "switchMode(" + 0 + ")");
-    button.innerHTML = "View Mode";
-    document.getElementById("view").setAttribute("class", "hide");
-    document.getElementById("edit").setAttribute("class", "");
-  }
-}
-
-// Full Data Objects
-let editHostel = new Hostel1();
-
-editHostel.createBasicInfo(
-  "Feel Home Mess and Hostel",
-  "Best Food Across the Location",
-  "+91 8919847090",
-  "Babai garu",
-  "Male",
-  "Public",
-  110,
-  "Vignan’s Foundation for Sciences, Technology and Research",
-  "location"
-);
-
-editHostel.createRoomDetails();
-editHostel.createFoodDetails();
-editHostel.createSpecializationsDetails();
-editHostel.createHostelPoliciesDetails();
-editHostel.createRequirementsDetails();
-editHostel.createHotspotsDetails();
-
-//New State
-
-// class HostelBasicInfo {
-//   constructor() {}
-// }
-
 function dataConversion(obj, value) {
   switch (value) {
     case 0:
       obj = JSON.parse(obj);
-      window.originalData.basicInfo = obj;
-      window.modifiedData.basicInfo = obj;
+      // console.log(obj);
+      window.originalData.basicInfo = obj.basicInfo;
+      window.modifiedData.basicInfo = obj.basicInfo;
+      window.originalData.foodInfo = obj.foodInfo;
+      window.modifiedData.foodInfo = obj.foodInfo;
+      window.originalData.roomInfo = obj.roomInfo;
+      window.modifiedData.roomInfo = obj.roomInfo;
+      window.originalData.policyInfo = obj.policyInfo;
+      window.modifiedData.policyInfo = obj.policyInfo;
+      window.originalData.hotspotInfo = obj.hotspotInfo;
+      window.modifiedData.hotspotInfo = obj.hotspotInfo;
+      window.originalData.requirementInfo = obj.requirementInfo;
+      window.modifiedData.requirementInfo = obj.requirementInfo;
+      window.originalData.specializationInfo = obj.specializationInfo;
+      window.modifiedData.specializationInfo = obj.specializationInfo;
+
       BasicInfo.updateBasicInfoUi();
-      break;
-    case 1:
-      obj = JSON.parse(obj);
-      window.originalData.foodInfo = obj;
-      window.modifiedData.foodInfo = obj;
+      RoomInfo.processRoomInfoData();
       FoodInfo.processFoodInfoData();
+      SpecializationInfo.processSpecializationInfoData();
+      PolicyInfo.processPolicyInfoData();
+      HotspotInfo.processHotspotInfoData();
+      RequirementInfo.processRequirementInfoData();
       break;
   }
 }
+
+function getHostelInfo(hid) {
+  var ltable = hid.split("_")[0];
+  var obj = {
+    signal: 0,
+    id: hid,
+    lanmincode: ltable,
+  };
+
+  $.post("HostelWorkspace", obj, function (data, status) {
+    if (status === "success") {
+      dataConversion(data, 0);
+    } else {
+      alert("Something Went Wrong..!!");
+    }
+  });
+}
+
+window.onload = function () {
+  var hid = processString(document.getElementById("hostel-id").innerHTML);
+  window.getHostelInfo(hid);
+};

@@ -271,40 +271,32 @@ window.onload = function () {
   getLandmarks();
 };
 
+//processing functions
+function processString(s) {
+  s = s.replaceAll("\r", "");
+  s = s.replaceAll("\n", "");
+  return s;
+}
+
 //Sending Data to servlets
 
 function sendNewHostelData() {
   var obj = window.obj;
-  var c = {
-    signal: 1,
-    hname: obj.hname,
-    oname: obj.oname,
-    ocontact: obj.ocontact,
-    hgender: obj.hgender,
-    htype: obj.htype,
-    hcommunityname: obj.hcommunityname,
-    hlandmark: obj.hlandmark,
-    hlocation: obj.hlocation,
-    hid: obj.hid,
-    htablename: obj.htablesname, //this was generated in generate hostel id
-    hpassword: obj.hpassword, //this was generated in generate hostel id
-  };
-  console.log(c);
   $.post(
     "hostelRegister",
     {
       signal: 1,
-      hname: obj.hname,
-      oname: obj.oname,
-      ocontact: obj.ocontact,
-      hgender: obj.hgender,
-      htype: obj.htype,
-      hcommunityname: obj.hcommunityname,
-      hlandmark: obj.hlandmark,
-      hlocation: obj.hlocation,
-      hid: obj.hid,
-      htablename: obj.htablesname, //this was generated in generate hostel id
-      hpassword: obj.hpassword, //this was generated in generate hostel id
+      hname: processString(obj.hname),
+      oname: processString(obj.oname),
+      ocontact: processString(obj.ocontact),
+      hgender: processString(obj.hgender),
+      htype: processString(obj.htype),
+      hcommunityname: processString(obj.hcommunityname),
+      hlandmark: processString(obj.hlandmark),
+      hlocation: processString(obj.hlocation),
+      hid: processString(obj.hid),
+      htablename: processString(obj.htablesname), //this was generated in generate hostel id
+      hpassword: processString(obj.hpassword), //this was generated in generate hostel id
     },
     function (data, status) {
       if (status === "success") {

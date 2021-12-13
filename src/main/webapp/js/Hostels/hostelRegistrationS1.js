@@ -13,6 +13,12 @@ var objsignal = {
   newLandmarkdes: false,
 };
 
+function processString(s) {
+  s = s.replaceAll("\r", "");
+  s = s.replaceAll("\n", "");
+  return s;
+}
+
 function checkChange(value) {
   var obj = window.obj;
   var objsignal = window.objsignal;
@@ -154,10 +160,10 @@ function createLandmarkObject() {
 
   obj = {
     signal: 0,
-    id: lanid,
-    minicode: mini,
-    fullname: fname,
-    tablename: htablename,
+    id: processString(lanid),
+    minicode: processString(mini),
+    fullname: processString(fname),
+    tablename: processString(htablename),
   };
   return obj;
 }
