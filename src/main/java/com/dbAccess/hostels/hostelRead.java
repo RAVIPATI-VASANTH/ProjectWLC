@@ -216,4 +216,24 @@ public class hostelRead {
 		}
 		return list;
 	}
+	
+	public static ArrayList<String> getHostelSpecializationInfo(String tname) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String sql="select speacialization from "+tname;
+			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			con.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
 }

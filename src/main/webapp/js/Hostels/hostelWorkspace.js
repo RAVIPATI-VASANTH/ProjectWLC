@@ -17,6 +17,22 @@ function processString(s) {
   return s;
 }
 
+//Switch Mode
+function switchMode(mode) {
+  var button = document.getElementById("switch-button");
+  if (mode === 0) {
+    button.setAttribute("onclick", "switchMode(" + 1 + ")");
+    button.innerHTML = "Edit Mode";
+    document.getElementById("view").setAttribute("class", "");
+    document.getElementById("edit").setAttribute("class", "hide");
+  } else {
+    button.setAttribute("onclick", "switchMode(" + 0 + ")");
+    button.innerHTML = "View Mode";
+    document.getElementById("view").setAttribute("class", "hide");
+    document.getElementById("edit").setAttribute("class", "");
+  }
+}
+
 //Location Related functions
 function addLocation() {
   if (navigator.geolocation) {
@@ -933,6 +949,415 @@ class SpecializationInfo {
     }
     return result;
   }
+
+  static updateUi() {
+    var maindiv = document.getElementById("spec-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    maindiv = document.getElementById("spec-view-tags-section");
+    while (maindiv.hasChildNodes()) {
+      maindiv.removeChild(maindiv.firstChild);
+    }
+
+    this.updateEditUiOfPreListTags();
+    this.updateViewUiOfPreListCards();
+    window.modifiedData.specializationInfo.postList.forEach((element) => {
+      this.createSpecializationTags(element);
+      this.createSpecializationCards(element);
+    });
+  }
+
+  static createSpecializationTags(obj) {
+    let division = document.getElementById("spec-tags-section");
+
+    let div = document.createElement("DIV");
+    div.setAttribute("class", "room-tags ");
+    let p = document.createElement("P");
+    p.setAttribute("class", "label1 ");
+    p.setAttribute("onclick", "SpecializationInfo.editCard(" + obj.index + ")");
+    p.innerText = obj.tagname;
+    let button = document.createElement("BUTTON");
+    button.setAttribute("class", "cross-button");
+    button.setAttribute(
+      "onclick",
+      "SpecializationInfo.removeCard(" + obj.index + ")"
+    );
+    button.innerHTML = "<strong>x</strong>";
+    div.appendChild(p);
+    div.appendChild(button);
+    obj.tag = div;
+    division.appendChild(div);
+  }
+
+  static updateEditUiOfPreListTags() {
+    window.modifiedData.specializationInfo.preList.forEach((element) => {
+      switch (element.specname) {
+        case "WIFI":
+          document.getElementById("wifi-method").value = element.type;
+          document.getElementById("wifi-plan").value = element.plan;
+          document.getElementById("wifi-amount").value = element.amount;
+          document.getElementById("wifi-notes").value = element.notes;
+          break;
+        case "Washing Machine":
+          document.getElementById("washing-machine-method").value =
+            element.type;
+          document.getElementById("washing-machine-plan").value = element.plan;
+          document.getElementById("washing-machine-amount").value =
+            element.amount;
+          document.getElementById("washing-machine-notes").value =
+            element.notes;
+          break;
+        case "Lockers":
+          document.getElementById("lockers-method").value = element.type;
+          document.getElementById("lockers-plan").value = element.plan;
+          document.getElementById("lockers-amount").value = element.amount;
+          document.getElementById("lockers-notes").value = element.notes;
+          break;
+        case "Hot Water":
+          document.getElementById("hot-water-method").value = element.type;
+          document.getElementById("hot-water-plan").value = element.plan;
+          document.getElementById("hot-water-amount").value = element.amount;
+          document.getElementById("hot-water-notes").value = element.notes;
+          break;
+        case "Gym":
+          document.getElementById("gym-method").value = element.type;
+          document.getElementById("gym-plan").value = element.plan;
+          document.getElementById("gym-amount").value = element.amount;
+          document.getElementById("gym-notes").value = element.notes;
+          break;
+        case "Generator":
+          document.getElementById("generator-method").value = element.type;
+          document.getElementById("generator-plan").value = element.plan;
+          document.getElementById("generator-amount").value = element.amount;
+          document.getElementById("generator-notes").value = element.notes;
+          break;
+        case "Vehicle Parking":
+          document.getElementById("vehicle-parking-method").value =
+            element.type;
+          document.getElementById("vehicle-parking-plan").value = element.plan;
+          document.getElementById("vehicle-parking-amount").value =
+            element.amount;
+          document.getElementById("vehicle-parking-notes").value =
+            element.notes;
+          break;
+        case "Transport":
+          document.getElementById("transport-method").value = element.type;
+          document.getElementById("transport-plan").value = element.plan;
+          document.getElementById("transport-amount").value = element.amount;
+          document.getElementById("transport-notes").value = element.notes;
+          break;
+        case "Room Service":
+          document.getElementById("room-service-method").value = element.type;
+          document.getElementById("room-service-nooftimes").value =
+            element.amount;
+          document.getElementById("room-service-notes").value = element.notes;
+          break;
+        case "Sports Environment":
+          document.getElementById("sports-environment-method").value =
+            element.type;
+          document.getElementById("sports-environment-notes").value =
+            element.notes;
+          break;
+        case "CC-TV Survilance":
+          document.getElementById("cctv-method").value = element.type;
+          document.getElementById("cctv-notes").value = element.notes;
+          break;
+        case "Security":
+          document.getElementById("security-method").value = element.type;
+          document.getElementById("security-notes").value = element.notes;
+          break;
+      }
+    });
+  }
+
+  static createSpecializationCards(obj) {
+    var maindiv = document.getElementById("spec-view-tags-section");
+    var pdiv = document.createElement("div");
+    pdiv.setAttribute("class", "field-box");
+
+    var arrow = document.createElement("IMG");
+    arrow.setAttribute("src", "images/others.svg");
+    arrow.setAttribute("class", "mini-icon");
+    pdiv.appendChild(arrow);
+
+    var pp = document.createElement("P");
+    pp.setAttribute("class", "label2");
+    pp.innerText = obj.specname;
+    pdiv.appendChild(pp);
+    maindiv.appendChild(pdiv);
+  }
+
+  static updateViewUiOfPreListCards() {
+    window.modifiedData.specializationInfo.preList.forEach((element) => {
+      var type1 = [
+        "WIFI",
+        "Washing Machine",
+        "Lockers",
+        "Hot Water",
+        "Gym",
+        "Generator",
+        "Vehicle Parking",
+        "Transport",
+      ];
+      var type2 = ["Room Service"];
+      var type3 = ["Sports Environment", "CC-TV Survilance", "Security"];
+      var text = "";
+      if (type1.includes(element.specname)) {
+        text = element.specname + "-";
+        text += element.type;
+        if (element.type === "Pay And Use") {
+          text += "-" + element.plan;
+          if (element.amount.trim() !== "") text += "-" + element.amount;
+        }
+        if (element.notes.trim() !== "") text += "-" + element.notes;
+      } else if (type2.includes(element.specname)) {
+        text = element.specname + "-";
+        text += element.type;
+        if (element.type !== "Un Available") {
+          if (element.amount.trim() !== "") text += "-" + element.amount;
+        }
+        if (element.notes.trim() !== "") text += "-" + element.notes;
+      } else if (type3.includes(element.specname)) {
+        text = element.specname + "-";
+        text += element.type;
+        if (element.notes.trim() !== "") text += "-" + element.notes;
+      }
+      var maindiv = document.getElementById("spec-view-tags-section");
+      var pdiv = document.createElement("div");
+      pdiv.setAttribute("class", "field-box");
+
+      var arrow = document.createElement("IMG");
+      switch (element.specname) {
+        case "WIFI":
+          arrow.setAttribute("src", "images/wifi.svg");
+          break;
+        case "Lockers":
+          arrow.setAttribute("src", "images/lockers.svg");
+          break;
+        case "Generator":
+          arrow.setAttribute("src", "images/generator.svg");
+          break;
+        case "Gym":
+          arrow.setAttribute("src", "images/gym.svg");
+          break;
+        case "Vehicle Parking":
+          arrow.setAttribute("src", "images/vehicle-parking.svg");
+          break;
+        case "Transport":
+          arrow.setAttribute("src", "images/transport.svg");
+          break;
+        case "Sports Environment":
+          arrow.setAttribute("src", "images/ground.svg");
+          break;
+        case "Hot Water":
+          arrow.setAttribute("src", "images/hot-water.svg");
+          break;
+        case "CC-TV Survilance":
+          arrow.setAttribute("src", "images/survilence.svg");
+          break;
+        case "Security":
+          arrow.setAttribute("src", "images/survilence.svg");
+          break;
+        default:
+          arrow.setAttribute("src", "images/others.svg");
+          break;
+      }
+      arrow.setAttribute("class", "mini-icon");
+      pdiv.appendChild(arrow);
+
+      var pp = document.createElement("P");
+      pp.setAttribute("class", "label2");
+      pp.innerText = text;
+      pdiv.appendChild(pp);
+      maindiv.appendChild(pdiv);
+    });
+  }
+
+  static editCard(index) {
+    var obj;
+    for (
+      var i = 0;
+      i < window.modifiedData.specializationInfo.postList.length;
+      i++
+    ) {
+      if (window.modifiedData.specializationInfo.postList[i].index === index) {
+        window.modifiedData.specializationInfo.postList[i].signal = true;
+        obj = window.modifiedData.specializationInfo.postList[i];
+        break;
+      }
+    }
+    document.getElementById("new-specialization").value = obj.specname;
+
+    document
+      .getElementById("add-specialization")
+      .setAttribute("class", "label1 hide");
+    document
+      .getElementById("update-specialization")
+      .setAttribute("class", "label1");
+  }
+
+  static updateSpecialization() {
+    var obj;
+    var index = 0;
+    for (
+      var i = 0;
+      i < window.modifiedData.specializationInfo.postList.length;
+      i++
+    ) {
+      if (window.modifiedData.specializationInfo.postList[i].signal) {
+        obj = window.modifiedData.specializationInfo.postList[i];
+        index = i;
+        break;
+      }
+    }
+    window.modifiedData.specializationInfo.postList[index] = obj;
+    obj.specname = document.getElementById("new-specialization").value;
+    if (obj.specname.length > 10) obj.tagname = obj.specname.slice(0, 10);
+    else obj.tagname = obj.specname;
+    obj.signal = false;
+    this.makeDefault();
+  }
+
+  static makeDefault() {
+    document.getElementById("new-specialization").value = "";
+    document
+      .getElementById("add-specialization")
+      .setAttribute("class", "label1");
+    document
+      .getElementById("update-specialization")
+      .setAttribute("class", "label1 hide");
+    this.updateUi();
+  }
+
+  static removeCard(index) {
+    if (!window.modifiedData.specializationInfo.postList[index].signal) {
+      if (window.modifiedData.specializationInfo.postList.length === 1) {
+        window.modifiedData.specializationInfo.postList = [];
+      } else {
+        window.modifiedData.specializationInfo.postList.splice(index, 1);
+        for (
+          var i = index;
+          i < window.modifiedData.specializationInfo.postList.length;
+          i++
+        ) {
+          window.modifiedData.specializationInfo.postList[i].index = i;
+        }
+      }
+      this.updateUi();
+    } else {
+      alert("Can't remove the Card while Editing It.");
+    }
+  }
+
+  static updatePreListToView() {
+    window.modifiedData.specializationInfo.preList.forEach((element) => {
+      switch (element.specname) {
+        case "WIFI":
+          element.type = document.getElementById("wifi-method").value;
+          element.plan = document.getElementById("wifi-plan").value;
+          element.amount = document.getElementById("wifi-amount").value;
+          element.notes = document.getElementById("wifi-notes").value;
+          break;
+        case "Washing Machine":
+          element.type = document.getElementById(
+            "washing-machine-method"
+          ).value;
+          element.plan = document.getElementById("washing-machine-plan").value;
+          element.amount = document.getElementById(
+            "washing-machine-amount"
+          ).value;
+          element.notes = document.getElementById(
+            "washing-machine-notes"
+          ).value;
+          break;
+        case "Lockers":
+          element.type = document.getElementById("lockers-method").value;
+          element.plan = document.getElementById("lockers-plan").value;
+          element.amount = document.getElementById("lockers-amount").value;
+          element.notes = document.getElementById("lockers-notes").value;
+          break;
+        case "Hot Water":
+          element.type = document.getElementById("hot-water-method").value;
+          element.plan = document.getElementById("hot-water-plan").value;
+          element.amount = document.getElementById("hot-water-amount").value;
+          element.notes = document.getElementById("hot-water-notes").value;
+          break;
+        case "Gym":
+          element.type = document.getElementById("gym-method").value;
+          element.plan = document.getElementById("gym-plan").value;
+          element.amount = document.getElementById("gym-amount").value;
+          element.notes = document.getElementById("gym-notes").value;
+          break;
+        case "Generator":
+          element.type = document.getElementById("generator-method").value;
+          element.plan = document.getElementById("generator-plan").value;
+          element.amount = document.getElementById("generator-amount").value;
+          element.notes = document.getElementById("generator-notes").value;
+          break;
+        case "Vehicle Parking":
+          element.type = document.getElementById(
+            "vehicle-parking-method"
+          ).value;
+          element.plan = document.getElementById("vehicle-parking-plan").value;
+          element.amount = document.getElementById(
+            "vehicle-parking-amount"
+          ).value;
+          element.notes = document.getElementById(
+            "vehicle-parking-notes"
+          ).value;
+          break;
+        case "Transport":
+          element.type = document.getElementById("transport-method").value;
+          element.plan = document.getElementById("transport-plan").value;
+          element.amount = document.getElementById("transport-amount").value;
+          element.notes = document.getElementById("transport-notes").value;
+          break;
+        case "Room Service":
+          element.type = document.getElementById("room-service-method").value;
+          element.amount = document.getElementById(
+            "room-service-nooftimes"
+          ).value;
+          element.notes = document.getElementById("room-service-notes").value;
+          break;
+        case "Sports Environment":
+          element.type = document.getElementById(
+            "sports-environment-method"
+          ).value;
+          element.notes = document.getElementById(
+            "sports-environment-notes"
+          ).value;
+          break;
+        case "CC-TV Survilance":
+          element.type = document.getElementById("cctv-method").value;
+          element.notes = document.getElementById("cctv-notes").value;
+          break;
+        case "Security":
+          element.type = document.getElementById("security-method").value;
+          element.notes = document.getElementById("security-notes").value;
+          break;
+      }
+    });
+    this.updateUi();
+  }
+
+  static addSpecialization() {
+    var obj = {
+      signal: false,
+      index: 0,
+      tagname: "",
+      specname: "",
+      tag: "",
+      card: "",
+    };
+    obj.specname = document.getElementById("new-specialization").value;
+    if (obj.specname.length > 10) obj.tagname = obj.specname.slice(0, 10);
+    else obj.tagname = obj.specname;
+    obj.index = window.modifiedData.specializationInfo.postList.length;
+    window.modifiedData.specializationInfo.postList.push(obj);
+    this.makeDefault();
+  }
 }
 
 class PolicyInfo {
@@ -1469,711 +1894,6 @@ class HotspotInfo {
     obj.index = window.modifiedData.hotspotInfo.length;
     window.modifiedData.hotspotInfo.push(obj);
     this.makeDefault();
-  }
-}
-
-class SpecializationsType1 {
-  constructor() {
-    this.type = 1;
-    this.isActive = false;
-    this.method;
-    this.plan;
-    this.amount;
-    this.notes;
-    this.iconsAddress;
-  }
-}
-
-class SpecializationsType2 {
-  constructor() {
-    this.type = 2;
-    this.isActive = false;
-    this.method;
-    this.notes;
-    this.iconsAddress;
-  }
-}
-
-class SpecializationsType3 {
-  constructor() {
-    this.type = 3;
-    this.isActive = false;
-    this.plan;
-    this.count;
-    this.notes;
-    this.iconsAddress;
-  }
-}
-
-class SpecializationsType4 {
-  constructor() {
-    this.type = 4;
-    this.isActive = false;
-    this.method;
-    this.notes;
-    this.iconsAddress;
-  }
-}
-class Specializations {
-  constructor() {
-    this.wifi = new SpecializationsType1();
-    this.wifi.iconsAddress = "images/wifi.svg";
-
-    this.washingMachine = new SpecializationsType1();
-    this.washingMachine.iconsAddress = "images/others.svg";
-
-    this.lockers = new SpecializationsType1();
-    this.lockers.iconsAddress = "images/lockers.svg";
-
-    this.hotWater = new SpecializationsType1();
-    this.hotWater.iconsAddress = "images/hot-water.svg";
-
-    this.gym = new SpecializationsType1();
-    this.gym.iconsAddress = "images/gym.svg";
-
-    this.generator = new SpecializationsType1();
-    this.generator.iconsAddress = "images/generator.svg";
-
-    this.vehicleParking = new SpecializationsType1();
-    this.vehicleParking.iconsAddress = "images/vehicle-parking.svg";
-
-    this.transport = new SpecializationsType1();
-    this.transport.iconsAddress = "images/transport.svg";
-
-    this.sportsEnvironment = new SpecializationsType2();
-    this.sportsEnvironment.iconsAddress = "images/ground.svg";
-
-    this.roomService = new SpecializationsType3();
-    this.roomService.iconsAddress = "images/others.svg";
-
-    this.ccTv = new SpecializationsType4();
-    this.ccTv.iconsAddress = "images/survilence.svg";
-
-    this.security = new SpecializationsType4();
-    this.security.iconsAddress = "images/security.svg";
-
-    this.additionalSpecializations = [];
-  }
-
-  updateSpecializationsDetails() {
-    //Wifi
-    if (document.getElementById("wifi-method").value !== "un-available") {
-      this.wifi.isActive = true;
-      this.wifi.method = document.getElementById("wifi-method").value;
-      this.wifi.plan = document.getElementById("wifi-plan").value;
-      this.wifi.amount = document.getElementById("wifi-amount").value;
-      this.wifi.notes = document.getElementById("wifi-notes").value;
-    }
-
-    //Washing Machine
-    if (
-      document.getElementById("washing-machine-method").value !== "un-available"
-    ) {
-      this.washingMachine.isActive = true;
-      this.washingMachine.method = document.getElementById(
-        "washing-machine-method"
-      ).value;
-      this.washingMachine.plan = document.getElementById(
-        "washing-machine-plan"
-      ).value;
-      this.washingMachine.amount = document.getElementById(
-        "washing-machine-amount"
-      ).value;
-      this.washingMachine.notes = document.getElementById(
-        "washing-machine-notes"
-      ).value;
-    }
-
-    //Lockers
-    if (document.getElementById("lockers-method").value !== "un-available") {
-      this.lockers.isActive = true;
-      this.lockers.method = document.getElementById("lockers-method").value;
-      this.lockers.plan = document.getElementById("lockers-plan").value;
-      this.lockers.amount = document.getElementById("lockers-amount").value;
-      this.lockers.notes = document.getElementById("lockers-notes").value;
-    }
-
-    //Hotwater
-    if (document.getElementById("hot-water-method").value !== "un-available") {
-      this.hotWater.isActive = true;
-      this.hotWater.method = document.getElementById("hot-water-method").value;
-      this.hotWater.plan = document.getElementById("hot-water-plan").value;
-      this.hotWater.amount = document.getElementById("hot-water-amount").value;
-      this.hotWater.notes = document.getElementById("hot-water-notes").value;
-    }
-
-    //Gym
-    if (document.getElementById("gym-method").value !== "un-available") {
-      this.gym.isActive = true;
-      this.gym.method = document.getElementById("gym-method").value;
-      this.gym.plan = document.getElementById("gym-plan").value;
-      this.gym.amount = document.getElementById("gym-amount").value;
-      this.gym.notes = document.getElementById("gym-notes").value;
-    }
-
-    //Generator
-    if (document.getElementById("generator-method").value !== "un-available") {
-      this.generator.isActive = true;
-      this.generator.method = document.getElementById("generator-method").value;
-      this.generator.plan = document.getElementById("generator-plan").value;
-      this.generator.amount = document.getElementById("generator-amount").value;
-      this.generator.notes = document.getElementById("generator-notes").value;
-    }
-
-    //Vehicle-Parking
-    if (
-      document.getElementById("vehicle-parking-method").value !== "un-available"
-    ) {
-      this.vehicleParking.isActive = true;
-      this.vehicleParking.method = document.getElementById(
-        "vehicle-parking-method"
-      ).value;
-      this.vehicleParking.plan = document.getElementById(
-        "vehicle-parking-plan"
-      ).value;
-      this.vehicleParking.amount = document.getElementById(
-        "vehicle-parking-amount"
-      ).value;
-      this.vehicleParking.notes = document.getElementById(
-        "vehicle-parking-notes"
-      ).value;
-    }
-
-    //Transport
-    if (document.getElementById("transport-method").value !== "un-available") {
-      this.transport.isActive = true;
-      this.transport.method = document.getElementById("transport-method").value;
-      this.transport.plan = document.getElementById("transport-plan").value;
-      this.transport.amount = document.getElementById("transport-amount").value;
-      this.transport.notes = document.getElementById("transport-notes").value;
-    }
-
-    //Sports Environment
-    if (
-      document.getElementById("sports-environment-method").value !==
-      "un-available"
-    ) {
-      this.sportsEnvironment.isActive = true;
-      this.sportsEnvironment.method = document.getElementById(
-        "sports-environment-method"
-      ).value;
-      this.sportsEnvironment.notes = document.getElementById(
-        "sports-environment-notes"
-      ).value;
-    }
-
-    //Room Service
-    if (
-      document.getElementById("sports-environment-method").value !==
-      "un-available"
-    ) {
-      this.roomService.isActive = true;
-      this.roomService.method =
-        document.getElementById("room-service-notes").value;
-      this.roomService.count = document.getElementById(
-        "room-service-nooftimes"
-      ).value;
-      this.roomService.notes =
-        document.getElementById("room-service-notes").value;
-    }
-
-    //Cc-Tv
-    if (document.getElementById("cctv-method").value !== "un-available") {
-      this.ccTv.isActive = true;
-      this.ccTv.method = document.getElementById("cctv-method").value;
-      console.log(this.ccTv);
-      this.ccTv.notes = document.getElementById("cctv-notes").value;
-    }
-
-    //Security
-    if (document.getElementById("security-method").value !== "un-available") {
-      this.security.isActive = true;
-      this.security.method = document.getElementById("security-method").value;
-      this.security.notes = document.getElementById("security-notes").value;
-    }
-
-    this.createSpecializationsViewTags();
-  }
-
-  static addSpecialization() {
-    if (document.getElementById("new-specialization").value !== "") {
-      editHostel.specializations.additionalSpecializations.push(
-        document.getElementById("new-specialization").value
-      );
-      Specializations.createSpecializationsEditTags(
-        editHostel.specializations.additionalSpecializations.length - 1
-      );
-      document.getElementById("new-specialization").value = "";
-    }
-  }
-
-  static createSpecializationsEditTags(index) {
-    var division = document.getElementById("specializations-tags-section");
-
-    var specDiv = document.createElement("DIV");
-    specDiv.setAttribute("class", "specializationDivCard");
-    specDiv.setAttribute("id", "specializationDivCard-" + index);
-
-    var specP = document.createElement("P");
-    specP.setAttribute("class", "notes label2");
-    specP.innerHTML =
-      editHostel.specializations.additionalSpecializations[index];
-    specDiv.appendChild(specP);
-
-    var specCross = document.createElement("BUTTON");
-    specCross.setAttribute("class", "cross-button");
-    specCross.setAttribute("id", "spec-cross-button-" + index);
-    specCross.setAttribute(
-      "onclick",
-      "Specializations.removeSpecCard(" + index + ")"
-    );
-    specCross.innerHTML = "<strong>X</strong>";
-    specDiv.appendChild(specCross);
-
-    division.appendChild(specDiv);
-  }
-
-  static removeSpecCard(index) {
-    document.getElementById("specializationDivCard-" + index).remove();
-    editHostel.specializations.additionalSpecializations.splice(index, 1);
-    Specializations.updateSpecCardsIds(index);
-  }
-
-  static updateSpecCardsIds(index) {
-    for (
-      var i = index;
-      i < editHostel.specializations.additionalSpecializations.length;
-      i++
-    ) {
-      var element = document.getElementById("specializationDivCard-" + (i + 1));
-      element.setAttribute("id", "specializationDivCard-" + i);
-      var button = document.getElementById("spec-cross-button-" + (i + 1));
-      button.setAttribute("id", "spec-cross-button-" + i);
-      button.setAttribute(
-        "onclick",
-        "Specializations.removeSpecCard(" + i + ")"
-      );
-    }
-  }
-
-  createSpecializationsViewTags() {
-    var division = document.getElementById("spec-view-tags-section");
-    try {
-      // removing previous spec cards
-      while (division.hasChildNodes()) {
-        division.removeChild(division.firstChild);
-      }
-    } catch (err) {}
-
-    //Wifi
-    if (this.wifi.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.wifi.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.wifi.method === "Free") {
-        specP.innerHTML = "Wifi-Free\n";
-      } else {
-        var str = "Wifi-";
-        str += this.wifi.method + "-";
-        str += this.wifi.plan + "-";
-        str += this.wifi.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.wifi.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Washing Machine
-    if (this.washingMachine.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.washingMachine.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.washingMachine.method === "Free") {
-        specP.innerHTML = "Washing Machine-Free";
-      } else {
-        var str = "Washing Machine-";
-        str += this.washingMachine.method + "-";
-        str += this.washingMachine.plan + "-";
-        str += this.washingMachine.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.washingMachine.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Lockers
-    if (this.lockers.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.lockers.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.lockers.method === "Free") {
-        specP.innerHTML = "Lockers-Free";
-      } else {
-        var str = "Lockers-";
-        str += this.lockers.method + "-";
-        str += this.lockers.plan + "-";
-        str += this.lockers.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.lockers.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Hot Water
-    if (this.hotWater.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.hotWater.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.hotWater.method === "Free") {
-        specP.innerHTML = "Hot Water-Free";
-      } else {
-        var str = "Hot Water-";
-        str += this.hotWater.method + "-";
-        str += this.hotWater.plan + "-";
-        str += this.hotWater.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.hotWater.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Gym
-    if (this.gym.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.gym.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.gym.method === "Free") {
-        specP.innerHTML = "Gym-Free";
-      } else {
-        var str = "Gym-";
-        str += this.gym.method + "-";
-        str += this.gym.plan + "-";
-        str += this.gym.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.gym.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Geneartor
-    if (this.generator.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.generator.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.generator.method === "Free") {
-        specP.innerHTML = "Geneartor-Free";
-      } else {
-        var str = "Geneartor-";
-        str += this.generator.method + "-";
-        str += this.generator.plan + "-";
-        str += this.generator.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.generator.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Vehicle Parking
-    if (this.vehicleParking.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.vehicleParking.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.vehicleParking.method === "Free") {
-        specP.innerHTML = "Vehicle Parking-Free";
-      } else {
-        var str = "Vehicle Parking-";
-        str += this.vehicleParking.method + "-";
-        str += this.vehicleParking.plan + "-";
-        str += this.vehicleParking.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.vehicleParking.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Transport
-    if (this.transport.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.transport.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.transport.method === "Free") {
-        specP.innerHTML = "Transport-Free";
-      } else {
-        var str = "Transport-";
-        str += this.transport.method + "-";
-        str += this.transport.plan + "-";
-        str += this.transport.amount + "\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.transport.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Room Service
-    if (this.roomService.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.roomService.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      if (this.roomService.method === "Daily") {
-        specP.innerHTML = "Room Service-Daily\n";
-      } else {
-        var str = "Room Service-Weekly " + this.roomService.count + " times\n";
-        specP.innerHTML = str;
-      }
-      specP.innerHTML += this.roomService.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Sports Environment
-    if (this.sportsEnvironment.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.sportsEnvironment.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      specP.innerHTML = "Sports Environment-Available\n";
-      specP.innerHTML += this.sportsEnvironment.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //cc-tv
-    if (this.ccTv.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.ccTv.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      specP.innerHTML = "CCTV Survailance-Available\n";
-      specP.innerHTML += this.ccTv.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Security
-    if (this.security.isActive) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", this.security.iconsAddress);
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      specP.innerHTML = "Security-Available\n";
-      specP.innerHTML += this.security.notes;
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-
-    //Additional Specializations
-    for (var i = 0; i < this.additionalSpecializations.length; i++) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "spec-view-tags");
-
-      var specImg = document.createElement("IMG");
-      specImg.setAttribute("src", "images/others.svg");
-      specImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(specImg);
-
-      var specP = document.createElement("P");
-      specP.setAttribute("class", "label2 notes");
-      specP.setAttribute("style", "margin:1rem");
-      specP.innerHTML = this.additionalSpecializations[i];
-      subdiv.appendChild(specP);
-      division.appendChild(subdiv);
-    }
-  }
-}
-
-class HostelPolicies {
-  constructor() {
-    this.hostelPoliciesList = new Array();
-  }
-
-  static addPolicy() {
-    var element = document.getElementById("new-policy");
-    if (element.value !== "") {
-      editHostel.hostelPolicies.hostelPoliciesList.push(element.value);
-      element.value = "";
-      HostelPolicies.createPolicyEditTags(
-        editHostel.hostelPolicies.hostelPoliciesList.length - 1
-      );
-    }
-  }
-
-  static createPolicyEditTags(index) {
-    var division = document.getElementById("hp-edit-tags-section");
-    var hpDiv = document.createElement("DIV");
-    hpDiv.setAttribute("class", "policyDivCard");
-    hpDiv.setAttribute("id", "policyDivCard-" + index);
-
-    var hPP = document.createElement("P");
-    hPP.setAttribute("class", "notes label2");
-    hPP.innerHTML = editHostel.hostelPolicies.hostelPoliciesList[index];
-    hpDiv.appendChild(hPP);
-
-    var hPCross = document.createElement("BUTTON");
-    hPCross.setAttribute("class", "cross-button");
-    hPCross.setAttribute("id", "cross-button-" + index);
-    hPCross.setAttribute(
-      "onclick",
-      "HostelPolicies.removeHpCard(" + index + ")"
-    );
-    hPCross.innerHTML = "<strong>X</strong>";
-    hpDiv.appendChild(hPCross);
-
-    division.appendChild(hpDiv);
-  }
-
-  static removeHpCard(index) {
-    document.getElementById("policyDivCard-" + index).remove();
-    // console.log(editHostel.hostelPolicies.hostelPoliciesList);
-    //removing hp from class list
-    editHostel.hostelPolicies.hostelPoliciesList.splice(index, 1);
-    HostelPolicies.updateHpCardsIds(index);
-    // console.log(editHostel.hostelPolicies.hostelPoliciesList);
-  }
-
-  static updateHpCardsIds(index) {
-    for (
-      var i = index;
-      i < editHostel.hostelPolicies.hostelPoliciesList.length;
-      i++
-    ) {
-      var element = document.getElementById("policyDivCard-" + (i + 1));
-      element.setAttribute("id", "policyDivCard-" + i);
-
-      var button = document.getElementById("cross-button-" + (i + 1));
-      button.setAttribute("id", "cross-button-" + i);
-      button.setAttribute("onclick", "HostelPolicies.removeHpCard(" + i + ")");
-    }
-  }
-
-  static createPolicyViewTags() {
-    var division = document.getElementById("hp-view-tags-section");
-    try {
-      // removing previous HP cards
-      while (division.hasChildNodes()) {
-        division.removeChild(division.firstChild);
-      }
-    } catch (err) {}
-    for (
-      var i = 0;
-      i < editHostel.hostelPolicies.hostelPoliciesList.length;
-      i++
-    ) {
-      var subdiv = document.createElement("DIV");
-      subdiv.setAttribute("class", "hp-view-tags");
-
-      var hpImg = document.createElement("IMG");
-      hpImg.setAttribute("src", "images/arrow-right.svg");
-      hpImg.setAttribute("class", "mini-icon");
-      subdiv.appendChild(hpImg);
-
-      var hpP = document.createElement("P");
-      hpP.setAttribute("class", "label2 notes");
-      hpP.setAttribute("style", "margin:1rem");
-      hpP.innerHTML = editHostel.hostelPolicies.hostelPoliciesList[i];
-      subdiv.appendChild(hpP);
-      division.appendChild(subdiv);
-    }
   }
 }
 

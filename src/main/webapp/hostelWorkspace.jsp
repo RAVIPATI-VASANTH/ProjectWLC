@@ -487,9 +487,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">WIFI</label>
             <label for="wifi-method" class="label1">Select Type</label>
             <select name="" id="wifi-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="wifi-plan" class="label1">Select Plan</label>
             <select name="" id="wifi-plan" class="text-input">
@@ -508,9 +508,9 @@ pageEncoding="ISO-8859-1"%>
               >Select Type</label
             >
             <select name="" id="washing-machine-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="washing-machine-plan" class="label1">Select Plan</label>
             <select name="" id="washing-machine-plan" class="text-input">
@@ -527,9 +527,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Lockers</label>
             <label for="lockers-method" class="label1">Select Type</label>
             <select name="" id="lockers-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="lockers-plan" class="label1">Select Plan</label>
             <select name="" id="lockers-plan" class="text-input">
@@ -546,9 +546,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Hot Water</label>
             <label for="hot-water-method" class="label1">Select Type</label>
             <select name="" id="hot-water-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="hot-water-plan" class="label1">Select Plan</label>
             <select name="" id="hot-water-plan" class="text-input">
@@ -565,9 +565,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Gym</label>
             <label for="gym-method" class="label1">Select Type</label>
             <select name="" id="gym-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="gym-plan" class="label1">Select Plan</label>
             <select name="" id="gym-plan" class="text-input">
@@ -584,9 +584,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Generator</label>
             <label for="generator-method" class="label1">Select Type</label>
             <select name="" id="generator-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="generator-plan" class="label1">Select Plan</label>
             <select name="" id="generator-plan" class="text-input">
@@ -605,9 +605,9 @@ pageEncoding="ISO-8859-1"%>
               >Select Type</label
             >
             <select name="" id="vehicle-parking-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="vehicle-parking-plan" class="label1">Select Plan</label>
             <select name="" id="vehicle-parking-plan" class="text-input">
@@ -624,9 +624,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Transport</label>
             <label for="transport-method" class="label1">Select Type</label>
             <select name="" id="transport-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="transport-plan" class="label1">Select Plan</label>
             <select name="" id="transport-plan" class="text-input">
@@ -645,7 +645,7 @@ pageEncoding="ISO-8859-1"%>
             <select name="" id="room-service-method" class="text-input">
               <option value="Daily">Daily</option>
               <option value="Weekly">Weekly</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="room-service-nooftimes" class="label1"
               >Enter noof Times</label
@@ -665,7 +665,7 @@ pageEncoding="ISO-8859-1"%>
             >
             <select name="" id="sports-environment-method" class="text-input">
               <option value="Available">Available</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="sports-environment-notes" class="label1">Notes</label>
             <input
@@ -696,24 +696,35 @@ pageEncoding="ISO-8859-1"%>
           </div>
           <div class="form-element">
             <label for="" class="label">Others Specializations</label>
-            <div class="" id="specializations-tags-section"></div>
+            <div
+              class="specializations-tags-section"
+              id="spec-tags-section"
+            ></div>
+            <label for="new-specialization" class="label1">Enter Here</label>
             <input id="new-specialization" type="text" class="text-input" />
-            <button
-              id=""
-              class="label1"
-              style="margin: 1rem"
-              onclick="Specializations.addSpecialization()"
-            >
-              Add
-            </button>
           </div>
           <div class="form-element">
             <button
-              id="update-specializations"
-              class="label1"
-              onclick="checkChange(3,0)"
+              class="label1 hide"
+              id="update-specialization"
+              onclick="SpecializationInfo.updateSpecialization()"
             >
               Update
+            </button>
+            <button
+              id="add-specialization"
+              class="label1"
+              onclick="SpecializationInfo.addSpecialization()"
+            >
+              ADD Specialization
+            </button>
+            <button
+              id="update-to-view"
+              class="label1"
+              style="margin: 1rem 0rem"
+              onclick="SpecializationInfo.updatePreListToView()"
+            >
+              Update To View
             </button>
           </div>
         </div>
