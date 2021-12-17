@@ -45,37 +45,31 @@ pageEncoding="ISO-8859-1"%>
     <section id="view" class="hide">
       <div class="hero-section view-section">
         <div class="intro">
-          <p class="hostel-name" id="view-hostel-name">
-            Feel Home Mess and Hostel
-          </p>
-          <p class="head-line" id="view-head-line">
-            Best Food Across the Location
-          </p>
+          <p class="hostel-name" id="view-hostel-name"></p>
+          <p class="head-line" id="view-head-line"></p>
           <p class="by">
-            by <span class="owner-name" id="view-owner-name">Babai garu</span>
+            by <span class="owner-name" id="view-owner-name"></span>
           </p>
           <div class="info-section">
             <div class="info-element">
               <img class="mini-icon" src="images/type.svg" alt="" />
-              <div class="info" id="view-type">Public - Anyone can join</div>
+              <div class="info" id="view-type"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" id="gender" src="images/male.svg" alt="" />
-              <div class="info" id="view-gender">Gents</div>
+              <div class="info" id="view-gender"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/strength.svg" alt="" />
-              <div class="info" id="view-strength">110</div>
+              <div class="info" id="view-strength"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/call.svg" alt="" />
-              <div class="info" id="view-owner-contact">8919847090</div>
+              <div class="info" id="view-owner-contact"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/landmark.png" alt="" />
-              <div class="info" id="view-landmark">
-                Vignan's Foundation for Sciences, Technology and Research
-              </div>
+              <div class="info" id="view-landmark"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/location-point.svg" alt="" />
@@ -154,7 +148,7 @@ pageEncoding="ISO-8859-1"%>
           </div>
 
           <div class="search-score">
-            <p class="score">000</p>
+            <p class="score" id="score">000</p>
             <p class="info-guide">Search Score</p>
           </div>
         </div>
@@ -278,6 +272,7 @@ pageEncoding="ISO-8859-1"%>
                 value="AC"
                 name="gender"
                 class="radio-button"
+                checked
               />
               <label for="ac" class="label1">AC</label>
             </div>
@@ -288,7 +283,6 @@ pageEncoding="ISO-8859-1"%>
                 value="N-AC"
                 name="gender"
                 class="radio-button"
-                checked
               />
               <label for="nac" class="label1">N-AC</label>
             </div>
@@ -349,12 +343,18 @@ pageEncoding="ISO-8859-1"%>
             </div>
           </div>
           <div class="form-element">
+            <label for="" class="label">Notes</label>
+            <div>
+              <input type="text" class="text-input" id="room-notes" />
+            </div>
+          </div>
+          <div class="form-element">
             <button
               id="add-room-card"
               class="label1"
               onclick="RoomInfo.addRoomCard()"
             >
-              ADD
+              ADD Room Card
             </button>
             <button
               id="update-room-card"
@@ -469,11 +469,7 @@ pageEncoding="ISO-8859-1"%>
             <input id="nonveg-notes" type="text" class="text-input" />
           </div>
           <div class="form-element">
-            <button
-              id="update-food-cards"
-              class="label1"
-              onclick="FoodInfo.updateFoodInfo()"
-            >
+            <button class="label1" onclick="FoodInfo.updateFoodInfo()">
               Update Changes to View
             </button>
           </div>
@@ -487,9 +483,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">WIFI</label>
             <label for="wifi-method" class="label1">Select Type</label>
             <select name="" id="wifi-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="wifi-plan" class="label1">Select Plan</label>
             <select name="" id="wifi-plan" class="text-input">
@@ -508,9 +504,9 @@ pageEncoding="ISO-8859-1"%>
               >Select Type</label
             >
             <select name="" id="washing-machine-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="washing-machine-plan" class="label1">Select Plan</label>
             <select name="" id="washing-machine-plan" class="text-input">
@@ -527,9 +523,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Lockers</label>
             <label for="lockers-method" class="label1">Select Type</label>
             <select name="" id="lockers-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="lockers-plan" class="label1">Select Plan</label>
             <select name="" id="lockers-plan" class="text-input">
@@ -546,9 +542,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Hot Water</label>
             <label for="hot-water-method" class="label1">Select Type</label>
             <select name="" id="hot-water-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="hot-water-plan" class="label1">Select Plan</label>
             <select name="" id="hot-water-plan" class="text-input">
@@ -565,9 +561,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Gym</label>
             <label for="gym-method" class="label1">Select Type</label>
             <select name="" id="gym-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="gym-plan" class="label1">Select Plan</label>
             <select name="" id="gym-plan" class="text-input">
@@ -584,9 +580,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Generator</label>
             <label for="generator-method" class="label1">Select Type</label>
             <select name="" id="generator-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="generator-plan" class="label1">Select Plan</label>
             <select name="" id="generator-plan" class="text-input">
@@ -605,9 +601,9 @@ pageEncoding="ISO-8859-1"%>
               >Select Type</label
             >
             <select name="" id="vehicle-parking-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="vehicle-parking-plan" class="label1">Select Plan</label>
             <select name="" id="vehicle-parking-plan" class="text-input">
@@ -624,9 +620,9 @@ pageEncoding="ISO-8859-1"%>
             <label for="" class="label">Transport</label>
             <label for="transport-method" class="label1">Select Type</label>
             <select name="" id="transport-method" class="text-input">
-              <option value="Paid">Pay and Use</option>
+              <option value="Pay and Use">Pay and Use</option>
               <option value="Free">Free</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="transport-plan" class="label1">Select Plan</label>
             <select name="" id="transport-plan" class="text-input">
@@ -645,7 +641,7 @@ pageEncoding="ISO-8859-1"%>
             <select name="" id="room-service-method" class="text-input">
               <option value="Daily">Daily</option>
               <option value="Weekly">Weekly</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="room-service-nooftimes" class="label1"
               >Enter noof Times</label
@@ -665,7 +661,7 @@ pageEncoding="ISO-8859-1"%>
             >
             <select name="" id="sports-environment-method" class="text-input">
               <option value="Available">Available</option>
-              <option value="un-available">Un Available</option>
+              <option value="Un Available">Un Available</option>
             </select>
             <label for="sports-environment-notes" class="label1">Notes</label>
             <input
@@ -696,24 +692,35 @@ pageEncoding="ISO-8859-1"%>
           </div>
           <div class="form-element">
             <label for="" class="label">Others Specializations</label>
-            <div class="" id="specializations-tags-section"></div>
+            <div
+              class="specializations-tags-section"
+              id="spec-tags-section"
+            ></div>
+            <label for="new-specialization" class="label1">Enter Here</label>
             <input id="new-specialization" type="text" class="text-input" />
-            <button
-              id=""
-              class="label1"
-              style="margin: 1rem"
-              onclick="Specializations.addSpecialization()"
-            >
-              Add
-            </button>
           </div>
           <div class="form-element">
             <button
-              id="update-specializations"
-              class="label1"
-              onclick="checkChange(3,0)"
+              class="label1 hide"
+              id="update-specialization"
+              onclick="SpecializationInfo.updateSpecialization()"
             >
               Update
+            </button>
+            <button
+              id="add-specialization"
+              class="label1"
+              onclick="SpecializationInfo.addSpecialization()"
+            >
+              ADD Specialization
+            </button>
+            <button
+              id="update-to-view"
+              class="label1"
+              style="margin: 1rem 0rem"
+              onclick="SpecializationInfo.updatePreListToView()"
+            >
+              Update Changes to View
             </button>
           </div>
         </div>
@@ -783,7 +790,7 @@ pageEncoding="ISO-8859-1"%>
               class="label1"
               onclick="RequirementInfo.addRequirement()"
             >
-              ADD Hotspot
+              ADD Requirement
             </button>
           </div>
         </div>
@@ -822,12 +829,21 @@ pageEncoding="ISO-8859-1"%>
               ADD Hotspot
             </button>
           </div>
+          <div class="form-element">
+            <button
+              id="add-hotspot"
+              class="label1"
+              onclick="CommitValidation.startvalidation(window.modifiedData)"
+            >
+              Commit Changes
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/Hostels/hostelWorkspace2.js"></script>
     <script src="js/Hostels/hostelWorkspace.js"></script>
-    <!-- <script src="js/Hostels/hostelWorkspaceAjaxCalls.js"></script> -->
   </body>
 </html>

@@ -46,7 +46,7 @@ public class HostelWorkspace extends HttpServlet {
 				ArrayList<String> reqlist= hostelRead.getHostelRequirementsInfo(reqtable);
 				finalobj.put("requirementInfo", reqlist);
 				String spectable=(String) basicInfoObj.get("hstable");
-				ArrayList<String> speclist= hostelRead.getHostelRequirementsInfo(spectable);
+				ArrayList<String> speclist= hostelRead.getHostelSpecializationInfo(spectable);
 				finalobj.put("specializationInfo", speclist);
 				System.out.println(finalobj);
 				PrintWriter out = response.getWriter();
