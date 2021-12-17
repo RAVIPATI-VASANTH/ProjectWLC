@@ -45,37 +45,31 @@ pageEncoding="ISO-8859-1"%>
     <section id="view" class="hide">
       <div class="hero-section view-section">
         <div class="intro">
-          <p class="hostel-name" id="view-hostel-name">
-            Feel Home Mess and Hostel
-          </p>
-          <p class="head-line" id="view-head-line">
-            Best Food Across the Location
-          </p>
+          <p class="hostel-name" id="view-hostel-name"></p>
+          <p class="head-line" id="view-head-line"></p>
           <p class="by">
-            by <span class="owner-name" id="view-owner-name">Babai garu</span>
+            by <span class="owner-name" id="view-owner-name"></span>
           </p>
           <div class="info-section">
             <div class="info-element">
               <img class="mini-icon" src="images/type.svg" alt="" />
-              <div class="info" id="view-type">Public - Anyone can join</div>
+              <div class="info" id="view-type"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" id="gender" src="images/male.svg" alt="" />
-              <div class="info" id="view-gender">Gents</div>
+              <div class="info" id="view-gender"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/strength.svg" alt="" />
-              <div class="info" id="view-strength">110</div>
+              <div class="info" id="view-strength"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/call.svg" alt="" />
-              <div class="info" id="view-owner-contact">8919847090</div>
+              <div class="info" id="view-owner-contact"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/landmark.png" alt="" />
-              <div class="info" id="view-landmark">
-                Vignan's Foundation for Sciences, Technology and Research
-              </div>
+              <div class="info" id="view-landmark"></div>
             </div>
             <div class="info-element">
               <img class="mini-icon" src="images/location-point.svg" alt="" />
@@ -154,7 +148,7 @@ pageEncoding="ISO-8859-1"%>
           </div>
 
           <div class="search-score">
-            <p class="score">000</p>
+            <p class="score" id="score">000</p>
             <p class="info-guide">Search Score</p>
           </div>
         </div>
@@ -278,6 +272,7 @@ pageEncoding="ISO-8859-1"%>
                 value="AC"
                 name="gender"
                 class="radio-button"
+                checked
               />
               <label for="ac" class="label1">AC</label>
             </div>
@@ -288,7 +283,6 @@ pageEncoding="ISO-8859-1"%>
                 value="N-AC"
                 name="gender"
                 class="radio-button"
-                checked
               />
               <label for="nac" class="label1">N-AC</label>
             </div>
@@ -349,12 +343,18 @@ pageEncoding="ISO-8859-1"%>
             </div>
           </div>
           <div class="form-element">
+            <label for="" class="label">Notes</label>
+            <div>
+              <input type="text" class="text-input" id="room-notes" />
+            </div>
+          </div>
+          <div class="form-element">
             <button
               id="add-room-card"
               class="label1"
               onclick="RoomInfo.addRoomCard()"
             >
-              ADD
+              ADD Room Card
             </button>
             <button
               id="update-room-card"
@@ -469,11 +469,7 @@ pageEncoding="ISO-8859-1"%>
             <input id="nonveg-notes" type="text" class="text-input" />
           </div>
           <div class="form-element">
-            <button
-              id="update-food-cards"
-              class="label1"
-              onclick="FoodInfo.updateFoodInfo()"
-            >
+            <button class="label1" onclick="FoodInfo.updateFoodInfo()">
               Update Changes to View
             </button>
           </div>
@@ -724,7 +720,7 @@ pageEncoding="ISO-8859-1"%>
               style="margin: 1rem 0rem"
               onclick="SpecializationInfo.updatePreListToView()"
             >
-              Update To View
+              Update Changes to View
             </button>
           </div>
         </div>
@@ -794,7 +790,7 @@ pageEncoding="ISO-8859-1"%>
               class="label1"
               onclick="RequirementInfo.addRequirement()"
             >
-              ADD Hotspot
+              ADD Requirement
             </button>
           </div>
         </div>
@@ -833,12 +829,21 @@ pageEncoding="ISO-8859-1"%>
               ADD Hotspot
             </button>
           </div>
+          <div class="form-element">
+            <button
+              id="add-hotspot"
+              class="label1"
+              onclick="CommitValidation.startvalidation(window.modifiedData)"
+            >
+              Commit Changes
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/Hostels/hostelWorkspace2.js"></script>
     <script src="js/Hostels/hostelWorkspace.js"></script>
-    <!-- <script src="js/Hostels/hostelWorkspaceAjaxCalls.js"></script> -->
   </body>
 </html>

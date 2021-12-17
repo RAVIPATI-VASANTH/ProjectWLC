@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import org.json.simple.JSONObject;
+
 import com.classes.hostels.dataContainers.HostelRegisterContainer;
 import com.dbAccess.hostels.hostelRead;
 public class hostelWrite {
@@ -29,7 +33,7 @@ public class hostelWrite {
 		st.setString(7,"");
 		status=st.executeUpdate();
 
-		String sql2="create table "+tabname+" (hostel_id VARCHAR(15) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(20),owner_contact VARCHAR(15),hostel_type VARCHAR(10),hostel_gender VARCHAR(10),hostel_location VARCHAR(30),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(5),hostel_headline VARCHAR(45),hostel_roomtable VARCHAR(45),hostel_hotspottable VARCHAR(45),hostel_speacializationtable VARCHAR(45),hostel_policytable VARCHAR(45),hostel_requirementtable VARCHAR(45) ,PRIMARY KEY(hostel_id))";
+		String sql2="create table "+tabname+" (hostel_id VARCHAR(15) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(20),owner_contact VARCHAR(15),hostel_type VARCHAR(10),hostel_gender VARCHAR(10),hostel_location VARCHAR(30),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(5),hostel_headline VARCHAR(45),hostel_roomtable VARCHAR(45),hostel_hotspottable VARCHAR(45),hostel_speacializationtable VARCHAR(45),hostel_policytable VARCHAR(45),hostel_requirementtable VARCHAR(45),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id))";
 		PreparedStatement smt= con.prepareStatement(sql2);
 		status=smt.executeUpdate();
 		con.close();
@@ -41,8 +45,7 @@ public class hostelWrite {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
-//			System.out.println("called");
-			String sql="insert into "+h.htablename+" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql="insert into "+h.htablename+" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,h.hid);
 			smt.setString(2,h.hname);
@@ -62,6 +65,7 @@ public class hostelWrite {
 			smt.setString(15,h.hid+"_speacializationtable");
 			smt.setString(16,h.hid+"_policytable");
 			smt.setString(17,h.hid+"_requirementtable");
+			smt.setString(18, "0");
 			status=smt.executeUpdate();
 			
 			String rt=h.hid+"_roomtable";
@@ -108,4 +112,203 @@ public class hostelWrite {
 		}
 		return status;
 	}
+
+	public static boolean commitBasicInfo(JSONObject binfo) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		try {
+			String minicode=binfo.get("hid").toString();
+			
+			String words[]=minicode.split("_");
+			minicode=words[0];
+			
+			Statement stmt=con.createStatement();
+			String sql="select hostels_table from landmarks where mini_code ='"+minicode+"';";
+			ResultSet rs=stmt.executeQuery(sql);
+			String tname="";
+			while(rs.next()) {
+				tname=rs.getString(1);
+			}
+			
+			String hid=binfo.get("hid").toString();
+			String hname=binfo.get("hname").toString();
+			String hheadline=binfo.get("hheadline").toString();
+			String honame=binfo.get("honame").toString();
+			String hocontact=binfo.get("hocontact").toString();
+			String hstrength=binfo.get("hstrength").toString();
+			String htype=binfo.get("htype").toString();
+			String hcommunity=binfo.get("hcommunity").toString();
+			String hgender=binfo.get("hgender").toString();
+			String hsscore=binfo.get("hsearchscore").toString();
+
+			sql="update "+tname+" set hostel_name=?,owner_name=?,owner_contact=?,hostel_type=?,hostel_gender=?,hostel_strength=?,hostel_headline=?,hostel_community=?,hostel_searchscore=? where hostel_id=?";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,hname);
+			smt.setString(2,honame);
+			smt.setString(3,hocontact);
+			smt.setString(4,htype);
+			smt.setString(5,hgender);
+			smt.setString(6,hstrength);
+			smt.setString(7,hheadline);
+			smt.setString(8,hcommunity);
+			smt.setString(9,hsscore);
+			smt.setString(10,hid);
+			smt.executeUpdate();
+			con.close();
+			return true;			
+		}
+		catch(Exception e) {
+			System.out.println("here 2"+e.getMessage());
+		}
+		return false;
+	}
+	
+	public static boolean commitFoodInfo(JSONObject finfo,String id) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		try {
+			String bf=finfo.get("breakfast").toString();
+			String lun=finfo.get("lunch").toString();
+			String sn=finfo.get("snacks").toString();
+			String din=finfo.get("dinner").toString();
+			String non=finfo.get("nonveg").toString();
+			
+			String sql="update food_table set breakfast=?,lunch=?,snacks=?,dinner=?,nonveg=? where hostel_id=?";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,bf);
+			smt.setString(2,lun);
+			smt.setString(3,sn);
+			smt.setString(4,din);
+			smt.setString(5,non);
+			smt.setString(6,id);
+			smt.executeUpdate();
+			con.close();
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println("here 2"+e.getMessage());
+		}
+		return false;
+	}
+	
+	public static boolean commitRoomInfo(ArrayList<String> roomlist,String tname) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		try {
+			Statement stmt=con.createStatement();
+			
+			stmt.execute("truncate table "+tname+";");
+
+			for(String s: roomlist) {
+				s=s.substring(1, s.length()-1);
+				String sql="insert into "+tname+" values(?)";
+				PreparedStatement smt=con.prepareStatement(sql);
+				smt.setString(1,s);
+				smt.executeUpdate();
+			}
+			con.close();
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println("here 2"+e.getMessage());
+		}
+		return false;
+	}
+	
+	public static boolean commitPolicyInfo(ArrayList<String> policylist,String tname) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		try {
+			Statement stmt=con.createStatement();
+			
+			stmt.execute("truncate table "+tname+";");
+
+			for(String s: policylist) {
+				s=s.substring(1, s.length()-1);
+				String sql="insert into "+tname+" values(?)";
+				PreparedStatement smt=con.prepareStatement(sql);
+				smt.setString(1,s);
+				smt.executeUpdate();
+			}
+			con.close();
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println("here 2"+e.getMessage());
+		}
+		return false;
+	}
+
+	public static boolean commitHotspotInfo(ArrayList<String> hotspotslist,String tname) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		try {
+			Statement stmt=con.createStatement();
+			
+			stmt.execute("truncate table "+tname+";");
+
+			for(String s: hotspotslist) {
+				s=s.substring(1, s.length()-1);
+				String sql="insert into "+tname+" values(?)";
+				PreparedStatement smt=con.prepareStatement(sql);
+				smt.setString(1,s);
+				smt.executeUpdate();
+			}
+			con.close();
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println("here 2"+e.getMessage());
+		}
+		return false;
+	}
+
+	public static boolean commitReqInfo(ArrayList<String> requirementslist,String tname) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		try {
+			Statement stmt=con.createStatement();
+			
+			stmt.execute("truncate table "+tname+";");
+
+			for(String s: requirementslist) {
+				s=s.substring(1, s.length()-1);
+				String sql="insert into "+tname+" values(?)";
+				PreparedStatement smt=con.prepareStatement(sql);
+				smt.setString(1,s);
+				smt.executeUpdate();
+			}
+			con.close();
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println("here 2"+e.getMessage());
+		}
+		return false;
+	}
+
+	public static boolean commitSpecInfo(ArrayList<String> specslist,String tname) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		try {
+			Statement stmt=con.createStatement();
+			
+			stmt.execute("truncate table "+tname+";");
+
+			for(String s: specslist) {
+				s=s.substring(1, s.length()-1);
+				String sql="insert into "+tname+" values(?)";
+				PreparedStatement smt=con.prepareStatement(sql);
+				smt.setString(1,s);
+				smt.executeUpdate();
+			}
+			con.close();
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println("here 2"+e.getMessage());
+		}
+		return false;
+	}
+
 }

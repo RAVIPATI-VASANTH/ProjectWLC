@@ -367,3 +367,20 @@ body {
   justify-content: flex-start !important;
   align-items: center !important;
 }
+
+.no-data {
+  color: #e67e22;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.commit-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.commit-button {
+  width: auto;
+  height: auto;
+}

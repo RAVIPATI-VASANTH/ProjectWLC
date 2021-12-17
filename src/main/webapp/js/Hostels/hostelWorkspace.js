@@ -4,6 +4,16 @@ class Hostel {
     this.basicInfo;
     this.foodInfo;
     this.roomInfo;
+    this.specializationInfo;
+    this.hotspotInfo;
+    this.policyInfo;
+    this.searchScore = 0;
+    this.basicInfoScore = 0;
+    this.foodInfoScore = 0;
+    this.roomInfoScore = 0;
+    this.specializationInfoScore = 0;
+    this.hotspotInfoScore = 0;
+    this.requirementInfoScore = 0;
   }
 }
 
@@ -44,7 +54,7 @@ function addLocation() {
 }
 
 function success(position) {
-  window.basicInfo.hlocation =
+  window.modifiedData.basicInfo.hlocation =
     position.coords.latitude + "&" + position.coords.longitude;
   document.getElementById("location").innerText = "Updated";
   document.getElementById("location").style.backgroundColor = "lightgreen";
@@ -131,6 +141,16 @@ class BasicInfo {
       hostel.basicInfo.hlfname;
     //location
     document.getElementById("location").href = hostel.basicInfo.hlocation;
+
+    window.modifiedData = hostel;
+
+    window.modifiedData.searchScore -= window.modifiedData.basicInfoScore;
+    window.modifiedData.basicInfoScore = SearchScore.updateBasicInfoScore(
+      window.modifiedData.basicInfo
+    );
+    window.modifiedData.searchScore += window.modifiedData.basicInfoScore;
+    document.getElementById("score").innerText =
+      window.modifiedData.searchScore;
   }
 
   static updateChanges() {
@@ -158,10 +178,11 @@ class BasicInfo {
     //hostel gender
     if (document.getElementById("hostel-gender-male").checked) {
       hostel.basicInfo.hgender = "male";
-    } else {
+    }
+    if (document.getElementById("hostel-gender-female").checked) {
       hostel.basicInfo.hgender = "female";
     }
-    BasicInfo.updateBasicInfoUi();
+    this.updateBasicInfoUi();
     window.modifiedData = hostel;
   }
 }
@@ -233,7 +254,26 @@ class FoodInfo {
     window.modifiedData.foodInfo = obj;
     window.originalData.foodInfo = obj;
 
-    FoodInfo.updateFoodEditInfo();
+    this.updateFoodEditInfo();
+    this.checkEmptyCondtion(rawobj);
+  }
+
+  static checkEmptyCondtion(obj) {
+    if (
+      obj.breakfast === "|||" &&
+      obj.lunch === "|||" &&
+      obj.snacks === "|||" &&
+      obj.dinner === "|||" &&
+      obj.nonveg === "||"
+    ) {
+      var maindiv = document.getElementById("food-cards-section");
+
+      var p = document.createElement("P");
+      p.setAttribute("class", "no-data");
+      p.innerText = "No Data";
+      maindiv.append(p);
+      return true;
+    } else return false;
   }
 
   static updateFoodEditInfo() {
@@ -267,7 +307,14 @@ class FoodInfo {
     document.getElementById("limit").value = obj.nonveg.type;
     document.getElementById("nonveg-notes").value = obj.nonveg.notes;
 
-    FoodInfo.updateFoodViewInfo();
+    this.updateFoodViewInfo();
+    window.modifiedData.searchScore -= window.modifiedData.foodInfoScore;
+    window.modifiedData.foodInfoScore = SearchScore.updateFoodInfoScore(
+      window.modifiedData.foodInfo
+    );
+    window.modifiedData.searchScore += window.modifiedData.foodInfoScore;
+    document.getElementById("score").innerText =
+      window.modifiedData.searchScore;
   }
 
   static createCard1(obj, title) {
@@ -275,113 +322,125 @@ class FoodInfo {
       //creating food card
       var carddiv = document.createElement("div");
       carddiv.setAttribute("class", "food-card");
-      //creating Title
-      var tit = document.createElement("P");
-      tit.setAttribute("class", "label");
-      tit.innerText = title + "(" + obj.type + ")";
-      carddiv.appendChild(tit);
-      //creating ul1 for ordering
-      var ul1 = document.createElement("ul");
-      //creating time div
-      var tdiv = document.createElement("div");
-      tdiv.setAttribute("class", "field-box");
+      if (obj.type === "") {
+        alert("Please Select the Type for " + title);
+      } else {
+        //creating Title
+        var tit = document.createElement("P");
+        tit.setAttribute("class", "label");
+        tit.innerText = title + "(" + obj.type + ")";
+        carddiv.appendChild(tit);
+        //creating ul1 for ordering
+        var ul1 = document.createElement("ul");
+        //creating time div
+        var tdiv = document.createElement("div");
+        tdiv.setAttribute("class", "field-box");
 
-      var arrow = document.createElement("IMG");
-      arrow.setAttribute("src", "images/arrow-right.svg");
-      arrow.setAttribute("class", "mini-icon");
-      tdiv.appendChild(arrow);
+        var arrow = document.createElement("IMG");
+        arrow.setAttribute("src", "images/arrow-right.svg");
+        arrow.setAttribute("class", "mini-icon");
+        tdiv.appendChild(arrow);
 
-      var tp = document.createElement("P");
-      tp.setAttribute("class", "label2");
-      tp.innerText = "Starts at " + obj.time;
-      tdiv.appendChild(tp);
-      ul1.appendChild(tdiv);
-      //creating item div
-      var itemdiv = document.createElement("div");
-      itemdiv.setAttribute("class", "field-box");
+        var tp = document.createElement("P");
+        tp.setAttribute("class", "label2");
+        tp.innerText = "Starts at " + obj.time;
+        tdiv.appendChild(tp);
+        ul1.appendChild(tdiv);
+        //creating item div
+        var itemdiv = document.createElement("div");
+        itemdiv.setAttribute("class", "field-box");
 
-      var arrow1 = document.createElement("IMG");
-      arrow1.setAttribute("src", "images/arrow-right.svg");
-      arrow1.setAttribute("class", "mini-icon");
-      itemdiv.appendChild(arrow1);
+        var arrow1 = document.createElement("IMG");
+        arrow1.setAttribute("src", "images/arrow-right.svg");
+        arrow1.setAttribute("class", "mini-icon");
+        itemdiv.appendChild(arrow1);
 
-      var tp1 = document.createElement("P");
-      tp1.setAttribute("class", "label2 notes");
-      tp1.innerText = "Items : ";
-      var words = obj.items.split("-");
-      for (var i = 0; i < words.length; i++) {
-        if (i !== words.length - 1) {
-          tp1.innerText += words[i] + ", ";
-        } else {
-          tp1.innerText += words[i];
+        var tp1 = document.createElement("P");
+        tp1.setAttribute("class", "label2 notes");
+        tp1.innerText = "Items : ";
+        var words = obj.items.split("-");
+        for (var i = 0; i < words.length; i++) {
+          if (i !== words.length - 1) {
+            tp1.innerText += words[i] + ", ";
+          } else {
+            tp1.innerText += words[i];
+          }
         }
+        itemdiv.appendChild(tp1);
+        ul1.appendChild(itemdiv);
+        //creating notes div
+        if (obj.notes.trim() !== "") {
+          var ndiv = document.createElement("div");
+          ndiv.setAttribute("class", "field-box");
+
+          var arrow2 = document.createElement("IMG");
+          arrow2.setAttribute("src", "images/arrow-right.svg");
+          arrow2.setAttribute("class", "mini-icon");
+          ndiv.appendChild(arrow2);
+
+          var np = document.createElement("P");
+          np.setAttribute("class", "label2 notes");
+          np.innerText = obj.notes;
+          ndiv.appendChild(np);
+
+          ul1.appendChild(ndiv);
+        }
+        carddiv.appendChild(ul1);
+        document.getElementById("food-cards-section").appendChild(carddiv);
       }
-      itemdiv.appendChild(tp1);
-      ul1.appendChild(itemdiv);
-      //creating notes div
-      var ndiv = document.createElement("div");
-      ndiv.setAttribute("class", "field-box");
-
-      var arrow2 = document.createElement("IMG");
-      arrow2.setAttribute("src", "images/arrow-right.svg");
-      arrow2.setAttribute("class", "mini-icon");
-      ndiv.appendChild(arrow2);
-
-      var np = document.createElement("P");
-      np.setAttribute("class", "label2 notes");
-      np.innerText = obj.notes;
-      ndiv.appendChild(np);
-
-      ul1.appendChild(ndiv);
-      carddiv.appendChild(ul1);
-      document.getElementById("food-cards-section").appendChild(carddiv);
     }
   }
 
   static createCard2(obj, title) {
-    if (obj.time !== "") {
-      //creating food card
-      var carddiv = document.createElement("div");
-      carddiv.setAttribute("class", "food-card");
-      //creating Title
-      var tit = document.createElement("P");
-      tit.setAttribute("class", "label");
-      tit.innerText = title;
-      carddiv.appendChild(tit);
-      //creating ul1 for ordering
-      var ul1 = document.createElement("ul");
-      //creating count div
-      var cdiv = document.createElement("div");
-      cdiv.setAttribute("class", "field-box");
-      var arrow = document.createElement("IMG");
-      arrow.setAttribute("src", "images/arrow-right.svg");
-      arrow.setAttribute("class", "mini-icon");
-      cdiv.appendChild(arrow);
+    if (obj.count !== "") {
+      if (obj.type === "") {
+        alert("Please Select Type for " + title);
+      } else {
+        //creating food card
+        var carddiv = document.createElement("div");
+        carddiv.setAttribute("class", "food-card");
+        //creating Title
+        var tit = document.createElement("P");
+        tit.setAttribute("class", "label");
+        tit.innerText = title;
+        carddiv.appendChild(tit);
+        //creating ul1 for ordering
+        var ul1 = document.createElement("ul");
+        //creating count div
+        var cdiv = document.createElement("div");
+        cdiv.setAttribute("class", "field-box");
+        var arrow = document.createElement("IMG");
+        arrow.setAttribute("src", "images/arrow-right.svg");
+        arrow.setAttribute("class", "mini-icon");
+        cdiv.appendChild(arrow);
 
-      var cp = document.createElement("P");
-      cp.setAttribute("class", "label2");
-      cp.innerText = obj.count + " times per week - " + obj.type;
-      cdiv.appendChild(cp);
-      ul1.appendChild(cdiv);
+        var cp = document.createElement("P");
+        cp.setAttribute("class", "label2");
+        cp.innerText = obj.count + " times per week - " + obj.type;
+        cdiv.appendChild(cp);
+        ul1.appendChild(cdiv);
 
-      //creating notes div
-      var ndiv = document.createElement("div");
-      ndiv.setAttribute("class", "field-box");
+        //creating notes div
+        if (obj.notes.trim() !== "") {
+          var ndiv = document.createElement("div");
+          ndiv.setAttribute("class", "field-box");
 
-      var arrow2 = document.createElement("IMG");
-      arrow2.setAttribute("src", "images/arrow-right.svg");
-      arrow2.setAttribute("class", "mini-icon");
-      ndiv.appendChild(arrow2);
+          var arrow2 = document.createElement("IMG");
+          arrow2.setAttribute("src", "images/arrow-right.svg");
+          arrow2.setAttribute("class", "mini-icon");
+          ndiv.appendChild(arrow2);
 
-      var np = document.createElement("P");
-      np.setAttribute("class", "label2 notes");
-      np.innerText = obj.notes;
-      ndiv.appendChild(np);
+          var np = document.createElement("P");
+          np.setAttribute("class", "label2 notes");
+          np.innerText = obj.notes;
+          ndiv.appendChild(np);
 
-      ul1.appendChild(ndiv);
+          ul1.appendChild(ndiv);
+        }
 
-      carddiv.appendChild(ul1);
-      document.getElementById("food-cards-section").appendChild(carddiv);
+        carddiv.appendChild(ul1);
+        document.getElementById("food-cards-section").appendChild(carddiv);
+      }
     }
   }
 
@@ -392,14 +451,15 @@ class FoodInfo {
       maindiv.removeChild(maindiv.firstChild);
     }
     //Creating Food Cards
-    FoodInfo.createCard1(window.modifiedData.foodInfo.breakfast, "Breakfast");
-    FoodInfo.createCard1(window.modifiedData.foodInfo.lunch, "Lunch");
-    FoodInfo.createCard1(window.modifiedData.foodInfo.snacks, "Snacks");
-    FoodInfo.createCard1(window.modifiedData.foodInfo.dinner, "Dinner");
-    FoodInfo.createCard2(window.modifiedData.foodInfo.nonveg, "Non-Veg");
+    this.createCard1(window.modifiedData.foodInfo.breakfast, "Breakfast");
+    this.createCard1(window.modifiedData.foodInfo.lunch, "Lunch");
+    this.createCard1(window.modifiedData.foodInfo.snacks, "Snacks");
+    this.createCard1(window.modifiedData.foodInfo.dinner, "Dinner");
+    this.createCard2(window.modifiedData.foodInfo.nonveg, "Non-Veg");
   }
 
   static updateFoodInfo() {
+    // console.log("food info called");
     var obj = window.modifiedData.foodInfo;
     //Breakfast
     obj.breakfast.time = document.getElementById("breakfast-time").value;
@@ -430,7 +490,7 @@ class FoodInfo {
     obj.nonveg.type = document.getElementById("limit").value;
     obj.nonveg.notes = document.getElementById("nonveg-notes").value;
     window.modifiedData.foodInfo = obj;
-    FoodInfo.updateFoodViewInfo;
+    this.updateFoodEditInfo();
   }
 }
 
@@ -438,6 +498,9 @@ class RoomInfo {
   static processRoomInfoData() {
     var list = [];
     var rawlist = window.modifiedData.roomInfo;
+    if (rawlist.length === 0) {
+      this.emptyCondition();
+    }
     var index = 0;
     rawlist.forEach((element) => {
       element = element.replace(/[\r\n]+/gm, "");
@@ -460,6 +523,7 @@ class RoomInfo {
           semester: "",
           annum: "",
         },
+        notes: "",
       };
 
       var words = element.split("|");
@@ -475,14 +539,25 @@ class RoomInfo {
       obj.stayonly.monthly = prices[0];
       obj.stayonly.semester = prices[1];
       obj.stayonly.annum = prices[2];
+      obj.notes = words[5];
       obj.index = index;
 
       index++;
 
       list.push(obj);
     });
+    document.getElementById("nac").checked = true;
     window.modifiedData.roomInfo = list;
     this.updateUi();
+  }
+
+  static emptyCondition() {
+    var maindiv = document.getElementById("room-cards-section");
+
+    var p = document.createElement("P");
+    p.setAttribute("class", "no-data");
+    p.innerText = "No Data";
+    maindiv.append(p);
   }
 
   static updateUi() {
@@ -500,6 +575,14 @@ class RoomInfo {
       this.createRoomTags(element);
       this.createRoomCards(element);
     });
+
+    window.modifiedData.searchScore -= window.modifiedData.roomInfoScore;
+    window.modifiedData.roomInfoScore = SearchScore.updateRoomInfoScore(
+      window.modifiedData.roomInfo
+    );
+    window.modifiedData.searchScore += window.modifiedData.roomInfoScore;
+    document.getElementById("score").innerText =
+      window.modifiedData.searchScore;
   }
 
   static createRoomTags(obj) {
@@ -679,6 +762,30 @@ class RoomInfo {
       sodiv.appendChild(ul3);
       ul1.appendChild(sodiv);
     }
+    //Notes
+    if (obj.notes.trim() !== "") {
+      var ndiv = document.createElement("div");
+      ndiv.setAttribute("class", "field-box");
+
+      var arrow2 = document.createElement("IMG");
+      arrow2.setAttribute("src", "images/arrow-right.svg");
+      arrow2.setAttribute("class", "mini-icon");
+      ndiv.appendChild(arrow2);
+
+      var uln = document.createElement("ul");
+      uln.setAttribute("class", "filed-box-column");
+
+      var np = document.createElement("P");
+      np.setAttribute("class", "label2 word-color");
+      np.innerText = "Note";
+      uln.appendChild(np);
+      var nv = document.createElement("p");
+      nv.setAttribute("class", "label2");
+      nv.innerText = obj.notes;
+      uln.appendChild(nv);
+      ndiv.appendChild(uln);
+      ul1.appendChild(ndiv);
+    }
     card.appendChild(ul1);
     obj.card = card;
     maindiv.appendChild(card);
@@ -727,7 +834,8 @@ class RoomInfo {
     document.getElementById("s-monthly").value = obj.stayonly.monthly;
     document.getElementById("s-semester").value = obj.stayonly.semester;
     document.getElementById("s-annum").value = obj.stayonly.annum;
-
+    //Notes
+    document.getElementById("room-notes").value = obj.notes;
     //updating buttons
     document
       .getElementById("add-room-card")
@@ -763,6 +871,8 @@ class RoomInfo {
       obj.bathroom = "Common";
     } else if (document.getElementById("attached").checked) {
       obj.bathroom = "Attached";
+    } else {
+      obj.bathroom = "";
     }
     //beds per room
     obj.beds = document.getElementById("bed-count").value;
@@ -774,6 +884,8 @@ class RoomInfo {
     obj.stayonly.monthly = document.getElementById("s-monthly").value;
     obj.stayonly.semester = document.getElementById("s-semester").value;
     obj.stayonly.annum = document.getElementById("s-annum").value;
+    //Notes
+    obj.notes = document.getElementById("room-notes").value;
 
     window.modifiedData.roomInfo[index] = obj;
     window.modifiedData.roomInfo[index].signal = false;
@@ -798,6 +910,8 @@ class RoomInfo {
     document.getElementById("s-monthly").value = "";
     document.getElementById("s-semester").value = "";
     document.getElementById("s-annum").value = "";
+    //Notes
+    document.getElementById("room-notes").value = "";
     //updating buttons
     document.getElementById("add-room-card").setAttribute("class", "label1");
     document
@@ -845,38 +959,44 @@ class RoomInfo {
     };
     //plan name
     obj.planname = document.getElementById("plan-name").value;
-    //type
-    if (document.getElementById("ac").checked) {
-      obj.type = "AC";
+    if (obj.planname.trim() === "") {
+      alert("Plan Name is Required");
     } else {
-      obj.type = "N-AC";
-    }
-    //bathroom
-    if (
-      document.getElementById("common").checked &&
-      document.getElementById("attached").checked
-    ) {
-      obj.bathroom = "Common-Attached";
-    } else if (document.getElementById("common").checked) {
-      obj.bathroom = "Common";
-    } else if (document.getElementById("attached").checked) {
-      obj.bathroom = "Attached";
-    }
-    //beds per room
-    obj.beds = document.getElementById("bed-count").value;
-    //Stay and Food
-    obj.stayandfood.monthly = document.getElementById("sf-monthly").value;
-    obj.stayandfood.semester = document.getElementById("sf-semester").value;
-    obj.stayandfood.annum = document.getElementById("sf-annum").value;
-    //Stay Only
-    obj.stayonly.monthly = document.getElementById("s-monthly").value;
-    obj.stayonly.semester = document.getElementById("s-semester").value;
-    obj.stayonly.annum = document.getElementById("s-annum").value;
+      //type
 
-    obj.index = window.modifiedData.roomInfo.length;
-    window.modifiedData.roomInfo.push(obj);
-    // console.log(window.modifiedData.roomInfo);
-    this.makeDefault();
+      if (document.getElementById("ac").checked) {
+        obj.type = "AC";
+      } else {
+        obj.type = "N-AC";
+      }
+      //bathroom
+      if (
+        document.getElementById("common").checked &&
+        document.getElementById("attached").checked
+      ) {
+        obj.bathroom = "Common-Attached";
+      } else if (document.getElementById("common").checked) {
+        obj.bathroom = "Common";
+      } else if (document.getElementById("attached").checked) {
+        obj.bathroom = "Attached";
+      }
+      //beds per room
+      obj.beds = document.getElementById("bed-count").value;
+      //Stay and Food
+      obj.stayandfood.monthly = document.getElementById("sf-monthly").value;
+      obj.stayandfood.semester = document.getElementById("sf-semester").value;
+      obj.stayandfood.annum = document.getElementById("sf-annum").value;
+      //Stay Only
+      obj.stayonly.monthly = document.getElementById("s-monthly").value;
+      obj.stayonly.semester = document.getElementById("s-semester").value;
+      obj.stayonly.annum = document.getElementById("s-annum").value;
+      //Notes
+      obj.notes = document.getElementById("room-notes").value;
+
+      obj.index = window.modifiedData.roomInfo.length;
+      window.modifiedData.roomInfo.push(obj);
+      this.makeDefault();
+    }
   }
 }
 
@@ -886,7 +1006,11 @@ class SpecializationInfo {
       preList: [],
       postList: [],
     };
+    var signal = false;
     var rawlist = window.modifiedData.specializationInfo;
+    if (rawlist.length === 0) {
+      signal = this.emptyCondition();
+    }
     rawlist.forEach((element) => {
       var index = obj.postList.length;
       var result = this.classifyData(element, index);
@@ -896,11 +1020,127 @@ class SpecializationInfo {
         obj.postList.push(result.obj);
       }
     });
+    if (signal) obj = this.addPreprocessData(obj);
     window.modifiedData.specializationInfo = obj;
     this.updateUi();
   }
 
+  static addPreprocessData(obj) {
+    var WIFI = {
+      specname: "WIFI",
+      type: "Free",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Washing_Machine = {
+      specname: "Washing Machine",
+      type: "Free",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Lockers = {
+      specname: "Lockers",
+      type: "Free",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Hot_Water = {
+      specname: "Hot Water",
+      type: "Un Available",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Gym = {
+      specname: "Gym",
+      type: "Un Available",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Generator = {
+      specname: "Generator",
+      type: "Un Available",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Vehicle_Parking = {
+      specname: "Vehicle Parking",
+      type: "Un Available",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Transport = {
+      specname: "Transport",
+      type: "Un Available",
+      plan: "Monthly",
+      amount: "",
+      notes: "",
+    };
+    var Room_Service = {
+      specname: "Room Service",
+      type: "Daily",
+      plan: "",
+      amount: "",
+      notes: "",
+    };
+    var Sports_Environment = {
+      specname: "Sports Environment",
+      type: "Un Available",
+      plan: "",
+      amount: "",
+      notes: "",
+    };
+    var CC_TV_Survilance = {
+      specname: "CC TV Survilance",
+      type: "Un Available",
+      plan: "",
+      amount: "",
+      notes: "",
+    };
+    var Security = {
+      specname: "Security",
+      type: "Un Available",
+      plan: "",
+      amount: "",
+      notes: "",
+    };
+    var list = [
+      WIFI,
+      Washing_Machine,
+      Lockers,
+      Hot_Water,
+      Gym,
+      Generator,
+      Vehicle_Parking,
+      Transport,
+      Room_Service,
+      Sports_Environment,
+      CC_TV_Survilance,
+      Security,
+    ];
+
+    obj.preList = list;
+    return obj;
+  }
+
+  static emptyCondition() {
+    var maindiv = document.getElementById("spec-view-tags-section");
+
+    var p = document.createElement("P");
+    p.setAttribute("class", "no-data");
+    p.innerText = "No Data";
+    maindiv.append(p);
+    return true;
+  }
+
   static classifyData(element, index) {
+    console.log("Not to be called");
     var result = {
       signal: 0,
       obj: "",
@@ -917,10 +1157,15 @@ class SpecializationInfo {
       "Transport",
       "Room Service",
       "Sports Environment",
-      "CC-TV Survilance",
+      "CC TV Survilance",
       "Security",
     ];
     if (specsList.includes(words[0])) {
+      for (var i = 0; i <= 4; i++) {
+        if (words[i] === "undefined") {
+          words[i] = "";
+        }
+      }
       var specdata = {
         specname: words[0],
         type: words[1],
@@ -928,6 +1173,7 @@ class SpecializationInfo {
         amount: words[3],
         notes: words[4],
       };
+
       result.signal = 0;
       result.obj = specdata;
     } else {
@@ -967,6 +1213,26 @@ class SpecializationInfo {
       this.createSpecializationTags(element);
       this.createSpecializationCards(element);
     });
+
+    window.modifiedData.specializationInfo.preList.forEach((element) => {
+      if (element.specname === "CC TV Survilance") {
+        document.getElementById("cctv-method").value = element.type;
+      }
+      if (element.specname === "Security") {
+        document.getElementById("security-method").value = element.type;
+      }
+    });
+
+    window.modifiedData.searchScore -=
+      window.modifiedData.specializationInfoScore;
+    window.modifiedData.specializationInfoScore =
+      SearchScore.updateSpecializationInfoScore(
+        window.modifiedData.specializationInfo
+      );
+    window.modifiedData.searchScore +=
+      window.modifiedData.specializationInfoScore;
+    document.getElementById("score").innerText =
+      window.modifiedData.searchScore;
   }
 
   static createSpecializationTags(obj) {
@@ -1060,7 +1326,7 @@ class SpecializationInfo {
           document.getElementById("sports-environment-notes").value =
             element.notes;
           break;
-        case "CC-TV Survilance":
+        case "CC TV Survilance":
           document.getElementById("cctv-method").value = element.type;
           document.getElementById("cctv-notes").value = element.notes;
           break;
@@ -1102,7 +1368,7 @@ class SpecializationInfo {
         "Transport",
       ];
       var type2 = ["Room Service"];
-      var type3 = ["Sports Environment", "CC-TV Survilance", "Security"];
+      var type3 = ["Sports Environment", "CC TV Survilance", "Security"];
       var text = "";
       if (type1.includes(element.specname)) {
         text = element.specname + "-";
@@ -1154,7 +1420,7 @@ class SpecializationInfo {
         case "Hot Water":
           arrow.setAttribute("src", "images/hot-water.svg");
           break;
-        case "CC-TV Survilance":
+        case "CC TV Survilance":
           arrow.setAttribute("src", "images/survilence.svg");
           break;
         case "Security":
@@ -1329,7 +1595,7 @@ class SpecializationInfo {
             "sports-environment-notes"
           ).value;
           break;
-        case "CC-TV Survilance":
+        case "CC TV Survilance":
           element.type = document.getElementById("cctv-method").value;
           element.notes = document.getElementById("cctv-notes").value;
           break;
@@ -1352,11 +1618,15 @@ class SpecializationInfo {
       card: "",
     };
     obj.specname = document.getElementById("new-specialization").value;
-    if (obj.specname.length > 10) obj.tagname = obj.specname.slice(0, 10);
-    else obj.tagname = obj.specname;
-    obj.index = window.modifiedData.specializationInfo.postList.length;
-    window.modifiedData.specializationInfo.postList.push(obj);
-    this.makeDefault();
+    if (obj.specname.length === 0) {
+      alert("Specialization name not to be empty.");
+    } else {
+      if (obj.specname.length > 10) obj.tagname = obj.specname.slice(0, 10);
+      else obj.tagname = obj.specname;
+      obj.index = window.modifiedData.specializationInfo.postList.length;
+      window.modifiedData.specializationInfo.postList.push(obj);
+      this.makeDefault();
+    }
   }
 }
 
@@ -1364,6 +1634,10 @@ class PolicyInfo {
   static processPolicyInfoData() {
     var list = [];
     var rawlist = window.modifiedData.policyInfo;
+    if (rawlist.length === 0) {
+      this.emptyCondition();
+      return;
+    }
     var index = 0;
     rawlist.forEach((element) => {
       var obj = {
@@ -1385,6 +1659,15 @@ class PolicyInfo {
     });
     window.modifiedData.policyInfo = list;
     this.updateUi();
+  }
+
+  static emptyCondition() {
+    var maindiv = document.getElementById("hp-view-tags-section");
+
+    var p = document.createElement("P");
+    p.setAttribute("class", "no-data");
+    p.innerText = "No Data";
+    maindiv.append(p);
   }
 
   static updateUi() {
@@ -1508,11 +1791,15 @@ class PolicyInfo {
       card: "",
     };
     obj.policy = document.getElementById("new-policy").value;
-    if (obj.policy.length > 10) obj.tagname = obj.policy.slice(0, 10);
-    else obj.tagname = obj.policy;
-    obj.index = window.modifiedData.policyInfo.length;
-    window.modifiedData.policyInfo.push(obj);
-    this.makeDefault();
+    if (obj.policy.length === 0) {
+      alert("Policy is not to be empty.");
+    } else {
+      if (obj.policy.length > 10) obj.tagname = obj.policy.slice(0, 10);
+      else obj.tagname = obj.policy;
+      obj.index = window.modifiedData.policyInfo.length;
+      window.modifiedData.policyInfo.push(obj);
+      this.makeDefault();
+    }
   }
 }
 
@@ -1520,6 +1807,10 @@ class RequirementInfo {
   static processRequirementInfoData() {
     var list = [];
     var rawlist = window.modifiedData.requirementInfo;
+    if (rawlist.length === 0) {
+      this.emptyCondition();
+      return;
+    }
     var index = 0;
     rawlist.forEach((element) => {
       var obj = {
@@ -1535,7 +1826,7 @@ class RequirementInfo {
       obj.type = words[0];
       obj.requirement = words[1];
       if (obj.requirement.length > 10)
-        obj.requirement = obj.requirement.slice(0, 10);
+        obj.tagname = obj.requirement.slice(0, 10);
       else obj.tagname = obj.requirement;
       obj.index = index;
 
@@ -1545,6 +1836,15 @@ class RequirementInfo {
     });
     window.modifiedData.requirementInfo = list;
     this.updateUi();
+  }
+
+  static emptyCondition() {
+    var maindiv = document.getElementById("req-view-tags-section");
+
+    var p = document.createElement("P");
+    p.setAttribute("class", "no-data");
+    p.innerText = "No Data";
+    maindiv.append(p);
   }
 
   static updateUi() {
@@ -1562,6 +1862,15 @@ class RequirementInfo {
       this.createRequirementTags(element);
       this.createRequirementCards(element);
     });
+
+    window.modifiedData.searchScore -= window.modifiedData.requirementInfoScore;
+    window.modifiedData.requirementInfoScore =
+      SearchScore.updateRequirementInfoScore(
+        window.modifiedData.requirementInfo
+      );
+    window.modifiedData.searchScore += window.modifiedData.requirementInfoScore;
+    document.getElementById("score").innerText =
+      window.modifiedData.searchScore;
   }
 
   static createRequirementTags(obj) {
@@ -1623,7 +1932,10 @@ class RequirementInfo {
 
     var hp = document.createElement("P");
     hp.setAttribute("class", "label2");
-    hp.innerText = obj.requirement;
+    hp.innerText = obj.type + "-" + obj.requirement;
+    if (obj.type === "Others") {
+      hp.innerText = obj.requirement;
+    }
     pdiv.appendChild(hp);
     maindiv.appendChild(pdiv);
   }
@@ -1648,7 +1960,7 @@ class RequirementInfo {
       .setAttribute("class", "label1");
   }
 
-  static updateHotspot() {
+  static updateRequirement() {
     var obj;
     var index = 0;
     for (var i = 0; i < window.modifiedData.requirementInfo.length; i++) {
@@ -1709,11 +2021,16 @@ class RequirementInfo {
     };
     obj.type = document.getElementById("req-category").value;
     obj.requirement = document.getElementById("new-requirement").value;
-    if (obj.requirement.length > 10) obj.tagname = obj.requirement.slice(0, 10);
-    else obj.tagname = obj.requirement;
-    obj.index = window.modifiedData.requirementInfo.length;
-    window.modifiedData.requirementInfo.push(obj);
-    this.makeDefault();
+    if (obj.requirement.length === 0) {
+      alert("Requirement name is not to be empty.");
+    } else {
+      if (obj.requirement.length > 10)
+        obj.tagname = obj.requirement.slice(0, 10);
+      else obj.tagname = obj.requirement;
+      obj.index = window.modifiedData.requirementInfo.length;
+      window.modifiedData.requirementInfo.push(obj);
+      this.makeDefault();
+    }
   }
 }
 
@@ -1721,6 +2038,10 @@ class HotspotInfo {
   static processHotspotInfoData() {
     var list = [];
     var rawlist = window.modifiedData.hotspotInfo;
+    if (rawlist.length === 0) {
+      this.emptyCondition();
+      return;
+    }
     var index = 0;
     rawlist.forEach((element) => {
       var obj = {
@@ -1747,6 +2068,15 @@ class HotspotInfo {
     this.updateUi();
   }
 
+  static emptyCondition() {
+    var maindiv = document.getElementById("hs-view-tags-section");
+
+    var p = document.createElement("P");
+    p.setAttribute("class", "no-data");
+    p.innerText = "No Data";
+    maindiv.append(p);
+  }
+
   static updateUi() {
     var maindiv = document.getElementById("hs-edit-tags-section");
     while (maindiv.hasChildNodes()) {
@@ -1762,6 +2092,13 @@ class HotspotInfo {
       this.createHotspotTags(element);
       this.createHotspotCards(element);
     });
+    window.modifiedData.searchScore -= window.modifiedData.hotspotInfoScore;
+    window.modifiedData.hotspotInfoScore = SearchScore.updateHotspotInfoScore(
+      window.modifiedData.hotspotInfo
+    );
+    window.modifiedData.searchScore += window.modifiedData.hotspotInfoScore;
+    document.getElementById("score").innerText =
+      window.modifiedData.searchScore;
   }
 
   static createHotspotTags(obj) {
@@ -1781,6 +2118,15 @@ class HotspotInfo {
     div.appendChild(button);
     obj.tag = div;
     division.appendChild(div);
+
+    window.modifiedData.searchScore -= window.modifiedData.requirementInfoScore;
+    window.modifiedData.requirementInfoScore =
+      SearchScore.updateRequirementInfoScore(
+        window.modifiedData.requirementInfo
+      );
+    window.modifiedData.searchScore += window.modifiedData.requirementInfoScore;
+    document.getElementById("score").innerText =
+      window.modifiedData.searchScore;
   }
 
   static createHotspotCards(obj) {
@@ -1811,7 +2157,8 @@ class HotspotInfo {
 
     var hp = document.createElement("P");
     hp.setAttribute("class", "label2");
-    hp.innerText = obj.hotspot;
+    hp.innerText = obj.type + "-" + obj.hotspot;
+    if (obj.type === "Others") hp.innerText = obj.hotspot;
     pdiv.appendChild(hp);
     maindiv.appendChild(pdiv);
   }
@@ -1889,11 +2236,15 @@ class HotspotInfo {
     };
     obj.type = document.getElementById("hs-category").value;
     obj.hotspot = document.getElementById("new-hotspot").value;
-    if (obj.hotspot.length > 10) obj.tagname = obj.hotspot.slice(0, 10);
-    else obj.tagname = obj.hotspot;
-    obj.index = window.modifiedData.hotspotInfo.length;
-    window.modifiedData.hotspotInfo.push(obj);
-    this.makeDefault();
+    if (obj.hotspot.length === 0) {
+      alert("Hotspot name not to be empty.");
+    } else {
+      if (obj.hotspot.length > 10) obj.tagname = obj.hotspot.slice(0, 10);
+      else obj.tagname = obj.hotspot;
+      obj.index = window.modifiedData.hotspotInfo.length;
+      window.modifiedData.hotspotInfo.push(obj);
+      this.makeDefault();
+    }
   }
 }
 
@@ -1901,7 +2252,7 @@ function dataConversion(obj, value) {
   switch (value) {
     case 0:
       obj = JSON.parse(obj);
-      // console.log(obj);
+      console.log(obj);
       window.originalData.basicInfo = obj.basicInfo;
       window.modifiedData.basicInfo = obj.basicInfo;
       window.originalData.foodInfo = obj.foodInfo;
@@ -1916,6 +2267,8 @@ function dataConversion(obj, value) {
       window.modifiedData.requirementInfo = obj.requirementInfo;
       window.originalData.specializationInfo = obj.specializationInfo;
       window.modifiedData.specializationInfo = obj.specializationInfo;
+
+      // console.log(window.modifiedData);
 
       BasicInfo.updateBasicInfoUi();
       RoomInfo.processRoomInfoData();

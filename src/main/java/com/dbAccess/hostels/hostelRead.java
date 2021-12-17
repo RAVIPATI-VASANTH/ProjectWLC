@@ -49,7 +49,7 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		ArrayList<JSONObject> list = new ArrayList<JSONObject>();
 		try {
-			String sql="select hostel_id,hostel_name,hostel_gender,hostel_type,hostel_community,owner_contact from "+tname;
+			String sql="select hostel_id,hostel_name,hostel_gender,hostel_type,hostel_community,owner_contact,hostel_searchscore from "+tname;
 			ResultSet rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				JSONObject ob = new JSONObject();
@@ -59,6 +59,7 @@ public class hostelRead {
 				ob.put("htype", rs.getString(4));
 				ob.put("hcommunity", rs.getString(5));
 				ob.put("hcontact",rs.getString(6));
+				ob.put("hsearchscore", rs.getString(7));
 				list.add(ob);
 			}
 			con.close();
@@ -84,7 +85,7 @@ public class hostelRead {
 				tname=rs.getString(1);
 				lfname=rs.getString(2);
 			}
-			sql="select hostel_id,hostel_name,owner_name,owner_contact,hostel_type,hostel_gender,hostel_location,hostel_landmark,hostel_community,hostel_strength,hostel_headline,hostel_roomtable,hostel_hotspottable,hostel_speacializationtable,hostel_policytable,hostel_requirementtable from "+tname+" where hostel_id='"+id+"';";
+			sql="select hostel_id,hostel_name,owner_name,owner_contact,hostel_type,hostel_gender,hostel_location,hostel_landmark,hostel_community,hostel_strength,hostel_headline,hostel_roomtable,hostel_hotspottable,hostel_speacializationtable,hostel_policytable,hostel_requirementtable,hostel_searchscore from "+tname+" where hostel_id='"+id+"';";
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				ob.put("hid",rs.getString(1));
@@ -103,6 +104,7 @@ public class hostelRead {
 				ob.put("hstable",rs.getString(14));
 				ob.put("hptable",rs.getString(15));
 				ob.put("hreqtable",rs.getString(16));
+				ob.put("hsearchscore", rs.getObject(17));
 				ob.put("hlfname",lfname);
 			}
 			con.close();
