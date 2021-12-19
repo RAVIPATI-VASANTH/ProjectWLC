@@ -23,8 +23,10 @@ pageEncoding="ISO-8859-1"%>
       <nav class="nav">
         <p class="count-info">
           <strong>
-            <span class="word-color count">00</span> Hostels around
-            <span class="word-color count">00</span> Locations
+            <span class="word-color count" id="hostel-count">00</span> Hostels
+            around
+            <span class="word-color count" id="landmark-count">00</span>
+            Locations
           </strong>
         </p>
       </nav>
@@ -124,6 +126,7 @@ pageEncoding="ISO-8859-1"%>
           </p>
           <div>
             <a
+              id="landmark-link"
               href=""
               class="word-color location phrase2"
               style="font-weight: bold"

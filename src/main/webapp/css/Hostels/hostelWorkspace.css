@@ -37,11 +37,7 @@ body {
 
 .hostel-id {
   height: 2rem;
-  /* background-color: #e67e22; */
   text-decoration: none;
-  /* border-radius: 0.75rem; */
-  /* border: solid #e67e22; */
-  /* border-width: 0.1rem; */
   padding: 0.5rem 1rem;
 }
 
@@ -50,7 +46,8 @@ body {
   margin: 1rem;
 }
 
-.switch-button {
+.switch-button,
+.sign-out {
   font-size: 2rem;
   margin: 1rem;
   border-radius: 0.75rem;
@@ -60,22 +57,7 @@ body {
 }
 
 .sign-out {
-  height: 2rem;
   background-color: #e67e22;
-  color: white;
-  text-decoration: none;
-  border-radius: 0.75rem;
-  border: solid #e67e22;
-  border-width: 0.1rem;
-  padding: 0.5rem 1rem;
-  justify-content: center;
-  align-items: center;
-  /* transition: all 1s; */
-}
-
-.sign-out:hover {
-  border-width: 0.15rem;
-  /* box-shadow:inset 0rem 0rem 0rem 10rem #f00; */
 }
 
 .view-section,

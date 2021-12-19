@@ -656,7 +656,7 @@ class ProcessData {
       requirementInfo: reqObj,
       specializationInfo: specObj,
     };
-    // sendCommitData(processedData);
+    sendCommitData(processedData);
   }
 
   static processBasicInfo(obj) {

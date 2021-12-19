@@ -97,9 +97,17 @@ function callForStep2() {
     if (isAvailable(window.obj.landmark)) {
       alert("Sorry we didn't find this Landmark. Please create new one.");
     } else {
-      window.location.assign(
-        "hostelRegistrationS2.jsp?l=" + window.obj.landmark
-      );
+      var obj = {
+        signal: 2,
+        landmark: window.obj.landmark,
+      };
+      $.post("hostelRegister", obj, function (data, status) {
+        if (status === "success") {
+        } else {
+          alert("Something Went Wrong..!!");
+        }
+      });
+      window.location.assign("hostelRegistrationS2.jsp");
     }
   } else {
     alert("Select Landmark");

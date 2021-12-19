@@ -33,7 +33,7 @@ public class hostelWrite {
 		st.setString(7,"");
 		status=st.executeUpdate();
 
-		String sql2="create table "+tabname+" (hostel_id VARCHAR(15) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(20),owner_contact VARCHAR(15),hostel_type VARCHAR(10),hostel_gender VARCHAR(10),hostel_location VARCHAR(30),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(5),hostel_headline VARCHAR(45),hostel_roomtable VARCHAR(45),hostel_hotspottable VARCHAR(45),hostel_speacializationtable VARCHAR(45),hostel_policytable VARCHAR(45),hostel_requirementtable VARCHAR(45),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id))";
+		String sql2="create table "+tabname+" (hostel_id VARCHAR(15) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(25),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(5),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(45),hostel_hotspottable VARCHAR(45),hostel_speacializationtable VARCHAR(45),hostel_policytable VARCHAR(45),hostel_requirementtable VARCHAR(45),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id))";
 		PreparedStatement smt= con.prepareStatement(sql2);
 		status=smt.executeUpdate();
 		con.close();
@@ -78,11 +78,11 @@ public class hostelWrite {
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
-			sql="create table "+ht+" (hotspot VARCHAR(50));";
+			sql="create table "+ht+" (hotspot VARCHAR(100));";
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
-			sql="create table "+st+" (speacialization VARCHAR(100));";
+			sql="create table "+st+" (speacialization VARCHAR(150));";
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
@@ -104,7 +104,13 @@ public class hostelWrite {
 			smt.setString(5,"|||");
 			smt.setString(6,"||");
 			status=smt.executeUpdate();
-
+			
+			sql="insert into all_hostels values(?,?)";
+			smt=con.prepareStatement(sql);
+			smt.setString(1, h.hid);
+			smt.setString(2, h.hpassword);
+			status=smt.executeUpdate();
+			
 			con.close();
 		}
 		catch(Exception e) {

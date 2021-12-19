@@ -22,9 +22,14 @@ public class hostelsLoad extends HttpServlet {
     	int i= Integer.parseInt(request.getParameter("signal"));
     	if(i==0) {
 			try {
+				JSONObject ob = new JSONObject();
+				
 				ArrayList<JSONObject> list= hostelRead.getLandmarksBasicInfo();
+				ob.put("list", list);
+				JSONObject count = hostelRead.getCountOfHostels();
+				ob.put("count", count);
 				PrintWriter out = response.getWriter();
-				out.println(list.toString());
+				out.println(ob.toString());
 			} catch (Exception e) {
 				System.out.println("hello"+e.getMessage());
 			}

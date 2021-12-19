@@ -88,3 +88,193 @@ body {
 .color {
   background-color: #fdf2e9;
 }
+
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: initial;
+}
+
+.intro p {
+  margin: 0rem;
+  padding: 0rem;
+}
+.hostel-name {
+  color: #e67e22;
+  font-size: 3.6rem;
+  font-weight: bold;
+}
+
+.head-line {
+  font-size: 6.4rem;
+  font-weight: bold;
+}
+
+.by {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.owner-name {
+  color: #e67e22;
+}
+
+.info-section {
+  margin: 2rem 0rem 0rem 0rem;
+}
+
+.info-element {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 1rem 1rem 1rem;
+}
+
+.info {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0rem 0rem 0rem 2rem;
+  padding: 0.5rem 0rem 0rem 0rem;
+}
+
+.location {
+  text-decoration: none;
+  color: #e67e22;
+  font-size: 1.8rem;
+}
+
+.location:hover {
+  text-decoration: underline;
+}
+
+.illustration img {
+  width: 100%;
+  height: 45rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .view-room-section {
+  background-color: #fdf2e9;
+} */
+
+.view-tag {
+  font-size: 3.2rem;
+  font-weight: bold;
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.room-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.grid-for-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.grid-for-2 div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  grid-gap: 1rem;
+}
+
+.mini-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.room-cards-section,
+.food-cards-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1.5rem;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.spec-view-tags-section,
+.hp-view-tags-section,
+.req-view-tags-section,
+.hs-view-tags-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+ul {
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.food-card,
+.room-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 26rem;
+}
+
+.label {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  color: #e67e22;
+  margin: 0rem;
+}
+
+.label2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0.5rem 0rem 0rem 0rem;
+  margin: 0rem;
+}
+
+.field-box {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+.filed-box-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.notes {
+  overflow-wrap: break-word;
+}
+
+.no-data {
+  color: #e67e22;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.word-color {
+  color: #e67e22;
+}
