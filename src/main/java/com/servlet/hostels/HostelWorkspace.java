@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
@@ -54,6 +55,11 @@ public class HostelWorkspace extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println("hello1"+e.getMessage());
 			}
+		}
+		if(signal==1) {
+			System.out.println("called here vro");
+			HttpSession session= request.getSession();
+			session.removeAttribute("hid");
 		}
 	}
 }

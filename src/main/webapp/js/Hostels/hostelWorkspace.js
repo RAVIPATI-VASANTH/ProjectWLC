@@ -84,6 +84,9 @@ function showError(error) {
 class BasicInfo {
   static updateBasicInfoUi() {
     var hostel = window.modifiedData;
+    //Title Tag
+    document.getElementById("title-name").innerText =
+      "Workspace-" + hostel.basicInfo.hname;
     //hostelname
     document.getElementById("edit-hostel-name").value = hostel.basicInfo.hname;
     document.getElementById("view-hostel-name").innerHTML =
@@ -2268,8 +2271,6 @@ function dataConversion(obj, value) {
       window.originalData.specializationInfo = obj.specializationInfo;
       window.modifiedData.specializationInfo = obj.specializationInfo;
 
-      // console.log(window.modifiedData);
-
       BasicInfo.updateBasicInfoUi();
       RoomInfo.processRoomInfoData();
       FoodInfo.processFoodInfoData();
@@ -2298,7 +2299,21 @@ function getHostelInfo(hid) {
   });
 }
 
+function logout() {
+  $.post("HostelWorkspace", { signal: 1 }, function (data, status) {
+    if (status === "success") {
+    } else {
+      alert("Something Went Wrong..!!");
+    }
+  });
+  window.location.assign("Login.jsp");
+}
+
 window.onload = function () {
   var hid = processString(document.getElementById("hostel-id").innerHTML);
-  window.getHostelInfo(hid);
+  if (hid === "null") {
+    window.location.assign("Login.jsp");
+  } else {
+    window.getHostelInfo(hid);
+  }
 };

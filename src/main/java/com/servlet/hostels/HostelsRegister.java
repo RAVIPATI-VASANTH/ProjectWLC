@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
@@ -65,6 +67,8 @@ public class HostelsRegister extends HttpServlet {
 					out.println("error");
 				}
 				else {
+					HttpSession session =request.getSession();
+					session.setAttribute("hid", h.hid);
 					out.println("success");
 					//Create here a Session Object
 				}
@@ -72,6 +76,12 @@ public class HostelsRegister extends HttpServlet {
 				System.out.println("here 1"+e.getMessage());
 				out.println("error");
 			}
+		}
+		if(i==2) {
+			System.out.println("called here bro");
+			String landmark=request.getParameter("landmark").toString();
+			HttpSession session =request.getSession();
+			session.setAttribute("landmark", landmark);
 		}
 	}
 

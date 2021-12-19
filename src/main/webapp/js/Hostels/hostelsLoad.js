@@ -5,6 +5,13 @@ var hostelIds = [];
 function changeLandmark() {
   var lfname = document.getElementById("landmarks").value;
   changeLandmarkInfoSection(lfname);
+  currentLandmarks.forEach((element) => {
+    if (element.fullname === lfname) {
+      document
+        .getElementById("landmark-link")
+        .setAttribute("href", element.location);
+    }
+  });
   callForHostelsMinidata(lfname);
 }
 
@@ -102,9 +109,11 @@ function redirect(index) {
 }
 //Processing
 function updateLandmarksDatalist(data) {
-  var list = JSON.parse(data);
+  var obj = JSON.parse(data);
+  var list = obj.list;
+  var countobj = obj.count;
+  updateViewCountElements(countobj);
   window.currentLandmarks = list;
-  console.log(currentLandmarks);
   var element = document.getElementById("landmarks");
   list.forEach((item, index) => {
     var tag = document.createElement("option");
@@ -116,9 +125,18 @@ function updateLandmarksDatalist(data) {
   changeLandmark();
 }
 
-function changeLandmarkInfoSection(lname) {
+function updateViewCountElements(obj) {
+  var hcount = String(obj.hostelscount);
+  var lancount = String(obj.landmarkcount);
+  if (hcount.length < 2) hcount = "0" + hcount;
+  if (lancount.length < 2) lancount = "0" + lancount;
+  document.getElementById("hostel-count").innerText = hcount;
+  document.getElementById("landmark-count").innerText = lancount;
+}
+
+function changeLandmarkInfoSection(lname, location) {
   document.getElementById("landmark-name").innerHTML = lname;
-  //need to add new loaction to landmark
+  // document.getElementById("").setAttribute("href");
 }
 
 function callForHostelsMinidata(lfname) {

@@ -16,6 +16,9 @@ pageEncoding="ISO-8859-1"%>
     <title>WebsiteLoChudu-Login</title>
   </head>
   <body>
+  <%
+  			response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+	%>
     <section class="head-section">
       <a class="website-name" href="index.html">
         <strong>WebsiteLoChudu</strong>
@@ -26,16 +29,6 @@ pageEncoding="ISO-8859-1"%>
         >
       </nav>
     </section>
-
-    <section>
-      <!-- Message module -->
-    </section>
-
-    <div>
-      <nav class="modules-nav">
-        <a class="module">Hostels</a>
-      </nav>
-    </div>
 
     <div class="color">
       <section class="credentials-section">
@@ -49,7 +42,7 @@ pageEncoding="ISO-8859-1"%>
 
         <div class="credentials">
           <div class="form-element pad">
-            <label for="login-id" class="label">ID</label>
+            <label for="hostel-id" class="label">ID</label>
             <input
               type="text"
               id="hostel-id"
@@ -75,6 +68,7 @@ pageEncoding="ISO-8859-1"%>
       </section>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/Login.js"></script>
   </body>
 </html>

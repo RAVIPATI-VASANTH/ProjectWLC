@@ -71,6 +71,29 @@ public class hostelRead {
 		
 	}
 
+	public static JSONObject getCountOfHostels()throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		JSONObject ob = new JSONObject();
+		try {
+			String sql="select count(id) from landmarks;";
+			ResultSet rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				ob.put("landmarkcount", rs.getInt(1));
+			}
+			sql="select count(hostel_id) from all_hostels;";
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				ob.put("hostelscount", rs.getInt(1));
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return ob;
+	}
+	
 	public static JSONObject getHostelBasicInfo(String id,String lanmincode) throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
@@ -238,4 +261,36 @@ public class hostelRead {
 		}
 		return list;
 	}
+
+	public static int checkCredentials(String id,String password) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,user,pass);
+		Statement stmt=con.createStatement();
+		System.out.println("call for DB");
+		try {
+			String rspassword="";
+			String sql="select hostel_password from all_hostels where hostel_id = '"+id+"'";
+			ResultSet rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				rspassword=rs.getString(1);
+			}
+			con.close();
+			System.out.println(id+" "+password+" "+rspassword+"@");
+			System.out.println(password.equals(rspassword));
+			if(rspassword.equals("")) {
+				System.out.print("this 2");
+				return 0;
+			}
+			else if(password.equals(rspassword)) {
+				System.out.print("this");
+				return 1;
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.print("this 3");		
+		return 0;
+	}
 }
+

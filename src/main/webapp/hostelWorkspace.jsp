@@ -14,9 +14,12 @@ pageEncoding="ISO-8859-1"%>
     />
     <link rel="stylesheet" href="css/Hostels/hostelWorkspace.css" />
     <link rel="stylesheet" href="css/Hostels/hostelWorkspace2.css" />
-    <title>Workspace-Hostel</title>
+    <title id="title-name">Workspace</title>
   </head>
   <body>
+  	<%
+  			response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+	%>
     <section class="head-section">
       <a class="website-name" href="index.html">
         <strong>WebsiteLoChudu</strong>
@@ -26,7 +29,9 @@ pageEncoding="ISO-8859-1"%>
           ><strong
             >Hostel-Id
             <span id="hostel-id"
-              ><% out.println(request.getParameter("id"));%></span
+              ><% if(session.getAttribute("hid")==null){ out.println("null"); }
+              else{ out.println(session.getAttribute("hid").toString());
+              }%></span
             ></strong
           ></a
         >
@@ -37,7 +42,9 @@ pageEncoding="ISO-8859-1"%>
         >
           View Mode
         </button>
-        <a class="sign-out"><strong>sign out</strong></a>
+        <button class="sign-out" onclick="logout()">
+          <strong>Log Out</strong>
+        </button>
       </nav>
     </section>
 

@@ -16,6 +16,9 @@ pageEncoding="ISO-8859-1"%>
     <title>Hostel Registration-Step 2</title>
   </head>
   <body>
+  <%
+  			response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+	%>
     <section class="head-section">
       <a class="website-name" href="index.html"
         ><strong>WebsiteLoChudu</strong></a
@@ -206,10 +209,7 @@ pageEncoding="ISO-8859-1"%>
         <div class="form-element">
           <label for="" class="label">Landmark</label>
           <input type="text" id="landmark" class="text-input" readonly value="<%
-          String s=request.getParameter("l"); out.println(s); %>"/>
-          <!-- <dump id="dump"
-            ><% out.println(request.getParameter("l").toString()); %></dump
-          > -->
+          String s=session.getAttribute("landmark").toString(); out.println(s); %>"/>
         </div>
       </div>
     </div>
