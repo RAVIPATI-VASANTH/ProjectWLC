@@ -16,8 +16,8 @@ class SearchScore {
     if (obj.htype === "community") {
       if (obj.hcommunity.trim() !== "") score += 10;
     } else score += 10;
-    document.getElementById("score").innerText =
-      window.modifiedData.searchScore;
+    //location
+    if (obj.hlocation.trim() !== "") score += 10;
     return score;
   }
 
@@ -214,10 +214,11 @@ class CommitValidation {
       alert("Strength should not be exceed 5 charecters");
       signal = true;
     }
-    // if (!/^[0-9]{1-5}$/.test(obj.hstrength.trim())) {
-    //   alert("Strength should be only numbers");
-    //   signal = true;
-    // }
+    //Location
+    if (!obj.hlocation.includes("www.google.com/maps")) {
+      alert("Location Link is not a valid link");
+      signal = true;
+    }
     if (signal) return false;
     else return true;
   }
@@ -349,7 +350,6 @@ class CommitValidation {
     var signal = false;
     obj.preList.forEach((element) => {
       if (element.type === "Pay And Use") {
-        console.log("called");
         if (element.amount === "") {
           alert("For " + element.specname + " Amount is required.");
           signal = true;
@@ -423,8 +423,6 @@ class CommitValidation {
 }
 
 function sendCommitData(obj) {
-  console.log(obj);
-  console.log(JSON.stringify(obj.basicInfo));
   $.post(
     "HostelWorkspaceCommit",
     {
@@ -444,6 +442,7 @@ function sendCommitData(obj) {
       }
     }
   );
+  alert("Please wait for response dont close the window or tab.");
 }
 
 class ForSeparator {

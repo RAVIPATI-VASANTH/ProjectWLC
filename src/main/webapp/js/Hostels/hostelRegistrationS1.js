@@ -82,7 +82,6 @@ function checkChange(value) {
 function updateLandmarksDatalist(data) {
   var list = JSON.parse(data);
   window.currentLandmarks = list;
-  console.log(currentLandmarks);
   var element = document.getElementById("landmarks");
   list.forEach((item, index) => {
     var tag = document.createElement("option");
@@ -144,7 +143,6 @@ function createLandmarkCode() {
     list.push(Number(element.id.split("_")[1]));
   });
   list = sortOrder(list);
-  console.log(list);
   var num = list[list.length - 1];
   num += 1;
   var str = "lan_" + String(num);

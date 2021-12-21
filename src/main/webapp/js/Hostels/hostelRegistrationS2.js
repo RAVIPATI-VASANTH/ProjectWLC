@@ -110,6 +110,17 @@ function checkChange(value) {
       }
       generateHostelId();
       break;
+
+    case 6:
+      var loc = document.getElementById("location-input").value;
+      if (loc.includes("www.google.com/maps")) {
+        obj.hlocation = document.getElementById("location-input").value;
+        objsignal.hlocation = true;
+      } else {
+        obj.hlocation = "";
+        objsignal.hlocation = false;
+      }
+      break;
   }
 
   window.obj = obj;
@@ -169,52 +180,6 @@ function checkDataValidation() {
   }
   if (signal) {
     sendNewHostelData();
-  }
-}
-
-//Location Related functions
-function addLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(success, showError);
-  } else {
-    document.getElementById("location-status").innerText =
-      "Geolocation is<br>not supported<br>by this browser.";
-  }
-}
-
-function success(position) {
-  obj.hlocation = position.coords.latitude + "&" + position.coords.longitude;
-  objsignal.hlocation = true;
-  // x.innerHTML =
-  //   "Latitude: " +
-  //   position.coords.latitude +
-  //   "<br>Longitude: " +
-  //   position.coords.longitude;
-  document.getElementById("location-button").style.display = "none";
-  document.getElementById("location-status").style.backgroundColor = "#63c28d";
-  document.getElementById("location-status").innerText = "Added";
-}
-
-function showError(error) {
-  obj.hlocation = "";
-  objsignal.hlocation = false;
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      document.getElementById("location-status").innerText =
-        "User denied the request for Geolocation.";
-      break;
-    case error.POSITION_UNAVAILABLE:
-      document.getElementById("location-status").innerText =
-        "Location information is unavailable.";
-      break;
-    case error.TIMEOUT:
-      document.getElementById("location-status").innerText =
-        "The request to get user location timed out.";
-      break;
-    case error.UNKNOWN_ERROR:
-      document.getElementById("location-status").innerText =
-        "An unknown error occurred.";
-      break;
   }
 }
 
@@ -282,6 +247,7 @@ function processString(s) {
 
 function sendNewHostelData() {
   var obj = window.obj;
+  console.log(obj);
   $.post(
     "hostelRegister",
     {

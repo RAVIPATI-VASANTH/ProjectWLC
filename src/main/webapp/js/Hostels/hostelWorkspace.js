@@ -32,52 +32,14 @@ function switchMode(mode) {
   var button = document.getElementById("switch-button");
   if (mode === 0) {
     button.setAttribute("onclick", "switchMode(" + 1 + ")");
-    button.innerHTML = "Edit Mode";
+    button.innerHTML = "<strong>Edit Mode</strong>";
     document.getElementById("view").setAttribute("class", "");
     document.getElementById("edit").setAttribute("class", "hide");
   } else {
     button.setAttribute("onclick", "switchMode(" + 0 + ")");
-    button.innerHTML = "View Mode";
+    button.innerHTML = "<strong>View Mode</strong>";
     document.getElementById("view").setAttribute("class", "hide");
     document.getElementById("edit").setAttribute("class", "");
-  }
-}
-
-//Location Related functions
-function addLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(success, showError);
-  } else {
-    document.getElementById("location-status").innerText =
-      "Geolocation is<br>not supported<br>by this browser.";
-  }
-}
-
-function success(position) {
-  window.modifiedData.basicInfo.hlocation =
-    position.coords.latitude + "&" + position.coords.longitude;
-  document.getElementById("location").innerText = "Updated";
-  document.getElementById("location").style.backgroundColor = "lightgreen";
-}
-
-function showError(error) {
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      document.getElementById("location-status").innerText =
-        "User denied the request for Geolocation.";
-      break;
-    case error.POSITION_UNAVAILABLE:
-      document.getElementById("location-status").innerText =
-        "Location information is unavailable.";
-      break;
-    case error.TIMEOUT:
-      document.getElementById("location-status").innerText =
-        "The request to get user location timed out.";
-      break;
-    case error.UNKNOWN_ERROR:
-      document.getElementById("location-status").innerText =
-        "An unknown error occurred.";
-      break;
   }
 }
 
@@ -144,7 +106,7 @@ class BasicInfo {
       hostel.basicInfo.hlfname;
     //location
     document.getElementById("location").href = hostel.basicInfo.hlocation;
-
+    document.getElementById("edit-location").value = hostel.basicInfo.hlocation;
     window.modifiedData = hostel;
 
     window.modifiedData.searchScore -= window.modifiedData.basicInfoScore;
@@ -185,6 +147,8 @@ class BasicInfo {
     if (document.getElementById("hostel-gender-female").checked) {
       hostel.basicInfo.hgender = "female";
     }
+    //hostel location
+    hostel.basicInfo.hlocation = document.getElementById("edit-location").value;
     this.updateBasicInfoUi();
     window.modifiedData = hostel;
   }
@@ -462,7 +426,6 @@ class FoodInfo {
   }
 
   static updateFoodInfo() {
-    // console.log("food info called");
     var obj = window.modifiedData.foodInfo;
     //Breakfast
     obj.breakfast.time = document.getElementById("breakfast-time").value;
@@ -1143,7 +1106,6 @@ class SpecializationInfo {
   }
 
   static classifyData(element, index) {
-    console.log("Not to be called");
     var result = {
       signal: 0,
       obj: "",
@@ -2255,7 +2217,6 @@ function dataConversion(obj, value) {
   switch (value) {
     case 0:
       obj = JSON.parse(obj);
-      console.log(obj);
       window.originalData.basicInfo = obj.basicInfo;
       window.modifiedData.basicInfo = obj.basicInfo;
       window.originalData.foodInfo = obj.foodInfo;

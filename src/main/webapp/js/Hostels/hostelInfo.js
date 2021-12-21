@@ -310,7 +310,6 @@ class RoomInfo {
     var signal = true;
     var rawlist = window.modifiedData.roomInfo;
     if (rawlist.length === 0) {
-      // console.log(rawlist);
       signal = false;
       this.emptyCondition();
     }
@@ -364,7 +363,6 @@ class RoomInfo {
   }
 
   static emptyCondition() {
-    console.log("called");
     var maindiv = document.getElementById("room-cards-section");
 
     var p = document.createElement("P");
@@ -712,7 +710,6 @@ class SpecializationInfo {
   }
 
   static classifyData(element, index) {
-    console.log("Not to be called");
     var result = {
       signal: 0,
       obj: "",

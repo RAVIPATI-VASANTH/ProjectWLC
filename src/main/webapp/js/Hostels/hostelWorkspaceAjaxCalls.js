@@ -30,7 +30,6 @@ function getHostelFoodInfo(hid) {
 }
 
 function getHostelRoomInfo(hostel) {
-  console.log(hostel.basicInfo.hrtable);
   var rt = processString(hostel.basicInfo.hrtable);
   var obj = {
     signal: 2,

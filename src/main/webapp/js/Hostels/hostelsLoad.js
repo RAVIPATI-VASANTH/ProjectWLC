@@ -1,4 +1,5 @@
 "use strict;";
+var signalsList = [false, true, true, true, true, true];
 var currentLandmarks = [];
 var hostelIds = [];
 //UI interacting functions
@@ -15,6 +16,19 @@ function changeLandmark() {
   callForHostelsMinidata(lfname);
 }
 
+function sort(list) {
+  for (var i = 0; i < list.length - 1; i++) {
+    for (var j = 0; j < list.length - i - 1; j++) {
+      if (Number(list[j].hsearchscore) < Number(list[j + 1].hsearchscore)) {
+        var temp = list[j];
+        list[j] = list[j + 1];
+        list[j + 1] = temp;
+      }
+    }
+  }
+  return list;
+}
+
 function createHostelitems(list) {
   // removing all previous items
   var maindiv = document.getElementById("hostels-list");
@@ -23,6 +37,7 @@ function createHostelitems(list) {
   }
   window.hostelIds = [];
   index = 0;
+  list = sort(list);
   list.forEach((element) => {
     //creating item div
     var hItemDiv = document.createElement("div");
@@ -107,6 +122,17 @@ function createHostelitems(list) {
 function redirect(index) {
   window.location.assign("hostelInfo.jsp?id=" + window.hostelIds[index]);
 }
+
+function toggleMoreInfo(index) {
+  var div = document.getElementById("word-" + index);
+  if (signalsList[index]) {
+    div.setAttribute("class", "hide");
+    signalsList[index] = false;
+  } else {
+    div.setAttribute("class", "");
+    signalsList[index] = true;
+  }
+}
 //Processing
 function updateLandmarksDatalist(data) {
   var obj = JSON.parse(data);
@@ -177,4 +203,9 @@ function getHostelsMiniData(tname) {
 
 window.onload = function () {
   getLandmarks();
+  if (window.innerWidth < 750) {
+    for (var i = 0; i < signalsList.length; i++) {
+      toggleMoreInfo(i);
+    }
+  }
 };

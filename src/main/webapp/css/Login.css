@@ -148,3 +148,68 @@ body {
 .notes {
   word-break: break-all;
 }
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: initial;
+  margin: 0rem 15rem 2rem 15rem;
+}
+
+.production {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-3-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  justify-items: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.word-color {
+  color: #e67e22;
+}
+
+.flex-div-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: initial;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.footer-info {
+  font-size: 1.5rem;
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.header {
+  font-size: 2rem;
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: initial;
+  font-size: 1.5rem;
+}
+
+.color {
+  background-color: #fdf2e9;
+}

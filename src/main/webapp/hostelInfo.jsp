@@ -113,6 +113,84 @@ pageEncoding="ISO-8859-1"%>
         </div>
       </div>
     </div>
+
+    <footer class="color">
+      <div class="footer-section">
+        <div class="production header"><p><strong>a <span class="word-color">Vasanth Ravipati</span> production</strong></p></div>
+        <div class="grid-3-div">
+          <div class="flex-div-column">
+            <div class="header word-color">
+              <p><strong>Note from us</strong></p>
+            </div>
+            <div class="items">
+              <p class="footer-info"><strong>Illustrations from</strong></p>
+              <p>
+                <a href="https://www.storyset.com/" class="word-color link"
+                  ><strong>Storyset</strong></a
+                >
+              </p>
+              <p class="footer-info"><strong>Icons from</strong></p>
+              <p>
+                <a href="https://iconscout.com/" class="word-color link"
+                  ><strong>iconscout</strong></a
+                >
+              </p>
+              <p>
+                <a href="https://www.flaticon.com/" class="word-color link"
+                  ><strong>flaticons</strong></a
+                >
+              </p>
+            </div>
+          </div>
+          <div class="flex-div-column">
+            <div class="header word-color">
+              <p><strong>Social Media</strong></p>
+            </div>
+            <div class="items">
+              <p class="footer-info">
+                <strong>Gmail</strong>
+              </p>
+              <p class="word-color">
+                <strong>websitelochudu@gmail.com</strong>
+              </p>
+              <p class="footer-info">
+                <strong>Instagram</strong>
+              </p>
+              <p class="word-color">
+                <strong>@websitelochudu</strong>
+              </p>
+            </div>
+          </div>
+          <div class="flex-div-column">
+            <div class="header word-color">
+              <p><strong>Developer's Contact</strong></p>
+            </div>
+            <div class="items">
+              <p class="footer-info">
+                <strong>Gmail</strong>
+              </p>
+              <p class="word-color">
+                <strong>vasanthravipati99@gmail.com</strong>
+              </p>
+              <p class="footer-info">
+                <strong>GitHub</strong>
+              </p>
+              <p class="word-color">
+                <strong>@RAVIPATI-VASANTH</strong>
+              </p>
+              <p class="footer-info">
+                <strong>LinkedIn</strong>
+              </p>
+              <p class="word-color">
+                <strong>Vasanth Ravipati</strong>
+              </p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/Hostels/hostelInfo.js"></script>
   </body>
