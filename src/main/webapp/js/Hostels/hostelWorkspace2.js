@@ -736,7 +736,9 @@ class ProcessData {
         "-" +
         element.stayonly.semester +
         "-" +
-        element.stayonly.annum;
+        element.stayonly.annum +
+        "|" +
+        element.notes;
       list.push(text);
     });
     return list;

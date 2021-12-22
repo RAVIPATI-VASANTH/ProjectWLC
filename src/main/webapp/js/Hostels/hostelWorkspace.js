@@ -493,6 +493,7 @@ class RoomInfo {
       };
 
       var words = element.split("|");
+      console.log(words);
       obj.planname = words[0];
       obj.type = words[1];
       obj.bathroom = words[2];
@@ -501,11 +502,11 @@ class RoomInfo {
       obj.stayandfood.monthly = prices[0];
       obj.stayandfood.semester = prices[1];
       obj.stayandfood.annum = prices[2];
-      prices = words[4].split("-");
+      prices = words[5].split("-");
       obj.stayonly.monthly = prices[0];
       obj.stayonly.semester = prices[1];
       obj.stayonly.annum = prices[2];
-      obj.notes = words[5];
+      obj.notes = words[6];
       obj.index = index;
 
       index++;
