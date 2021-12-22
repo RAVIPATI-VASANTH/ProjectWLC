@@ -36,28 +36,43 @@ body {
 }
 
 .hostel-id {
-  height: 2rem;
+  font-size: 2rem;
+  margin: 1rem;
   text-decoration: none;
-  padding: 0.5rem 1rem;
 }
 
-.head-section a {
+.head-section button {
   font-size: 2rem;
   margin: 1rem;
 }
 
-.switch-button,
-.sign-out {
-  font-size: 2rem;
-  margin: 1rem;
-  border-radius: 0.75rem;
-  font-weight: bold;
+.switch-button {
   background-color: white;
+  color: #e67e22;
+  border-radius: 0.75rem;
+  border: solid #e67e22;
+  border-width: 0.1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
 }
 
+.switch-button:hover {
+  border-width: 0.15rem;
+}
+
 .sign-out {
+  width: 13.1rem;
   background-color: #e67e22;
+  color: white;
+  border-radius: 0.75rem;
+  border: solid #e67e22;
+  border-width: 0.1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.sign-out:hover {
+  border-width: 0.15rem;
 }
 
 .view-section,
@@ -65,13 +80,6 @@ body {
   max-width: 130rem;
   margin: 0rem 15rem 0rem 15rem;
 }
-
-/* .view,
-.edit {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-} */
 
 .color {
   background-color: #fdf2e9;
@@ -365,4 +373,69 @@ body {
 .commit-button {
   width: auto;
   height: auto;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: initial;
+  margin: 0rem 15rem 2rem 15rem;
+}
+
+.production {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-3-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  justify-items: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.word-color {
+  color: #e67e22;
+}
+
+.flex-div-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: initial;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.footer-info {
+  font-size: 1.5rem;
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.header {
+  font-size: 2rem;
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: initial;
+  font-size: 1.5rem;
+}
+
+.color {
+  background-color: #fdf2e9;
 }

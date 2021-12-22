@@ -17,11 +17,8 @@ function validateLoginDetails() {
       hid: id,
       password: pass,
     };
-    console.log(obj);
     $.post("hostelLogin", obj, function (data, status) {
       if (status === "success") {
-        console.log(data);
-        console.log(Number(data));
         if (Number(data) == 0) {
           alert("The entered Hostel-Id or Password is Inavlid.");
         } else {

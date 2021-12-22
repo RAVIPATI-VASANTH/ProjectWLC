@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import org.json.simple.*;
+import org.json.simple.JSONObject;
 
 public class hostelRead {
 	static String url= "jdbc:mysql://localhost:3306/hostelsdb";

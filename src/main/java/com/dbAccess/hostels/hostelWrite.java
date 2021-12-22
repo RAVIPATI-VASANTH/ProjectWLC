@@ -146,8 +146,9 @@ public class hostelWrite {
 			String hcommunity=binfo.get("hcommunity").toString();
 			String hgender=binfo.get("hgender").toString();
 			String hsscore=binfo.get("hsearchscore").toString();
+			String hlocation=binfo.get("hlocation").toString();
 
-			sql="update "+tname+" set hostel_name=?,owner_name=?,owner_contact=?,hostel_type=?,hostel_gender=?,hostel_strength=?,hostel_headline=?,hostel_community=?,hostel_searchscore=? where hostel_id=?";
+			sql="update "+tname+" set hostel_name=?,owner_name=?,owner_contact=?,hostel_type=?,hostel_gender=?,hostel_strength=?,hostel_headline=?,hostel_community=?,hostel_searchscore=?,hostel_location=? where hostel_id=?";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,hname);
 			smt.setString(2,honame);
@@ -158,7 +159,8 @@ public class hostelWrite {
 			smt.setString(7,hheadline);
 			smt.setString(8,hcommunity);
 			smt.setString(9,hsscore);
-			smt.setString(10,hid);
+			smt.setString(10,hlocation);
+			smt.setString(11, hid);
 			smt.executeUpdate();
 			con.close();
 			return true;			
