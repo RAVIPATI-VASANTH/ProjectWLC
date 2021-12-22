@@ -1,4 +1,13 @@
 "use strict";
+var hideSectionsList = [
+  "room-cards-section",
+  "food-cards-section",
+  "spec-view-tags-section",
+  "hp-view-tags-section",
+  "req-view-tags-section",
+  "hs-view-tags-section",
+];
+
 class Hostel {
   constructor() {
     this.basicInfo;
@@ -46,7 +55,7 @@ class BasicInfo {
       hostel.basicInfo.hocontact;
     //strength
     document.getElementById("view-strength").innerHTML =
-      hostel.basicInfo.hstrength;
+      "Current Strength - " + hostel.basicInfo.hstrength;
     //hostel type
     if (hostel.basicInfo.htype === "public") {
       document.getElementById("view-type").innerHTML =
@@ -351,7 +360,7 @@ class RoomInfo {
       obj.stayonly.monthly = prices[0];
       obj.stayonly.semester = prices[1];
       obj.stayonly.annum = prices[2];
-      obj.notes = words[5];
+      obj.notes = words[6];
       obj.index = index;
 
       index++;
@@ -1053,6 +1062,19 @@ class RequirementInfo {
   }
 }
 
+class Toggle {
+  static toggleSection(index) {
+    if (sectionSignalList[index]) {
+      document.getElementById("section-" + index).setAttribute("class", "hide");
+      sectionSignalList[index] = false;
+    } else {
+      document.getElementById("section-" + index).setAttribute("class", "");
+      sectionSignalList[index] = true;
+    }
+    console.log("called");
+  }
+}
+
 class HotspotInfo {
   static processHotspotInfoData() {
     var list = [];
@@ -1180,11 +1202,21 @@ function getHostelInfo(hid) {
   });
 }
 
+var sectionSignalList = [true, true, true, true, true, true];
+
 window.onload = function () {
   var hid = processString(document.getElementById("hostel-id").innerHTML);
   if (hid === "null") {
     window.location.assign("Login.jsp");
   } else {
     window.getHostelInfo(hid);
+  }
+  if (window.innerWidth < 540) {
+    sectionSignalList = [false, true, true, true, true, true];
+    Toggle.toggleSection(1);
+    Toggle.toggleSection(2);
+    Toggle.toggleSection(3);
+    Toggle.toggleSection(4);
+    Toggle.toggleSection(5);
   }
 };

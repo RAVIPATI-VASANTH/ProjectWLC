@@ -13,6 +13,7 @@ pageEncoding="ISO-8859-1"%>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/Login.css" />
+    <link rel="stylesheet" href="css/Hostels/LoginMediaQueries.css">
     <title>WebsiteLoChudu-Login</title>
   </head>
   <body>
@@ -29,8 +30,8 @@ pageEncoding="ISO-8859-1"%>
       </nav>
     </section>
 
-    <div class="color">
-      <section class="credentials-section">
+    <div class="">
+      <section class="credentials-section"  style="padding: 1rem;">
         <div class="illustration">
           <img
             class="illustration-img"
@@ -67,9 +68,9 @@ pageEncoding="ISO-8859-1"%>
       </section>
     </div>
 
-    <footer class="">
+    <footer class="color">
       <div class="footer-section">
-        <div class="production header"><p><strong>a <span class="word-color">Ravipati Vasanth</span> production</strong></p></div>
+        <div class="production header"><p><strong>a <span class="word-color">Vasanth Ravipati</span> production</strong></p></div>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
