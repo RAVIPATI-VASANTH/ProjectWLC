@@ -13,6 +13,7 @@ pageEncoding="ISO-8859-1"%>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/Hostels/hostelRegistrationS1.css" />
+    <link rel="stylesheet" href="css/Hostels/hostelRegistrationS1MediaQueries.css">
     <title>Hostel Registration-Step 1</title>
   </head>
   <body>
@@ -21,7 +22,7 @@ pageEncoding="ISO-8859-1"%>
         ><strong>WebsiteLoChudu</strong></a
       >
       <nav class="nav">
-        <a href="Login.jsp" class="Workspace"><strong>Workspace</strong></a>
+        <a href="Login.jsp" class="Workspace extra"><strong>Workspace</strong></a>
       </nav>
     </section>
 
@@ -152,10 +153,6 @@ pageEncoding="ISO-8859-1"%>
             </li>
             <br />
           </ul>
-          <!-- <li class="phrase1 notes">
-            Make Sure you must need to register the hostel, with the new
-            landmark created
-          </li> -->
         </div>
       </section>
     </section>
@@ -166,22 +163,22 @@ pageEncoding="ISO-8859-1"%>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
-              <p><strong>Note from us</strong></p>
+              <p><strong>Resources</strong></p>
             </div>
             <div class="items">
               <p class="footer-info"><strong>Illustrations from</strong></p>
-              <p>
+              <p style="margin: 0rem; padding: 0rem;">
                 <a href="https://www.storyset.com/" class="word-color link"
                   ><strong>Storyset</strong></a
                 >
               </p>
               <p class="footer-info"><strong>Icons from</strong></p>
-              <p>
+              <p style="margin: 0rem; padding: 0rem;">
                 <a href="https://iconscout.com/" class="word-color link"
                   ><strong>iconscout</strong></a
                 >
               </p>
-              <p>
+              <p style="margin: 0rem; padding: 0rem;">
                 <a href="https://www.flaticon.com/" class="word-color link"
                   ><strong>flaticons</strong></a
                 >
@@ -196,13 +193,13 @@ pageEncoding="ISO-8859-1"%>
               <p class="footer-info">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>websitelochudu@gmail.com</strong>
               </p>
               <p class="footer-info">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>@websitelochudu</strong>
               </p>
             </div>
@@ -215,19 +212,19 @@ pageEncoding="ISO-8859-1"%>
               <p class="footer-info">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>vasanthravipati99@gmail.com</strong>
               </p>
               <p class="footer-info">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>@RAVIPATI-VASANTH</strong>
               </p>
               <p class="footer-info">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>Vasanth Ravipati</strong>
               </p>
             </div>

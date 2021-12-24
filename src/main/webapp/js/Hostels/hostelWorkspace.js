@@ -70,7 +70,7 @@ class BasicInfo {
     //strength
     document.getElementById("edit-strength").value = hostel.basicInfo.hstrength;
     document.getElementById("view-strength").innerHTML =
-      hostel.basicInfo.hstrength;
+      "Current Strength - Vacancies - Queued : " + hostel.basicInfo.hstrength;
     //hostel type
     if (hostel.basicInfo.htype === "public") {
       document.getElementById("edit-type-public").checked = true;
