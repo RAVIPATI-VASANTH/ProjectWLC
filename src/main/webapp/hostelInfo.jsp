@@ -133,7 +133,7 @@ pageEncoding="ISO-8859-1"%>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
-              <p><strong>Note from us</strong></p>
+              <p><strong>Resources</strong></p>
             </div>
             <div class="items">
               <p class="footer-info"><strong>Illustrations from</strong></p>

@@ -13,6 +13,7 @@ pageEncoding="ISO-8859-1"%>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/Hostels/hostelRegistrationS2.css" />
+    <link rel="stylesheet" href="css/Hostels/hostelRegistrationS2MediaQueries.css">
     <title>Hostel Registration-Step 2</title>
   </head>
   <body>
@@ -230,7 +231,7 @@ pageEncoding="ISO-8859-1"%>
         </div>
 
         <div class="credentials">
-          <div class="form-element pad">
+          <div class="form-element ">
             <label for="hostel-id" class="label">Hostel-ID</label>
             <input type="text" id="hostel-id" readonly class="text-input" />
           </div>
@@ -266,22 +267,22 @@ pageEncoding="ISO-8859-1"%>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
-              <p><strong>Note from us</strong></p>
+              <p><strong>Resources</strong></p>
             </div>
             <div class="items">
               <p class="footer-info"><strong>Illustrations from</strong></p>
-              <p>
+              <p style="margin: 0rem; padding: 0rem;">
                 <a href="https://www.storyset.com/" class="word-color link"
                   ><strong>Storyset</strong></a
                 >
               </p>
               <p class="footer-info"><strong>Icons from</strong></p>
-              <p>
+              <p style="margin: 0rem; padding: 0rem;">
                 <a href="https://iconscout.com/" class="word-color link"
                   ><strong>iconscout</strong></a
                 >
               </p>
-              <p>
+              <p style="margin: 0rem; padding: 0rem;">
                 <a href="https://www.flaticon.com/" class="word-color link"
                   ><strong>flaticons</strong></a
                 >
@@ -296,13 +297,13 @@ pageEncoding="ISO-8859-1"%>
               <p class="footer-info">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>websitelochudu@gmail.com</strong>
               </p>
               <p class="footer-info">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;"> 
                 <strong>@websitelochudu</strong>
               </p>
             </div>
@@ -315,19 +316,19 @@ pageEncoding="ISO-8859-1"%>
               <p class="footer-info">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>vasanthravipati99@gmail.com</strong>
               </p>
               <p class="footer-info">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>@RAVIPATI-VASANTH</strong>
               </p>
               <p class="footer-info">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-color">
+              <p class="word-color" style="margin: 0rem; padding: 0rem;">
                 <strong>Vasanth Ravipati</strong>
               </p>
             </div>

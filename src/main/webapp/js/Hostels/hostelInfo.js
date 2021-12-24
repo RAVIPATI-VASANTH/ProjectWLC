@@ -55,7 +55,7 @@ class BasicInfo {
       hostel.basicInfo.hocontact;
     //strength
     document.getElementById("view-strength").innerHTML =
-      "Current Strength - " + hostel.basicInfo.hstrength;
+      "Current Strength - Vacancies - Queued : " + hostel.basicInfo.hstrength;
     //hostel type
     if (hostel.basicInfo.htype === "public") {
       document.getElementById("view-type").innerHTML =

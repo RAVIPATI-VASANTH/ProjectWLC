@@ -190,8 +190,8 @@ pageEncoding="ISO-8859-1"%>
             <input type="text" id="edit-owner-contact" class="text-input" />
           </div>
           <div class="form-element">
-            <label for="edit-strength" class="label">Current Strength</label>
-            <input type="text" id="edit-strength" class="text-input" />
+            <label for="edit-strength" class="label" >C-V-Q</label>
+            <input type="text" id="edit-strength" class="text-input" placeholder="current strength-vacancies-Queued"/>
           </div>
           <div class="form-element">
             <label for="" class="label">Hostel Type</label>

@@ -210,8 +210,13 @@ class CommitValidation {
       alert("Strength is not to be Empty");
       signal = true;
     }
-    if (obj.hstrength.length > 5) {
+    if (obj.hstrength.length > 20) {
       alert("Strength should not be exceed 5 charecters");
+      signal = true;
+    }
+    var words = obj.hstrength.split("-");
+    if (!words.length === 3) {
+      alert("Please enter correct Format for CVQ field.");
       signal = true;
     }
     //Location
