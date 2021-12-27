@@ -127,7 +127,7 @@ function createHostelitems(list) {
 }
 
 function redirect(index) {
-  window.location.assign("hostelInfo.jsp?id=" + window.hostelIds[index]);
+  window.location.assign("HostelInfo.jsp?id=" + window.hostelIds[index]);
 }
 
 function toggleMoreInfo(index) {
