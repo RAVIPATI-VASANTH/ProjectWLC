@@ -174,7 +174,7 @@ body p {
   flex-direction: column;
   justify-content: flex-start;
   align-items: initial;
-  margin: 0rem 10% 2rem 10%;
+  margin: 0rem 10% 0rem 10%;
 }
 
 .production {
@@ -221,7 +221,6 @@ body p {
 
 .header {
   font-size: 2rem;
-  padding: 2rem;
 }
 .items {
   display: flex;

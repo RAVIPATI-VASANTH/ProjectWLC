@@ -165,6 +165,7 @@ body {
   font-weight: bold;
   padding: 0rem;
   margin: 0rem;
+  cursor: pointer;
 }
 
 .room-cards {

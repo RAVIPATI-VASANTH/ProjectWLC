@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 
@@ -167,7 +168,7 @@ public class hostelWrite {
 			return true;			
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			System.out.println("here 02"+e.getMessage());
 		}
 		return false;
 	}
@@ -200,124 +201,145 @@ public class hostelWrite {
 		return false;
 	}
 	
-	public static boolean commitRoomInfo(ArrayList<String> roomlist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitRoomInfo(List<String> roomlist,String tname) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
 			
 			stmt.execute("truncate table "+tname+";");
-
-			for(String s: roomlist) {
-				s=s.substring(1, s.length()-1);
-				String sql="insert into "+tname+" values(?)";
-				PreparedStatement smt=con.prepareStatement(sql);
-				smt.setString(1,s);
-				smt.executeUpdate();
+			System.out.println(roomlist+" "+roomlist.size());
+			if(!roomlist.isEmpty()) {
+				for(String s: roomlist) {
+					if(s=="") {
+						continue;
+					}
+					s=s.substring(1, s.length()-1);
+					
+					String sql="insert into "+tname+" values(?)";
+					PreparedStatement smt=con.prepareStatement(sql);
+					smt.setString(1,s);
+					smt.executeUpdate();
+				}
+				con.close();
+				return true;
 			}
-			con.close();
-			return true;
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			System.out.println("here 5"+e.getMessage());
 		}
 		return false;
 	}
 	
-	public static boolean commitPolicyInfo(ArrayList<String> policylist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitPolicyInfo(List<String> policylist,String tname) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
 			
 			stmt.execute("truncate table "+tname+";");
-
-			for(String s: policylist) {
-				s=s.substring(1, s.length()-1);
-				String sql="insert into "+tname+" values(?)";
-				PreparedStatement smt=con.prepareStatement(sql);
-				smt.setString(1,s);
-				smt.executeUpdate();
+			if(!policylist.isEmpty()) {				
+				for(String s: policylist) {
+					if(s=="") {
+						continue;
+					}
+					s=s.substring(1, s.length()-1);
+					String sql="insert into "+tname+" values(?)";
+					PreparedStatement smt=con.prepareStatement(sql);
+					smt.setString(1,s);
+					smt.executeUpdate();
+				}
+				con.close();
+				return true;
 			}
-			con.close();
-			return true;
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			System.out.println("here 6"+e.getMessage());
 		}
 		return false;
 	}
 
-	public static boolean commitHotspotInfo(ArrayList<String> hotspotslist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitHotspotInfo(List<String> hotspotslist,String tname) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
 			
 			stmt.execute("truncate table "+tname+";");
-
-			for(String s: hotspotslist) {
-				s=s.substring(1, s.length()-1);
-				String sql="insert into "+tname+" values(?)";
-				PreparedStatement smt=con.prepareStatement(sql);
-				smt.setString(1,s);
-				smt.executeUpdate();
+			if(!hotspotslist.isEmpty()) {				
+				for(String s: hotspotslist) {
+					if(s=="") {
+						continue;
+					}
+					s=s.substring(1, s.length()-1);
+					String sql="insert into "+tname+" values(?)";
+					PreparedStatement smt=con.prepareStatement(sql);
+					smt.setString(1,s);
+					smt.executeUpdate();
+				}
+				con.close();
+				return true;
 			}
-			con.close();
-			return true;
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			System.out.println("here 8"+e.getMessage());
 		}
 		return false;
 	}
 
-	public static boolean commitReqInfo(ArrayList<String> requirementslist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitReqInfo(List<String> requirementslist,String tname) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
 			
 			stmt.execute("truncate table "+tname+";");
-
-			for(String s: requirementslist) {
-				s=s.substring(1, s.length()-1);
-				String sql="insert into "+tname+" values(?)";
-				PreparedStatement smt=con.prepareStatement(sql);
-				smt.setString(1,s);
-				smt.executeUpdate();
+			if(!requirementslist.isEmpty()) {				
+				for(String s: requirementslist) {
+					if(s=="") {
+						continue;
+					}
+					s=s.substring(1, s.length()-1);
+					String sql="insert into "+tname+" values(?)";
+					PreparedStatement smt=con.prepareStatement(sql);
+					smt.setString(1,s);
+					smt.executeUpdate();
+				}
+				con.close();
+				return true;
 			}
-			con.close();
-			return true;
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			System.out.println("here 9"+e.getMessage());
 		}
 		return false;
 	}
 
-	public static boolean commitSpecInfo(ArrayList<String> specslist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitSpecInfo(List<String> specslist,String tname) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
 			
 			stmt.execute("truncate table "+tname+";");
-
-			for(String s: specslist) {
-				s=s.substring(1, s.length()-1);
-				String sql="insert into "+tname+" values(?)";
-				PreparedStatement smt=con.prepareStatement(sql);
-				smt.setString(1,s);
-				smt.executeUpdate();
+			if(!specslist.isEmpty()) {				
+				for(String s: specslist) {
+					if(s=="") {
+						continue;
+					}
+					s=s.substring(1, s.length()-1);
+					String sql="insert into "+tname+" values(?)";
+					PreparedStatement smt=con.prepareStatement(sql);
+					smt.setString(1,s);
+					smt.executeUpdate();
+				}
+				con.close();
+				return true;
 			}
-			con.close();
-			return true;
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			System.out.println("here 10"+e.getMessage());
 		}
 		return false;
 	}
-
 }

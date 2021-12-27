@@ -20,18 +20,11 @@
   }
 
   .grid-3-div {
-    grid-template-columns: 1fr 1fr;
-    justify-items: flex-start;
-  }
-}
-
-@media (max-width: 47.5em) {
-  .grid-3-div {
     grid-template-columns: 1fr;
+    justify-content: flex-start;
+    justify-items: baseline;
   }
-}
 
-@media (max-width: 47.5em) {
   .head-section {
     flex-direction: column;
     justify-content: flex-start;

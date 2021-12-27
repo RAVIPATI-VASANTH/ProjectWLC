@@ -14,12 +14,12 @@ pageEncoding="ISO-8859-1"%>
     />
     <link rel="stylesheet" href="css/Hostels/hostelsLoad.css" />
     <link rel="stylesheet" href="css/Hostels/hostelsLoadMediaQueries.css" />
-    <title>WebsiteLoChudu-Hostels</title>
+    <title>WebsiteLoChoodu-Hostels</title>
   </head>
   <body>
     <section class="head-section">
       <a class="website-name" href="index.html">
-        <strong>WebsiteLoChudu</strong>
+        <strong>WebsiteLoChuoodu</strong>
       </a>
       <nav class="nav">
         <p class="count-info">

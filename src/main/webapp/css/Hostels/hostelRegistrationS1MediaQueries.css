@@ -81,14 +81,6 @@
 }
 
 @media (max-width: 47.5em) {
-  .about-section {
-    grid-template-columns: 1fr;
-  }
-
-  .illustration {
-    display: none;
-  }
-
   .grid-3-div {
     grid-template-columns: 1fr 1fr;
     justify-items: baseline;
@@ -99,6 +91,18 @@
   .landmark-section {
     display: flex;
     flex-direction: column-reverse;
+  }
+
+  .grid-3-div {
+    grid-template-columns: 1fr;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .illustration {
+    display: none;
   }
 }
 
@@ -127,10 +131,6 @@
 
   .phrase1 {
     font-size: 1.2rem;
-  }
-
-  .grid-3-div {
-    grid-template-columns: 1fr;
   }
 
   .container {

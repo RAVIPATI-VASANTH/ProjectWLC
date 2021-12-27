@@ -22,7 +22,7 @@ pageEncoding="ISO-8859-1"%>
 	%>
     <section class="head-section">
       <a class="website-name" href="index.html"
-        ><strong>WebsiteLoChudu</strong></a
+        ><strong>WebsiteLoChoodu</strong></a
       >
       <nav class="nav">
         <a href="Login.jsp" class="Workspace"><strong>Workspace</strong></a>

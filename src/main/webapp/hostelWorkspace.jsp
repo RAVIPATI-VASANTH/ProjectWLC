@@ -23,7 +23,7 @@ pageEncoding="ISO-8859-1"%>
 	%>
     <section class="head-section">
       <a class="website-name" href="index.html">
-        <strong>WebsiteLoChudu</strong>
+        <strong>WebsiteLoChoodu</strong>
       </a>
       <nav class="nav">
         <a class="hostel-id"
@@ -187,7 +187,7 @@ pageEncoding="ISO-8859-1"%>
         <section id="section-6">
           <div class="basic-info edit-section">
             <div class="form-element">
-              <label for="edit-hostel-name" class="label">Hostel Name</label>
+              <label for="edit-hostel-name" class="label">Hostel Name *</label>
               <input type="text" id="edit-hostel-name" class="text-input" />
             </div>
             <div class="form-element">
@@ -195,30 +195,31 @@ pageEncoding="ISO-8859-1"%>
               <input type="text" id="edit-head-line" class="text-input" />
             </div>
             <div class="form-element">
-              <label for="edit-owner-name" class="label">Owner's Name</label>
+              <label for="edit-owner-name" class="label">Owner's Name *</label>
               <input type="text" id="edit-owner-name" class="text-input" />
             </div>
             <div class="form-element">
               <label for="edit-owner-contact" class="label"
-                >Owner's Contact</label
+                >Owner's Contact <span class="required-field">*</span></label
               >
               <input type="text" id="edit-owner-contact" class="text-input" />
             </div>
             <div class="form-element">
-              <label for="edit-strength" class="label" >C-V-Q</label>
+              <label for="edit-strength" class="label" >C-V-Q *</label>
               <input type="text" id="edit-strength" class="text-input" placeholder="current strength-vacancies-Queued"/>
             </div>
             <div class="form-element">
-              <label for="" class="label">Hostel Type</label>
+              <label for="" class="label">Hostel Type *</label>
               <div>
                 <input
                   type="radio"
                   id="edit-type-public"
                   value="Public"
-                  name="type"
+                  name="htype"
                   class="radio-button"
+                  onclick="toggelType()"
                 />
-                <label for="edit-type-public" class="label1">Public</label>
+                <label for="edit-type-public" class="label1" onclick="toggelType()">Public</label>
               </div>
   
               <div>
@@ -226,10 +227,11 @@ pageEncoding="ISO-8859-1"%>
                   type="radio"
                   id="edit-type-community"
                   value="Community"
-                  name="type"
+                  name="htype"
                   class="radio-button"
+                  onclick="toggelType()"
                 />
-                <label for="edit-type-community" class="label1">Community</label>
+                <label for="edit-type-community" class="label1" onclick="toggelType()">Community</label>
               </div>
               <input
                 type="text"
@@ -240,7 +242,7 @@ pageEncoding="ISO-8859-1"%>
               />
             </div>
             <div class="form-element">
-              <label for="" class="label">Select Gender</label>
+              <label for="" class="label">Select Gender *</label>
               <div>
                 <input
                   type="radio"
@@ -263,7 +265,7 @@ pageEncoding="ISO-8859-1"%>
               </div>
             </div>
             <div class="form-element">
-              <label for="location" class="label">Location</label>
+              <label for="location" class="label">Location *</label>
               <input type="text" id="edit-location" class="text-input" />
             </div>
             <div class="form-element">
@@ -281,19 +283,18 @@ pageEncoding="ISO-8859-1"%>
           <div class="room-tags-section edit-section color" id="room-tags"></div>
           <div class="room-info edit-section">
             <div class="form-element">
-              <label for="plan-name" class="label">Plan Name</label>
+              <label for="plan-name" class="label">Plan Name *</label>
               <input type="plan" id="plan-name" class="text-input" />
             </div>
             <div class="form-element">
-              <label for="" class="label">AC/N-AC</label>
+              <label class="label">AC/N-AC *</label>
               <div>
                 <input
                   type="radio"
                   id="ac"
                   value="AC"
-                  name="gender"
+                  name="type"
                   class="radio-button"
-                  checked
                 />
                 <label for="ac" class="label1">AC</label>
               </div>
@@ -302,20 +303,20 @@ pageEncoding="ISO-8859-1"%>
                   type="radio"
                   id="nac"
                   value="N-AC"
-                  name="gender"
+                  name="type"
                   class="radio-button"
                 />
                 <label for="nac" class="label1">N-AC</label>
               </div>
             </div>
             <div class="form-element">
-              <label for="" class="label">Bathrooms</label>
+              <label for="" class="label">Bathrooms *</label>
               <div>
                 <input
                   type="checkbox"
                   id="common"
                   value="Common"
-                  name="gender"
+                  name="btype"
                   class="radio-button"
                 />
                 <label for="common" class="label1">Common</label>
@@ -325,7 +326,7 @@ pageEncoding="ISO-8859-1"%>
                   type="checkbox"
                   id="attached"
                   value="Attached"
-                  name="gender"
+                  name="btype"
                   class="radio-button"
                   checked
                 />
@@ -333,7 +334,7 @@ pageEncoding="ISO-8859-1"%>
               </div>
             </div>
             <div class="form-element">
-              <label for="bed-count" class="label">Beds per Room</label>
+              <label for="bed-count" class="label">Beds per Room *</label>
               <input
                 type="text"
                 id="bed-count"
@@ -342,24 +343,24 @@ pageEncoding="ISO-8859-1"%>
               />
             </div>
             <div class="form-element">
-              <label for="" class="label">Stay + Food</label>
+              <label for="" class="label">Stay + Food Payment</label>
               <div>
                 <p class="label1" style="margin: 0rem">Monthly</p>
                 <input type="text" class="text-input" id="sf-monthly" />
-                <p class="label1" style="margin: 0rem">Semester</p>
+                <p class="label1" style="margin: 0rem">Half-yearly</p>
                 <input type="text" class="text-input" id="sf-semester" />
-                <p class="label1" style="margin: 0rem">Annum</p>
+                <p class="label1" style="margin: 0rem">Annually</p>
                 <input type="text" class="text-input" id="sf-annum" />
               </div>
             </div>
             <div class="form-element">
-              <label for="" class="label">Stay Only</label>
+              <label for="" class="label">Stay Only Payment</label>
               <div>
                 <p class="label1" style="margin: 0rem">Monthly</p>
                 <input type="text" class="text-input" id="s-monthly" />
-                <p class="label1" style="margin: 0rem">Semester</p>
+                <p class="label1" style="margin: 0rem">Half-yearly</p>
                 <input type="text" class="text-input" id="s-semester" />
-                <p class="label1" style="margin: 0rem">Annum</p>
+                <p class="label1" style="margin: 0rem">Annually</p>
                 <input type="text" class="text-input" id="s-annum" />
               </div>
             </div>
@@ -405,7 +406,7 @@ pageEncoding="ISO-8859-1"%>
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
-              <label for="items" class="label1">Items</label>
+              <label for="items" class="label1">Items *</label>
               <input
                 id="breakfast-items"
                 type="text"
@@ -426,7 +427,7 @@ pageEncoding="ISO-8859-1"%>
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
-              <label for="lunch-items" class="label1">Items</label>
+              <label for="lunch-items" class="label1">Items *</label>
               <input
                 id="lunch-items"
                 type="text"
@@ -448,7 +449,7 @@ pageEncoding="ISO-8859-1"%>
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
-              <label for="snacks-items" class="label1">Items</label>
+              <label for="snacks-items" class="label1">Items *</label>
               <input
                 id="snacks-items"
                 type="text"
@@ -469,7 +470,7 @@ pageEncoding="ISO-8859-1"%>
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
-              <label for="dinner-items" class="label1">Items</label>
+              <label for="dinner-items" class="label1">Items *</label>
               <input
                 id="dinner-items"
                 type="text"
@@ -739,15 +740,7 @@ pageEncoding="ISO-8859-1"%>
                 class="label1"
                 onclick="SpecializationInfo.addSpecialization()"
               >
-                ADD Specialization
-              </button>
-              <button
-                id="update-to-view"
-                class="label1"
-                style="margin: 1rem 0rem"
-                onclick="SpecializationInfo.updatePreListToView()"
-              >
-                Update Changes to View
+                ADD Specialization or Update
               </button>
             </div>
           </div>
@@ -805,7 +798,7 @@ pageEncoding="ISO-8859-1"%>
                 <option value="Xerox">Xerox</option>
                 <option value="Others">Others</option>
               </select>
-              <label for="add-requirement" class="label1">Enter Name</label>
+              <label for="new-requirement" class="label1">Enter Name</label>
               <input id="new-requirement" type="text" class="text-input" />
             </div>
   
@@ -844,7 +837,7 @@ pageEncoding="ISO-8859-1"%>
                 <option value="Parks">Parks</option>
                 <option value="Others">Others</option>
               </select>
-              <label for="add-hotspot" class="label1">Enter Name</label>
+              <label for="new-hotspot" class="label1">Enter Name</label>
               <input id="new-hotspot" type="text" class="text-input" />
             </div>
             <div class="form-element">
@@ -954,8 +947,8 @@ pageEncoding="ISO-8859-1"%>
       </div>
     </footer>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/validations.js"></script>
     <script src="js/Hostels/hostelWorkspace2.js"></script>
     <script src="js/Hostels/hostelWorkspace.js"></script>
   </body>

@@ -21,7 +21,7 @@ pageEncoding="ISO-8859-1"%>
     %>
     <section class="head-section">
       <a class="website-name" href="index.html">
-        <strong>WebsiteLoChudu</strong>
+        <strong>WebsiteLoChoodu</strong>
       </a>
       <nav class="nav">
         <a href="hostelRegistrationS1.jsp" class="Register"
@@ -74,7 +74,7 @@ pageEncoding="ISO-8859-1"%>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
-              <p><strong>Note from us</strong></p>
+              <p><strong>Resources</strong></p>
             </div>
             <div class="items">
               <p class="footer-info" style="margin: 0rem; padding: 0rem;"><strong>Illustrations from</strong></p>

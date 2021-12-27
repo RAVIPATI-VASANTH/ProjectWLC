@@ -21,7 +21,7 @@ pageEncoding="ISO-8859-1"%>
     %>
     <section class="head-section">
       <a class="website-name" href="index.html"
-        ><strong>WebsiteLoChudu</strong></a
+        ><strong>WebsiteLoChoodu</strong></a
       >
       <nav class="nav">
         <a href="Login.jsp" class="Workspace extra"><strong>Workspace</strong></a>
@@ -237,6 +237,7 @@ pageEncoding="ISO-8859-1"%>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/validations.js"></script>
     <script src="js/Hostels/hostelRegistrationS1.js"></script>
   </body>
 </html>

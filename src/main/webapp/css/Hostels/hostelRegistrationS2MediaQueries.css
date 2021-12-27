@@ -78,24 +78,20 @@
   .phrase1 {
     font-size: 1.4rem;
   }
+
+  .form {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 47.5em) {
-  .about-section {
-    grid-template-columns: 1fr;
-  }
-
-  .illustration {
-    display: none;
-  }
-
   .grid-3-div {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     justify-items: baseline;
   }
 
   .form {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -103,6 +99,14 @@
   .landmark-section {
     display: flex;
     flex-direction: column-reverse;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .illustration {
+    display: none;
   }
 }
 

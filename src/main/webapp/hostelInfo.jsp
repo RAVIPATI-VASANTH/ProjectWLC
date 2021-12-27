@@ -20,7 +20,7 @@ pageEncoding="ISO-8859-1"%>
   <body>
     <section class="head-section">
       <a class="website-name" href="index.html">
-        <strong>WebsiteLoChudu</strong>
+        <strong>WebsiteLoChoodu</strong>
       </a>
       <nav class="nav">
         <p class="phrase1" style="margin: 1rem">Hostel-ID</p>

@@ -154,37 +154,38 @@ class CommitValidation {
   static validateBasicInfo(obj) {
     var signal = false;
     //HostelName
-    obj.hname.trim();
-    if (obj.hname.length === 0) {
+    if (obj.hname.trim().length === 0) {
       alert("Hostel Name is not to be Empty");
       signal = true;
     }
-    if (obj.hname.length > 40) {
+    if (obj.hname.trim().length > 40) {
       alert("Hostel Name should not be exceed 40 charecters");
       signal = true;
     }
     //Type
     if (obj.htype === "community") {
-      if (obj.hcommunity.length > 12) {
+      if (obj.hcommunity.trim().length > 12) {
         alert("Community Name should not be Exceed 12 charecters");
+        signal = true;
+      }
+      if (obj.hcommunity.trim().length === 0) {
+        alert("Community is not to be empty.");
         signal = true;
       }
     } else {
       obj.hcommunity = "";
     }
     //Headline
-    obj.hheadline.trim();
-    if (obj.hheadline.length > 55) {
+    if (obj.hheadline.trim().length > 55) {
       alert("Head Line should not be exceed 55 charecters");
       signal = true;
     }
     //Owner Name
-    obj.honame.trim();
-    if (obj.honame.length === 0) {
+    if (obj.honame.trim().length === 0) {
       alert("Owner Name is not to be Empty");
       signal = true;
     }
-    if (obj.honame.length > 20) {
+    if (obj.honame.trim().length > 20) {
       alert("Hostel Name should not be exceed 20 charecters");
       signal = true;
     }
@@ -192,35 +193,31 @@ class CommitValidation {
     // let regex = new RegExp(/^[0-9]{10}$/);
 
     //Owner Contact
-    obj.hocontact.trim();
-    if (obj.hocontact.length === 0) {
+    if (obj.hocontact.trim().length === 0) {
       alert("Owner Contact is not to be Empty");
       signal = true;
     }
-    if (obj.hocontact.length > 10) {
-      alert("Owner Contact should not be exceed 10 charecters");
+    if (obj.hocontact.trim().length !== 10) {
+      alert("Owner Contact should be allowed 10 digits");
       signal = true;
     }
-    if (!/^[0-9]{10}$/.test(obj.hocontact.trim())) {
-      alert("Owner Contact should be only numbers");
-      signal = true;
-    }
+
     //Strength
-    if (obj.hstrength.length === 0) {
+    if (obj.hstrength.trim().length === 0) {
       alert("Strength is not to be Empty");
       signal = true;
     }
-    if (obj.hstrength.length > 20) {
-      alert("Strength should not be exceed 5 charecters");
+    if (obj.hstrength.trim().length > 20) {
+      alert("Strength should not be exceed 20 charecters");
       signal = true;
     }
-    var words = obj.hstrength.split("-");
-    if (!words.length === 3) {
+    var words = obj.hstrength.trim().split("-");
+    if (words.length !== 3) {
       alert("Please enter correct Format for CVQ field.");
       signal = true;
     }
     //Location
-    if (!obj.hlocation.includes("www.google.com/maps")) {
+    if (!obj.hlocation.trim().includes("www.google.com/maps")) {
       alert("Location Link is not a valid link");
       signal = true;
     }
@@ -240,6 +237,7 @@ class CommitValidation {
         );
         signal = true;
       }
+
       //bathroom
       if (element.bathroom.trim().length === 0) {
         alert("Please select Bath room type in card " + element.planname);
@@ -294,6 +292,7 @@ class CommitValidation {
             element.planname +
             " Notes should not be morethan 150 charecters"
         );
+        signal = true;
       }
     });
     if (signal) return false;
@@ -428,6 +427,9 @@ class CommitValidation {
 }
 
 function sendCommitData(obj) {
+  // console.log(obj.specializationInfo);
+  // console.log(obj.requirementInfo);
+  console.log(obj);
   $.post(
     "HostelWorkspaceCommit",
     {
