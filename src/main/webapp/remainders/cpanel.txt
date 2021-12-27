@@ -1,0 +1,25 @@
+Username: websitel
+Password: d!20zZ0s1NA[Nc
+
+create table last 
+ENGINE = MyISAM;
+
+static String url= "jdbc:mysql://mysql3000.mochahost.com/hostelsdb";
+static String user= "websitel_dbreader";
+static String pass="read@database99";
+
+static String url= "jdbc:mysql://mysql3000.mochahost.com/hostelsdb";
+static String user= "websitel_dbwriter";
+static String pass="write@database99";
+
+	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
+	static String user= "dbwriter";
+	static String pass="write@database99";
+	
+	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
+	static String user= "dbreader";
+	static String pass="read@database99";
+	
+	
+Ticket Id
+531886

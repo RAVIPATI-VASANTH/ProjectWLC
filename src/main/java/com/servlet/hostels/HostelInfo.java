@@ -30,6 +30,12 @@ public class HostelInfo extends HttpServlet {
 				String minicode=request.getParameter("lanmincode").toString();
 				JSONObject basicInfoObj= hostelRead.getHostelBasicInfo(id,minicode);
 				finalobj.put("basicInfo", basicInfoObj);
+				if(basicInfoObj.toString().equals("{}")) {
+					finalobj.put("valid", 0);
+				}
+				else {
+					finalobj.put("valid", 1);
+				}
 				JSONObject foodObj= hostelRead.getHostelFoodInfo(id);
 				finalobj.put("foodInfo", foodObj);
 				String rtable=(String) basicInfoObj.get("hrtable");

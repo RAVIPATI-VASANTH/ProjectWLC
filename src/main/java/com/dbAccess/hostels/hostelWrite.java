@@ -14,8 +14,8 @@ import org.json.simple.JSONObject;
 import com.classes.hostels.dataContainers.HostelRegisterContainer;
 import com.dbAccess.hostels.hostelRead;
 public class hostelWrite {
-	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
-	static String user= "dbwriter";
+	static String url= "jdbc:mysql://mysql3000.mochahost.com/hostelsdb";
+	static String user= "websitel_dbwriter";
 	static String pass="write@database99";
 	
 	public static int createNewLandmark(String id,String minicode,String fullname,String tabname) throws ClassNotFoundException, SQLException {
