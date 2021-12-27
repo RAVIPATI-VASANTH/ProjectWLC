@@ -17,6 +17,8 @@ pageEncoding="ISO-8859-1"%>
     <title>Hostel Registration-Step 1</title>
   </head>
   <body>
+    <% response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+    %>
     <section class="head-section">
       <a class="website-name" href="index.html"
         ><strong>WebsiteLoChudu</strong></a

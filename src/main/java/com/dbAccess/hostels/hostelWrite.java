@@ -33,12 +33,13 @@ public class hostelWrite {
 		st.setString(7,"");
 		status=st.executeUpdate();
 
-		String sql2="create table "+tabname+" (hostel_id VARCHAR(15) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(25),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(45),hostel_hotspottable VARCHAR(45),hostel_speacializationtable VARCHAR(45),hostel_policytable VARCHAR(45),hostel_requirementtable VARCHAR(45),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id))";
+		String sql2="create table "+tabname+" (hostel_id VARCHAR(25) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(25),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(55),hostel_hotspottable VARCHAR(55),hostel_speacializationtable VARCHAR(55),hostel_policytable VARCHAR(55),hostel_requirementtable VARCHAR(55),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id))";
 		PreparedStatement smt= con.prepareStatement(sql2);
 		status=smt.executeUpdate();
+		System.out.println(status);
 		con.close();
 		return status;
-	}
+	}	
 
 	public static int createNewHostel(HostelRegisterContainer h) throws ClassNotFoundException, SQLException {
 		int status=0;

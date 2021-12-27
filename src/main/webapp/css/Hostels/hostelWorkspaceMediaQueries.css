@@ -1,0 +1,345 @@
+@media (max-width: 87em) {
+  .basic-info,
+  .room-info,
+  .food-info,
+  .specializations-info,
+  .policy-info {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 70em) {
+  .hostel-name {
+    color: #e67e22;
+    font-size: 3.4rem;
+    font-weight: bold;
+  }
+
+  .head-line {
+    font-size: 6.2rem;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 63em) {
+  .website-name {
+    font-size: 3.4rem !important;
+    margin: 0rem 1rem 0rem 2rem !important;
+    text-decoration: none;
+    color: black;
+  }
+
+  .hostel-id {
+    font-size: 1.6rem;
+  }
+
+  .phrase1 {
+    font-size: 2.2rem;
+  }
+  .hostel-name {
+    color: #e67e22;
+    font-size: 3.3rem;
+    font-weight: bold;
+  }
+
+  .head-line {
+    font-size: 6.1rem;
+    font-weight: bold;
+  }
+
+  .info {
+    font-size: 1.75rem;
+  }
+
+  .info-guide,
+  .note {
+    font-size: 1.8rem;
+  }
+
+  .score {
+    font-size: 8.2rem;
+  }
+}
+
+@media (max-width: 60em) {
+  .basic-info,
+  .room-info,
+  .food-info,
+  .specializations-info,
+  .policy-info {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 58em) {
+  .head-section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 57em) {
+  .website-name {
+    font-size: 3.2rem !important;
+    margin: 0rem 1rem 0rem 2rem !important;
+    text-decoration: none;
+    color: black;
+  }
+
+  .hostel-id {
+    font-size: 1.5rem;
+  }
+
+  .phrase1 {
+    font-size: 2rem;
+  }
+  .hostel-name {
+    color: #e67e22;
+    font-size: 3.1rem;
+    font-weight: bold;
+  }
+
+  .head-line {
+    font-size: 6rem;
+    font-weight: bold;
+  }
+
+  .info {
+    font-size: 1.7rem;
+  }
+
+  .info-guide,
+  .note {
+    font-size: 1.6rem;
+  }
+
+  .score {
+    font-size: 8rem;
+  }
+
+  .view-tag {
+    font-size: 3rem;
+  }
+
+  .room-cards-section,
+  .food-cards-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grid-3-div {
+    grid-template-columns: 1fr 1fr;
+    justify-items: baseline;
+  }
+}
+
+@media (max-width: 52em) {
+  .website-name {
+    font-size: 3rem !important;
+    margin: 0rem 1rem 0rem 2rem !important;
+    text-decoration: none;
+    color: black;
+  }
+
+  .hostel-id {
+    font-size: 1.4rem;
+  }
+
+  .phrase1 {
+    font-size: 1.8rem;
+  }
+  .hostel-name {
+    color: #e67e22;
+    font-size: 2.9rem;
+    font-weight: bold;
+  }
+
+  .head-line {
+    font-size: 5.8rem;
+    font-weight: bold;
+  }
+
+  .info {
+    font-size: 1.5rem;
+  }
+
+  .info-guide,
+  .note {
+    font-size: 1.4rem;
+  }
+
+  .score {
+    font-size: 7.8rem;
+  }
+
+  .view-tag {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 48em) {
+  .hostel-name {
+    color: #e67e22;
+    font-size: 2.7rem;
+    font-weight: bold;
+  }
+
+  .head-line {
+    font-size: 5.6rem;
+    font-weight: bold;
+  }
+
+  .info-element {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  .info {
+    font-size: 1.3rem;
+  }
+
+  .info-guide,
+  .note {
+    font-size: 1.2rem;
+  }
+
+  .score {
+    font-size: 7.6rem;
+  }
+
+  .mini-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .view-tag {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 44em) {
+  .hostel-name {
+    color: #e67e22;
+    font-size: 2.6rem;
+    font-weight: bold;
+  }
+
+  .head-line {
+    font-size: 5.4rem;
+    font-weight: bold;
+  }
+
+  .info-element {
+    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+  }
+
+  .mini-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+
+  .view-tag {
+    font-size: 2.4rem;
+  }
+
+  .hero-section {
+    grid-template-columns: 1fr;
+  }
+  .illustration {
+    display: none;
+  }
+
+  .header {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 40em) {
+  .hostel-name {
+    color: #e67e22;
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+
+  .head-line {
+    font-size: 5rem;
+    font-weight: bold;
+  }
+
+  .info-element {
+    margin: 0.2rem;
+  }
+
+  .mini-icon {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  .view-tag {
+    font-size: 2.2rem;
+  }
+
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .nav {
+    flex-direction: column;
+  }
+
+  .head-section button {
+    margin: 0.5rem;
+  }
+}
+
+@media (max-width: 87em) {
+  .basic-info,
+  .room-info,
+  .food-info,
+  .specializations-info,
+  .policy-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 38em) {
+  .info-element {
+    margin: 0.1rem;
+  }
+
+  .mini-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .view-tag {
+    color: #e67e22;
+  }
+
+  .header {
+    font-size: 1.5rem;
+  }
+
+  .room-cards-section,
+  .food-cards-section {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+
+  .grid-for-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 34em) {
+  .grid-3-div {
+    grid-template-columns: 1fr;
+  }
+
+  .extra {
+    margin-top: 1rem;
+  }
+}
