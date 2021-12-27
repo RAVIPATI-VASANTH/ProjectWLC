@@ -1064,14 +1064,13 @@ class RequirementInfo {
 
 class Toggle {
   static toggleSection(index) {
-    if (sectionSignalList[index]) {
+    if (window.sectionSignalList[index]) {
       document.getElementById("section-" + index).setAttribute("class", "hide");
-      sectionSignalList[index] = false;
+      window.sectionSignalList[index] = false;
     } else {
       document.getElementById("section-" + index).setAttribute("class", "");
-      sectionSignalList[index] = true;
+      window.sectionSignalList[index] = true;
     }
-    console.log("called");
   }
 }
 
@@ -1212,7 +1211,7 @@ window.onload = function () {
     window.getHostelInfo(hid);
   }
   if (window.innerWidth < 540) {
-    sectionSignalList = [false, true, true, true, true, true];
+    window.sectionSignalList = [false, true, true, true, true, true];
     Toggle.toggleSection(1);
     Toggle.toggleSection(2);
     Toggle.toggleSection(3);

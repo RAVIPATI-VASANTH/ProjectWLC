@@ -32,14 +32,8 @@ public class HostelsRegister extends HttpServlet {
 			PrintWriter out=response.getWriter();
 			try {
 				int resultSignal=hostelWrite.createNewLandmark(lanid,mcode,fname,tabname);
-				if (resultSignal==0) {
-					out.println("error");
-				}
-				else {
-					out.println("success");
-					//Create here a Session Object
-
-				}
+				HttpSession session =request.getSession();
+				session.setAttribute("landmark", mcode);
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 				out.println("error");
@@ -70,7 +64,6 @@ public class HostelsRegister extends HttpServlet {
 					HttpSession session =request.getSession();
 					session.setAttribute("hid", h.hid);
 					out.println("success");
-					//Create here a Session Object
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				System.out.println("here 1"+e.getMessage());

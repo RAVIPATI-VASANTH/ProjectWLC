@@ -197,13 +197,7 @@ function generateHostelId() {
       }
     }
   });
-
-  if (document.getElementById("hostel-gender-male").checked) {
-    var g = "M";
-  } else {
-    var g = "F";
-  }
-  document.getElementById("hostel-id").value = lan + "_" + g + "_" + num;
+  document.getElementById("hostel-id").value = lan + "_" + num;
   window.obj.hid = document.getElementById("hostel-id").value;
   window.objsignal.hid = true;
 }

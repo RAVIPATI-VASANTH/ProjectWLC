@@ -43,6 +43,18 @@ function switchMode(mode) {
   }
 }
 
+class Toggle {
+  static toggleSection(index) {
+    if (window.sectionSignalList[index]) {
+      document.getElementById("section-" + index).setAttribute("class", "hide");
+      window.sectionSignalList[index] = false;
+    } else {
+      document.getElementById("section-" + index).setAttribute("class", "");
+      window.sectionSignalList[index] = true;
+    }
+  }
+}
+
 class BasicInfo {
   static updateBasicInfoUi() {
     var hostel = window.modifiedData;
@@ -2271,11 +2283,55 @@ function logout() {
   window.location.assign("Login.jsp");
 }
 
+var sectionSignalList = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+];
+
 window.onload = function () {
   var hid = processString(document.getElementById("hostel-id").innerHTML);
   if (hid === "null") {
     window.location.assign("Login.jsp");
   } else {
     window.getHostelInfo(hid);
+    if (window.innerWidth < 540) {
+      window.sectionSignalList = [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+      ];
+      Toggle.toggleSection(1);
+      Toggle.toggleSection(2);
+      Toggle.toggleSection(3);
+      Toggle.toggleSection(4);
+      Toggle.toggleSection(5);
+      Toggle.toggleSection(7);
+      Toggle.toggleSection(8);
+      Toggle.toggleSection(9);
+      Toggle.toggleSection(10);
+      Toggle.toggleSection(11);
+      Toggle.toggleSection(12);
+    }
   }
 };

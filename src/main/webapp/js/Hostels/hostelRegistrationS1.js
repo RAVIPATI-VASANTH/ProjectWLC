@@ -14,6 +14,7 @@ var objsignal = {
 };
 
 function processString(s) {
+  console.log(s);
   s = s.replaceAll("\r", "");
   s = s.replaceAll("\n", "");
   return s;
@@ -139,22 +140,56 @@ function sortOrder(list) {
 
 function createLandmarkCode() {
   var list = [];
-  currentLandmarks.forEach((element) => {
-    list.push(Number(element.id.split("_")[1]));
-  });
-  list = sortOrder(list);
-  var num = list[list.length - 1];
+  var num = 0;
+  if (currentLandmarks.length !== 0) {
+    currentLandmarks.forEach((element) => {
+      list.push(Number(element.id.split("_")[1]));
+    });
+    list = sortOrder(list);
+    var num = list[list.length - 1];
+  }
   num += 1;
   var str = "lan_" + String(num);
   return str;
 }
 
 function generateMinicode(hstr) {
-  var str = hstr.toUpperCase();
-  if (str.length > 7) {
-    str = str.slice(0, 7);
+  var date = new Date();
+  var str = "";
+  var dumb = "";
+  var alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  for (var i = 0; i < hstr.length; i++) {
+    if (alpha.includes(hstr[i]) || hstr[i] === " ") {
+      dumb += hstr[i];
+    }
   }
-  return str;
+  hstr = dumb;
+  var words = hstr.split(" ");
+  words.forEach((element) => {
+    str += element[0];
+  });
+  if (str.length < 6) {
+    var d = "";
+    var diff = 6 - str.length;
+    for (var i = 0; i < diff; i++) {
+      var rnum = Math.floor(Math.random() * alpha.length);
+      d += alpha.substring(rnum, rnum + 1);
+    }
+    str += d;
+    str +=
+      String(date.getDate()) +
+      String(date.getMonth()) +
+      String(date.getYear()).substring(1, 4);
+  } else {
+    if (str.length > 6) {
+      str = str.substring(0, 7);
+    }
+    str +=
+      String(date.getDate()) +
+      String(date.getMonth()) +
+      String(date.getYear()).substring(1, 4);
+  }
+  return str.toUpperCase();
 }
 
 function createLandmarkObject() {
@@ -174,21 +209,37 @@ function createLandmarkObject() {
   return obj;
 }
 
+function checkLanid(obj) {
+  for (var i = 0; i < window.currentLandmarks.length; i++) {
+    var element = window.currentLandmarks[i];
+    if (obj.minicode === element.minicode) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function createLandmark() {
   if (!window.objsignal.newLandmarkfname) {
     alert("Enter a valid Landmark Name");
   } else if (!window.objsignal.newLandmarkfname) {
     alert("Enter a valid Description");
   } else {
-    var obj = createLandmarkObject();
-
-    $.post("hostelRegister", obj, function (data, status) {
-      if (status === "success") {
-        window.location.assign("hostelRegistrationS2.jsp?l=" + obj.minicode);
-      } else {
-        alert("Something Went Wrong..!!");
-      }
-    });
+    var data = createLandmarkObject();
+    var signal = checkLanid(data);
+    if (signal) {
+      $.post("hostelRegister", data, function (data, status) {
+        if (status === "success") {
+          document.getElementById("landmark-full-name").value = "";
+          document.getElementById("landmark-description").value = "";
+          window.location.assign("hostelRegistrationS2.jsp");
+        } else {
+          alert("Something Went Wrong..!!");
+        }
+      });
+    } else {
+      alert("landmark already exists.");
+    }
   }
 }
 
