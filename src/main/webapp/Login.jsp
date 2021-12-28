@@ -14,7 +14,7 @@ pageEncoding="ISO-8859-1"%>
     />
     <link rel="stylesheet" href="css/Login.css" />
     <link rel="stylesheet" href="css/Hostels/LoginMediaQueries.css">
-    <title>WebsiteLoChudu-Login</title>
+    <title>WebsiteLoChoodu-Login</title>
   </head>
   <body>
     <% response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");

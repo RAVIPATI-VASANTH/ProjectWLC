@@ -14,16 +14,21 @@ import org.json.simple.JSONObject;
 import com.classes.hostels.dataContainers.HostelRegisterContainer;
 import com.dbAccess.hostels.hostelRead;
 public class hostelWrite {
-	static String url= "jdbc:mysql://mysql3000.mochahost.com/hostelsdb";
-	static String user= "websitel_dbwriter";
+//	static String url= "jdbc:mysql://mysql3000.mochahost.com/hostelsdb";
+//	static String user= "websitel_dbwriter";
+//	static String pass="write@database99";
+
+	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
+	static String user= "dbwriter";
 	static String pass="write@database99";
+	
 	
 	public static int createNewLandmark(String id,String minicode,String fullname,String tabname) throws ClassNotFoundException, SQLException {
 		int status=0;
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 
-		String sql="insert into landmarks values(?,?,?,?,?,?,?)";
+		String sql="INSERT INTO landmarks VALUES(?,?,?,?,?,?,?);";
 		PreparedStatement st= con.prepareStatement(sql);
 		st.setString(1,id);
 		st.setString(2,minicode);
@@ -34,7 +39,7 @@ public class hostelWrite {
 		st.setString(7,"");
 		status=st.executeUpdate();
 
-		String sql2="create table "+tabname+" (hostel_id VARCHAR(25) NOT NULL unique,hostel_name VARCHAR(45),owner_name VARCHAR(25),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(55),hostel_hotspottable VARCHAR(55),hostel_speacializationtable VARCHAR(55),hostel_policytable VARCHAR(55),hostel_requirementtable VARCHAR(55),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id))";
+		String sql2="CREATE TABLE "+tabname+" (hostel_id VARCHAR(25) NOT NULL UNIQUE,hostel_name VARCHAR(45),owner_name VARCHAR(25),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(55),hostel_hotspottable VARCHAR(55),hostel_speacializationtable VARCHAR(55),hostel_policytable VARCHAR(55),hostel_requirementtable VARCHAR(55),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id))";
 		PreparedStatement smt= con.prepareStatement(sql2);
 		status=smt.executeUpdate();
 		System.out.println(status);
@@ -47,7 +52,7 @@ public class hostelWrite {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
-			String sql="insert into "+h.htablename+" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO"+h.htablename+" VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,h.hid);
 			smt.setString(2,h.hname);
@@ -76,28 +81,28 @@ public class hostelWrite {
 			String pt=h.hid+"_policytable";
 			String reqt=h.hid+"_requirementtable";
 			
-			sql="create table "+rt+" (roomcard VARCHAR(300));";
+			sql="CREATE TABLE "+rt+" (roomcard VARCHAR(300));";
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
-			sql="create table "+ht+" (hotspot VARCHAR(100));";
+			sql="CREATE TABLE "+ht+" (hotspot VARCHAR(100));";
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
-			sql="create table "+st+" (speacialization VARCHAR(150));";
+			sql="CREATE TABLE "+st+" (speacialization VARCHAR(150));";
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
-			sql="create table "+pt+" (policy VARCHAR(150));";
+			sql="CREATE TABLE "+pt+" (policy VARCHAR(150));";
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
-			sql="create table "+reqt+" (requirement VARCHAR(100));";
+			sql="CREATE TABLE "+reqt+" (requirement VARCHAR(100));";
 			smt=con.prepareStatement(sql);
 			smt.executeUpdate();
 			
 			h.hid=h.hid.toUpperCase();
-			sql="insert into food_table values(?,?,?,?,?,?)";
+			sql="INSERT INTO food_table VALUES(?,?,?,?,?,?)";
 			smt=con.prepareStatement(sql);
 			smt.setString(1,h.hid);
 			smt.setString(2,"|||");
@@ -107,7 +112,7 @@ public class hostelWrite {
 			smt.setString(6,"||");
 			status=smt.executeUpdate();
 			
-			sql="insert into all_hostels values(?,?)";
+			sql="INSERT INTO all_hostels VALUES(?,?)";
 			smt=con.prepareStatement(sql);
 			smt.setString(1, h.hid);
 			smt.setString(2, h.hpassword);
@@ -131,7 +136,7 @@ public class hostelWrite {
 			minicode=words[0];
 			
 			Statement stmt=con.createStatement();
-			String sql="select hostels_table from landmarks where mini_code ='"+minicode+"';";
+			String sql="SELECT hostels_table FROM landmarks WHERE mini_code ='"+minicode+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			String tname="";
 			while(rs.next()) {
@@ -150,7 +155,7 @@ public class hostelWrite {
 			String hsscore=binfo.get("hsearchscore").toString();
 			String hlocation=binfo.get("hlocation").toString();
 
-			sql="update "+tname+" set hostel_name=?,owner_name=?,owner_contact=?,hostel_type=?,hostel_gender=?,hostel_strength=?,hostel_headline=?,hostel_community=?,hostel_searchscore=?,hostel_location=? where hostel_id=?";
+			sql="UPDATE "+tname+" SET hostel_name=?,owner_name=?,owner_contact=?,hostel_type=?,hostel_gender=?,hostel_strength=?,hostel_headline=?,hostel_community=?,hostel_searchscore=?,hostel_location=? WHERE hostel_id=?";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,hname);
 			smt.setString(2,honame);
@@ -183,7 +188,7 @@ public class hostelWrite {
 			String din=finfo.get("dinner").toString();
 			String non=finfo.get("nonveg").toString();
 			
-			String sql="update food_table set breakfast=?,lunch=?,snacks=?,dinner=?,nonveg=? where hostel_id=?";
+			String sql="UPDATE food_table SET breakfast=?,lunch=?,snacks=?,dinner=?,nonveg=? WHERE hostel_id=?";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,bf);
 			smt.setString(2,lun);
@@ -207,7 +212,7 @@ public class hostelWrite {
 		try {
 			Statement stmt=con.createStatement();
 			
-			stmt.execute("truncate table "+tname+";");
+			stmt.execute("TRUNCATE TABLE "+tname+";");
 			System.out.println(roomlist+" "+roomlist.size());
 			if(!roomlist.isEmpty()) {
 				for(String s: roomlist) {
@@ -216,7 +221,7 @@ public class hostelWrite {
 					}
 					s=s.substring(1, s.length()-1);
 					
-					String sql="insert into "+tname+" values(?)";
+					String sql="INSERT INTO "+tname+" VALUES(?)";
 					PreparedStatement smt=con.prepareStatement(sql);
 					smt.setString(1,s);
 					smt.executeUpdate();
@@ -237,14 +242,14 @@ public class hostelWrite {
 		try {
 			Statement stmt=con.createStatement();
 			
-			stmt.execute("truncate table "+tname+";");
+			stmt.execute("TRUNCATE TABLE "+tname+";");
 			if(!policylist.isEmpty()) {				
 				for(String s: policylist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="insert into "+tname+" values(?)";
+					String sql="INSERT INTO "+tname+" VALUES(?)";
 					PreparedStatement smt=con.prepareStatement(sql);
 					smt.setString(1,s);
 					smt.executeUpdate();
@@ -265,14 +270,14 @@ public class hostelWrite {
 		try {
 			Statement stmt=con.createStatement();
 			
-			stmt.execute("truncate table "+tname+";");
+			stmt.execute("TRUNCATE TABLE "+tname+";");
 			if(!hotspotslist.isEmpty()) {				
 				for(String s: hotspotslist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="insert into "+tname+" values(?)";
+					String sql="INSERT INTO "+tname+" VALUES(?)";
 					PreparedStatement smt=con.prepareStatement(sql);
 					smt.setString(1,s);
 					smt.executeUpdate();
@@ -293,14 +298,14 @@ public class hostelWrite {
 		try {
 			Statement stmt=con.createStatement();
 			
-			stmt.execute("truncate table "+tname+";");
+			stmt.execute("TRUNCATE TABLE "+tname+";");
 			if(!requirementslist.isEmpty()) {				
 				for(String s: requirementslist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="insert into "+tname+" values(?)";
+					String sql="INSERT INTO "+tname+" VALUES(?)";
 					PreparedStatement smt=con.prepareStatement(sql);
 					smt.setString(1,s);
 					smt.executeUpdate();
@@ -321,14 +326,14 @@ public class hostelWrite {
 		try {
 			Statement stmt=con.createStatement();
 			
-			stmt.execute("truncate table "+tname+";");
+			stmt.execute("TRUNCATE TABLE "+tname+";");
 			if(!specslist.isEmpty()) {				
 				for(String s: specslist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="insert into "+tname+" values(?)";
+					String sql="INSERT INTO "+tname+" VALUES(?)";
 					PreparedStatement smt=con.prepareStatement(sql);
 					smt.setString(1,s);
 					smt.executeUpdate();
