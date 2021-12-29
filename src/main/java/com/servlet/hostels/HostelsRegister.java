@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 
 import com.dbAccess.hostels.*;
 import com.classFiles.hostels.dataContainers.HostelRegisterContainer;
-@WebServlet("/hostelRegister")
+//@WebServlet("/hostelRegister")
 public class HostelsRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -66,12 +66,11 @@ public class HostelsRegister extends HttpServlet {
 					out.println("success");
 				}
 			} catch (ClassNotFoundException | SQLException e) {
-				System.out.println("here 1"+e.getMessage());
+				e.printStackTrace();
 				out.println("error");
 			}
 		}
 		if(i==2) {
-			System.out.println("called here bro");
 			String landmark=request.getParameter("landmark").toString();
 			HttpSession session =request.getSession();
 			session.setAttribute("landmark", landmark);
@@ -86,7 +85,7 @@ public class HostelsRegister extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println(list.toString());
 			} catch (Exception e) {
-				System.out.println("hello"+e.getMessage());
+				e.printStackTrace();
 			}
 		}
 	}

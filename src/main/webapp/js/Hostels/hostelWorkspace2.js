@@ -238,6 +238,10 @@ class CommitValidation {
         signal = true;
       }
 
+      if (element.planname.trim().includes(",")) {
+        alert("Plan name shouldnot includes comma ',' for " + element.planname);
+        signal = true;
+      }
       //bathroom
       if (element.bathroom.trim().length === 0) {
         alert("Please select Bath room type in card " + element.planname);
@@ -255,6 +259,13 @@ class CommitValidation {
             " bed count should not be morethan 10 charecters"
         );
         signal = true;
+      }
+      if (element.beds.trim().includes(",")) {
+        alert(
+          "Plan name for card " +
+            element.planname +
+            " bed count shouldnot include comma ','"
+        );
       }
       //Stay and Food
       if (
@@ -285,12 +296,33 @@ class CommitValidation {
         );
         signal = true;
       }
+      if (
+        element.stayandfood.monthly.trim().includes(",") ||
+        element.stayandfood.semester.trim().includes(",") ||
+        element.stayandfood.annum.trim().includes(",") ||
+        element.stayonly.monthly.trim().includes(",") ||
+        element.stayonly.semester.trim().includes(",") ||
+        element.stayonly.annum.trim().includes(",")
+      ) {
+        alert(
+          "Payment Methods shouldnot contains comma ','" + element.planname
+        );
+        signal = true;
+      }
       //Notes
       if (element.notes.trim().length > 150) {
         alert(
           "Plan name for card " +
             element.planname +
             " Notes should not be morethan 150 charecters"
+        );
+        signal = true;
+      }
+      if (element.notes.trim().includes(",")) {
+        alert(
+          "Plan name for card " +
+            element.planname +
+            " Notes shouldnot contain comma ','"
         );
         signal = true;
       }
@@ -355,25 +387,58 @@ class CommitValidation {
     obj.preList.forEach((element) => {
       if (element.type === "Pay And Use") {
         if (element.amount === "") {
-          alert("For " + element.specname + " Amount is required.");
+          alert(
+            "For Specialization " + element.specname + " Amount is required."
+          );
           signal = true;
         } else if (element.amount.length > 10) {
           alert(
-            "For " + element.specname + " Amount is not to be exceed 10 digits."
+            "For Specialization " +
+              element.specname +
+              " Amount is not to be exceed 10 digits."
+          );
+          signal = true;
+        } else if (element.amount.includes(",")) {
+          alert(
+            "For Specialization " +
+              element.specname +
+              " Amount shouldnot contain comma ','."
           );
           signal = true;
         }
       }
       if (element.notes.length > 80) {
         alert(
-          "For " + element.specname + " Notes is not to be exceed 80 charecters"
+          "For Specialization " +
+            element.specname +
+            " Notes is not to be exceed 80 charecters"
+        );
+        signal = true;
+      }
+      if (element.notes.includes(",")) {
+        alert(
+          "For Specialization " +
+            element.specname +
+            " Notes shouldnot contain comma','"
         );
         signal = true;
       }
     });
     obj.postList.forEach((element) => {
       if (element.specname.length > 145) {
-        alert(element.tagname + " is not be exceed 145 charecters");
+        alert(
+          "For Specialization " +
+            element.specname +
+            " is not be exceed 145 charecters"
+        );
+        signal = true;
+      }
+      if (element.specname.includes(",")) {
+        alert(
+          "For Specialization " +
+            element.specname +
+            " shouldnot contain comma ','"
+        );
         signal = true;
       }
     });
@@ -388,6 +453,10 @@ class CommitValidation {
         alert(
           "Policy is not to be exceed 145 charecters for " + element.tagname
         );
+        signal = true;
+      }
+      if (element.policy.includes(",")) {
+        alert("Policy is shouldnot contain comma ',' for " + element.policy);
         signal = true;
       }
     });
@@ -405,6 +474,12 @@ class CommitValidation {
         );
         signal = true;
       }
+      if (element.requirement.includes(",")) {
+        alert(
+          "Requirement name shouldnot contain ',' for " + element.requirement
+        );
+        signal = true;
+      }
     });
     if (signal) return false;
     else return true;
@@ -418,6 +493,10 @@ class CommitValidation {
           "Hotspot name is not to be exceed 70 charecters for " +
             element.tagname
         );
+        signal = true;
+      }
+      if (element.hotspot.includes(",")) {
+        alert("Hotspot name shouldnot contain comma',' for " + element.hotspot);
         signal = true;
       }
     });

@@ -515,7 +515,6 @@ class RoomInfo {
       };
 
       var words = element.split("|");
-      console.log(words);
       obj.planname = words[0];
       obj.type = words[1];
       obj.bathroom = words[2];
@@ -1370,87 +1369,89 @@ class SpecializationInfo {
 
   static updateViewUiOfPreListCards() {
     window.modifiedData.specializationInfo.preList.forEach((element) => {
-      var type1 = [
-        "WIFI",
-        "Washing Machine",
-        "Lockers",
-        "Hot Water",
-        "Gym",
-        "Generator",
-        "Vehicle Parking",
-        "Transport",
-      ];
-      var type2 = ["Room Service"];
-      var type3 = ["Sports Environment", "CC TV Survilance", "Security"];
-      var text = "";
-      if (type1.includes(element.specname)) {
-        text = element.specname + "-";
-        text += element.type;
-        if (element.type === "Pay And Use") {
-          text += "-" + element.plan;
-          if (element.amount.trim() !== "") text += "-" + element.amount;
+      if (element.type !== "Un Available") {
+        var type1 = [
+          "WIFI",
+          "Washing Machine",
+          "Lockers",
+          "Hot Water",
+          "Gym",
+          "Generator",
+          "Vehicle Parking",
+          "Transport",
+        ];
+        var type2 = ["Room Service"];
+        var type3 = ["Sports Environment", "CC TV Survilance", "Security"];
+        var text = "";
+        if (type1.includes(element.specname)) {
+          text = element.specname + "-";
+          text += element.type;
+          if (element.type === "Pay And Use") {
+            text += "-" + element.plan;
+            if (element.amount.trim() !== "") text += "-" + element.amount;
+          }
+          if (element.notes.trim() !== "") text += "-" + element.notes;
+        } else if (type2.includes(element.specname)) {
+          text = element.specname + "-";
+          text += element.type;
+          if (element.type !== "Un Available") {
+            if (element.amount.trim() !== "") text += "-" + element.amount;
+          }
+          if (element.notes.trim() !== "") text += "-" + element.notes;
+        } else if (type3.includes(element.specname)) {
+          text = element.specname + "-";
+          text += element.type;
+          if (element.notes.trim() !== "") text += "-" + element.notes;
         }
-        if (element.notes.trim() !== "") text += "-" + element.notes;
-      } else if (type2.includes(element.specname)) {
-        text = element.specname + "-";
-        text += element.type;
-        if (element.type !== "Un Available") {
-          if (element.amount.trim() !== "") text += "-" + element.amount;
+        var maindiv = document.getElementById("spec-view-tags-section");
+        var pdiv = document.createElement("div");
+        pdiv.setAttribute("class", "field-box");
+
+        var arrow = document.createElement("IMG");
+        switch (element.specname) {
+          case "WIFI":
+            arrow.setAttribute("src", "images/wifi.svg");
+            break;
+          case "Lockers":
+            arrow.setAttribute("src", "images/lockers.svg");
+            break;
+          case "Generator":
+            arrow.setAttribute("src", "images/generator.svg");
+            break;
+          case "Gym":
+            arrow.setAttribute("src", "images/gym.svg");
+            break;
+          case "Vehicle Parking":
+            arrow.setAttribute("src", "images/vehicle-parking.svg");
+            break;
+          case "Transport":
+            arrow.setAttribute("src", "images/transport.svg");
+            break;
+          case "Sports Environment":
+            arrow.setAttribute("src", "images/ground.svg");
+            break;
+          case "Hot Water":
+            arrow.setAttribute("src", "images/hot-water.svg");
+            break;
+          case "CC TV Survilance":
+            arrow.setAttribute("src", "images/survilence.svg");
+            break;
+          case "Security":
+            arrow.setAttribute("src", "images/survilence.svg");
+            break;
+          default:
+            arrow.setAttribute("src", "images/others.svg");
+            break;
         }
-        if (element.notes.trim() !== "") text += "-" + element.notes;
-      } else if (type3.includes(element.specname)) {
-        text = element.specname + "-";
-        text += element.type;
-        if (element.notes.trim() !== "") text += "-" + element.notes;
-      }
-      var maindiv = document.getElementById("spec-view-tags-section");
-      var pdiv = document.createElement("div");
-      pdiv.setAttribute("class", "field-box");
+        arrow.setAttribute("class", "mini-icon");
+        pdiv.appendChild(arrow);
 
-      var arrow = document.createElement("IMG");
-      switch (element.specname) {
-        case "WIFI":
-          arrow.setAttribute("src", "images/wifi.svg");
-          break;
-        case "Lockers":
-          arrow.setAttribute("src", "images/lockers.svg");
-          break;
-        case "Generator":
-          arrow.setAttribute("src", "images/generator.svg");
-          break;
-        case "Gym":
-          arrow.setAttribute("src", "images/gym.svg");
-          break;
-        case "Vehicle Parking":
-          arrow.setAttribute("src", "images/vehicle-parking.svg");
-          break;
-        case "Transport":
-          arrow.setAttribute("src", "images/transport.svg");
-          break;
-        case "Sports Environment":
-          arrow.setAttribute("src", "images/ground.svg");
-          break;
-        case "Hot Water":
-          arrow.setAttribute("src", "images/hot-water.svg");
-          break;
-        case "CC TV Survilance":
-          arrow.setAttribute("src", "images/survilence.svg");
-          break;
-        case "Security":
-          arrow.setAttribute("src", "images/survilence.svg");
-          break;
-        default:
-          arrow.setAttribute("src", "images/others.svg");
-          break;
+        var pp = document.createElement("P");
+        pp.setAttribute("class", "label2");
+        pp.innerText = text;
+        pdiv.appendChild(pp);
+        maindiv.appendChild(pdiv);
       }
-      arrow.setAttribute("class", "mini-icon");
-      pdiv.appendChild(arrow);
-
-      var pp = document.createElement("P");
-      pp.setAttribute("class", "label2");
-      pp.innerText = text;
-      pdiv.appendChild(pp);
-      maindiv.appendChild(pdiv);
     });
   }
 

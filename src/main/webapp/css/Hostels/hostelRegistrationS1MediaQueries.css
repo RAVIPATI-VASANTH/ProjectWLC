@@ -97,6 +97,18 @@
     grid-template-columns: 1fr;
   }
 
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
+
+  .extra {
+    margin-top: 1rem;
+  }
+
   .about-section {
     grid-template-columns: 1fr;
   }
@@ -135,11 +147,5 @@
 
   .container {
     flex-direction: column;
-  }
-}
-
-@media (max-width: 23em) {
-  .header {
-    font-size: 1.6rem;
   }
 }

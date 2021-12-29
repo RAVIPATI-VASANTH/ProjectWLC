@@ -197,6 +197,7 @@ body {
   justify-content: flex-start;
   align-items: initial;
   margin: 0rem 10% 2rem 10%;
+  padding-bottom: 2rem;
 }
 
 .production {

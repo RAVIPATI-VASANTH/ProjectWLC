@@ -305,12 +305,21 @@
 
 @media (max-width: 32em) {
   .grid-3-div {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    justify-items: flex-start;
   }
 
   .header {
     font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
+
+  .extra {
+    margin-top: 1rem;
   }
 }
 

@@ -703,7 +703,7 @@ pageEncoding="ISO-8859-1"%>
               <label for="cctv-method" class="label1">Select Type</label>
               <select name="" id="cctv-method" class="text-input">
                 <option value="Available">Available</option>
-                <option value="un-available">Un Available</option>
+                <option value="Un Available">Un Available</option>
               </select>
               <label for="cctv-notes" class="label1">Notes</label>
               <input id="cctv-notes" type="text" class="text-input" />
@@ -713,7 +713,7 @@ pageEncoding="ISO-8859-1"%>
               <label for="security-method" class="label1">Select Type</label>
               <select name="" id="security-method" class="text-input">
                 <option value="Available">Available</option>
-                <option value="un-available">Un Available</option>
+                <option value="Un Available">Un Available</option>
               </select>
               <label for="security-notes" class="label1">Notes</label>
               <input id="security-notes" type="text" class="text-input" />

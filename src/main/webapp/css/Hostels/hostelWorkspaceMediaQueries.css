@@ -342,4 +342,11 @@
   .extra {
     margin-top: 1rem;
   }
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
 }

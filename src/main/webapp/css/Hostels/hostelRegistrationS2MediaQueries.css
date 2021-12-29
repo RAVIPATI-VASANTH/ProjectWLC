@@ -90,6 +90,18 @@
     justify-items: baseline;
   }
 
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
+
+  .extra {
+    margin-top: 1rem;
+  }
+
   .form {
     grid-template-columns: 1fr;
   }

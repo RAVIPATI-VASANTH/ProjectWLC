@@ -243,6 +243,18 @@
     justify-content: center;
     justify-items: flex-start;
   }
+
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
+
+  .extra {
+    margin-top: 1rem;
+  }
 }
 
 @media (max-width: 35em) {

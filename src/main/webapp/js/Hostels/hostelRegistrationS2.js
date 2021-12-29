@@ -53,22 +53,24 @@ function checkChange(value) {
       var n = 15;
       document.getElementById("owner-name-message").innerHTML =
         n - s.length + " charecters remaining";
-      if (s.length > 15) {
-        document.getElementById("hostel-name-message").innerHTML = "Invalid";
-      }
       obj.oname = s;
       objsignal.oname = true;
+      if (s.length > 15) {
+        objsignal.oname = false;
+        document.getElementById("hostel-name-message").innerHTML = "Invalid";
+      }
       break;
     case 2:
       var n = 10;
       var s = document.getElementById("hostel-owner-contact").value;
       document.getElementById("contact-message").innerHTML =
         n - s.length + " charecters remaining";
-      if (s.length > 10) {
-        document.getElementById("contact-message").innerHTML = "Invalid";
-      }
       obj.ocontact = s;
       objsignal.ocontact = true;
+      if (s.length > 10) {
+        document.getElementById("contact-message").innerHTML = "Invalid";
+        objsignal.ocontact = false;
+      }
       break;
     case 3:
       if (document.getElementById("hostel-type-community").checked) {
@@ -125,7 +127,6 @@ function checkChange(value) {
 
   window.obj = obj;
   window.objsignal = objsignal;
-  // console.log(obj);
 }
 
 function checkPassword() {
@@ -146,9 +147,23 @@ function checkPassword() {
   }
 }
 
+function checkReRegistering() {
+  currentLandmarks.forEach((element) => {
+    element.hostel_ids.forEach((hid) => {
+      if (hid === window.obj.hid) {
+        return true;
+      }
+    });
+  });
+  return false;
+}
+
 function checkDataValidation() {
   var signal = true;
-  if (!objsignal.hname) {
+  if (checkReRegistering()) {
+    alert("Please Reload the Page.");
+    signal = false;
+  } else if (!objsignal.hname) {
     alert("Enter a valid Hostel Name");
     signal = false;
   } else if (!objsignal.oname) {
@@ -205,7 +220,6 @@ function generateHostelId() {
 function updateLandmarksDatalist(data) {
   var list = JSON.parse(data);
   currentLandmarks = list;
-  console.log(currentLandmarks);
   window.dumpValue = document.getElementById("landmark").value;
   window.obj.hlandmark = window.dumpValue;
   window.objsignal.hlandmark = true;
@@ -230,6 +244,13 @@ window.onload = function () {
   getLandmarks();
 };
 
+function cleanupPage() {
+  document.getElementById("hostel-name").value = "";
+  document.getElementById("hostel-owner-name").value = "";
+  document.getElementById("hostel-owner-contact").value = "";
+  document.getElementById("location-input").value = "";
+}
+
 //processing functions
 function processString(s) {
   s = s.replaceAll("\r", "");
@@ -241,7 +262,6 @@ function processString(s) {
 
 function sendNewHostelData() {
   var obj = window.obj;
-  console.log(obj);
   $.post(
     "hostelRegister",
     {
@@ -260,7 +280,8 @@ function sendNewHostelData() {
     },
     function (data, status) {
       if (status === "success") {
-        console.log("created hostel");
+        window.getLandmarks();
+        window.cleanupPage();
         window.location.assign("hostelWorkspace.jsp");
       } else {
         alert("Something Went Wrong..!!");

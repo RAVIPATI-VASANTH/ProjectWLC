@@ -31,7 +31,7 @@ public class hostelsLoad extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println(ob.toString());
 			} catch (Exception e) {
-				System.out.println("hello"+e.getMessage());
+				e.printStackTrace();
 			}
 		}
     	else if(i==1) {
@@ -41,7 +41,7 @@ public class hostelsLoad extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println(list.toString());
 			} catch (Exception e) {
-				System.out.println("hello"+e.getMessage());
+				e.printStackTrace();
 			}
     	}
 	}

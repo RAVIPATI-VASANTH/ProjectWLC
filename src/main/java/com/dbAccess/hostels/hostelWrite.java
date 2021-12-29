@@ -14,35 +14,41 @@ import org.json.simple.JSONObject;
 import com.classFiles.hostels.dataContainers.HostelRegisterContainer;
 import com.dbAccess.hostels.hostelRead;
 public class hostelWrite {
-	static String url= "jdbc:mysql://mysql3000.mochahost.com:3036/hostelsdb";
+	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
 	static String user= "websitel_dbwriter";
 	static String pass="write@database99";
 
 //	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
 //	static String user= "dbwriter";
 //	static String pass="write@database99";
-	
+
 	
 	public static int createNewLandmark(String id,String minicode,String fullname,String tabname) throws ClassNotFoundException, SQLException {
 		int status=0;
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 
-		String sql="INSERT INTO landmarks VALUES(?,?,?,?,?,?,?);";
-		PreparedStatement st= con.prepareStatement(sql);
-		st.setString(1,id);
-		st.setString(2,minicode);
-		st.setString(3,fullname);
-		st.setString(4,"");
-		st.setString(5,tabname);
-		st.setString(6,"");
-		st.setString(7,"");
-		status=st.executeUpdate();
-
-		String sql2="CREATE TABLE "+tabname+" (hostel_id VARCHAR(25) NOT NULL UNIQUE,hostel_name VARCHAR(45),owner_name VARCHAR(25),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(55),hostel_hotspottable VARCHAR(55),hostel_speacializationtable VARCHAR(55),hostel_policytable VARCHAR(55),hostel_requirementtable VARCHAR(55),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id));";
-		PreparedStatement smt= con.prepareStatement(sql2);
-		status=smt.executeUpdate();
-		System.out.println(status);
+		try {
+			
+			
+			String sql="INSERT INTO landmarks VALUES(?,?,?,?,?,?,?);";
+			PreparedStatement st= con.prepareStatement(sql);
+			st.setString(1,id);
+			st.setString(2,minicode);
+			st.setString(3,fullname);
+			st.setString(4,"");
+			st.setString(5,tabname);
+			st.setString(6,"");
+			st.setString(7,"");
+			status=st.executeUpdate();
+			
+			String sql2="CREATE TABLE "+tabname+" (hostel_id VARCHAR(25) NOT NULL UNIQUE,hostel_name VARCHAR(45),owner_name VARCHAR(25),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(55),hostel_hotspottable VARCHAR(55),hostel_speacializationtable VARCHAR(55),hostel_policytable VARCHAR(55),hostel_requirementtable VARCHAR(55),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id));";
+			PreparedStatement smt= con.prepareStatement(sql2);
+			status=smt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		con.close();
 		return status;
 	}	
@@ -52,7 +58,7 @@ public class hostelWrite {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
-			String sql="INSERT INTO"+h.htablename+" VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			String sql="INSERT INTO "+h.htablename+" VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,h.hid);
 			smt.setString(2,h.hname);
@@ -118,11 +124,11 @@ public class hostelWrite {
 			smt.setString(2, h.hpassword);
 			status=smt.executeUpdate();
 			
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return status;
 	}
 
@@ -173,8 +179,9 @@ public class hostelWrite {
 			return true;			
 		}
 		catch(Exception e) {
-			System.out.println("here 02"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return false;
 	}
 	
@@ -201,8 +208,9 @@ public class hostelWrite {
 			return true;
 		}
 		catch(Exception e) {
-			System.out.println("here 2"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return false;
 	}
 	
@@ -213,7 +221,6 @@ public class hostelWrite {
 			Statement stmt=con.createStatement();
 			
 			stmt.execute("TRUNCATE TABLE "+tname+";");
-			System.out.println(roomlist+" "+roomlist.size());
 			if(!roomlist.isEmpty()) {
 				for(String s: roomlist) {
 					if(s=="") {
@@ -231,8 +238,9 @@ public class hostelWrite {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("here 5"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return false;
 	}
 	
@@ -259,8 +267,9 @@ public class hostelWrite {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("here 6"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return false;
 	}
 
@@ -287,8 +296,9 @@ public class hostelWrite {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("here 8"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return false;
 	}
 
@@ -315,8 +325,9 @@ public class hostelWrite {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("here 9"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return false;
 	}
 
@@ -343,8 +354,9 @@ public class hostelWrite {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("here 10"+e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return false;
 	}
 }

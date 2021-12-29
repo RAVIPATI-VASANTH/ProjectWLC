@@ -178,13 +178,13 @@ pageEncoding="ISO-8859-1"%>
               <p class="footer-info" style="margin: 0rem; padding: 0rem;">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color footer-info" style="margin: 0rem; padding: 0rem;">
+              <p class="word-color " style="margin: 0rem; padding: 0rem;">
                 <strong>websitelochudu@gmail.com</strong>
               </p>
               <p class="footer-info">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color footer-info">
+              <p class="word-color ">
                 <strong>@websitelochudu</strong>
               </p>
             </div>
@@ -197,19 +197,19 @@ pageEncoding="ISO-8859-1"%>
               <p class="footer-info">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color footer-info" >
+              <p class="word-color" >
                 <strong>vasanthravipati99@gmail.com</strong>
               </p>
               <p class="footer-info">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color footer-info">
+              <p class="word-color ">
                 <strong>@RAVIPATI-VASANTH</strong>
               </p>
               <p class="footer-info">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-color footer-info">
+              <p class="word-color ">
                 <strong>Vasanth Ravipati</strong>
               </p>
             </div>

@@ -7,7 +7,7 @@ import org.json.simple.*;
 import org.json.simple.JSONObject;
 
 public class hostelRead {
-	static String url= "jdbc:mysql://mysql3000.mochahost.com:3036/hostelsdb";
+	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
 	static String user= "websitel_dbreader";
 	static String pass="read@database99";
 
@@ -41,11 +41,11 @@ public class hostelRead {
 			ob.put("hostel_ids", l);
 			list.add(ob);
 		}
-		con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -68,11 +68,11 @@ public class hostelRead {
 				ob.put("hsearchscore", rs.getString(7));
 				list.add(ob);
 			}
-			con.close();
 			}
 			catch(Exception e) {
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
+		con.close();
 		return list;
 		
 	}
@@ -95,8 +95,9 @@ public class hostelRead {
 			}
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return ob;
 	}
 	
@@ -136,11 +137,11 @@ public class hostelRead {
 				ob.put("hsearchscore", rs.getObject(17));
 				ob.put("hlfname",lfname);
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return ob;
 	}
 	
@@ -160,11 +161,11 @@ public class hostelRead {
 				ob.put("dinner",rs.getString(4));
 				ob.put("nonveg",rs.getString(5));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return ob;
 	}
 	
@@ -180,11 +181,11 @@ public class hostelRead {
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -200,11 +201,11 @@ public class hostelRead {
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -220,11 +221,11 @@ public class hostelRead {
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -240,11 +241,11 @@ public class hostelRead {
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -260,11 +261,11 @@ public class hostelRead {
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 
@@ -272,7 +273,6 @@ public class hostelRead {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
-		System.out.println("call for DB");
 		try {
 			String rspassword="";
 			String sql="SELECT hostel_password FROM all_hostels WHERE hostel_id = '"+id+"'";
@@ -280,22 +280,22 @@ public class hostelRead {
 			while(rs.next()) {
 				rspassword=rs.getString(1);
 			}
-			con.close();
-			System.out.println(id+" "+password+" "+rspassword+"@");
-			System.out.println(password.equals(rspassword));
 			if(rspassword.equals("")) {
 				System.out.print("this 2");
+				con.close();
 				return 0;
 			}
 			else if(password.equals(rspassword)) {
 				System.out.print("this");
+				con.close();
 				return 1;
 			}
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		System.out.print("this 3");		
+		con.close();
 		return 0;
 	}
 }

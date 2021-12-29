@@ -152,6 +152,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: initial;
+  padding-bottom: 2rem;
   margin: 0rem 10% 0rem 10%;
 }
 

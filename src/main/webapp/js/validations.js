@@ -11,7 +11,6 @@ function isAlpha(str) {
 }
 //Checks all are digits or not
 function isDigit(str) {
-  console.log(str);
   var validate = "1234567890";
   for (var i = 0; i < str.length; i++) {
     if (!validate.includes(str[i])) {

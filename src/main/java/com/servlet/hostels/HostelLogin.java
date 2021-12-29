@@ -20,7 +20,6 @@ public class HostelLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int i=Integer.parseInt(request.getParameter("signal"));
 		if(i==0) {
-			System.out.println("call for authentication");
 			String id=request.getParameter("hid").toString();
 			String pass=request.getParameter("password").toString();
 			int status=0;
@@ -30,7 +29,6 @@ public class HostelLogin extends HttpServlet {
 				e.printStackTrace();
 			}
 			if(status==1) {
-				System.out.println("call for session");
 				HttpSession session=request.getSession();
 				session.setAttribute("hid",id);				
 			}

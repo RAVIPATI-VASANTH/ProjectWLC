@@ -53,11 +53,10 @@ public class HostelInfo extends HttpServlet {
 				String spectable=(String) basicInfoObj.get("hstable");
 				ArrayList<String> speclist= hostelRead.getHostelSpecializationInfo(spectable);
 				finalobj.put("specializationInfo", speclist);
-				System.out.println(finalobj);
 				PrintWriter out = response.getWriter();
 				out.println(finalobj.toString());
 			} catch (Exception e) {
-				System.out.println("hello1"+e.getMessage());
+				e.printStackTrace();
 			}
 		}
 	}
