@@ -1,4 +1,4 @@
-package com.classes.hostels.dataContainers;
+package com.classFiles.hostels.dataContainers;
 
 public class HostelRegisterContainer {
 	public String hname;

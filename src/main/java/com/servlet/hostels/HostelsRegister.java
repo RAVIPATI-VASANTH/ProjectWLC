@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 
 import com.dbAccess.hostels.*;
-import com.classes.hostels.dataContainers.HostelRegisterContainer;
+import com.classFiles.hostels.dataContainers.HostelRegisterContainer;
 @WebServlet("/hostelRegister")
 public class HostelsRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;

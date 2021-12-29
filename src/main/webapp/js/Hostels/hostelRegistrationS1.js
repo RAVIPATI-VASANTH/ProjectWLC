@@ -81,6 +81,7 @@ function checkChange(value) {
 }
 
 function updateLandmarksDatalist(data) {
+	console.log(data);
   var list = JSON.parse(data);
   window.currentLandmarks = list;
   var element = document.getElementById("landmarks");
