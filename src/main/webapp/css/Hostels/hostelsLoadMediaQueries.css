@@ -59,22 +59,6 @@
   .field-name {
     font-size: 1.8rem;
   }
-
-  .link {
-    text-decoration: none;
-    font-size: 1.4rem;
-  }
-
-  .header {
-    font-size: 1.8rem;
-    padding: 0.8;
-  }
-
-  .footer-info {
-    font-size: 1.4rem;
-    padding: 0rem;
-    margin: 0rem;
-  }
 }
 
 @media (max-width: 59em) {
@@ -126,22 +110,6 @@
 
   .field-name {
     font-size: 1.6rem;
-  }
-
-  .link {
-    text-decoration: none;
-    font-size: 1.4rem;
-  }
-
-  .header {
-    font-size: 1.8rem;
-    padding: 0.8;
-  }
-
-  .footer-info {
-    font-size: 1.4rem;
-    padding: 0rem;
-    margin: 0rem;
   }
 }
 
@@ -316,6 +284,10 @@
 
   .items {
     font-size: 1.4rem;
+  }
+
+  .link {
+    font-size: 1.2rem;
   }
 
   .extra {

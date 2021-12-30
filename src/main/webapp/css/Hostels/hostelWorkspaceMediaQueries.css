@@ -248,11 +248,15 @@
     display: none;
   }
 
-  .header {
-    font-size: 1.8rem;
+  .description {
+    grid-template-columns: 1fr;
   }
 
-  .description {
+  .basic-info,
+  .room-info,
+  .food-info,
+  .specializations-info,
+  .policy-info {
     grid-template-columns: 1fr;
   }
 }
@@ -282,26 +286,12 @@
     font-size: 2.2rem;
   }
 
-  .header {
-    font-size: 1.6rem;
-  }
-
   .nav {
     flex-direction: column;
   }
 
   .head-section button {
     margin: 0.5rem;
-  }
-}
-
-@media (max-width: 87em) {
-  .basic-info,
-  .room-info,
-  .food-info,
-  .specializations-info,
-  .policy-info {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -317,10 +307,6 @@
 
   .view-tag {
     color: #e67e22;
-  }
-
-  .header {
-    font-size: 1.5rem;
   }
 
   .room-cards-section,
@@ -348,5 +334,9 @@
 
   .items {
     font-size: 1.4rem;
+  }
+
+  .link {
+    font-size: 1.2rem;
   }
 }

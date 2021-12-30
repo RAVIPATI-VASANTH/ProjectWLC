@@ -25,6 +25,18 @@
     justify-items: baseline;
   }
 
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
+
+  .link {
+    font-size: 1.2rem;
+  }
+
   .head-section {
     flex-direction: column;
     justify-content: flex-start;
