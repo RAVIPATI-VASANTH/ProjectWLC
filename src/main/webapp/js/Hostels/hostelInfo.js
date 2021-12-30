@@ -356,7 +356,7 @@ class RoomInfo {
       obj.stayandfood.monthly = prices[0];
       obj.stayandfood.semester = prices[1];
       obj.stayandfood.annum = prices[2];
-      prices = words[4].split("-");
+      prices = words[5].split("-");
       obj.stayonly.monthly = prices[0];
       obj.stayonly.semester = prices[1];
       obj.stayonly.annum = prices[2];
@@ -1166,21 +1166,25 @@ function dataConversion(obj, value) {
   switch (value) {
     case 0:
       obj = JSON.parse(obj);
-      window.modifiedData.basicInfo = obj.basicInfo;
-      window.modifiedData.foodInfo = obj.foodInfo;
-      window.modifiedData.roomInfo = obj.roomInfo;
-      window.modifiedData.policyInfo = obj.policyInfo;
-      window.modifiedData.hotspotInfo = obj.hotspotInfo;
-      window.modifiedData.requirementInfo = obj.requirementInfo;
-      window.modifiedData.specializationInfo = obj.specializationInfo;
+      if (obj.valid === 0) {
+        window.location.assign("Hostels.jsp");
+      } else {
+        window.modifiedData.basicInfo = obj.basicInfo;
+        window.modifiedData.foodInfo = obj.foodInfo;
+        window.modifiedData.roomInfo = obj.roomInfo;
+        window.modifiedData.policyInfo = obj.policyInfo;
+        window.modifiedData.hotspotInfo = obj.hotspotInfo;
+        window.modifiedData.requirementInfo = obj.requirementInfo;
+        window.modifiedData.specializationInfo = obj.specializationInfo;
 
-      BasicInfo.updateBasicInfoUi();
-      RoomInfo.processRoomInfoData();
-      FoodInfo.processFoodInfoData();
-      SpecializationInfo.processSpecializationInfoData();
-      PolicyInfo.processPolicyInfoData();
-      HotspotInfo.processHotspotInfoData();
-      RequirementInfo.processRequirementInfoData();
+        BasicInfo.updateBasicInfoUi();
+        RoomInfo.processRoomInfoData();
+        FoodInfo.processFoodInfoData();
+        SpecializationInfo.processSpecializationInfoData();
+        PolicyInfo.processPolicyInfoData();
+        HotspotInfo.processHotspotInfoData();
+        RequirementInfo.processRequirementInfoData();
+      }
       break;
   }
 }

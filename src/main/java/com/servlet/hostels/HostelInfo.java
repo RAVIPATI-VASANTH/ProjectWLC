@@ -30,6 +30,12 @@ public class HostelInfo extends HttpServlet {
 				String minicode=request.getParameter("lanmincode").toString();
 				JSONObject basicInfoObj= hostelRead.getHostelBasicInfo(id,minicode);
 				finalobj.put("basicInfo", basicInfoObj);
+				if(basicInfoObj.toString().equals("{}")) {
+					finalobj.put("valid", 0);
+				}
+				else {
+					finalobj.put("valid", 1);
+				}
 				JSONObject foodObj= hostelRead.getHostelFoodInfo(id);
 				finalobj.put("foodInfo", foodObj);
 				String rtable=(String) basicInfoObj.get("hrtable");
@@ -47,11 +53,10 @@ public class HostelInfo extends HttpServlet {
 				String spectable=(String) basicInfoObj.get("hstable");
 				ArrayList<String> speclist= hostelRead.getHostelSpecializationInfo(spectable);
 				finalobj.put("specializationInfo", speclist);
-				System.out.println(finalobj);
 				PrintWriter out = response.getWriter();
 				out.println(finalobj.toString());
 			} catch (Exception e) {
-				System.out.println("hello1"+e.getMessage());
+				e.printStackTrace();
 			}
 		}
 	}

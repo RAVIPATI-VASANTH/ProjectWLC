@@ -20,18 +20,23 @@
   }
 
   .grid-3-div {
-    grid-template-columns: 1fr 1fr;
-    justify-items: flex-start;
-  }
-}
-
-@media (max-width: 47.5em) {
-  .grid-3-div {
     grid-template-columns: 1fr;
+    justify-content: flex-start;
+    justify-items: baseline;
   }
-}
 
-@media (max-width: 47.5em) {
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
+
+  .link {
+    font-size: 1.2rem;
+  }
+
   .head-section {
     flex-direction: column;
     justify-content: flex-start;

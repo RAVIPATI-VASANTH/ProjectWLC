@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,25 +34,25 @@ public class HostelWorkspaceCommit extends HttpServlet {
 		obj=JSONValue.parse(request.getParameter("foodInfo"));  
 		JSONObject finfo = (JSONObject) obj;
 		
-		String r=request.getParameter("roomInfo");
+		String r=request.getParameter("roomInfo").toString();
 		r=r.substring(1,r.length()-1);
-		ArrayList<String> roomlist = new ArrayList<String>(Arrays.asList(r.split(",")));
+		List<String> roomlist = Arrays.asList(r.split(","));
 		
 		r=request.getParameter("policyInfo");
 		r=r.substring(1,r.length()-1);
-		ArrayList<String> policylist = new ArrayList<String>(Arrays.asList(r.split(",")));
+		List<String> policylist = Arrays.asList(r.split(","));
 		
 		r=request.getParameter("hotspotInfo");
 		r=r.substring(1,r.length()-1);
-		ArrayList<String> hotspotslist = new ArrayList<String>(Arrays.asList(r.split(",")));
+		List<String> hotspotslist = Arrays.asList(r.split(","));
 		
 		r=request.getParameter("requirementInfo");
 		r=r.substring(1,r.length()-1);
-		ArrayList<String> requirementslist = new ArrayList<String>(Arrays.asList(r.split(",")));
+		List<String> requirementslist = Arrays.asList(r.split(","));
 		
 		r=request.getParameter("specializationInfo");
 		r=r.substring(1,r.length()-1);
-		ArrayList<String> specslist = new ArrayList<String>(Arrays.asList(r.split(",")));
+		List<String> specslist =Arrays.asList(r.split(","));
 		
 		try {
 			signal=hostelWrite.commitBasicInfo(binfo);

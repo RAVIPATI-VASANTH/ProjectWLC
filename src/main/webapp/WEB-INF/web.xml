@@ -13,4 +13,14 @@
   	<error-code>404</error-code>
   	<location>/ProjectWLC/Error.jsp</location>
   </error-page>
+  
+  <servlet>  
+		<servlet-name>hregister</servlet-name>  
+		<servlet-class>com.servlet.hostels.HostelsRegister</servlet-class>  
+	</servlet>  
+  
+	<servlet-mapping>  
+		<servlet-name>hregister</servlet-name>  
+		<url-pattern>/hostelRegister</url-pattern>  
+	</servlet-mapping>  
 </web-app>

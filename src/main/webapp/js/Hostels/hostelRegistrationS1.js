@@ -14,7 +14,6 @@ var objsignal = {
 };
 
 function processString(s) {
-  console.log(s);
   s = s.replaceAll("\r", "");
   s = s.replaceAll("\n", "");
   return s;
@@ -68,7 +67,7 @@ function checkChange(value) {
         n - s.length + " charecters remaining";
       obj.newLandmarkdes = s;
       objsignal.newLandmarkdes = true;
-      if (s.length > n) {
+      if (s.length > n || s.length === 0) {
         obj.newLandmarkdes = "";
         objsignal.newLandmarkdes = false;
         document.getElementById("landmark-description-message").innerHTML =
@@ -220,9 +219,11 @@ function checkLanid(obj) {
 }
 
 function createLandmark() {
+  window.checkChange(1);
+  window.checkChange(2);
   if (!window.objsignal.newLandmarkfname) {
     alert("Enter a valid Landmark Name");
-  } else if (!window.objsignal.newLandmarkfname) {
+  } else if (!window.objsignal.newLandmarkdes) {
     alert("Enter a valid Description");
   } else {
     var data = createLandmarkObject();
@@ -238,7 +239,19 @@ function createLandmark() {
         }
       });
     } else {
-      alert("landmark already exists.");
+      var s1 = isDigit(data.fullname);
+      var s2 = isSpecEncounter(data.fullname);
+      var s3 = false;
+      if (s2) {
+        alert("Landmark should not contain special Charecters.");
+        s3 = true;
+      } else if (s1) {
+        alert("Landmark should contain Alphabets.");
+        s3 = true;
+      }
+      if (!s3) {
+        alert("landmark already exists.");
+      }
     }
   }
 }

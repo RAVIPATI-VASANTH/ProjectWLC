@@ -35,92 +35,100 @@ function createHostelitems(list) {
   while (maindiv.hasChildNodes()) {
     maindiv.removeChild(maindiv.firstChild);
   }
-  window.hostelIds = [];
-  index = 0;
-  list = sort(list);
-  list.forEach((element) => {
-    //creating item div
-    var hItemDiv = document.createElement("div");
-    hItemDiv.setAttribute("class", "hostel-item");
-    hItemDiv.setAttribute("onclick", "redirect(" + index + ")");
-    window.hostelIds.push(element.hid);
-    //creating himage
-    var himage = document.createElement("img");
-    himage.setAttribute("src", "images/bed.PNG");
-    himage.setAttribute("class", "hostel-img");
-    hItemDiv.append(himage);
+  if (list.length === 0) {
+    var p = document.createElement("P");
+    p.setAttribute("class", "no-data");
+    p.innerText = "No Data";
+    maindiv.append(p);
+  } else {
+    window.hostelIds = [];
+    index = 0;
+    list = sort(list);
+    list.forEach((element) => {
+      //creating item div
+      var hItemDiv = document.createElement("div");
+      hItemDiv.setAttribute("class", "hostel-item");
+      hItemDiv.setAttribute("onclick", "redirect(" + index + ")");
+      window.hostelIds.push(element.hid);
+      //creating himage
+      var himage = document.createElement("img");
+      himage.setAttribute("src", "images/bed.PNG");
+      himage.setAttribute("class", "hostel-img");
+      hItemDiv.append(himage);
 
-    //creating infoDiv
-    var infoDiv = document.createElement("div");
-    infoDiv.setAttribute("class", "info");
-    //creating hNameP
-    var hNameP = document.createElement("P");
-    hNameP.setAttribute("class", "hostelname");
-    hNameP.innerHTML = element.hname;
-    infoDiv.appendChild(hNameP);
-    //***************creating gDiv
-    var gDiv = document.createElement("div");
-    gDiv.setAttribute("class", "field");
-    //creating giconImg
-    var giconImg = document.createElement("IMG");
-    giconImg.setAttribute("class", "icon");
-    if (element.hgender === "male") {
-      giconImg.setAttribute("src", "images/male.svg");
-    } else {
-      giconImg.setAttribute("src", "images/female.svg");
-    }
-    gDiv.appendChild(giconImg);
-    //creating gPFname
-    var gPFname = document.createElement("P");
-    gPFname.setAttribute("class", "field-name");
-    if (element.hgender === "male") {
-      gPFname.innerHTML = "Gents";
-    } else {
-      gPFname.innerHTML = "Ladies";
-    }
-    gDiv.appendChild(gPFname);
-    infoDiv.appendChild(gDiv);
-    //***************creating htypeDiv
-    var htypeDiv = document.createElement("div");
-    htypeDiv.setAttribute("class", "field");
-    //creating ticonImg
-    var ticonImg = document.createElement("IMG");
-    ticonImg.setAttribute("class", "icon");
-    ticonImg.setAttribute("src", "images/type.svg");
-    htypeDiv.appendChild(ticonImg);
-    //creating tPFname
-    var tPFname = document.createElement("P");
-    tPFname.setAttribute("class", "field-name");
-    if (element.htype === "public") {
-      tPFname.innerHTML = "Public";
-    } else {
-      tPFname.innerHTML = "Comminity-" + element.hcommunity;
-    }
-    htypeDiv.appendChild(tPFname);
-    infoDiv.appendChild(htypeDiv);
-    //***************creating hconDiv
-    var hconDiv = document.createElement("div");
-    hconDiv.setAttribute("class", "field");
-    //creating ciconImg
-    var ciconImg = document.createElement("IMG");
-    ciconImg.setAttribute("class", "icon");
-    ciconImg.setAttribute("src", "images/call.svg");
-    hconDiv.appendChild(ciconImg);
-    //creating cPFname
-    var cPFname = document.createElement("P");
-    cPFname.setAttribute("class", "field-name");
-    cPFname.innerHTML = element.hcontact;
-    hconDiv.appendChild(cPFname);
-    infoDiv.appendChild(hconDiv);
+      //creating infoDiv
+      var infoDiv = document.createElement("div");
+      infoDiv.setAttribute("class", "info");
+      //creating hNameP
+      var hNameP = document.createElement("P");
+      hNameP.setAttribute("class", "hostelname");
+      hNameP.innerHTML = element.hname;
+      infoDiv.appendChild(hNameP);
+      //***************creating gDiv
+      var gDiv = document.createElement("div");
+      gDiv.setAttribute("class", "field");
+      //creating giconImg
+      var giconImg = document.createElement("IMG");
+      giconImg.setAttribute("class", "icon");
+      if (element.hgender === "male") {
+        giconImg.setAttribute("src", "images/male.svg");
+      } else {
+        giconImg.setAttribute("src", "images/female.svg");
+      }
+      gDiv.appendChild(giconImg);
+      //creating gPFname
+      var gPFname = document.createElement("P");
+      gPFname.setAttribute("class", "field-name");
+      if (element.hgender === "male") {
+        gPFname.innerHTML = "Gents";
+      } else {
+        gPFname.innerHTML = "Ladies";
+      }
+      gDiv.appendChild(gPFname);
+      infoDiv.appendChild(gDiv);
+      //***************creating htypeDiv
+      var htypeDiv = document.createElement("div");
+      htypeDiv.setAttribute("class", "field");
+      //creating ticonImg
+      var ticonImg = document.createElement("IMG");
+      ticonImg.setAttribute("class", "icon");
+      ticonImg.setAttribute("src", "images/type.svg");
+      htypeDiv.appendChild(ticonImg);
+      //creating tPFname
+      var tPFname = document.createElement("P");
+      tPFname.setAttribute("class", "field-name");
+      if (element.htype === "public") {
+        tPFname.innerHTML = "Public";
+      } else {
+        tPFname.innerHTML = "Comminity-" + element.hcommunity;
+      }
+      htypeDiv.appendChild(tPFname);
+      infoDiv.appendChild(htypeDiv);
+      //***************creating hconDiv
+      var hconDiv = document.createElement("div");
+      hconDiv.setAttribute("class", "field");
+      //creating ciconImg
+      var ciconImg = document.createElement("IMG");
+      ciconImg.setAttribute("class", "icon");
+      ciconImg.setAttribute("src", "images/call.svg");
+      hconDiv.appendChild(ciconImg);
+      //creating cPFname
+      var cPFname = document.createElement("P");
+      cPFname.setAttribute("class", "field-name");
+      cPFname.innerHTML = element.hcontact;
+      hconDiv.appendChild(cPFname);
+      infoDiv.appendChild(hconDiv);
 
-    hItemDiv.append(infoDiv);
-    maindiv.appendChild(hItemDiv);
-    index++;
-  });
+      hItemDiv.append(infoDiv);
+      maindiv.appendChild(hItemDiv);
+      index++;
+    });
+  }
 }
 
 function redirect(index) {
-  window.location.assign("hostelInfo.jsp?id=" + window.hostelIds[index]);
+  window.location.assign("HostelInfo.jsp?id=" + window.hostelIds[index]);
+//window.location.assign("index.html");
 }
 
 function toggleMoreInfo(index) {

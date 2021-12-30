@@ -165,6 +165,7 @@ body {
   font-weight: bold;
   padding: 0rem;
   margin: 0rem;
+  cursor: pointer;
 }
 
 .room-cards {
@@ -376,6 +377,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: initial;
+  padding-bottom: 2rem;
   margin: 0rem 10% 0rem 10%;
 }
 

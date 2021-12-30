@@ -173,10 +173,6 @@
   .illustration {
     display: none;
   }
-
-  .header {
-    font-size: 1.8rem;
-  }
 }
 
 @media (max-width: 40em) {
@@ -203,10 +199,6 @@
   .view-tag {
     font-size: 2.2rem;
   }
-
-  .header {
-    font-size: 1.6rem;
-  }
 }
 
 @media (max-width: 38em) {
@@ -221,10 +213,6 @@
 
   .view-tag {
     color: #e67e22;
-  }
-
-  .header {
-    font-size: 1.5rem;
   }
 
   .room-cards-section,
@@ -245,6 +233,18 @@
 
   .grid-3-div {
     grid-template-columns: 1fr;
+  }
+
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .items {
+    font-size: 1.4rem;
+  }
+
+  .link {
+    font-size: 1.2rem;
   }
 
   .extra {

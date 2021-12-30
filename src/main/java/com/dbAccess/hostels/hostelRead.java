@@ -7,9 +7,14 @@ import org.json.simple.*;
 import org.json.simple.JSONObject;
 
 public class hostelRead {
-	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
-	static String user= "dbreader";
+	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
+	static String user= "websitel_dbreader";
 	static String pass="read@database99";
+
+//	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
+//	static String user= "dbreader";
+//	static String pass="read@database99";
+
 	
 	public static ArrayList<JSONObject> getLandmarksBasicInfo() throws ClassNotFoundException, SQLException {
 	
@@ -18,7 +23,7 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		ArrayList<JSONObject> list = new ArrayList<JSONObject>();
 		try {
-		ResultSet rs=stmt.executeQuery("select id,mini_code,full_name,hostels_table,coordinates from landmarks");
+		ResultSet rs=stmt.executeQuery("SELECT id,mini_code,full_name,hostels_table,coordinates FROM landmarks");
 		while(rs.next()) {
 			JSONObject ob = new JSONObject();
 			ob.put("id", rs.getString(1));
@@ -27,7 +32,7 @@ public class hostelRead {
 			ob.put("htablesname", rs.getString(4));
 			ob.put("location",rs.getString(5));
 			Statement st=con.createStatement();
-			String s="select hostel_id from "+rs.getString(4)+"";
+			String s="SELECT hostel_id FROM "+rs.getString(4)+"";
 			ResultSet r=st.executeQuery(s);
 			ArrayList<String> l=new ArrayList<String>();
 			while(r.next()) {
@@ -36,11 +41,11 @@ public class hostelRead {
 			ob.put("hostel_ids", l);
 			list.add(ob);
 		}
-		con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -50,7 +55,7 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		ArrayList<JSONObject> list = new ArrayList<JSONObject>();
 		try {
-			String sql="select hostel_id,hostel_name,hostel_gender,hostel_type,hostel_community,owner_contact,hostel_searchscore from "+tname;
+			String sql="SELECT hostel_id,hostel_name,hostel_gender,hostel_type,hostel_community,owner_contact,hostel_searchscore FROM "+tname;
 			ResultSet rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				JSONObject ob = new JSONObject();
@@ -63,11 +68,11 @@ public class hostelRead {
 				ob.put("hsearchscore", rs.getString(7));
 				list.add(ob);
 			}
-			con.close();
 			}
 			catch(Exception e) {
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
+		con.close();
 		return list;
 		
 	}
@@ -78,20 +83,21 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		JSONObject ob = new JSONObject();
 		try {
-			String sql="select count(id) from landmarks;";
+			String sql="SELECT COUNT(id) FROM landmarks;";
 			ResultSet rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				ob.put("landmarkcount", rs.getInt(1));
 			}
-			sql="select count(hostel_id) from all_hostels;";
+			sql="SELECT COUNT(hostel_id) FROM all_hostels;";
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				ob.put("hostelscount", rs.getInt(1));
 			}
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return ob;
 	}
 	
@@ -101,7 +107,7 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		JSONObject ob = new JSONObject();
 		try {
-			String sql="select hostels_table,full_name from landmarks where mini_code ='"+lanmincode+"';";
+			String sql="SELECT hostels_table,full_name FROM landmarks WHERE mini_code ='"+lanmincode+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			String tname="";
 			String lfname="";
@@ -109,7 +115,7 @@ public class hostelRead {
 				tname=rs.getString(1);
 				lfname=rs.getString(2);
 			}
-			sql="select hostel_id,hostel_name,owner_name,owner_contact,hostel_type,hostel_gender,hostel_location,hostel_landmark,hostel_community,hostel_strength,hostel_headline,hostel_roomtable,hostel_hotspottable,hostel_speacializationtable,hostel_policytable,hostel_requirementtable,hostel_searchscore from "+tname+" where hostel_id='"+id+"';";
+			sql="SELECT hostel_id,hostel_name,owner_name,owner_contact,hostel_type,hostel_gender,hostel_location,hostel_landmark,hostel_community,hostel_strength,hostel_headline,hostel_roomtable,hostel_hotspottable,hostel_speacializationtable,hostel_policytable,hostel_requirementtable,hostel_searchscore FROM "+tname+" WHERE hostel_id='"+id+"';";
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				ob.put("hid",rs.getString(1));
@@ -131,11 +137,11 @@ public class hostelRead {
 				ob.put("hsearchscore", rs.getObject(17));
 				ob.put("hlfname",lfname);
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return ob;
 	}
 	
@@ -145,7 +151,7 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		JSONObject ob = new JSONObject();
 		try {
-			String sql="select breakfast,lunch,snacks,dinner,nonveg from food_table where hostel_id='"+id+"';";
+			String sql="SELECT breakfast,lunch,snacks,dinner,nonveg FROM food_table WHERE hostel_id='"+id+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -155,11 +161,11 @@ public class hostelRead {
 				ob.put("dinner",rs.getString(4));
 				ob.put("nonveg",rs.getString(5));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return ob;
 	}
 	
@@ -169,17 +175,17 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="select roomcard from "+tname;
+			String sql="SELECT roomcard FROM "+tname;
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -189,17 +195,17 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="select policy from "+tname;
+			String sql="SELECT policy FROM "+tname;
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -209,17 +215,17 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="select hotspot from "+tname;
+			String sql="SELECT hotspot FROM "+tname;
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -229,17 +235,17 @@ public class hostelRead {
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="select requirement from "+tname;
+			String sql="SELECT requirement FROM "+tname;
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 	
@@ -255,11 +261,11 @@ public class hostelRead {
 			while(rs.next()) {
 				list.add(rs.getString(1));
 			}
-			con.close();
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		con.close();
 		return list;
 	}
 
@@ -267,30 +273,29 @@ public class hostelRead {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
-		System.out.println("call for DB");
 		try {
 			String rspassword="";
-			String sql="select hostel_password from all_hostels where hostel_id = '"+id+"'";
+			String sql="SELECT hostel_password FROM all_hostels WHERE hostel_id = '"+id+"'";
 			ResultSet rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				rspassword=rs.getString(1);
 			}
-			con.close();
-			System.out.println(id+" "+password+" "+rspassword+"@");
-			System.out.println(password.equals(rspassword));
 			if(rspassword.equals("")) {
 				System.out.print("this 2");
+				con.close();
 				return 0;
 			}
 			else if(password.equals(rspassword)) {
 				System.out.print("this");
+				con.close();
 				return 1;
 			}
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		System.out.print("this 3");		
+		con.close();
 		return 0;
 	}
 }

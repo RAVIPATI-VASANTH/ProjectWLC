@@ -17,12 +17,11 @@ pageEncoding="ISO-8859-1"%>
     <title>Hostel Registration-Step 2</title>
   </head>
   <body>
-  <%
-  			response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
-	%>
+    <% response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+    %>
     <section class="head-section">
       <a class="website-name" href="index.html"
-        ><strong>WebsiteLoChudu</strong></a
+        ><strong>WebsiteLoChoodu</strong></a
       >
       <nav class="nav">
         <a href="Login.jsp" class="Workspace"><strong>Workspace</strong></a>
@@ -294,17 +293,17 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Social Media</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info">
+              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color" style="margin: 0rem; padding: 0rem;">
-                <strong>websitelochudu@gmail.com</strong>
+              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
+                <strong>websitelochoodu@gmail.com</strong>
               </p>
-              <p class="footer-info">
+              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color" style="margin: 0rem; padding: 0rem;"> 
-                <strong>@websitelochudu</strong>
+              <p class="word-color link" style="margin: 0rem; padding: 0rem;"> 
+                <strong>@websitelochoodu</strong>
               </p>
             </div>
           </div>
@@ -313,22 +312,22 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Developer's Contact</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info">
+              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color" style="margin: 0rem; padding: 0rem;">
+              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
                 <strong>vasanthravipati99@gmail.com</strong>
               </p>
-              <p class="footer-info">
+              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color" style="margin: 0rem; padding: 0rem;">
+              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
                 <strong>@RAVIPATI-VASANTH</strong>
               </p>
-              <p class="footer-info">
+              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-color" style="margin: 0rem; padding: 0rem;">
+              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
                 <strong>Vasanth Ravipati</strong>
               </p>
             </div>
