@@ -17,9 +17,9 @@
     margin: 0.8rem;
   }
 
-  .phrase {
+  /* .phrase {
     font-size: 4rem;
-  }
+  } */
 
   .module {
     width: 15rem;
@@ -50,9 +50,9 @@
     margin: 0.8rem;
   }
 
-  .phrase {
+  /* .phrase {
     font-size: 3.8rem;
-  }
+  } */
 
   .description p:last-child {
     font-size: 1.4rem;
@@ -114,9 +114,9 @@
     margin: 0.8rem;
   }
 
-  .phrase {
+  /* .phrase {
     font-size: 3.2rem;
-  }
+  } */
 
   .description p:last-child {
     font-size: 1rem;
@@ -178,9 +178,9 @@
     margin: 0.8rem;
   }
 
-  .phrase {
+  /* .phrase {
     font-size: 3rem;
-  }
+  } */
 
   .description p:last-child {
     font-size: 1rem;
@@ -282,9 +282,9 @@
     display: none;
   }
 
-  .phrase {
+  /* .phrase {
     font-size: 3rem;
-  }
+  } */
 
   .description {
     margin: 1rem;

@@ -237,7 +237,8 @@ body {
 .room-info,
 .food-info,
 .specializations-info,
-.policy-info {
+.policy-info,
+.commit-section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   padding: 1rem;
@@ -257,11 +258,20 @@ body {
   font-weight: bold;
   border-radius: 0.5rem;
   padding: 0.3rem;
-  border: 0rem;
+  border: 0.2rem solid;
+  border-color: #e67e22;
   height: 2.5rem;
   padding: 0.5rem 0rem 0rem 0.5rem;
   /* width: ; */
 }
+
+.select-input {
+  height: fit-content;
+}
+
+/* .option {
+  height: ;
+} */
 
 .radio-button {
   height: 1.2rem;
@@ -369,7 +379,10 @@ body {
 .commit-button {
   background-color: #e67e22;
   color: white;
-  font-size: 2rem;
+  font-size: 3rem;
+  border: 0.2rem solid;
+  border-color: #e67e22;
+  border-radius: 1rem;
 }
 
 .footer-section {

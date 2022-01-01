@@ -961,7 +961,7 @@ class RoomInfo {
       },
     };
     //plan name
-    var curstr = document.getElementById("plan-name").value;
+    var curstr = document.getElementById("plan-name").value.trim();
     if (curstr === "") {
       alert("Plan Name is Required");
     } else {
@@ -1759,21 +1759,25 @@ class PolicyInfo {
   }
 
   static updatePolicy() {
-    var obj;
-    var index = 0;
-    for (var i = 0; i < window.modifiedData.policyInfo.length; i++) {
-      if (window.modifiedData.policyInfo[i].signal) {
-        obj = window.modifiedData.policyInfo[i];
-        index = i;
-        break;
+    if (document.getElementById("new-policy").value.trim() === "") {
+      alert("Policy is Not to be Empty");
+    } else {
+      var obj;
+      var index = 0;
+      for (var i = 0; i < window.modifiedData.policyInfo.length; i++) {
+        if (window.modifiedData.policyInfo[i].signal) {
+          obj = window.modifiedData.policyInfo[i];
+          index = i;
+          break;
+        }
       }
+      window.modifiedData.policyInfo[index] = obj;
+      obj.policy = document.getElementById("new-policy").value;
+      if (obj.policy.length > 10) obj.tagname = obj.policy.slice(0, 10);
+      else obj.tagname = obj.policy;
+      obj.signal = false;
+      this.makeDefault();
     }
-    window.modifiedData.policyInfo[index] = obj;
-    obj.policy = document.getElementById("new-policy").value;
-    if (obj.policy.length > 10) obj.tagname = obj.policy.slice(0, 10);
-    else obj.tagname = obj.policy;
-    obj.signal = false;
-    this.makeDefault();
   }
 
   static makeDefault() {
@@ -1984,22 +1988,27 @@ class RequirementInfo {
   }
 
   static updateRequirement() {
-    var obj;
-    var index = 0;
-    for (var i = 0; i < window.modifiedData.requirementInfo.length; i++) {
-      if (window.modifiedData.requirementInfo[i].signal) {
-        obj = window.modifiedData.requirementInfo[i];
-        index = i;
-        break;
+    if (document.getElementById("new-requirement").value.trim() === "") {
+      alert("Empty Requirement should not be Allowed.");
+    } else {
+      var obj;
+      var index = 0;
+      for (var i = 0; i < window.modifiedData.requirementInfo.length; i++) {
+        if (window.modifiedData.requirementInfo[i].signal) {
+          obj = window.modifiedData.requirementInfo[i];
+          index = i;
+          break;
+        }
       }
+      window.modifiedData.requirementInfo[index] = obj;
+      obj.type = document.getElementById("req-category").value;
+      obj.requirement = document.getElementById("new-requirement").value;
+      if (obj.requirement.length > 10)
+        obj.tagname = obj.requirement.slice(0, 10);
+      else obj.tagname = obj.requirement;
+      obj.signal = false;
+      this.makeDefault();
     }
-    window.modifiedData.requirementInfo[index] = obj;
-    obj.type = document.getElementById("req-category").value;
-    obj.requirement = document.getElementById("new-requirement").value;
-    if (obj.requirement.length > 10) obj.tagname = obj.requirement.slice(0, 10);
-    else obj.tagname = obj.requirement;
-    obj.signal = false;
-    this.makeDefault();
   }
 
   static makeDefault() {
@@ -2206,22 +2215,26 @@ class HotspotInfo {
   }
 
   static updateHotspot() {
-    var obj;
-    var index = 0;
-    for (var i = 0; i < window.modifiedData.hotspotInfo.length; i++) {
-      if (window.modifiedData.hotspotInfo[i].signal) {
-        obj = window.modifiedData.hotspotInfo[i];
-        index = i;
-        break;
+    if (document.getElementById("new-hotspot").value.trim() === "") {
+      alert("Empty Hotspot should not be Allowed.");
+    } else {
+      var obj;
+      var index = 0;
+      for (var i = 0; i < window.modifiedData.hotspotInfo.length; i++) {
+        if (window.modifiedData.hotspotInfo[i].signal) {
+          obj = window.modifiedData.hotspotInfo[i];
+          index = i;
+          break;
+        }
+        window.modifiedData.hotspotInfo[index] = obj;
+        obj.type = document.getElementById("hs-category").value;
+        obj.hotspot = document.getElementById("new-hotspot").value;
+        if (obj.hotspot.length > 10) obj.tagname = obj.hotspot.slice(0, 10);
+        else obj.tagname = obj.hotspot;
+        obj.signal = false;
+        this.makeDefault();
       }
     }
-    window.modifiedData.hotspotInfo[index] = obj;
-    obj.type = document.getElementById("hs-category").value;
-    obj.hotspot = document.getElementById("new-hotspot").value;
-    if (obj.hotspot.length > 10) obj.tagname = obj.hotspot.slice(0, 10);
-    else obj.tagname = obj.hotspot;
-    obj.signal = false;
-    this.makeDefault();
   }
 
   static makeDefault() {
