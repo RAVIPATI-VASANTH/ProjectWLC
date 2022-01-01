@@ -37,10 +37,10 @@ function checkChange(value) {
   switch (value) {
     case 0:
       var s = document.getElementById("hostel-name").value;
-      var n = 35;
+      var n = 50;
       document.getElementById("hostel-name-message").innerHTML =
         n - s.length + " charecters remaining";
-      if (s.length > 35) {
+      if (s.length > 50) {
         document.getElementById("hostel-name-message").innerHTML = "Invalid";
         objsignal.hname = false;
       } else if (s.length !== 0) {
@@ -50,12 +50,12 @@ function checkChange(value) {
       break;
     case 1:
       var s = document.getElementById("hostel-owner-name").value;
-      var n = 15;
+      var n = 25;
       document.getElementById("owner-name-message").innerHTML =
         n - s.length + " charecters remaining";
       obj.oname = s;
       objsignal.oname = true;
-      if (s.length > 15) {
+      if (s.length > 25) {
         objsignal.oname = false;
         document.getElementById("hostel-name-message").innerHTML = "Invalid";
       }

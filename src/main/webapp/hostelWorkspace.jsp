@@ -402,7 +402,7 @@ pageEncoding="ISO-8859-1"%>
                 <input id="breakfast-time" type="time" class="text-input" />
               </div>
               <label for="breakfast-period" class="label1">Select Type</label>
-              <select name="" id="breakfast-period" class="text-input">
+              <select name="" id="breakfast-period" class="text-input select-input">
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
@@ -423,7 +423,7 @@ pageEncoding="ISO-8859-1"%>
                 <input id="lunch-time" type="time" class="text-input" />
               </div>
               <label for="lunch-period" class="label1">Select Type</label>
-              <select name="" id="lunch-period" class="text-input">
+              <select name="" id="lunch-period" class="text-input select-input">
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
@@ -445,7 +445,7 @@ pageEncoding="ISO-8859-1"%>
                 <input id="snacks-time" type="time" class="text-input" />
               </div>
               <label for="snacks-period" class="label1">Select Type</label>
-              <select name="" id="snacks-period" class="text-input">
+              <select name="" id="snacks-period" class="text-input select-input">
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
@@ -466,7 +466,7 @@ pageEncoding="ISO-8859-1"%>
                 <input id="dinner-time" type="time" class="text-input" />
               </div>
               <label for="dinner-period" class="label1">Select Type</label>
-              <select name="" id="dinner-period" class="text-input">
+              <select name="" id="dinner-period" class="text-input select-input">
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
@@ -486,7 +486,7 @@ pageEncoding="ISO-8859-1"%>
               <input id="noof-times" type="number" class="text-input" />
   
               <label for="limit" class="label1">Select Type</label>
-              <select name="" id="limit" class="text-input">
+              <select name="" id="limit" class="text-input select-input">
                 <option value="Un-Limited" class="text-input">Un-Limited</option>
                 <option value="Limited" class="text-input">Limited</option>
               </select>
@@ -510,13 +510,13 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">WIFI</label>
               <label for="wifi-method" class="label1">Select Type</label>
-              <select name="" id="wifi-method" class="text-input">
+              <select name="" id="wifi-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="wifi-plan" class="label1">Select Plan</label>
-              <select name="" id="wifi-plan" class="text-input">
+              <select name="" id="wifi-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -531,13 +531,13 @@ pageEncoding="ISO-8859-1"%>
               <label for="washing-machine-method" class="label1"
                 >Select Type</label
               >
-              <select name="" id="washing-machine-method" class="text-input">
+              <select name="" id="washing-machine-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="washing-machine-plan" class="label1">Select Plan</label>
-              <select name="" id="washing-machine-plan" class="text-input">
+              <select name="" id="washing-machine-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -550,13 +550,13 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Lockers</label>
               <label for="lockers-method" class="label1">Select Type</label>
-              <select name="" id="lockers-method" class="text-input">
+              <select name="" id="lockers-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="lockers-plan" class="label1">Select Plan</label>
-              <select name="" id="lockers-plan" class="text-input">
+              <select name="" id="lockers-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -569,13 +569,13 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Hot Water</label>
               <label for="hot-water-method" class="label1">Select Type</label>
-              <select name="" id="hot-water-method" class="text-input">
+              <select name="" id="hot-water-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="hot-water-plan" class="label1">Select Plan</label>
-              <select name="" id="hot-water-plan" class="text-input">
+              <select name="" id="hot-water-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -588,13 +588,13 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Gym</label>
               <label for="gym-method" class="label1">Select Type</label>
-              <select name="" id="gym-method" class="text-input">
+              <select name="" id="gym-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="gym-plan" class="label1">Select Plan</label>
-              <select name="" id="gym-plan" class="text-input">
+              <select name="" id="gym-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -607,13 +607,13 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Generator</label>
               <label for="generator-method" class="label1">Select Type</label>
-              <select name="" id="generator-method" class="text-input">
+              <select name="" id="generator-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="generator-plan" class="label1">Select Plan</label>
-              <select name="" id="generator-plan" class="text-input">
+              <select name="" id="generator-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -628,13 +628,13 @@ pageEncoding="ISO-8859-1"%>
               <label for="vehicle-parking-method" class="label1"
                 >Select Type</label
               >
-              <select name="" id="vehicle-parking-method" class="text-input">
+              <select name="" id="vehicle-parking-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="vehicle-parking-plan" class="label1">Select Plan</label>
-              <select name="" id="vehicle-parking-plan" class="text-input">
+              <select name="" id="vehicle-parking-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -647,13 +647,13 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Transport</label>
               <label for="transport-method" class="label1">Select Type</label>
-              <select name="" id="transport-method" class="text-input">
+              <select name="" id="transport-method" class="text-input select-input">
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="transport-plan" class="label1">Select Plan</label>
-              <select name="" id="transport-plan" class="text-input">
+              <select name="" id="transport-plan" class="text-input select-input">
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -666,7 +666,7 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Room Service</label>
               <label for="room-service-method" class="label1">Select Type</label>
-              <select name="" id="room-service-method" class="text-input">
+              <select name="" id="room-service-method" class="text-input select-input">
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
                 <option value="Un Available">Un Available</option>
@@ -687,7 +687,7 @@ pageEncoding="ISO-8859-1"%>
               <label for="sports-environment-method" class="label1"
                 >Select Type</label
               >
-              <select name="" id="sports-environment-method" class="text-input">
+              <select name="" id="sports-environment-method" class="text-input select-input">
                 <option value="Available">Available</option>
                 <option value="Un Available">Un Available</option>
               </select>
@@ -701,7 +701,7 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">CC-TV Survilance</label>
               <label for="cctv-method" class="label1">Select Type</label>
-              <select name="" id="cctv-method" class="text-input">
+              <select name="" id="cctv-method" class="text-input select-input">
                 <option value="Available">Available</option>
                 <option value="Un Available">Un Available</option>
               </select>
@@ -711,7 +711,7 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Security</label>
               <label for="security-method" class="label1">Select Type</label>
-              <select name="" id="security-method" class="text-input">
+              <select name="" id="security-method" class="text-input select-input">
                 <option value="Available">Available</option>
                 <option value="Un Available">Un Available</option>
               </select>
@@ -788,7 +788,7 @@ pageEncoding="ISO-8859-1"%>
                 id="req-edit-tags-section"
               ></div>
               <label for="" class="label1">Select Type</label>
-              <select name="" id="req-category" class="text-input">
+              <select name="" id="req-category" class="text-input select-input">
                 <option value="Atm">ATM</option>
                 <option value="Medical Emergency">Medical Emergency</option>
                 <option value="Bus Stop">Bus Stop</option>
@@ -830,8 +830,8 @@ pageEncoding="ISO-8859-1"%>
               <label for="" class="label">Hotspot</label>
               <div class="hotspots-tags-section" id="hs-edit-tags-section"></div>
               <label for="" class="label1">Select Type</label>
-              <select name="" id="hs-category" class="text-input">
-                <option value="Restaurent">Restaurent</option>
+              <select name="" id="hs-category" class="text-input select-input">
+                <option class="option" value="Restaurent">Restaurent</option>
                 <option value="Drinks/Ice-creams">Drinks/Ice-creams</option>
                 <option value="Holy Places">Holy Places</option>
                 <option value="Parks">Parks</option>
@@ -856,6 +856,13 @@ pageEncoding="ISO-8859-1"%>
                 ADD Hotspot
               </button>
             </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="color">
+        <section>
+          <div class="commit-section edit-section">
             <div class="form-element">
               <button
                 id="add-hotspot"

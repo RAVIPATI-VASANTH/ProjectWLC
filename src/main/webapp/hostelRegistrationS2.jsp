@@ -79,7 +79,7 @@ pageEncoding="ISO-8859-1"%>
             oninput="checkChange(0)"
           />
           <p id="hostel-name-message" class="notes message">
-            35 charecters remaining
+            50 charecters remaining
           </p>
         </div>
 
@@ -92,7 +92,7 @@ pageEncoding="ISO-8859-1"%>
             oninput="checkChange(1)"
           />
           <p id="owner-name-message" class="notes message">
-            15 charecters remaining
+            25 charecters remaining
           </p>
         </div>
 

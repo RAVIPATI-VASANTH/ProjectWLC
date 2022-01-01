@@ -7,13 +7,13 @@ import org.json.simple.*;
 import org.json.simple.JSONObject;
 
 public class hostelRead {
-	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
-	static String user= "websitel_dbreader";
-	static String pass="read@database99";
-
-//	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
-//	static String user= "dbreader";
+//	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
+//	static String user= "websitel_dbreader";
 //	static String pass="read@database99";
+
+	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
+	static String user= "dbreader";
+	static String pass="read@database99";
 
 	
 	public static ArrayList<JSONObject> getLandmarksBasicInfo() throws ClassNotFoundException, SQLException {

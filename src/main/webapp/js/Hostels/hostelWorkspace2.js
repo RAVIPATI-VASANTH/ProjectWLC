@@ -125,30 +125,111 @@ function isdigits(s) {
 
 class CommitValidation {
   static startvalidation(obj) {
-    var value = this.validateBasicInfo(obj.basicInfo);
-    if (value) {
-      value = this.validateRoomInfo(obj.roomInfo);
+    var flag = true;
+    BasicInfo.updateChanges();
+
+    FoodInfo.updateFoodInfo();
+
+    if (flag) {
+      for (var i = 0; i < obj.specializationInfo.postList.length; i++) {
+        if (obj.specializationInfo.postList[i].signal) {
+          alert(
+            " For Specialization " +
+              obj.specializationInfo.postList[i].specname +
+              ", Complete Updation"
+          );
+          flag = false;
+        }
+      }
+      if (flag) {
+        SpecializationInfo.addSpecialization();
+      }
     }
-    if (value) {
-      value = this.validateFoodInfo(obj.foodInfo);
+
+    if (flag) {
+      for (var i = 0; i < obj.roomInfo.length; i++) {
+        if (obj.roomInfo[i].signal) {
+          alert(
+            "For Plan Name " + obj.roomInfo[i].planname + ", Complete Updation"
+          );
+          flag = false;
+        }
+      }
     }
-    if (value) {
-      value = this.validateSpecializationInfo(obj.specializationInfo);
+
+    if (flag) {
+      for (var i = 0; i < obj.policyInfo.length; i++) {
+        if (obj.policyInfo[i].signal) {
+          alert(
+            " For Policy " + obj.policyInfo[i].policy + ", Complete Updation"
+          );
+          flag = false;
+        }
+      }
+      if (flag && document.getElementById("new-policy").value.trim() !== "") {
+        PolicyInfo.addPolicy();
+      }
     }
-    if (value) {
-      value = this.validatePolicyInfo(obj.policyInfo);
+
+    if (flag) {
+      for (var i = 0; i < obj.requirementInfo.length; i++) {
+        if (obj.requirementInfo[i].signal) {
+          alert(
+            " For Requirement " +
+              obj.requirementInfo[i].requirement +
+              ", Complete Updation"
+          );
+          flag = false;
+        }
+      }
+      if (
+        flag &&
+        document.getElementById("new-requirement").value.trim() !== ""
+      ) {
+        RequirementInfo.addRequirement();
+      }
     }
-    if (value) {
-      value = this.validateRequirements(obj.requirementInfo);
+
+    if (flag) {
+      for (var i = 0; i < obj.hotspotInfo.length; i++) {
+        if (obj.hotspotInfo[i].signal) {
+          alert(
+            " For Hotspot " + obj.hotspotInfo[i].hotspot + ", Complete Updation"
+          );
+          flag = false;
+        }
+      }
+      if (flag && document.getElementById("new-hotspot").value.trim() !== "") {
+        HotspotInfo.addHotspot();
+      }
     }
-    if (value) {
-      value = this.validateHotspots(obj.hotspotInfo);
+
+    if (flag) {
+      var value = this.validateBasicInfo(obj.basicInfo);
+      if (value) {
+        value = this.validateRoomInfo(obj.roomInfo);
+      }
+      if (value) {
+        value = this.validateFoodInfo(obj.foodInfo);
+      }
+      if (value) {
+        value = this.validateSpecializationInfo(obj.specializationInfo);
+      }
+      if (value) {
+        value = this.validatePolicyInfo(obj.policyInfo);
+      }
+      if (value) {
+        value = this.validateRequirements(obj.requirementInfo);
+      }
+      if (value) {
+        value = this.validateHotspots(obj.hotspotInfo);
+      }
+      obj.basicInfo.hsearchscore = String(obj.searchScore);
+      if (value) {
+        value = ForSeparator.start(obj);
+      }
+      if (value) ProcessData.start(obj);
     }
-    obj.basicInfo.hsearchscore = String(obj.searchScore);
-    if (value) {
-      value = ForSeparator.start(obj);
-    }
-    if (value) ProcessData.start(obj);
   }
 
   static validateBasicInfo(obj) {
@@ -158,8 +239,8 @@ class CommitValidation {
       alert("Hostel Name is not to be Empty");
       signal = true;
     }
-    if (obj.hname.trim().length > 40) {
-      alert("Hostel Name should not be exceed 40 charecters");
+    if (obj.hname.trim().length > 55) {
+      alert("Hostel Name should not be exceed 50 charecters");
       signal = true;
     }
     //Type
@@ -185,8 +266,8 @@ class CommitValidation {
       alert("Owner Name is not to be Empty");
       signal = true;
     }
-    if (obj.honame.trim().length > 20) {
-      alert("Hostel Name should not be exceed 20 charecters");
+    if (obj.honame.trim().length > 25) {
+      alert("Hostel Name should not be exceed 25s charecters");
       signal = true;
     }
 
