@@ -196,6 +196,7 @@ function createLandmarkObject() {
   var mini = generateMinicode(obj.newLandmarkfname);
   var lanid = createLandmarkCode();
   var fname = obj.newLandmarkfname;
+  var des = obj.newLandmarkdes;
   var htablename = lanid + "_hostels";
 
   obj = {
@@ -204,6 +205,7 @@ function createLandmarkObject() {
     minicode: processString(mini),
     fullname: processString(fname),
     tablename: processString(htablename),
+    description: processString(des),
   };
   return obj;
 }

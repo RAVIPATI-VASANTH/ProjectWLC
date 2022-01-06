@@ -1,5 +1,4 @@
 package com.dbAccess.hostels;
-//import com.classes.LandMarkLoadInfo;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -7,13 +6,13 @@ import org.json.simple.*;
 import org.json.simple.JSONObject;
 
 public class hostelRead {
-//	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
-//	static String user= "websitel_dbreader";
-//	static String pass="read@database99";
-
-	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
-	static String user= "dbreader";
+	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
+	static String user= "websitel_dbreader";
 	static String pass="read@database99";
+
+//	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
+//	static String user= "dbreader";
+//	static String pass="read@database99";
 
 	
 	public static ArrayList<JSONObject> getLandmarksBasicInfo() throws ClassNotFoundException, SQLException {
@@ -115,7 +114,7 @@ public class hostelRead {
 				tname=rs.getString(1);
 				lfname=rs.getString(2);
 			}
-			sql="SELECT hostel_id,hostel_name,owner_name,owner_contact,hostel_type,hostel_gender,hostel_location,hostel_landmark,hostel_community,hostel_strength,hostel_headline,hostel_roomtable,hostel_hotspottable,hostel_speacializationtable,hostel_policytable,hostel_requirementtable,hostel_searchscore FROM "+tname+" WHERE hostel_id='"+id+"';";
+			sql="SELECT hostel_id,hostel_name,owner_name,owner_contact,hostel_type,hostel_gender,hostel_location,hostel_landmark,hostel_community,hostel_strength,hostel_headline,hostel_searchscore FROM "+tname+" WHERE hostel_id='"+id+"';";
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
 				ob.put("hid",rs.getString(1));
@@ -129,12 +128,7 @@ public class hostelRead {
 				ob.put("hcommunity",rs.getString(9));
 				ob.put("hstrength",rs.getString(10));
 				ob.put("hheadline",rs.getString(11));
-				ob.put("hrtable",rs.getString(12));
-				ob.put("hhtable",rs.getString(13));
-				ob.put("hstable",rs.getString(14));
-				ob.put("hptable",rs.getString(15));
-				ob.put("hreqtable",rs.getString(16));
-				ob.put("hsearchscore", rs.getObject(17));
+				ob.put("hsearchscore", rs.getObject(12));
 				ob.put("hlfname",lfname);
 			}
 		}
@@ -169,13 +163,13 @@ public class hostelRead {
 		return ob;
 	}
 	
-	public static ArrayList<String> getHostelRoomInfo(String tname) throws ClassNotFoundException, SQLException{
+	public static ArrayList<String> getHostelRoomInfo(String hid) throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="SELECT roomcard FROM "+tname;
+			String sql="SELECT roomcard FROM rooms_table WHERE hostel_id='"+hid+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -189,13 +183,13 @@ public class hostelRead {
 		return list;
 	}
 	
-	public static ArrayList<String> getHostelPolicyInfo(String tname) throws ClassNotFoundException, SQLException{
+	public static ArrayList<String> getHostelPolicyInfo(String hid) throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="SELECT policy FROM "+tname;
+			String sql="SELECT policy FROM policies_table WHERE hostel_id='"+hid+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -209,13 +203,13 @@ public class hostelRead {
 		return list;
 	}
 	
-	public static ArrayList<String> getHostelHotspotsInfo(String tname) throws ClassNotFoundException, SQLException{
+	public static ArrayList<String> getHostelHotspotsInfo(String hid) throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="SELECT hotspot FROM "+tname;
+			String sql="SELECT hotspot FROM hotspots_table WHERE hostel_id='"+hid+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -229,13 +223,13 @@ public class hostelRead {
 		return list;
 	}
 	
-	public static ArrayList<String> getHostelRequirementsInfo(String tname) throws ClassNotFoundException, SQLException{
+	public static ArrayList<String> getHostelRequirementsInfo(String hid) throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="SELECT requirement FROM "+tname;
+			String sql="SELECT requirement FROM requirements_table WHERE hostel_id='"+hid+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -249,13 +243,13 @@ public class hostelRead {
 		return list;
 	}
 	
-	public static ArrayList<String> getHostelSpecializationInfo(String tname) throws ClassNotFoundException, SQLException{
+	public static ArrayList<String> getHostelSpecializationInfo(String hid) throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		Statement stmt=con.createStatement();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String sql="select speacialization from "+tname;
+			String sql="SELECT speacialization FROM specializations_table WHERE hostel_id='"+hid+"';";
 			ResultSet rs=stmt.executeQuery(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {

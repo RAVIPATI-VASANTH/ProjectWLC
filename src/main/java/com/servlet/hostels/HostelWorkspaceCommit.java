@@ -60,19 +60,19 @@ public class HostelWorkspaceCommit extends HttpServlet {
 				signal=hostelWrite.commitFoodInfo(finfo,binfo.get("hid").toString());
 			}
 			if(signal) {
-				signal=hostelWrite.commitRoomInfo(roomlist,binfo.get("hrtable").toString());
+				signal=hostelWrite.commitRoomInfo(roomlist,binfo.get("hid").toString());
 			}
 			if(signal) {
-				signal=hostelWrite.commitPolicyInfo(policylist,binfo.get("hptable").toString());
+				signal=hostelWrite.commitPolicyInfo(policylist,binfo.get("hid").toString());
 			}
 			if(signal) {
-				signal=hostelWrite.commitHotspotInfo(hotspotslist,binfo.get("hhtable").toString());
+				signal=hostelWrite.commitHotspotInfo(hotspotslist,binfo.get("hid").toString());
 			}
 			if(signal) {
-				signal=hostelWrite.commitReqInfo(requirementslist,binfo.get("hreqtable").toString());
+				signal=hostelWrite.commitReqInfo(requirementslist,binfo.get("hid").toString());
 			}
 			if(signal) {
-				signal=hostelWrite.commitSpecInfo(specslist,binfo.get("hstable").toString());
+				signal=hostelWrite.commitSpecInfo(specslist,binfo.get("hid").toString());
 			}
 		
 			if(signal) {

@@ -123,6 +123,23 @@ function checkChange(value) {
         objsignal.hlocation = false;
       }
       break;
+    case 7:
+      var pass = document.getElementById("password").value;
+      obj.hpassword = pass;
+      objsignal.hpassword = true;
+      if (obj.hpassword === "") {
+        obj.hpassword = "";
+        objsignal.hpassword = false;
+      }
+      if (
+        document.getElementById("password").value ===
+        document.getElementById("re-password").value
+      ) {
+        document
+          .getElementById("password-message")
+          .setAttribute("class", "notes message hide");
+      }
+      break;
   }
 
   window.obj = obj;
@@ -193,6 +210,7 @@ function checkDataValidation() {
     alert("Your Password can't be allowed with more than 15 charecters");
     signal = false;
   }
+  console.log(obj);
   if (signal) {
     sendNewHostelData();
   }
