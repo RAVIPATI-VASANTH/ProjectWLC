@@ -13,7 +13,7 @@ pageEncoding="ISO-8859-1"%>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/Login.css" />
-    <link rel="stylesheet" href="css/LoginMediaQueries.css">
+    <link rel="stylesheet" href="css/LoginMediaQueries.css" />
     <title>WebsiteLoChoodu-Login</title>
   </head>
   <body>
@@ -31,7 +31,7 @@ pageEncoding="ISO-8859-1"%>
     </section>
 
     <div class="">
-      <section class="credentials-section"  style="padding: 1rem;">
+      <section class="credentials-section" style="padding: 1rem">
         <div class="illustration">
           <img
             class="illustration-img"
@@ -70,24 +70,36 @@ pageEncoding="ISO-8859-1"%>
 
     <footer class="color">
       <div class="footer-section">
-        <div class="production header"><p><strong>a <span class="word-color">Vasanth Ravipati</span> production</strong></p></div>
+        <div class="production header">
+          <p>
+            <strong
+              >a
+              <span class="word-color">Vasanth Ravipati</span>
+              production</strong
+            >
+          </p>
+        </div>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
               <p><strong>Resources</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;"><strong>Illustrations from</strong></p>
-              <p style="margin: 0rem; padding: 0rem;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
+                <strong>Illustrations from</strong>
+              </p>
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://www.storyset.com/" class="word-color link"
                   ><strong>Storyset</strong></a
                 >
               </p>
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;"><strong>Icons from</strong></p>
-              <p style="margin: 0rem; padding: 0rem;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
+                <strong>Icons from</strong>
+              </p>
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://iconscout.com/" class="word-color link"
                   ><strong>iconscout</strong></a
-                ><br>
+                ><br />
                 <a href="https://www.flaticon.com/" class="word-color link"
                   ><strong>flaticons</strong></a
                 >
@@ -99,18 +111,26 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Social Media</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
+              <a
+                href="mailto: websitelochoodu@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>websitelochoodu@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
+              <a
+                href="https://instagram.com/websitelochoodu"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@websitelochoodu</strong>
-              </p>
+              </a>
             </div>
           </div>
           <div class="flex-div-column">
@@ -118,26 +138,37 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Developer's Contact</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
+              <a
+                href="mailto: vasanthravipati99@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>vasanthravipati99@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
+              <a
+                href="https://github.com/RAVIPATI-VASANTH"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@RAVIPATI-VASANTH</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
+              <a
+                href="https://www.linkedin.com/in/vasanth-ravipati-4662a3208/"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>Vasanth Ravipati</strong>
-              </p>
+              </a>
             </div>
-          </div>
           </div>
         </div>
       </div>

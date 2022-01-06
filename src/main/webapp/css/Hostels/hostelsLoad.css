@@ -209,8 +209,11 @@ body {
   margin: 0rem;
   font-size: 2rem;
   font-weight: bolder;
-  text-overflow: ellipsis;
   color: #e67e22;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .field {

@@ -23,6 +23,7 @@ public class HostelInfo extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int signal=Integer.parseInt(request.getParameter("signal"));
+//		System.out.println("hello");
 		JSONObject finalobj= new JSONObject();
 		if(signal==0) {
 			try {
@@ -38,20 +39,15 @@ public class HostelInfo extends HttpServlet {
 				}
 				JSONObject foodObj= hostelRead.getHostelFoodInfo(id);
 				finalobj.put("foodInfo", foodObj);
-				String rtable=(String) basicInfoObj.get("hrtable");
-				ArrayList<String> roomlist= hostelRead.getHostelRoomInfo(rtable);
+				ArrayList<String> roomlist= hostelRead.getHostelRoomInfo(id);
 				finalobj.put("roomInfo", roomlist);
-				String ptable=(String) basicInfoObj.get("hptable");
-				ArrayList<String> policylist= hostelRead.getHostelPolicyInfo(ptable);
+				ArrayList<String> policylist= hostelRead.getHostelPolicyInfo(id);
 				finalobj.put("policyInfo", policylist);
-				String hstable=(String) basicInfoObj.get("hhtable");
-				ArrayList<String> hotspotslist= hostelRead.getHostelHotspotsInfo(hstable);
+				ArrayList<String> hotspotslist= hostelRead.getHostelHotspotsInfo(id);
 				finalobj.put("hotspotInfo", hotspotslist);
-				String reqtable=(String) basicInfoObj.get("hreqtable");
-				ArrayList<String> reqlist= hostelRead.getHostelRequirementsInfo(reqtable);
+				ArrayList<String> reqlist= hostelRead.getHostelRequirementsInfo(id);
 				finalobj.put("requirementInfo", reqlist);
-				String spectable=(String) basicInfoObj.get("hstable");
-				ArrayList<String> speclist= hostelRead.getHostelSpecializationInfo(spectable);
+				ArrayList<String> speclist= hostelRead.getHostelSpecializationInfo(id);
 				finalobj.put("specializationInfo", speclist);
 				PrintWriter out = response.getWriter();
 				out.println(finalobj.toString());
@@ -60,5 +56,4 @@ public class HostelInfo extends HttpServlet {
 			}
 		}
 	}
-
 }

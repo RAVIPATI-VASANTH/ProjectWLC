@@ -23,26 +23,24 @@ public class hostelWrite {
 //	static String pass="write@database99";
 
 	
-	public static int createNewLandmark(String id,String minicode,String fullname,String tabname) throws ClassNotFoundException, SQLException {
+	public static int createNewLandmark(String id,String minicode,String fullname,String tabname,String description) throws ClassNotFoundException, SQLException {
 		int status=0;
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
-
+		
 		try {
-			
-			
 			String sql="INSERT INTO landmarks VALUES(?,?,?,?,?,?,?);";
 			PreparedStatement st= con.prepareStatement(sql);
 			st.setString(1,id);
 			st.setString(2,minicode);
 			st.setString(3,fullname);
-			st.setString(4,"");
+			st.setString(4,description);
 			st.setString(5,tabname);
 			st.setString(6,"");
 			st.setString(7,"");
 			status=st.executeUpdate();
 			
-			String sql2="CREATE TABLE "+tabname+" (hostel_id VARCHAR(25) NOT NULL UNIQUE,hostel_name VARCHAR(55),owner_name VARCHAR(30),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_roomtable VARCHAR(55),hostel_hotspottable VARCHAR(55),hostel_speacializationtable VARCHAR(55),hostel_policytable VARCHAR(55),hostel_requirementtable VARCHAR(55),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id));";
+			String sql2="CREATE TABLE "+tabname+" (hostel_id VARCHAR(25) NOT NULL UNIQUE,hostel_name VARCHAR(55),owner_name VARCHAR(30),owner_contact VARCHAR(15),hostel_type VARCHAR(15),hostel_gender VARCHAR(10),hostel_location VARCHAR(500),hostel_landmark VARCHAR(15),hostel_password VARCHAR(45),hostel_community VARCHAR(15),hostel_strength VARCHAR(25),hostel_headline VARCHAR(60),hostel_searchscore VARCHAR(15) ,PRIMARY KEY(hostel_id));";
 			PreparedStatement smt= con.prepareStatement(sql2);
 			status=smt.executeUpdate();
 		}
@@ -58,7 +56,7 @@ public class hostelWrite {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
-			String sql="INSERT INTO "+h.htablename+" VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			String sql="INSERT INTO "+h.htablename+" VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
 			PreparedStatement smt=con.prepareStatement(sql);
 			smt.setString(1,h.hid);
 			smt.setString(2,h.hname);
@@ -72,40 +70,8 @@ public class hostelWrite {
 			smt.setString(10,h.hcommunityname);
 			smt.setString(11,"0");
 			smt.setString(12,"");
-			h.hid=h.hid.toLowerCase();
-			smt.setString(13,h.hid+"_roomtable");
-			smt.setString(14,h.hid+"_hotspottable");
-			smt.setString(15,h.hid+"_speacializationtable");
-			smt.setString(16,h.hid+"_policytable");
-			smt.setString(17,h.hid+"_requirementtable");
-			smt.setString(18, "0");
+			smt.setString(13, "0");
 			status=smt.executeUpdate();
-			
-			String rt=h.hid+"_roomtable";
-			String ht=h.hid+"_hotspottable";
-			String st=h.hid+"_speacializationtable";
-			String pt=h.hid+"_policytable";
-			String reqt=h.hid+"_requirementtable";
-			
-			sql="CREATE TABLE "+rt+" (roomcard VARCHAR(300));";
-			smt=con.prepareStatement(sql);
-			smt.executeUpdate();
-			
-			sql="CREATE TABLE "+ht+" (hotspot VARCHAR(100));";
-			smt=con.prepareStatement(sql);
-			smt.executeUpdate();
-			
-			sql="CREATE TABLE "+st+" (speacialization VARCHAR(150));";
-			smt=con.prepareStatement(sql);
-			smt.executeUpdate();
-			
-			sql="CREATE TABLE "+pt+" (policy VARCHAR(150));";
-			smt=con.prepareStatement(sql);
-			smt.executeUpdate();
-			
-			sql="CREATE TABLE "+reqt+" (requirement VARCHAR(100));";
-			smt=con.prepareStatement(sql);
-			smt.executeUpdate();
 			
 			h.hid=h.hid.toUpperCase();
 			sql="INSERT INTO food_table VALUES(?,?,?,?,?,?);";
@@ -214,13 +180,15 @@ public class hostelWrite {
 		return false;
 	}
 	
-	public static boolean commitRoomInfo(List<String> roomlist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitRoomInfo(List<String> roomlist,String hid) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
-			
-			stmt.execute("TRUNCATE TABLE "+tname+";");
+			String sql="DELETE FROM rooms_table WHERE hostel_id=?";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,hid);
+			smt.executeUpdate();
 			if(!roomlist.isEmpty()) {
 				for(String s: roomlist) {
 					if(s=="") {
@@ -228,9 +196,10 @@ public class hostelWrite {
 					}
 					s=s.substring(1, s.length()-1);
 					
-					String sql="INSERT INTO "+tname+" VALUES(?);";
-					PreparedStatement smt=con.prepareStatement(sql);
-					smt.setString(1,s);
+					sql="INSERT INTO rooms_table VALUES(?,?);";
+					smt=con.prepareStatement(sql);
+					smt.setString(1,hid);
+					smt.setString(2,s);
 					smt.executeUpdate();
 				}
 				con.close();
@@ -244,22 +213,25 @@ public class hostelWrite {
 		return false;
 	}
 	
-	public static boolean commitPolicyInfo(List<String> policylist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitPolicyInfo(List<String> policylist,String hid) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
-			
-			stmt.execute("TRUNCATE TABLE "+tname+";");
+			String sql="DELETE FROM policies_table WHERE hostel_id=?";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,hid);
+			smt.executeUpdate();
 			if(!policylist.isEmpty()) {				
 				for(String s: policylist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="INSERT INTO "+tname+" VALUES(?);";
-					PreparedStatement smt=con.prepareStatement(sql);
-					smt.setString(1,s);
+					sql="INSERT INTO policies_table VALUES(?,?);";
+					smt=con.prepareStatement(sql);
+					smt.setString(1,hid);
+					smt.setString(2,s);
 					smt.executeUpdate();
 				}
 				con.close();
@@ -273,22 +245,25 @@ public class hostelWrite {
 		return false;
 	}
 
-	public static boolean commitHotspotInfo(List<String> hotspotslist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitHotspotInfo(List<String> hotspotslist,String hid) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
-			
-			stmt.execute("TRUNCATE TABLE "+tname+";");
+			String sql="DELETE FROM hotspots_table WHERE hostel_id=?";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,hid);
+			smt.executeUpdate();
 			if(!hotspotslist.isEmpty()) {				
 				for(String s: hotspotslist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="INSERT INTO "+tname+" VALUES(?);";
-					PreparedStatement smt=con.prepareStatement(sql);
-					smt.setString(1,s);
+					sql="INSERT INTO hotspots_table VALUES(?,?);";
+					smt=con.prepareStatement(sql);
+					smt.setString(1,hid);
+					smt.setString(2,s);
 					smt.executeUpdate();
 				}
 				con.close();
@@ -302,22 +277,25 @@ public class hostelWrite {
 		return false;
 	}
 
-	public static boolean commitReqInfo(List<String> requirementslist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitReqInfo(List<String> requirementslist,String hid) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
-			
-			stmt.execute("TRUNCATE TABLE "+tname+";");
+			String sql="DELETE FROM requirements_table WHERE hostel_id=?";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,hid);
+			smt.executeUpdate();
 			if(!requirementslist.isEmpty()) {				
 				for(String s: requirementslist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="INSERT INTO "+tname+" VALUES(?);";
-					PreparedStatement smt=con.prepareStatement(sql);
-					smt.setString(1,s);
+					sql="INSERT INTO requirements_table VALUES(?,?);";
+					smt=con.prepareStatement(sql);
+					smt.setString(1,hid);
+					smt.setString(2,s);
 					smt.executeUpdate();
 				}
 				con.close();
@@ -331,22 +309,27 @@ public class hostelWrite {
 		return false;
 	}
 
-	public static boolean commitSpecInfo(List<String> specslist,String tname) throws ClassNotFoundException, SQLException {
+	public static boolean commitSpecInfo(List<String> specslist,String hid) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection(url,user,pass);
 		try {
 			Statement stmt=con.createStatement();
 			
-			stmt.execute("TRUNCATE TABLE "+tname+";");
+			String sql="DELETE FROM specializations_table WHERE hostel_id=?";
+			PreparedStatement smt=con.prepareStatement(sql);
+			smt.setString(1,hid);
+			smt.executeUpdate();
+			
 			if(!specslist.isEmpty()) {				
 				for(String s: specslist) {
 					if(s=="") {
 						continue;
 					}
 					s=s.substring(1, s.length()-1);
-					String sql="INSERT INTO "+tname+" VALUES(?);";
-					PreparedStatement smt=con.prepareStatement(sql);
-					smt.setString(1,s);
+					sql="INSERT INTO specializations_table VALUES(?,?);";
+					smt=con.prepareStatement(sql);
+					smt.setString(1,hid);
+					smt.setString(2,s);
 					smt.executeUpdate();
 				}
 				con.close();

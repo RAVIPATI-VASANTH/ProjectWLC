@@ -14,13 +14,12 @@ pageEncoding="ISO-8859-1"%>
     />
     <link rel="stylesheet" href="css/Hostels/hostelWorkspace.css" />
     <link rel="stylesheet" href="css/Hostels/hostelWorkspace2.css" />
-    <link rel="stylesheet" href="css/Hostels/hostelWorkspaceMediaQueries.css">
+    <link rel="stylesheet" href="css/Hostels/hostelWorkspaceMediaQueries.css" />
     <title id="title-name">Workspace</title>
   </head>
   <body>
-  	<%
-  			response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
-	%>
+    <% response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+    %>
     <section class="head-section">
       <a class="website-name" href="index.html">
         <strong>WebsiteLoChoodu</strong>
@@ -111,8 +110,10 @@ pageEncoding="ISO-8859-1"%>
       <div class="color">
         <div class="view-section grid-for-2" style="padding: 2rem 0rem">
           <div>
-            <p class="view-tag" onclick="Toggle.toggleSection(2)">Specializations</p>
-            
+            <p class="view-tag" onclick="Toggle.toggleSection(2)">
+              Specializations
+            </p>
+
             <section id="section-2">
               <div
                 class="spec-view-tags-section"
@@ -121,7 +122,9 @@ pageEncoding="ISO-8859-1"%>
             </section>
           </div>
           <div>
-            <p class="view-tag" onclick="Toggle.toggleSection(3)">Hostel Policies</p>
+            <p class="view-tag" onclick="Toggle.toggleSection(3)">
+              Hostel Policies
+            </p>
             <section id="section-3">
               <div class="hp-view-tags-section" id="hp-view-tags-section"></div>
             </section>
@@ -132,9 +135,14 @@ pageEncoding="ISO-8859-1"%>
       <div>
         <div class="view-section grid-for-2" style="padding: 2rem 0rem">
           <div>
-            <p class="view-tag" onclick="Toggle.toggleSection(4)">Requirements Around</p>
+            <p class="view-tag" onclick="Toggle.toggleSection(4)">
+              Requirements Around
+            </p>
             <section id="section-4">
-              <div class="req-view-tags-section" id="req-view-tags-section"></div>
+              <div
+                class="req-view-tags-section"
+                id="req-view-tags-section"
+              ></div>
             </section>
           </div>
           <div>
@@ -183,7 +191,9 @@ pageEncoding="ISO-8859-1"%>
       </div>
       <!-- Basic -->
       <div class="color">
-        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(6)">Basic Information</p>
+        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(6)">
+          Basic Information
+        </p>
         <section id="section-6">
           <div class="basic-info edit-section">
             <div class="form-element">
@@ -205,8 +215,13 @@ pageEncoding="ISO-8859-1"%>
               <input type="text" id="edit-owner-contact" class="text-input" />
             </div>
             <div class="form-element">
-              <label for="edit-strength" class="label" >C-V-Q *</label>
-              <input type="text" id="edit-strength" class="text-input" placeholder="current strength-vacancies-Queued"/>
+              <label for="edit-strength" class="label">C-V-Q *</label>
+              <input
+                type="text"
+                id="edit-strength"
+                class="text-input"
+                placeholder="current strength-vacancies-Queued"
+              />
             </div>
             <div class="form-element">
               <label for="" class="label">Hostel Type *</label>
@@ -219,9 +234,14 @@ pageEncoding="ISO-8859-1"%>
                   class="radio-button"
                   onclick="toggelType()"
                 />
-                <label for="edit-type-public" class="label1" onclick="toggelType()">Public</label>
+                <label
+                  for="edit-type-public"
+                  class="label1"
+                  onclick="toggelType()"
+                  >Public</label
+                >
               </div>
-  
+
               <div>
                 <input
                   type="radio"
@@ -231,7 +251,12 @@ pageEncoding="ISO-8859-1"%>
                   class="radio-button"
                   onclick="toggelType()"
                 />
-                <label for="edit-type-community" class="label1" onclick="toggelType()">Community</label>
+                <label
+                  for="edit-type-community"
+                  class="label1"
+                  onclick="toggelType()"
+                  >Community</label
+                >
               </div>
               <input
                 type="text"
@@ -278,9 +303,14 @@ pageEncoding="ISO-8859-1"%>
       </div>
       <!-- Rooms -->
       <div class="color">
-        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(7)">Room Details</p>
+        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(7)">
+          Room Details
+        </p>
         <section id="section-7">
-          <div class="room-tags-section edit-section color" id="room-tags"></div>
+          <div
+            class="room-tags-section edit-section color"
+            id="room-tags"
+          ></div>
           <div class="room-info edit-section">
             <div class="form-element">
               <label for="plan-name" class="label">Plan Name *</label>
@@ -391,9 +421,10 @@ pageEncoding="ISO-8859-1"%>
       </div>
       <!-- Food  -->
       <div class="color">
-        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(8)">Food Details</p>
+        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(8)">
+          Food Details
+        </p>
         <section id="section-8">
-
           <div class="food-info edit-section">
             <div class="form-element">
               <label for="" class="label">Breakfast</label>
@@ -402,7 +433,11 @@ pageEncoding="ISO-8859-1"%>
                 <input id="breakfast-time" type="time" class="text-input" />
               </div>
               <label for="breakfast-period" class="label1">Select Type</label>
-              <select name="" id="breakfast-period" class="text-input select-input">
+              <select
+                name=""
+                id="breakfast-period"
+                class="text-input select-input"
+              >
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
@@ -437,7 +472,7 @@ pageEncoding="ISO-8859-1"%>
               <label for="lunch-notes" class="label1">Notes</label>
               <input id="lunch-notes" type="text" class="text-input" />
             </div>
-  
+
             <div class="form-element">
               <label for="" class="label">Snacks</label>
               <div>
@@ -445,7 +480,11 @@ pageEncoding="ISO-8859-1"%>
                 <input id="snacks-time" type="time" class="text-input" />
               </div>
               <label for="snacks-period" class="label1">Select Type</label>
-              <select name="" id="snacks-period" class="text-input select-input">
+              <select
+                name=""
+                id="snacks-period"
+                class="text-input select-input"
+              >
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
@@ -466,7 +505,11 @@ pageEncoding="ISO-8859-1"%>
                 <input id="dinner-time" type="time" class="text-input" />
               </div>
               <label for="dinner-period" class="label1">Select Type</label>
-              <select name="" id="dinner-period" class="text-input select-input">
+              <select
+                name=""
+                id="dinner-period"
+                class="text-input select-input"
+              >
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
               </select>
@@ -484,10 +527,12 @@ pageEncoding="ISO-8859-1"%>
               <label for="" class="label">Non-Veg</label>
               <label for="noof-times" class="label1">Noof times per Week</label>
               <input id="noof-times" type="number" class="text-input" />
-  
+
               <label for="limit" class="label1">Select Type</label>
               <select name="" id="limit" class="text-input select-input">
-                <option value="Un-Limited" class="text-input">Un-Limited</option>
+                <option value="Un-Limited" class="text-input">
+                  Un-Limited
+                </option>
                 <option value="Limited" class="text-input">Limited</option>
               </select>
               <label for="nonveg-notes" class="label1">Notes</label>
@@ -503,9 +548,10 @@ pageEncoding="ISO-8859-1"%>
       </div>
 
       <div class="color">
-        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(9)">Specializations</p>
+        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(9)">
+          Specializations
+        </p>
         <section id="section-9">
-
           <div class="specializations-info edit-section">
             <div class="form-element">
               <label for="" class="label">WIFI</label>
@@ -531,26 +577,48 @@ pageEncoding="ISO-8859-1"%>
               <label for="washing-machine-method" class="label1"
                 >Select Type</label
               >
-              <select name="" id="washing-machine-method" class="text-input select-input">
+              <select
+                name=""
+                id="washing-machine-method"
+                class="text-input select-input"
+              >
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
-              <label for="washing-machine-plan" class="label1">Select Plan</label>
-              <select name="" id="washing-machine-plan" class="text-input select-input">
+              <label for="washing-machine-plan" class="label1"
+                >Select Plan</label
+              >
+              <select
+                name=""
+                id="washing-machine-plan"
+                class="text-input select-input"
+              >
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
               </select>
               <label for="washing-machine-amount" class="label1">Amount</label>
-              <input id="washing-machine-amount" type="text" class="text-input" />
+              <input
+                id="washing-machine-amount"
+                type="text"
+                class="text-input"
+              />
               <label for="washing-machine-notes" class="label1">Notes</label>
-              <input id="washing-machine-notes" type="text" class="text-input" />
+              <input
+                id="washing-machine-notes"
+                type="text"
+                class="text-input"
+              />
             </div>
             <div class="form-element">
               <label for="" class="label">Lockers</label>
               <label for="lockers-method" class="label1">Select Type</label>
-              <select name="" id="lockers-method" class="text-input select-input">
+              <select
+                name=""
+                id="lockers-method"
+                class="text-input select-input"
+              >
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
@@ -569,13 +637,21 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Hot Water</label>
               <label for="hot-water-method" class="label1">Select Type</label>
-              <select name="" id="hot-water-method" class="text-input select-input">
+              <select
+                name=""
+                id="hot-water-method"
+                class="text-input select-input"
+              >
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="hot-water-plan" class="label1">Select Plan</label>
-              <select name="" id="hot-water-plan" class="text-input select-input">
+              <select
+                name=""
+                id="hot-water-plan"
+                class="text-input select-input"
+              >
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -607,13 +683,21 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Generator</label>
               <label for="generator-method" class="label1">Select Type</label>
-              <select name="" id="generator-method" class="text-input select-input">
+              <select
+                name=""
+                id="generator-method"
+                class="text-input select-input"
+              >
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="generator-plan" class="label1">Select Plan</label>
-              <select name="" id="generator-plan" class="text-input select-input">
+              <select
+                name=""
+                id="generator-plan"
+                class="text-input select-input"
+              >
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -628,32 +712,58 @@ pageEncoding="ISO-8859-1"%>
               <label for="vehicle-parking-method" class="label1"
                 >Select Type</label
               >
-              <select name="" id="vehicle-parking-method" class="text-input select-input">
+              <select
+                name=""
+                id="vehicle-parking-method"
+                class="text-input select-input"
+              >
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
-              <label for="vehicle-parking-plan" class="label1">Select Plan</label>
-              <select name="" id="vehicle-parking-plan" class="text-input select-input">
+              <label for="vehicle-parking-plan" class="label1"
+                >Select Plan</label
+              >
+              <select
+                name=""
+                id="vehicle-parking-plan"
+                class="text-input select-input"
+              >
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
               </select>
               <label for="vehicle-parking-amount" class="label1">Amount</label>
-              <input id="vehicle-parking-amount" type="text" class="text-input" />
+              <input
+                id="vehicle-parking-amount"
+                type="text"
+                class="text-input"
+              />
               <label for="vehicle-parking-notes" class="label1">Notes</label>
-              <input id="vehicle-parking-notes" type="text" class="text-input" />
+              <input
+                id="vehicle-parking-notes"
+                type="text"
+                class="text-input"
+              />
             </div>
             <div class="form-element">
               <label for="" class="label">Transport</label>
               <label for="transport-method" class="label1">Select Type</label>
-              <select name="" id="transport-method" class="text-input select-input">
+              <select
+                name=""
+                id="transport-method"
+                class="text-input select-input"
+              >
                 <option value="Pay and Use">Pay and Use</option>
                 <option value="Free">Free</option>
                 <option value="Un Available">Un Available</option>
               </select>
               <label for="transport-plan" class="label1">Select Plan</label>
-              <select name="" id="transport-plan" class="text-input select-input">
+              <select
+                name=""
+                id="transport-plan"
+                class="text-input select-input"
+              >
                 <option value="Monthly">Monthly</option>
                 <option value="Semester">Semester</option>
                 <option value="Annum">Annum</option>
@@ -665,8 +775,14 @@ pageEncoding="ISO-8859-1"%>
             </div>
             <div class="form-element">
               <label for="" class="label">Room Service</label>
-              <label for="room-service-method" class="label1">Select Type</label>
-              <select name="" id="room-service-method" class="text-input select-input">
+              <label for="room-service-method" class="label1"
+                >Select Type</label
+              >
+              <select
+                name=""
+                id="room-service-method"
+                class="text-input select-input"
+              >
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
                 <option value="Un Available">Un Available</option>
@@ -687,7 +803,11 @@ pageEncoding="ISO-8859-1"%>
               <label for="sports-environment-method" class="label1"
                 >Select Type</label
               >
-              <select name="" id="sports-environment-method" class="text-input select-input">
+              <select
+                name=""
+                id="sports-environment-method"
+                class="text-input select-input"
+              >
                 <option value="Available">Available</option>
                 <option value="Un Available">Un Available</option>
               </select>
@@ -711,7 +831,11 @@ pageEncoding="ISO-8859-1"%>
             <div class="form-element">
               <label for="" class="label">Security</label>
               <label for="security-method" class="label1">Select Type</label>
-              <select name="" id="security-method" class="text-input select-input">
+              <select
+                name=""
+                id="security-method"
+                class="text-input select-input"
+              >
                 <option value="Available">Available</option>
                 <option value="Un Available">Un Available</option>
               </select>
@@ -748,12 +872,17 @@ pageEncoding="ISO-8859-1"%>
       </div>
 
       <div class="color">
-        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(10)">Hostel Policies</p>
+        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(10)">
+          Hostel Policies
+        </p>
         <section id="section-10">
           <div class="policy-info edit-section">
             <div class="form-element">
               <label for="" class="label">Enter Policy</label>
-              <div class="policies-tags-section" id="hp-edit-tags-section"></div>
+              <div
+                class="policies-tags-section"
+                id="hp-edit-tags-section"
+              ></div>
               <input type="text" class="text-input" id="new-policy" />
             </div>
             <div class="form-element">
@@ -777,9 +906,10 @@ pageEncoding="ISO-8859-1"%>
       </div>
 
       <div class="color">
-        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(11)">Requirements Around</p>
+        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(11)">
+          Requirements Around
+        </p>
         <section id="section-11">
-
           <div class="policy-info edit-section">
             <div class="form-element">
               <label for="" class="label">Requirement</label>
@@ -801,7 +931,7 @@ pageEncoding="ISO-8859-1"%>
               <label for="new-requirement" class="label1">Enter Name</label>
               <input id="new-requirement" type="text" class="text-input" />
             </div>
-  
+
             <div class="form-element">
               <button
                 class="label1 hide"
@@ -823,12 +953,17 @@ pageEncoding="ISO-8859-1"%>
       </div>
 
       <div class="color">
-        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(12)">Hotspots</p>
+        <p class="edit-tag edit-section" onclick="Toggle.toggleSection(12)">
+          Hotspots
+        </p>
         <section id="section-12">
           <div class="policy-info edit-section">
             <div class="form-element">
               <label for="" class="label">Hotspot</label>
-              <div class="hotspots-tags-section" id="hs-edit-tags-section"></div>
+              <div
+                class="hotspots-tags-section"
+                id="hs-edit-tags-section"
+              ></div>
               <label for="" class="label1">Select Type</label>
               <select name="" id="hs-category" class="text-input select-input">
                 <option class="option" value="Restaurent">Restaurent</option>
@@ -879,7 +1014,15 @@ pageEncoding="ISO-8859-1"%>
 
     <footer class="color">
       <div class="footer-section">
-        <div class="production header"><p><strong>a <span class="word-color">Vasanth Ravipati</span> production</strong></p></div>
+        <div class="production header">
+          <p>
+            <strong
+              >a
+              <span class="word-color">Vasanth Ravipati</span>
+              production</strong
+            >
+          </p>
+        </div>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
@@ -887,18 +1030,18 @@ pageEncoding="ISO-8859-1"%>
             </div>
             <div class="items">
               <p class="footer-info"><strong>Illustrations from</strong></p>
-              <p style="margin: 0rem; padding:0rem ;">
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://www.storyset.com/" class="word-color link"
                   ><strong>Storyset</strong></a
                 >
               </p>
               <p class="footer-info"><strong>Icons from</strong></p>
-              <p style="margin: 0rem; padding:0rem ;">
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://iconscout.com/" class="word-color link"
                   ><strong>iconscout</strong></a
                 >
               </p>
-              <p style="margin: 0rem; padding:0rem ;">
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://www.flaticon.com/" class="word-color link"
                   ><strong>flaticons</strong></a
                 >
@@ -910,18 +1053,26 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Social Media</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="mailto: websitelochoodu@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>websitelochoodu@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://instagram.com/websitelochoodu"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@websitelochoodu</strong>
-              </p>
+              </a>
             </div>
           </div>
           <div class="flex-div-column">
@@ -929,26 +1080,37 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Developer's Contact</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="mailto: vasanthravipati99@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>vasanthravipati99@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://github.com/RAVIPATI-VASANTH"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@RAVIPATI-VASANTH</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://www.linkedin.com/in/vasanth-ravipati-4662a3208/"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>Vasanth Ravipati</strong>
-              </p>
+              </a>
             </div>
-          </div>
           </div>
         </div>
       </div>

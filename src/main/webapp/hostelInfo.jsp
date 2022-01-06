@@ -14,7 +14,7 @@ pageEncoding="ISO-8859-1"%>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/Hostels/hostelInfo.css" />
-    <link rel="stylesheet" href="css/Hostels/hostelInfoMediaQueries.css">
+    <link rel="stylesheet" href="css/Hostels/hostelInfoMediaQueries.css" />
     <title id="title-name">Hostel ID</title>
   </head>
   <body>
@@ -77,7 +77,9 @@ pageEncoding="ISO-8859-1"%>
 
     <div class="color">
       <div class="view-section" style="padding: 2rem 0rem">
-        <p class="view-tag" id="view-tag-0" onclick="Toggle.toggleSection(0)">Room Details</p>
+        <p class="view-tag" id="view-tag-0" onclick="Toggle.toggleSection(0)">
+          Room Details
+        </p>
         <section id="section-0">
           <div class="room-cards-section" id="room-cards-section"></div>
         </section>
@@ -88,7 +90,7 @@ pageEncoding="ISO-8859-1"%>
       <div class="view-section" style="padding: 2rem 0rem">
         <p class="view-tag" onclick="Toggle.toggleSection(1)">Food Details</p>
         <section id="section-1">
-        <div class="food-cards-section" id="food-cards-section"></div>
+          <div class="food-cards-section" id="food-cards-section"></div>
         </section>
       </div>
     </div>
@@ -96,13 +98,20 @@ pageEncoding="ISO-8859-1"%>
     <div class="color">
       <div class="view-section grid-for-2" style="padding: 2rem 0rem">
         <div>
-          <p class="view-tag" onclick="Toggle.toggleSection(2)">Specializations</p>
+          <p class="view-tag" onclick="Toggle.toggleSection(2)">
+            Specializations
+          </p>
           <section id="section-2">
-            <div class="spec-view-tags-section" id="spec-view-tags-section"></div>
+            <div
+              class="spec-view-tags-section"
+              id="spec-view-tags-section"
+            ></div>
           </section>
         </div>
         <div>
-          <p class="view-tag extra" onclick="Toggle.toggleSection(3)">Hostel Policies</p>
+          <p class="view-tag extra" onclick="Toggle.toggleSection(3)">
+            Hostel Policies
+          </p>
           <section id="section-3">
             <div class="hp-view-tags-section" id="hp-view-tags-section"></div>
           </section>
@@ -113,13 +122,17 @@ pageEncoding="ISO-8859-1"%>
     <div>
       <div class="view-section grid-for-2" style="padding: 2rem 0rem">
         <div>
-          <p class="view-tag" onclick="Toggle.toggleSection(4)">Requirements Around</p>
+          <p class="view-tag" onclick="Toggle.toggleSection(4)">
+            Requirements Around
+          </p>
           <section id="section-4">
             <div class="req-view-tags-section" id="req-view-tags-section"></div>
           </section>
         </div>
         <div>
-          <p class="view-tag extra" onclick="Toggle.toggleSection(5)">Hotspots</p>
+          <p class="view-tag extra" onclick="Toggle.toggleSection(5)">
+            Hotspots
+          </p>
           <section id="section-5">
             <div class="hs-view-tags-section" id="hs-view-tags-section"></div>
           </section>
@@ -129,7 +142,15 @@ pageEncoding="ISO-8859-1"%>
 
     <footer class="color">
       <div class="footer-section">
-        <div class="production header"><p><strong>a <span class="word-color">Vasanth Ravipati</span> production</strong></p></div>
+        <div class="production header">
+          <p>
+            <strong
+              >a
+              <span class="word-color">Vasanth Ravipati</span>
+              production</strong
+            >
+          </p>
+        </div>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
@@ -137,18 +158,18 @@ pageEncoding="ISO-8859-1"%>
             </div>
             <div class="items">
               <p class="footer-info"><strong>Illustrations from</strong></p>
-              <p style="margin: 0rem; padding:0rem ;">
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://www.storyset.com/" class="word-color link"
                   ><strong>Storyset</strong></a
                 >
               </p>
               <p class="footer-info"><strong>Icons from</strong></p>
-              <p style="margin: 0rem; padding:0rem ;">
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://iconscout.com/" class="word-color link"
                   ><strong>iconscout</strong></a
                 >
               </p>
-              <p style="margin: 0rem; padding:0rem ;">
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://www.flaticon.com/" class="word-color link"
                   ><strong>flaticons</strong></a
                 >
@@ -160,18 +181,26 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Social Media</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="mailto: websitelochoodu@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>websitelochoodu@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://instagram.com/websitelochoodu"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@websitelochoodu</strong>
-              </p>
+              </a>
             </div>
           </div>
           <div class="flex-div-column">
@@ -179,26 +208,37 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Developer's Contact</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="mailto: vasanthravipati99@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>vasanthravipati99@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://github.com/RAVIPATI-VASANTH"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@RAVIPATI-VASANTH</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://www.linkedin.com/in/vasanth-ravipati-4662a3208/"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>Vasanth Ravipati</strong>
-              </p>
+              </a>
             </div>
-          </div>
           </div>
         </div>
       </div>

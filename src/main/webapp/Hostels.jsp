@@ -19,7 +19,7 @@ pageEncoding="ISO-8859-1"%>
   <body>
     <section class="head-section">
       <a class="website-name" href="index.html">
-        <strong>WebsiteLoChuoodu</strong>
+        <strong>WebsiteLoChoodu</strong>
       </a>
       <nav class="nav">
         <p class="count-info">
@@ -78,31 +78,50 @@ pageEncoding="ISO-8859-1"%>
       <section class="more-info-section">
         <ul>
           <li class="phrase3 notes">
-            <span class="word-color "  onclick="toggleMoreInfo(0)">Rooms</span><span id="word-0"> - gives information about room
-              types like Ac/Non-Ac, fare to pay,room structure.</span>
+            <span class="word-color" onclick="toggleMoreInfo(0)">Rooms</span
+            ><span id="word-0">
+              - gives information about room types like Ac/Non-Ac, fare to
+              pay,room structure.</span
+            >
           </li>
-          <li class="phrase3 notes ">
-            <span class="word-color toggle"  onclick="toggleMoreInfo(1)">Food</span><span id="word-1"> - gives information about food
-              they offer for Breakfast, Lunch, Snacks, Dinner and Non-veg details.</span>
+          <li class="phrase3 notes">
+            <span class="word-color toggle" onclick="toggleMoreInfo(1)"
+              >Food</span
+            ><span id="word-1">
+              - gives information about food they offer for Breakfast, Lunch,
+              Snacks, Dinner and Non-veg details.</span
+            >
           </li>
-          <li class="phrase3 notes ">
-            <span class="word-color toggle"  onclick="toggleMoreInfo(2)">Specializations</span><span id="word-2"> - gives information
-              about Wifi, Lockers, Gym, Transport, Washing Machine and more..</span>
+          <li class="phrase3 notes">
+            <span class="word-color toggle" onclick="toggleMoreInfo(2)"
+              >Specializations</span
+            ><span id="word-2">
+              - gives information about Wifi, Lockers, Gym, Transport, Washing
+              Machine and more..</span
+            >
           </li>
-          <li class="phrase3 notes ">
-            <span class="word-color toggle"  onclick="toggleMoreInfo(3)">Requirements-Around</span><span id="word-3"> - gives
-              information about basic required locations around that a hostler
-              needs like ATMs, Medical Emergencies, Saloon/Spa, Busstops,
-              Stationery shops, Xerox Shops and more..</span>
+          <li class="phrase3 notes">
+            <span class="word-color toggle" onclick="toggleMoreInfo(3)"
+              >Requirements-Around</span
+            ><span id="word-3">
+              - gives information about basic required locations around that a
+              hostler needs like ATMs, Medical Emergencies, Saloon/Spa,
+              Busstops, Stationery shops, Xerox Shops and more..</span
+            >
           </li>
-          <li class="phrase3 notes " onclick="toggleMoreInfo(4)">
-            <span class="word-color toggle">Hotspots</span><span id="word-4"> - gives information about
-              famous and popular locations to spend some time like Restaurents,
-              Holy Places, parks etc.,</span>
+          <li class="phrase3 notes" onclick="toggleMoreInfo(4)">
+            <span class="word-color toggle">Hotspots</span
+            ><span id="word-4">
+              - gives information about famous and popular locations to spend
+              some time like Restaurents, Holy Places, parks etc.,</span
+            >
           </li>
-          <li class="phrase3 notes "onclick="toggleMoreInfo(5)">
-            <span class="word-color toggle">Policies</span><span id="word-5"> - these are some Rules and
-              Regulations from Hostel Owner that to be followed in Hostel.</span>
+          <li class="phrase3 notes" onclick="toggleMoreInfo(5)">
+            <span class="word-color toggle">Policies</span
+            ><span id="word-5">
+              - these are some Rules and Regulations from Hostel Owner that to
+              be followed in Hostel.</span
+            >
           </li>
         </ul>
       </section>
@@ -146,24 +165,36 @@ pageEncoding="ISO-8859-1"%>
 
     <footer class="">
       <div class="footer-section">
-        <div class="production header"><p><strong>a <span class="word-color">Vasanth Ravipati</span> production</strong></p></div>
+        <div class="production header">
+          <p>
+            <strong
+              >a
+              <span class="word-color">Vasanth Ravipati</span>
+              production</strong
+            >
+          </p>
+        </div>
         <div class="grid-3-div">
           <div class="flex-div-column">
             <div class="header word-color">
               <p><strong>Resources</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;"><strong>Illustrations</strong></p>
-              <p style="margin: 0rem; padding: 0rem;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
+                <strong>Illustrations</strong>
+              </p>
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://www.storyset.com/" class="word-color link"
                   ><strong>Storyset</strong></a
                 >
               </p>
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;"><strong>Icons</strong></p>
-              <p style="margin: 0rem; padding: 0rem;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
+                <strong>Icons</strong>
+              </p>
+              <p style="margin: 0rem; padding: 0rem">
                 <a href="https://iconscout.com/" class="word-color link"
                   ><strong>iconscout</strong></a
-                ><br>
+                ><br />
                 <a href="https://www.flaticon.com/" class="word-color link"
                   ><strong>flaticons</strong></a
                 >
@@ -175,18 +206,26 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Social Media</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding: 0rem;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding: 0rem;">
+              <a
+                href="mailto: websitelochoodu@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>websitelochoodu@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Instagram</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://instagram.com/websitelochoodu"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@websitelochoodu</strong>
-              </p>
+              </a>
             </div>
           </div>
           <div class="flex-div-column">
@@ -194,26 +233,37 @@ pageEncoding="ISO-8859-1"%>
               <p><strong>Developer's Contact</strong></p>
             </div>
             <div class="items">
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>Gmail</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="mailto: vasanthravipati99@gmail.com"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>vasanthravipati99@gmail.com</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>GitHub</strong>
               </p>
-              <p class="word-color link" style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://github.com/RAVIPATI-VASANTH"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>@RAVIPATI-VASANTH</strong>
-              </p>
-              <p class="footer-info" style="margin: 0rem; padding:0rem ;">
+              </a>
+              <p class="footer-info" style="margin: 0rem; padding: 0rem">
                 <strong>LinkedIn</strong>
               </p>
-              <p class="word-colorlink "style="margin: 0rem; padding:0rem ;">
+              <a
+                href="https://www.linkedin.com/in/vasanth-ravipati-4662a3208/"
+                class="word-color link"
+                style="margin: 0rem; padding: 0rem"
+              >
                 <strong>Vasanth Ravipati</strong>
-              </p>
+              </a>
             </div>
-          </div>
           </div>
         </div>
       </div>

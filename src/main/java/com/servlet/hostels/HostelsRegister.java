@@ -29,9 +29,11 @@ public class HostelsRegister extends HttpServlet {
 			String mcode=(String)request.getParameter("minicode");
 			String fname=(String)request.getParameter("fullname");
 			String tabname=(String)request.getParameter("tablename");
+			String description=(String)request.getParameter("description");
+			
 			PrintWriter out=response.getWriter();
 			try {
-				int resultSignal=hostelWrite.createNewLandmark(lanid,mcode,fname,tabname);
+				int resultSignal=hostelWrite.createNewLandmark(lanid,mcode,fname,tabname,description);
 				HttpSession session =request.getSession();
 				session.setAttribute("landmark", mcode);
 			} catch (ClassNotFoundException | SQLException e) {
