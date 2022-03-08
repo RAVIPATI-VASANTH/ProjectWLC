@@ -216,6 +216,23 @@ function checkDataValidation() {
   }
 }
 
+function sortHids(list) {
+  var l = [];
+  list.forEach((element) => {
+    l.push(Number(element.split("_")[1]));
+  });
+  for (var i = 0; i < l.length - 1; i++) {
+    for (var j = 0; j < l.length - i - 1; j++) {
+      if (l[j] > l[j + 1]) {
+        var temp = l[j];
+        l[j] = l[j + 1];
+        l[j + 1] = temp;
+      }
+    }
+  }
+  return l[l.length - 1] + 1;
+}
+
 //Preloading tasks related
 function generateHostelId() {
   var lan = window.obj.hlandmark;
@@ -224,12 +241,11 @@ function generateHostelId() {
     if (element.minicode === lan) {
       window.obj.htablesname = element.htablesname;
       if (element.hostel_ids.length !== 0) {
-        var l = element.hostel_ids.sort();
-        l = l[l.length - 1].split("_");
-        num = Number(l[l.length - 1]) + 1;
+        num = sortHids(element.hostel_ids);
       }
     }
   });
+  console.log(num);
   document.getElementById("hostel-id").value = lan + "_" + num;
   window.obj.hid = document.getElementById("hostel-id").value;
   window.objsignal.hid = true;
