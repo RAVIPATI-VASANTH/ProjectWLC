@@ -14,13 +14,13 @@ import org.json.simple.JSONObject;
 import com.classFiles.hostels.dataContainers.HostelRegisterContainer;
 import com.dbAccess.hostels.hostelRead;
 public class hostelWrite {
-	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
-	static String user= "websitel_dbwriter";
-	static String pass="write@database99";
-
-//	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
-//	static String user= "dbwriter";
+//	static String url= "jdbc:mysql://mysql3000.mochahost.com:3306/websitel_hostelsdb";
+//	static String user= "websitel_dbwriter";
 //	static String pass="write@database99";
+
+	static String url= "jdbc:mysql://localhost:3306/hostelsdb";
+	static String user= "dbwriter";
+	static String pass="write@database99";
 
 	
 	public static int createNewLandmark(String id,String minicode,String fullname,String tabname,String description) throws ClassNotFoundException, SQLException {
@@ -68,7 +68,7 @@ public class hostelWrite {
 			smt.setString(8,h.hlandmark);
 			smt.setString(9,h.hpassword);
 			smt.setString(10,h.hcommunityname);
-			smt.setString(11,"0");
+			smt.setString(11,"0-0-0");
 			smt.setString(12,"");
 			smt.setString(13, "0");
 			status=smt.executeUpdate();

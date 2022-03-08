@@ -40,7 +40,7 @@ pageEncoding="ISO-8859-1"%>
           <ul>
             <li class="phrase2 notes">
               We provide information about Hostels around popular landmarks like
-              <span class="word-color"> Collages</span>,
+              <span class="word-color"> Colleges</span>,
               <span class="word-color"> IT-Hubs</span>,<span class="word-color">
                 Training Centers</span
               >
